@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion, useReducedMotion } from "motion/react";
 import {
-  IconArchiveDownloadOutline18,
-  IconCircleInfoOutline18,
-} from "nucleo-ui-outline-18";
+  IconArchiveDownloadFill18,
+  IconCircleInfoFill18,
+} from "nucleo-ui-fill-18";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SegmentedTabs, type SegmentItem } from "@/components/ui/segmented-tabs";
@@ -41,7 +41,7 @@ function App() {
   });
 
   return (
-    <TooltipProvider delayDuration={500} skipDelayDuration={0}>
+    <TooltipProvider delayDuration={200} skipDelayDuration={0}>
       <main className="min-h-screen bg-background text-foreground">
         <section className="mx-auto min-h-[930px] w-full max-w-[620px] px-7 py-5">
           <div className="flex items-start gap-[42px]">
@@ -132,7 +132,7 @@ function ShadowRamp() {
 }
 
 function ButtonRow({ variant }: { variant: "raised" | "quiet" }) {
-  const icon = <IconArchiveDownloadOutline18 aria-hidden strokeWidth={1.7} />;
+  const icon = <IconArchiveDownloadFill18 aria-hidden />;
 
   return (
     <div className="flex flex-wrap items-center gap-[11px]">
@@ -170,7 +170,7 @@ function TooltipSample({ variant }: { variant: "rich" | "compact" }) {
             type="button"
             {...pressProps}
           >
-            <IconCircleInfoOutline18 aria-hidden className="size-[18px]" />
+            <IconCircleInfoFill18 aria-hidden className="size-[18px]" />
           </motion.button>
         </TooltipTrigger>
         <TooltipContent align="center" compact={compact} side="bottom">

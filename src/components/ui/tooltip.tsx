@@ -61,7 +61,7 @@ const TooltipContent = React.forwardRef<
     const shouldReduceMotion = useReducedMotion();
     const enterTransition = shouldReduceMotion
       ? { duration: 0 }
-      : { type: "spring" as const, duration: 0.16, bounce: 0 };
+      : { type: "spring" as const, duration: 0.15, bounce: 0 };
     const exitTransition = shouldReduceMotion
       ? { duration: 0 }
       : { type: "tween" as const, duration: 0.1, ease: "easeOut" as const };

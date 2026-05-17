@@ -55,7 +55,7 @@ function ApartmentCard({
 			aria-hidden={isSkeleton}
 			data-apartment-card={isSkeleton ? undefined : ""}
 			className={cn(
-				"group/card relative flex flex-col gap-1 overflow-hidden rounded-[20px] bg-card p-2",
+				"group/card squircle relative flex flex-col gap-1 overflow-hidden rounded-[40px] bg-card p-2",
 				"shadow-card-1 outline-none",
 				isSkeleton
 					? "cursor-default"
@@ -103,7 +103,7 @@ function CardContent({
 
 	return (
 		<>
-			<div className="relative aspect-[1920/1080] w-full overflow-hidden rounded-[12px] bg-muted shadow-card-1">
+			<div className="squircle relative aspect-[1920/1080] w-full overflow-hidden rounded-[24px] bg-muted shadow-card-1">
 				{image?.url ? (
 					<FadeImage
 						src={image.url}
@@ -139,7 +139,7 @@ function SkeletonContent() {
 		<>
 			<div
 				aria-hidden
-				className="aspect-[1920/1080] w-full animate-pulse rounded-[12px] bg-muted shadow-card-1"
+				className="squircle aspect-[1920/1080] w-full animate-pulse rounded-[24px] bg-muted shadow-card-1"
 			/>
 			<div aria-hidden className="flex flex-col gap-2 px-2 py-1.5">
 				<div className="h-[16px] w-2/3 animate-pulse rounded bg-muted" />

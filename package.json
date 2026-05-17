@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build",
     "convex:dev": "convex dev",
     "convex:deploy": "convex deploy",
+    "discover:apartments": "node scripts/discover-apartments-firecrawl.mjs",
     "import:apartment-runs": "node scripts/import-apartment-runs.mjs",
     "preview": "vite preview"
   },

@@ -155,6 +155,16 @@ export default defineSchema({
     searchRunId: v.optional(v.id("searchRuns")),
     /** Manually toggled by the user from the UI; distinct from `status`. */
     isFavorite: v.optional(v.boolean()),
+    /** Free-form notes added by the user, shown above the AI assessment. */
+    userNotes: v.optional(v.string()),
+    /** User-set tour progress. Undefined treated as "not_yet". */
+    tourStatus: v.optional(
+      v.union(
+        v.literal("not_yet"),
+        v.literal("touring"),
+        v.literal("toured"),
+      ),
+    ),
     createdAt: v.number(),
     updatedAt: v.number(),
   })

@@ -1,0 +1,3939 @@
+{
+  "runDate": "2026-05-17",
+  "generatedAt": "2026-05-17T17:37:57.845Z",
+  "configVersion": 1,
+  "status": "degraded",
+  "degraded": true,
+  "degradedReasons": [
+    "Direct-operator candidate pool is below threshold: 0 < 5."
+  ],
+  "queries": [
+    "Chelsea NYC rental building availability 1 bedroom Manhattan",
+    "West Village Manhattan 1 bedroom rental availability laundry dishwasher",
+    "Greenwich Village Manhattan 1 bedroom rental availability renovated",
+    "Flatiron Gramercy Manhattan 1 bedroom rental building availability",
+    "East Village Lower East Side Manhattan 1 bedroom rental building availability",
+    "Chelsea Manhattan 2 bedroom 2 bath rental availability",
+    "West Village Greenwich Village Manhattan 2 bedroom 2 bath rental availability",
+    "SoHo NoHo Tribeca Manhattan 2 bedroom 2 bath rental availability",
+    "East Village Manhattan 2 bedroom 2 bath rental availability washer dryer dishwasher",
+    "Tribeca Manhattan true 3 bedroom 3 bath rental availability",
+    "SoHo NoHo Manhattan true 3 bedroom 3 bath rental availability",
+    "Chelsea Manhattan true 3 bedroom 3 bath rental availability",
+    "site:streeteasy.com/building Manhattan 1 bedroom available now Chelsea West Village Greenwich Village",
+    "site:streeteasy.com/building Manhattan 2 bedroom 2 bath available now Chelsea Tribeca SoHo",
+    "site:streeteasy.com/building Manhattan 3 bedroom 3 bath available now Tribeca SoHo Chelsea",
+    "site:zillow.com/homedetails Manhattan 1 bedroom rental Chelsea West Village",
+    "site:apartments.com/new-york-ny Manhattan 2 bedroom 2 bathroom available now",
+    "site:renthop.com Manhattan 3 bedroom 3 bathroom rental availability"
+  ],
+  "mappedRoots": [
+    {
+      "provider": "Equity Apartments",
+      "url": "https://www.equityapartments.com/new-york-city/",
+      "search": "chelsea west village gramercy tribeca apartment availability floor plan 1 bedroom 2 bedroom 3 bedroom"
+    },
+    {
+      "provider": "Avalon Communities",
+      "url": "https://www.avaloncommunities.com/new-york/new-york-city-apartments/",
+      "search": "new york city apartment availability floor plan 1 bedroom 2 bedroom 3 bedroom"
+    },
+    {
+      "provider": "Brodsky",
+      "url": "https://brodsky.com/rentals/",
+      "search": "west village greenwich village chelsea apartment available one bedroom two bedroom three bedroom"
+    },
+    {
+      "provider": "Stonehenge NYC",
+      "url": "https://www.stonehengenyc.com/apartments",
+      "search": "manhattan available apartment floorplan one bedroom two bedroom three bedroom"
+    },
+    {
+      "provider": "Rockrose",
+      "url": "https://rockrose.com/zh/listing/",
+      "search": "new york available apartment 1 bed 2 bed 3 bed"
+    },
+    {
+      "provider": "EVE NYC",
+      "url": "https://eve.nyc/floorplans/",
+      "search": "available floorplans 1 bedroom 2 bedroom 3 bedroom"
+    },
+    {
+      "provider": "StuyTown / Beam Living",
+      "url": "https://www.stuytown.com/nyc-apartments-for-rent",
+      "search": "available apartments 1 bedroom 2 bedroom 3 bedroom"
+    },
+    {
+      "provider": "The Chelsea / Greystar",
+      "url": "https://www.thechelseaapts.com/new-york/the-chelsea/conventional",
+      "search": "available apartment floorplan 1 bedroom 2 bedroom"
+    },
+    {
+      "provider": "Chelsea29",
+      "url": "https://www.chelsea29.com/floorplans",
+      "search": "available floorplans 1 bedroom 2 bedroom"
+    }
+  ],
+  "stats": {
+    "rawSearchCount": 144,
+    "rawMapCount": 0,
+    "rawCount": 144,
+    "uniqueCount": 143,
+    "keptCount": 120,
+    "directOperatorCount": 0,
+    "filteredCount": 1,
+    "filteredReasonCounts": {},
+    "errorCount": 9,
+    "searchLimit": 8,
+    "mapLimit": 60,
+    "maxCandidates": 120,
+    "degradedThreshold": 25,
+    "directOperatorThreshold": 5
+  },
+  "errors": [
+    {
+      "stage": "map",
+      "target": "https://www.avaloncommunities.com/new-york/new-york-city-apartments/",
+      "message": "429 Too Many Requests: {\"success\":false,\"error\":\"Rate limit exceeded. Consumed (req/min): 10, Remaining (req/min): 0. Upgrade your plan at https://firecrawl.dev/pricing for increased rate limits or please retry after 5s, resets at Sun May 17 2026 17:38:25 GMT+000"
+    },
+    {
+      "stage": "map",
+      "target": "https://www.equityapartments.com/new-york-city/",
+      "message": "429 Too Many Requests: {\"success\":false,\"error\":\"Rate limit exceeded. Consumed (req/min): 11, Remaining (req/min): 0. Upgrade your plan at https://firecrawl.dev/pricing for increased rate limits or please retry after 5s, resets at Sun May 17 2026 17:38:25 GMT+000"
+    },
+    {
+      "stage": "map",
+      "target": "https://brodsky.com/rentals/",
+      "message": "429 Too Many Requests: {\"success\":false,\"error\":\"Rate limit exceeded. Consumed (req/min): 12, Remaining (req/min): 0. Upgrade your plan at https://firecrawl.dev/pricing for increased rate limits or please retry after 5s, resets at Sun May 17 2026 17:38:25 GMT+000"
+    },
+    {
+      "stage": "map",
+      "target": "https://www.stonehengenyc.com/apartments",
+      "message": "429 Too Many Requests: {\"success\":false,\"error\":\"Rate limit exceeded. Consumed (req/min): 13, Remaining (req/min): 0. Upgrade your plan at https://firecrawl.dev/pricing for increased rate limits or please retry after 5s, resets at Sun May 17 2026 17:38:25 GMT+000"
+    },
+    {
+      "stage": "map",
+      "target": "https://eve.nyc/floorplans/",
+      "message": "429 Too Many Requests: {\"success\":false,\"error\":\"Rate limit exceeded. Consumed (req/min): 15, Remaining (req/min): 0. Upgrade your plan at https://firecrawl.dev/pricing for increased rate limits or please retry after 5s, resets at Sun May 17 2026 17:38:25 GMT+000"
+    },
+    {
+      "stage": "map",
+      "target": "https://rockrose.com/zh/listing/",
+      "message": "429 Too Many Requests: {\"success\":false,\"error\":\"Rate limit exceeded. Consumed (req/min): 14, Remaining (req/min): 0. Upgrade your plan at https://firecrawl.dev/pricing for increased rate limits or please retry after 5s, resets at Sun May 17 2026 17:38:25 GMT+000"
+    },
+    {
+      "stage": "map",
+      "target": "https://www.stuytown.com/nyc-apartments-for-rent",
+      "message": "429 Too Many Requests: {\"success\":false,\"error\":\"Rate limit exceeded. Consumed (req/min): 16, Remaining (req/min): 0. Upgrade your plan at https://firecrawl.dev/pricing for increased rate limits or please retry after 5s, resets at Sun May 17 2026 17:38:25 GMT+000"
+    },
+    {
+      "stage": "map",
+      "target": "https://www.thechelseaapts.com/new-york/the-chelsea/conventional",
+      "message": "429 Too Many Requests: {\"success\":false,\"error\":\"Rate limit exceeded. Consumed (req/min): 17, Remaining (req/min): 0. Upgrade your plan at https://firecrawl.dev/pricing for increased rate limits or please retry after 5s, resets at Sun May 17 2026 17:38:25 GMT+000"
+    },
+    {
+      "stage": "map",
+      "target": "https://www.chelsea29.com/floorplans",
+      "message": "429 Too Many Requests: {\"success\":false,\"error\":\"Rate limit exceeded. Consumed (req/min): 18, Remaining (req/min): 0. Upgrade your plan at https://firecrawl.dev/pricing for increased rate limits or please retry after 5s, resets at Sun May 17 2026 17:38:25 GMT+000"
+    }
+  ],
+  "candidates": [
+    {
+      "url": "https://www.compass.com/for-rent/noho-manhattan-ny/3-bed/",
+      "canonicalUrl": "https://compass.com/for-rent/noho-manhattan-ny/3-bed",
+      "domain": "compass.com",
+      "providerHint": "compass.com",
+      "sourceKind": "broker_listing",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "SoHo NoHo Manhattan true 3 bedroom 3 bath rental availability",
+      "title": "3 Bedroom Apartments for Rent in NoHo, NY - Compass Real Estate",
+      "snippet": "Find NoHo 3 bedroom apartments for rent on Compass. Explore exclusive Collections, view high-res photos, and schedule viewings with America's #1 brokerage.",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "SoHo",
+        "NoHo",
+        "Tribeca",
+        "Little Italy",
+        "Gramercy",
+        "Flatiron",
+        "Stuy Town"
+      ],
+      "priority": 88,
+      "dedupeKey": "compass.com/for-rent/noho-manhattan-ny/3-bed",
+      "flags": [
+        "broker",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.apartments.com/chelsea-new-york-ny/1-bedrooms/",
+      "canonicalUrl": "https://apartments.com/chelsea-new-york-ny/1-bedrooms",
+      "domain": "apartments.com",
+      "providerHint": "Apartments.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Chelsea NYC rental building availability 1 bedroom Manhattan",
+      "title": "1 Bedroom Apartments for Rent in Chelsea, New York",
+      "snippet": "Find your ideal 1 bedroom apartment in Chelsea, New York, NY. Discover 177 spacious units for rent with modern amenities and a variety of floor plans to fit ...",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "East Village",
+        "Lower East Side",
+        "Flatiron"
+      ],
+      "priority": 84,
+      "dedupeKey": "apartments.com/chelsea-new-york-ny/1-bedrooms",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.apartments.com/chelsea-new-york-ny/2-bedrooms/",
+      "canonicalUrl": "https://apartments.com/chelsea-new-york-ny/2-bedrooms",
+      "domain": "apartments.com",
+      "providerHint": "Apartments.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Chelsea Manhattan 2 bedroom 2 bath rental availability",
+      "title": "2 Bedroom Apartments for Rent in Chelsea, New York",
+      "snippet": "Click to view any of these 87 available rental units in Chelsea to see photos, reviews, floor plans and verified information about schools, neighborhoods, unit ...",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "East Village",
+        "Lower East Side",
+        "Flatiron"
+      ],
+      "priority": 84,
+      "dedupeKey": "apartments.com/chelsea-new-york-ny/2-bedrooms",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.apartments.com/chelsea-new-york-ny/3-bedrooms/",
+      "canonicalUrl": "https://apartments.com/chelsea-new-york-ny/3-bedrooms",
+      "domain": "apartments.com",
+      "providerHint": "Apartments.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Chelsea Manhattan true 3 bedroom 3 bath rental availability",
+      "title": "3 Bedroom Apartments for Rent in Chelsea, New York",
+      "snippet": "Find your ideal 3 bedroom apartment in Chelsea, New York, NY. Discover 30 spacious units for rent with modern amenities and a variety of floor plans to fit ...",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "East Village",
+        "Lower East Side",
+        "Flatiron"
+      ],
+      "priority": 84,
+      "dedupeKey": "apartments.com/chelsea-new-york-ny/3-bedrooms",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.apartments.com/east-village-new-york-ny/1-bedrooms/",
+      "canonicalUrl": "https://apartments.com/east-village-new-york-ny/1-bedrooms",
+      "domain": "apartments.com",
+      "providerHint": "Apartments.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "East Village Lower East Side Manhattan 1 bedroom rental building availability",
+      "title": "1 Bedroom Apartments for Rent in East Village, New York",
+      "snippet": "Find your ideal 1 bedroom apartment in East Village, New York, NY. Discover 108 spacious units for rent with modern amenities and a variety of floor plans ...",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "Gramercy",
+        "Stuy Town"
+      ],
+      "priority": 84,
+      "dedupeKey": "apartments.com/east-village-new-york-ny/1-bedrooms",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.apartments.com/east-village-new-york-ny/washer-dryer/",
+      "canonicalUrl": "https://apartments.com/east-village-new-york-ny/washer-dryer",
+      "domain": "apartments.com",
+      "providerHint": "Apartments.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "East Village Manhattan 2 bedroom 2 bath rental availability washer dryer dishwasher",
+      "title": "Apartments for Rent with Washer & Dryer in East Village, New York",
+      "snippet": "Get a great East Village, New York, NY rental with washer and dryer on Apartments.com! Use our search filters to browse all 116 apartments and score your ...",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "Gramercy",
+        "Stuy Town"
+      ],
+      "priority": 84,
+      "dedupeKey": "apartments.com/east-village-new-york-ny/washer-dryer",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.apartments.com/gramercy-park-new-york-ny/1-bedrooms/",
+      "canonicalUrl": "https://apartments.com/gramercy-park-new-york-ny/1-bedrooms",
+      "domain": "apartments.com",
+      "providerHint": "Apartments.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Flatiron Gramercy Manhattan 1 bedroom rental building availability",
+      "title": "1 Bedroom Apartments for Rent in Gramercy Park, New York",
+      "snippet": "Find your ideal 1 bedroom apartment in Gramercy Park, New York, NY. Discover 64 spacious units for rent with modern amenities and a variety of floor plans ...",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "Gramercy",
+        "Flatiron",
+        "Stuy Town"
+      ],
+      "priority": 84,
+      "dedupeKey": "apartments.com/gramercy-park-new-york-ny/1-bedrooms",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.apartments.com/greenwich-village-new-york-ny/1-bedrooms/",
+      "canonicalUrl": "https://apartments.com/greenwich-village-new-york-ny/1-bedrooms",
+      "domain": "apartments.com",
+      "providerHint": "Apartments.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Greenwich Village Manhattan 1 bedroom rental availability renovated",
+      "title": "1 Bedroom Apartments for Rent in Greenwich Village, New York",
+      "snippet": "Find your ideal 1 bedroom apartment in Greenwich Village, New York, NY. Discover 170 spacious units for rent with modern amenities and a variety of floor ...",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "SoHo",
+        "Gramercy",
+        "Flatiron"
+      ],
+      "priority": 84,
+      "dedupeKey": "apartments.com/greenwich-village-new-york-ny/1-bedrooms",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.apartments.com/greenwich-village-new-york-ny/2-bedrooms/",
+      "canonicalUrl": "https://apartments.com/greenwich-village-new-york-ny/2-bedrooms",
+      "domain": "apartments.com",
+      "providerHint": "Apartments.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "West Village Greenwich Village Manhattan 2 bedroom 2 bath rental availability",
+      "title": "2 Bedroom Apartments for Rent in Greenwich Village, New York",
+      "snippet": "Find your ideal 2 bedroom apartment in Greenwich Village, New York, NY. Discover 87 spacious units for rent with modern amenities and a variety of floor ...",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "SoHo",
+        "Gramercy",
+        "Flatiron"
+      ],
+      "priority": 84,
+      "dedupeKey": "apartments.com/greenwich-village-new-york-ny/2-bedrooms",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.apartments.com/new-york-ny-10031/",
+      "canonicalUrl": "https://apartments.com/new-york-ny-10031",
+      "domain": "apartments.com",
+      "providerHint": "Apartments.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:apartments.com/new-york-ny Manhattan 2 bedroom 2 bathroom available now",
+      "title": "Apartments for Rent in 10031 - New York, NY",
+      "snippet": "See all 65 apartments in 10031, New York, NY currently available for rent. Each Apartments.com listing has verified information like property rating, ...",
+      "trackHints": [
+        "1br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea"
+      ],
+      "priority": 84,
+      "dedupeKey": "apartments.com/new-york-ny-10031",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.apartments.com/new-york-ny/2-bedrooms/",
+      "canonicalUrl": "https://apartments.com/new-york-ny/2-bedrooms",
+      "domain": "apartments.com",
+      "providerHint": "Apartments.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:apartments.com/new-york-ny Manhattan 2 bedroom 2 bathroom available now",
+      "title": "2 Bedroom Apartments for Rent in New York City",
+      "snippet": "Find your ideal 2 bedroom apartment in New York, NY. Discover 1774 spacious units for rent with modern amenities and a variety of floor plans to fit your ...",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "East Village",
+        "Lower East Side",
+        "Little Italy"
+      ],
+      "priority": 84,
+      "dedupeKey": "apartments.com/new-york-ny/2-bedrooms",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.apartments.com/new-york-ny/2-bedrooms/cheap/",
+      "canonicalUrl": "https://apartments.com/new-york-ny/2-bedrooms/cheap",
+      "domain": "apartments.com",
+      "providerHint": "Apartments.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:apartments.com/new-york-ny Manhattan 2 bedroom 2 bathroom available now",
+      "title": "Cheap 2 Bedroom Apartments for Rent in New York City - 338 Rentals",
+      "snippet": "Find your ideal 2 bedroom cheap apartment in New York, NY. Discover 338 spacious units for rent with modern amenities and a variety of floor plans to fit ...",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "East Village",
+        "Lower East Side",
+        "Little Italy"
+      ],
+      "priority": 84,
+      "dedupeKey": "apartments.com/new-york-ny/2-bedrooms/cheap",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.apartments.com/new-york-ny/2-bedrooms/low-income/",
+      "canonicalUrl": "https://apartments.com/new-york-ny/2-bedrooms/low-income",
+      "domain": "apartments.com",
+      "providerHint": "Apartments.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:apartments.com/new-york-ny Manhattan 2 bedroom 2 bathroom available now",
+      "title": "2 Bedroom Low Income Apartments for Rent in New York City",
+      "snippet": "Find your ideal 2 bedroom apartment in New York, NY. Discover 17 spacious units for rent with modern amenities and a variety of floor plans to fit your ...",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "East Village",
+        "Lower East Side",
+        "Little Italy"
+      ],
+      "priority": 84,
+      "dedupeKey": "apartments.com/new-york-ny/2-bedrooms/low-income",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.apartments.com/new-york-ny/rent-specials/",
+      "canonicalUrl": "https://apartments.com/new-york-ny/rent-specials",
+      "domain": "apartments.com",
+      "providerHint": "Apartments.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:apartments.com/new-york-ny Manhattan 2 bedroom 2 bathroom available now",
+      "title": "Apartments with Move-In Specials in New York City - 711 Rentals",
+      "snippet": "Apartments with Move-In Specials in New York NY - 711 Rentals · 1 Bed. $3,095+ · 2 Beds. $3,800+ · 3 Beds. $5,797.",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "East Village",
+        "Lower East Side",
+        "Little Italy"
+      ],
+      "priority": 84,
+      "dedupeKey": "apartments.com/new-york-ny/rent-specials",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.apartments.com/new-york-ny/walk-up/",
+      "canonicalUrl": "https://apartments.com/new-york-ny/walk-up",
+      "domain": "apartments.com",
+      "providerHint": "Apartments.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:apartments.com/new-york-ny Manhattan 2 bedroom 2 bathroom available now",
+      "title": "Walk-Up Apartments for Rent in New York NY - 85 Rentals",
+      "snippet": "Walk-Up Apartments for Rent in New York NY - 85 Rentals ; Building Photo - 5807-5811 32nd Ave. 2 Beds. $2,950. 5807-5811 32nd Ave, Woodside, NY 11377 ; Building ...",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "East Village",
+        "Lower East Side",
+        "Little Italy"
+      ],
+      "priority": 84,
+      "dedupeKey": "apartments.com/new-york-ny/walk-up",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.apartments.com/west-village-new-york-ny/washer-dryer/",
+      "canonicalUrl": "https://apartments.com/west-village-new-york-ny/washer-dryer",
+      "domain": "apartments.com",
+      "providerHint": "Apartments.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "West Village Manhattan 1 bedroom rental availability laundry dishwasher",
+      "title": "Apartments for Rent with Washer & Dryer in West Village, New York",
+      "snippet": "Apartments for Rent in West Village - New York with Washer & Dryer ; Building Photo - 101 W 15th St · 1 Bed. $8,820 · 101 W 15th St, New York, NY 10011 ; Building ...",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "SoHo",
+        "Flatiron"
+      ],
+      "priority": 84,
+      "dedupeKey": "apartments.com/west-village-new-york-ny/washer-dryer",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.corcoran.com/search/for-rent/location/noho-ny-7651,soho-ny-7654,tribeca-ny-7658/regionId/1",
+      "canonicalUrl": "https://corcoran.com/search/for-rent/location/noho-ny-7651,soho-ny-7654,tribeca-ny-7658/regionId/1",
+      "domain": "corcoran.com",
+      "providerHint": "corcoran.com",
+      "sourceKind": "broker_listing",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "SoHo NoHo Tribeca Manhattan 2 bedroom 2 bath rental availability",
+      "title": "Noho, NY; Soho, NY; Tribeca, NY Homes for Rent | Rentals - Corcoran",
+      "snippet": "Real estate company featuring thousands of properties in Noho, NY; Soho, NY; Tribeca, NY for rent. Visit our site to search luxury homes, ...",
+      "trackHints": [],
+      "neighborhoodHints": [
+        "SoHo",
+        "NoHo",
+        "Tribeca"
+      ],
+      "priority": 84,
+      "dedupeKey": "corcoran.com/search/for-rent/location/noho-ny-7651,soho-ny-7654,tribeca-ny-7658/regionid/1",
+      "flags": [
+        "broker",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/1-bedroom-apartments-for-rent/chelsea",
+      "canonicalUrl": "https://streeteasy.com/1-bedroom-apartments-for-rent/chelsea",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Chelsea NYC rental building availability 1 bedroom Manhattan",
+      "title": "138 One-Bedroom Apartments for Rent in Chelsea, Manhattan NY",
+      "snippet": "138 One-Bedroom Apartments for Rent in Chelsea, Manhattan NY ; 105 West 29th Street #35K · $7,169 · 709 ft² ; 236 West 15th Street #13B · $4,295 · - ft² ; 606 West ...",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "Flatiron"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/1-bedroom-apartments-for-rent/chelsea",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/1-bedroom-apartments-for-rent/flatiron",
+      "canonicalUrl": "https://streeteasy.com/1-bedroom-apartments-for-rent/flatiron",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Flatiron Gramercy Manhattan 1 bedroom rental building availability",
+      "title": "One-Bedroom Apartments for Rent in Flatiron, Manhattan NY",
+      "snippet": "48 One-Bedroom Apartments for Rent in Flatiron, Manhattan NY ; 55 West 25th Street #19F · $7,300 · 679 ft² ; 776 Sixth Avenue #9E · $5,580 · 573 ft² ; 776 Sixth Avenue ...",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "Greenwich Village",
+        "East Village",
+        "Gramercy",
+        "Flatiron"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/1-bedroom-apartments-for-rent/flatiron",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/1-bedroom-apartments-for-rent/greenwich-village",
+      "canonicalUrl": "https://streeteasy.com/1-bedroom-apartments-for-rent/greenwich-village",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Greenwich Village Manhattan 1 bedroom rental availability renovated",
+      "title": "One-Bedroom Apartments for Rent in Greenwich Village, Manhattan ...",
+      "snippet": "41 One-Bedroom Apartments for Rent in Greenwich Village, Manhattan NY ; Rental unit in Noho. 298 Mulberry Street #7O · $7,500 ; Rental unit in Noho. 298 Mulberry ...",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "Greenwich Village",
+        "SoHo",
+        "NoHo",
+        "Tribeca",
+        "Gramercy"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/1-bedroom-apartments-for-rent/greenwich-village",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/2-bedroom-apartments-for-rent/chelsea",
+      "canonicalUrl": "https://streeteasy.com/2-bedroom-apartments-for-rent/chelsea",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Chelsea Manhattan 2 bedroom 2 bath rental availability",
+      "title": "51 Two-Bedroom Apartments for Rent in Chelsea, Manhattan NY",
+      "snippet": "51 Two-Bedroom Apartments for Rent in Chelsea, Manhattan NY ; 221 West 29th Street #19C · $7,750 · 1,041 ft² ; 507 West 28th Street #PH12 · $8,630 · - ft² ; 606 West ...",
+      "trackHints": [
+        "2br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "Flatiron"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/2-bedroom-apartments-for-rent/chelsea",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/2-bedroom-apartments-for-rent/east-village",
+      "canonicalUrl": "https://streeteasy.com/2-bedroom-apartments-for-rent/east-village",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "East Village Manhattan 2 bedroom 2 bath rental availability washer dryer dishwasher",
+      "title": "Two-Bedroom Apartments for Rent in East Village, Manhattan NY",
+      "snippet": "Browse photos of 135 Two-Bedroom Apartments for Rent in East Village, Manhattan NY by using detailed search filters to find your future home | StreetEasy.",
+      "trackHints": [
+        "2br"
+      ],
+      "neighborhoodHints": [
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "Gramercy",
+        "Stuy Town"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/2-bedroom-apartments-for-rent/east-village",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/2-bedroom-apartments-for-rent/noho",
+      "canonicalUrl": "https://streeteasy.com/2-bedroom-apartments-for-rent/noho",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "SoHo NoHo Tribeca Manhattan 2 bedroom 2 bath rental availability",
+      "title": "4 Two-Bedroom Apartments for Rent in Noho, Manhattan NY",
+      "snippet": "4 Two-Bedroom Apartments for Rent in Noho, Manhattan NY ; Condo in Noho. 10 Bond Street #W4 · $29,500 · 2.5 baths; 1,866 ft² ; Condo in Noho. 10 Bond Street #W4.",
+      "trackHints": [
+        "2br"
+      ],
+      "neighborhoodHints": [
+        "Greenwich Village",
+        "East Village",
+        "SoHo",
+        "NoHo"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/2-bedroom-apartments-for-rent/noho",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/2-bedroom-apartments-for-rent/west-village",
+      "canonicalUrl": "https://streeteasy.com/2-bedroom-apartments-for-rent/west-village",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "West Village Greenwich Village Manhattan 2 bedroom 2 bath rental availability",
+      "title": "31 Two-Bedroom Apartments for Rent in West Village, Manhattan NY",
+      "snippet": "31 Two-Bedroom Apartments for Rent in West Village, Manhattan NY ; 234 West 14th Street #2B · $6,995 · Listing by Centennial Properties NY ; 234 West 14th Street # ...",
+      "trackHints": [
+        "2br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "SoHo"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/2-bedroom-apartments-for-rent/west-village",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/3-bedroom-apartments-for-rent/chelsea",
+      "canonicalUrl": "https://streeteasy.com/3-bedroom-apartments-for-rent/chelsea",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Chelsea Manhattan true 3 bedroom 3 bath rental availability",
+      "title": "20 Three-Bedroom Apartments for Rent in Chelsea, Manhattan NY",
+      "snippet": "20 Three-Bedroom Apartments for Rent in Chelsea, Manhattan NY ; 236 West 15th Street #55A · $8,900 · Listing by Monday Morning Management LLC ; 243 West 28th Street ...",
+      "trackHints": [
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "Flatiron"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/3-bedroom-apartments-for-rent/chelsea",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/3-bedroom-apartments-for-rent/noho",
+      "canonicalUrl": "https://streeteasy.com/3-bedroom-apartments-for-rent/noho",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "SoHo NoHo Manhattan true 3 bedroom 3 bath rental availability",
+      "title": "2 Three-Bedroom Apartments for Rent in Noho, Manhattan NY",
+      "snippet": "2 Three-Bedroom Apartments for Rent in Noho, Manhattan NY ; Rental unit in Noho. 298 Mulberry Street #7K · $12,995 · 1.5 baths · Listing by Living New York ; Co-op ...",
+      "trackHints": [
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Greenwich Village",
+        "East Village",
+        "SoHo",
+        "NoHo"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/3-bedroom-apartments-for-rent/noho",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/3-bedroom-apartments-for-rent/soho",
+      "canonicalUrl": "https://streeteasy.com/3-bedroom-apartments-for-rent/soho",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "SoHo NoHo Manhattan true 3 bedroom 3 bath rental availability",
+      "title": "12 Three-Bedroom Apartments for Rent in Soho, Manhattan NY",
+      "snippet": "12 Three-Bedroom Apartments for Rent in Soho, Manhattan NY ; Co-op in Soho. 284 Lafayette Street #5D · $25,000 · Listing by Corcoran ; Rental unit in Hudson Square.",
+      "trackHints": [
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Greenwich Village",
+        "SoHo",
+        "Tribeca",
+        "Little Italy"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/3-bedroom-apartments-for-rent/soho",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/3-bedroom-apartments-for-rent/tribeca",
+      "canonicalUrl": "https://streeteasy.com/3-bedroom-apartments-for-rent/tribeca",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Tribeca Manhattan true 3 bedroom 3 bath rental availability",
+      "title": "17 Three-Bedroom Apartments for Rent in Tribeca, Manhattan NY",
+      "snippet": "Browse photos of 17 Three-Bedroom Apartments for Rent in Tribeca, Manhattan NY by using detailed search filters to find your future home | StreetEasy.",
+      "trackHints": [
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "West Village",
+        "SoHo",
+        "Tribeca"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/3-bedroom-apartments-for-rent/tribeca",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/building/1-5-avenue-new_york",
+      "canonicalUrl": "https://streeteasy.com/building/1-5-avenue-new_york",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:streeteasy.com/building Manhattan 1 bedroom available now Chelsea West Village Greenwich Village",
+      "title": "1 5th Avenue in Greenwich Village - StreetEasy",
+      "snippet": "4 units for sale in this building ; 1 5th Avenue, #16A. $1,385,000. 1 bed. 1 bath. Listing by Ann Weintraub, Ltd. ; 1 5th Avenue, #2B. $1,395,000. 2 beds. 2 baths.",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "Greenwich Village",
+        "SoHo",
+        "Tribeca",
+        "Gramercy"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/building/1-5-avenue-new_york",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/building/117-west-13-street-new_york/57",
+      "canonicalUrl": "https://streeteasy.com/building/117-west-13-street-new_york/57",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:streeteasy.com/building Manhattan 1 bedroom available now Chelsea West Village Greenwich Village",
+      "title": "117 West 13th Street #57 - Greenwich Village - StreetEasy",
+      "snippet": "Classy spacious 1 bedroom in Prime West village neighborhood. This apartment offers a unique mix of prime west village residential energy with luxury.",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "SoHo",
+        "Tribeca",
+        "Gramercy"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/building/117-west-13-street-new_york/57",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/building/133-west-22-street-new_york",
+      "canonicalUrl": "https://streeteasy.com/building/133-west-22-street-new_york",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:streeteasy.com/building Manhattan 2 bedroom 2 bath available now Chelsea Tribeca SoHo",
+      "title": "133 West 22nd Street in Chelsea - StreetEasy",
+      "snippet": "4 available units in this building ; 133 West 22nd Street, #8G. $2,250,000. 2 beds. 2 baths. Listing by Compass ; 133 West 22nd Street, #8A. $4,450. base rent.",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "Flatiron"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/building/133-west-22-street-new_york",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/building/14-west-14-street-new_york",
+      "canonicalUrl": "https://streeteasy.com/building/14-west-14-street-new_york",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:streeteasy.com/building Manhattan 1 bedroom available now Chelsea West Village Greenwich Village",
+      "title": "14 West 14th Street in Greenwich Village - StreetEasy",
+      "snippet": "1 unit for rent in this building. Rental prices shown are base rent only and don't include any fees. Visit each listing to see a complete cost breakdown ...",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "Greenwich Village",
+        "SoHo",
+        "Tribeca",
+        "Gramercy",
+        "Flatiron"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/building/14-west-14-street-new_york",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/building/143-chambers-street-new_york/3",
+      "canonicalUrl": "https://streeteasy.com/building/143-chambers-street-new_york/3",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:streeteasy.com/building Manhattan 3 bedroom 3 bath available now Tribeca SoHo Chelsea",
+      "title": "143 Chambers Street #3 in Tribeca, Manhattan | StreetEasy",
+      "snippet": "3 Bedroom 3 Bathroom Available 6/20 in Tribeca! Discover the epitome of contemporary urban living at 143 Chambers Street.",
+      "trackHints": [
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "West Village",
+        "Tribeca"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/building/143-chambers-street-new_york/3",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/building/19-west-8-street-new_york/1",
+      "canonicalUrl": "https://streeteasy.com/building/19-west-8-street-new_york/1",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:streeteasy.com/building Manhattan 1 bedroom available now Chelsea West Village Greenwich Village",
+      "title": "19 West 8th Street #1 in Greenwich Village, Manhattan | StreetEasy",
+      "snippet": "Adorable 1 bedroom (flex 2) apartment in charming prewar walk-up building. The main living area has a lovely decorative fireplace and modern kitchen.",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "SoHo",
+        "Tribeca",
+        "Gramercy"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/building/19-west-8-street-new_york/1",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/building/254-west-18-street-new_york/3",
+      "canonicalUrl": "https://streeteasy.com/building/254-west-18-street-new_york/3",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:streeteasy.com/building Manhattan 3 bedroom 3 bath available now Tribeca SoHo Chelsea",
+      "title": "254 West 18th Street #3 in Chelsea, Manhattan | StreetEasy",
+      "snippet": "254 West 18th Street, New York, Ny, 10011: *** NEW TO PRIME CHELSEA MARKET *** CLASSIC FLOOR THROUGH LOFT *** CORNER BUILDING SURROUNDED BY WINDOWS ...",
+      "trackHints": [
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "Flatiron"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/building/254-west-18-street-new_york/3",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/building/3-eleven/0529",
+      "canonicalUrl": "https://streeteasy.com/building/3-eleven/0529",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:streeteasy.com/building Manhattan 1 bedroom available now Chelsea West Village Greenwich Village",
+      "title": "311 11th Avenue #529 in West Chelsea, Manhattan | StreetEasy",
+      "snippet": "3 ELEVEN - JUST LISTED HIGH FLOOR 1 BEDROOM with IN-APT WASHER/DRYER. 2 MONTHS FREE ON 14 MONTH LEASE Contact us for our limited time look-and-lease special ...",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/building/3-eleven/0529",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/building/321-west-16-street-new_york/3w",
+      "canonicalUrl": "https://streeteasy.com/building/321-west-16-street-new_york/3w",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:streeteasy.com/building Manhattan 3 bedroom 3 bath available now Tribeca SoHo Chelsea",
+      "title": "321 West 16th Street #3W in Chelsea, Manhattan | StreetEasy",
+      "snippet": "Custom renovation in Chelsea. Beautiful three bedroom apartment with balcony features Western exposure, marble bathroom, washer & dryer, and granite kitchen ...",
+      "trackHints": [
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "Flatiron"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/building/321-west-16-street-new_york/3w",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/building/777-6th-avenue",
+      "canonicalUrl": "https://streeteasy.com/building/777-6th-avenue",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:streeteasy.com/building Manhattan 2 bedroom 2 bath available now Chelsea Tribeca SoHo",
+      "title": "777 6th Avenue in Chelsea : Sales, Rentals, Floorplans | StreetEasy",
+      "snippet": "777 6th Avenue, New York, NY 10001 ; Studio. $5,125 – $5,472 · 4 available ; 1 bed. $5,785 – $6,650 · 9 available ; 2 beds. $7,065 – $9,855 · No units ...",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "Flatiron"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/building/777-6th-avenue",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/building/95-christopher-street-new_york",
+      "canonicalUrl": "https://streeteasy.com/building/95-christopher-street-new_york",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:streeteasy.com/building Manhattan 1 bedroom available now Chelsea West Village Greenwich Village",
+      "title": "95 Christopher Street in West Village - StreetEasy",
+      "snippet": "One of the few doorman rental buildings in the West Village. Some of the apartments feature setback terraces and unbelievable views in all four directions.",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "SoHo"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/building/95-christopher-street-new_york",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/building/chelsea-canvas",
+      "canonicalUrl": "https://streeteasy.com/building/chelsea-canvas",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:streeteasy.com/building Manhattan 3 bedroom 3 bath available now Tribeca SoHo Chelsea",
+      "title": "Chelsea Canvas - 280 West 24th Street #8D - StreetEasy",
+      "snippet": "Chelsea Canvas, 280 West 24th Street: Now Leasing Artfully Designed Studio, 1-, 2-, and 3-Bedroom Residences. Elegance finds its form at Chelsea Canvas.",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "Flatiron"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/building/chelsea-canvas",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/building/chelsea-centro",
+      "canonicalUrl": "https://streeteasy.com/building/chelsea-centro",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:streeteasy.com/building Manhattan 2 bedroom 2 bath available now Chelsea Tribeca SoHo",
+      "title": "Chelsea Centro at 200 West 26th Street in Chelsea - StreetEasy",
+      "snippet": "Located in one of Manhattan's most sought after neighborhoods, Chelsea Centro soars above the heart of Chelsea on Seventh Avenue.",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "Flatiron"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/building/chelsea-centro",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/building/lantern-house",
+      "canonicalUrl": "https://streeteasy.com/building/lantern-house",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:streeteasy.com/building Manhattan 2 bedroom 2 bath available now Chelsea Tribeca SoHo",
+      "title": "Lantern House at 515 West 18th Street in West Chelsea - StreetEasy",
+      "snippet": "The 22-story building comprises a collection of approximately 181 one, two, three and four bedroom residences, many of which bestow uninterrupted cityscape and ...",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/building/lantern-house",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/building/mabel-335-8th-avenue-new_york",
+      "canonicalUrl": "https://streeteasy.com/building/mabel-335-8th-avenue-new_york",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:streeteasy.com/building Manhattan 2 bedroom 2 bath available now Chelsea Tribeca SoHo",
+      "title": "Mabel at 335 8th Avenue in Chelsea : Sales, Rentals, Floorplans",
+      "snippet": "Mabel, 335 8th Avenue: NOW LEASING THOUGHTFULLY DESIGNED STUDIO, ONE-, AND TWO-BEDROOM HOMES Discover Mabel, a rental property that ...",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "Flatiron"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/building/mabel-335-8th-avenue-new_york",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/building/the-archive/241",
+      "canonicalUrl": "https://streeteasy.com/building/the-archive/241",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:streeteasy.com/building Manhattan 1 bedroom available now Chelsea West Village Greenwich Village",
+      "title": "666 Greenwich Street #241 in West Village, Manhattan | StreetEasy",
+      "snippet": "The Archive at 666 Greenwich Street, New York, Ny, 10014: HUGE two-level home with a large open living area, soaring ceilings, and Sunny Southern Views!",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "SoHo"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/building/the-archive/241",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/building/the-seymour",
+      "canonicalUrl": "https://streeteasy.com/building/the-seymour",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:streeteasy.com/building Manhattan 2 bedroom 2 bath available now Chelsea Tribeca SoHo",
+      "title": "The Seymour at 261 West 25th Street in Chelsea - StreetEasy",
+      "snippet": "Available units ; 06/20/24 · #5B. $12,000. 2 beds, 2.5 baths ; 01/27/24 · #8E. $5,800. 1 bed, 1 bath ...",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "Flatiron"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/building/the-seymour",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/for-rent/east-village",
+      "canonicalUrl": "https://streeteasy.com/for-rent/east-village",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "East Village Lower East Side Manhattan 1 bedroom rental building availability",
+      "title": "379 East Village, Manhattan NY Apartments for Rent - StreetEasy",
+      "snippet": "379 East Village, Manhattan NY Apartments for Rent ; 280 East Houston Street #PH2B · $6,495 · Listing by REAL New York ; 202 East 13th Street #2A · $7,495 · Listing ...",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "Gramercy",
+        "Stuy Town"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/for-rent/east-village",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/for-rent/gramercy-park",
+      "canonicalUrl": "https://streeteasy.com/for-rent/gramercy-park",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Flatiron Gramercy Manhattan 1 bedroom rental building availability",
+      "title": "82 Gramercy Park, Manhattan NY Apartments for Rent - StreetEasy",
+      "snippet": "Browse photos of 82 Gramercy Park, Manhattan NY Apartments for Rent by using detailed search filters to find your future home | StreetEasy.",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "East Village",
+        "Gramercy",
+        "Stuy Town"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/for-rent/gramercy-park",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/for-rent/west-village",
+      "canonicalUrl": "https://streeteasy.com/for-rent/west-village",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "West Village Manhattan 1 bedroom rental availability laundry dishwasher",
+      "title": "166 West Village, Manhattan NY Apartments for Rent - StreetEasy",
+      "snippet": "Discover your dream rental in West Village, NY on StreetEasy! Browse 166 apartments with your favorite amenities, such as doorman and elevator.",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "SoHo"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/for-rent/west-village",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/soho-noho-rentals/manhattan",
+      "canonicalUrl": "https://streeteasy.com/soho-noho-rentals/manhattan",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "SoHo NoHo Tribeca Manhattan 2 bedroom 2 bath rental availability",
+      "title": "12 Manhattan NY Soho Noho Apartments for Rent - StreetEasy",
+      "snippet": "12 Manhattan NY Soho Noho Apartments for Rent ; 284 Lafayette Street #5D · $25,000 · Listing by Corcoran ; 50 Prince Street #3M · $5,095 · Listing by AZ REALTY NYC ...",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Greenwich Village",
+        "Lower East Side",
+        "SoHo",
+        "NoHo"
+      ],
+      "priority": 84,
+      "dedupeKey": "streeteasy.com/soho-noho-rentals/manhattan",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.trulia.com/for_rent/New_York,Chelsea,NY/2p_beds/",
+      "canonicalUrl": "https://trulia.com/for_rent/New_York,Chelsea,NY/2p_beds",
+      "domain": "trulia.com",
+      "providerHint": "trulia.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Chelsea Manhattan 2 bedroom 2 bath rental availability",
+      "title": "2 Bedroom Apartments For Rent in Chelsea; New York, NY - Trulia",
+      "snippet": "Search 90 Apartments For Rent with 2 Bedroom in Chelsea, New York, New York. Explore rentals by neighborhoods, schools, local guides and ...",
+      "trackHints": [
+        "2br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea"
+      ],
+      "priority": 84,
+      "dedupeKey": "trulia.com/for_rent/new_york,chelsea,ny/2p_beds",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.trulia.com/for_rent/New_York,Chelsea,NY/3p_beds/",
+      "canonicalUrl": "https://trulia.com/for_rent/New_York,Chelsea,NY/3p_beds",
+      "domain": "trulia.com",
+      "providerHint": "trulia.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Chelsea Manhattan true 3 bedroom 3 bath rental availability",
+      "title": "Chelsea, New York, NY 3 Bedroom Apartments For Rent - Trulia",
+      "snippet": "Search 215 Apartments For Rent with 3 Bedroom in Chelsea, New York, New York and nearby areas. Explore rentals by neighborhoods, ...",
+      "trackHints": [
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea"
+      ],
+      "priority": 84,
+      "dedupeKey": "trulia.com/for_rent/new_york,chelsea,ny/3p_beds",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.trulia.com/for_rent/New_York,Flatiron_District,NY/1p_beds/",
+      "canonicalUrl": "https://trulia.com/for_rent/New_York,Flatiron_District,NY/1p_beds",
+      "domain": "trulia.com",
+      "providerHint": "trulia.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Flatiron Gramercy Manhattan 1 bedroom rental building availability",
+      "title": "Flatiron District, New York, NY 1 Bedroom Apartments For Rent - Trulia",
+      "snippet": "Search 65 Apartments For Rent with 1 Bedroom in Flatiron District, New York, New York. Explore rentals by neighborhoods, schools, ...",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Flatiron"
+      ],
+      "priority": 84,
+      "dedupeKey": "trulia.com/for_rent/new_york,flatiron_district,ny/1p_beds",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.trulia.com/for_rent/New_York,Greenwich_Village,NY/1p_beds/",
+      "canonicalUrl": "https://trulia.com/for_rent/New_York,Greenwich_Village,NY/1p_beds",
+      "domain": "trulia.com",
+      "providerHint": "trulia.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Greenwich Village Manhattan 1 bedroom rental availability renovated",
+      "title": "1 Bedroom Apartments For Rent in Greenwich Village; New York, NY",
+      "snippet": "Search 63 Apartments For Rent with 1 Bedroom in Greenwich Village, New York, New York. Explore rentals by neighborhoods, schools, ...",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Greenwich Village"
+      ],
+      "priority": 84,
+      "dedupeKey": "trulia.com/for_rent/new_york,greenwich_village,ny/1p_beds",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.trulia.com/for_rent/New_York,Greenwich_Village,NY/2p_beds/",
+      "canonicalUrl": "https://trulia.com/for_rent/New_York,Greenwich_Village,NY/2p_beds",
+      "domain": "trulia.com",
+      "providerHint": "trulia.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "West Village Greenwich Village Manhattan 2 bedroom 2 bath rental availability",
+      "title": "Greenwich Village, New York, NY 2 Bedroom Apartments For Rent",
+      "snippet": "Search 400 Apartments For Rent with 2 Bedroom in Greenwich Village, New York, New York and nearby areas.",
+      "trackHints": [
+        "2br"
+      ],
+      "neighborhoodHints": [
+        "Greenwich Village"
+      ],
+      "priority": 84,
+      "dedupeKey": "trulia.com/for_rent/new_york,greenwich_village,ny/2p_beds",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.trulia.com/for_rent/New_York,SoHo,NY/2p_beds/",
+      "canonicalUrl": "https://trulia.com/for_rent/New_York,SoHo,NY/2p_beds",
+      "domain": "trulia.com",
+      "providerHint": "trulia.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "SoHo NoHo Tribeca Manhattan 2 bedroom 2 bath rental availability",
+      "title": "2 Bedroom Apartments For Rent in SoHo; New York, NY - 47 Rentals",
+      "snippet": "Search 47 Apartments For Rent with 2 Bedroom in SoHo, New York, New York. Explore rentals by neighborhoods, schools, local guides and ...",
+      "trackHints": [
+        "2br"
+      ],
+      "neighborhoodHints": [
+        "SoHo"
+      ],
+      "priority": 84,
+      "dedupeKey": "trulia.com/for_rent/new_york,soho,ny/2p_beds",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.trulia.com/for_rent/New_York,SoHo,NY/3p_beds/",
+      "canonicalUrl": "https://trulia.com/for_rent/New_York,SoHo,NY/3p_beds",
+      "domain": "trulia.com",
+      "providerHint": "trulia.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "SoHo NoHo Manhattan true 3 bedroom 3 bath rental availability",
+      "title": "3 Bedroom Apartments For Rent around SoHo; New York, NY - Trulia",
+      "snippet": "Search 127 Apartments For Rent with 3 Bedroom in SoHo, New York, New York and nearby areas. Explore rentals by neighborhoods, schools, ...",
+      "trackHints": [
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "SoHo"
+      ],
+      "priority": 84,
+      "dedupeKey": "trulia.com/for_rent/new_york,soho,ny/3p_beds",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.trulia.com/for_rent/New_York,Tribeca,NY/3p_beds/",
+      "canonicalUrl": "https://trulia.com/for_rent/New_York,Tribeca,NY/3p_beds",
+      "domain": "trulia.com",
+      "providerHint": "trulia.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Tribeca Manhattan true 3 bedroom 3 bath rental availability",
+      "title": "3 Bedroom Apartments For Rent around Tribeca; New York, NY",
+      "snippet": "Search 103 Apartments For Rent with 3 Bedroom in Tribeca, New York, New York and nearby areas. Explore rentals by neighborhoods, ...",
+      "trackHints": [
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Tribeca"
+      ],
+      "priority": 84,
+      "dedupeKey": "trulia.com/for_rent/new_york,tribeca,ny/3p_beds",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.zillow.com/chelsea-manhattan-new-york-ny/apartments-3-bedrooms/",
+      "canonicalUrl": "https://zillow.com/chelsea-manhattan-new-york-ny/apartments-3-bedrooms",
+      "domain": "zillow.com",
+      "providerHint": "Zillow",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Chelsea Manhattan true 3 bedroom 3 bath rental availability",
+      "title": "3 Bedroom Apartments For Rent in Chelsea New York | Zillow",
+      "snippet": "3 Bedroom Apartments for Rent in Chelsea New York. Special offers. 19 rentals available. Sort: Recommended. Sorted by Recommended. $10,500/moFees may apply.",
+      "trackHints": [
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "Flatiron"
+      ],
+      "priority": 84,
+      "dedupeKey": "zillow.com/chelsea-manhattan-new-york-ny/apartments-3-bedrooms",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.zillow.com/soho-manhattan-new-york-ny/apartments-3-bedrooms/",
+      "canonicalUrl": "https://zillow.com/soho-manhattan-new-york-ny/apartments-3-bedrooms",
+      "domain": "zillow.com",
+      "providerHint": "Zillow",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "SoHo NoHo Manhattan true 3 bedroom 3 bath rental availability",
+      "title": "3 Bedroom Apartments For Rent in SoHo New York - Zillow",
+      "snippet": "3 Bedroom Apartments for Rent in SoHo New York. Special offers. 13 rentals available. Sort: Recommended. Sorted by Recommended. $6,500+ 3 bdsFees may apply.",
+      "trackHints": [
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "East Village",
+        "Lower East Side",
+        "SoHo"
+      ],
+      "priority": 84,
+      "dedupeKey": "zillow.com/soho-manhattan-new-york-ny/apartments-3-bedrooms",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.zillow.com/tribeca-manhattan-new-york-ny/apartments-3-bedrooms/",
+      "canonicalUrl": "https://zillow.com/tribeca-manhattan-new-york-ny/apartments-3-bedrooms",
+      "domain": "zillow.com",
+      "providerHint": "Zillow",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Tribeca Manhattan true 3 bedroom 3 bath rental availability",
+      "title": "3 Bedroom Apartments For Rent in Tribeca New York - Zillow",
+      "snippet": "3 Bedroom Apartments for Rent in Tribeca New York. Special offers. 13 rentals available. Sort: Recommended. Sorted by Recommended. $39,000/moFees may apply.",
+      "trackHints": [
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Tribeca"
+      ],
+      "priority": 84,
+      "dedupeKey": "zillow.com/tribeca-manhattan-new-york-ny/apartments-3-bedrooms",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.zillow.com/west-village-manhattan-new-york-ny/apartments-1-bedrooms/",
+      "canonicalUrl": "https://zillow.com/west-village-manhattan-new-york-ny/apartments-1-bedrooms",
+      "domain": "zillow.com",
+      "providerHint": "Zillow",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "West Village Manhattan 1 bedroom rental availability laundry dishwasher",
+      "title": "1 Bedroom Apartments For Rent in West Village New York | Zillow",
+      "snippet": "1 Bedroom Apartments for Rent in West Village New York. Special offers. 78 rentals available ... West Village Apartments with Washer & Dryer. Find Speciality ...",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "West Village",
+        "East Village",
+        "Lower East Side"
+      ],
+      "priority": 84,
+      "dedupeKey": "zillow.com/west-village-manhattan-new-york-ny/apartments-1-bedrooms",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.apartments.com/new-york-ny-10035/",
+      "canonicalUrl": "https://apartments.com/new-york-ny-10035",
+      "domain": "apartments.com",
+      "providerHint": "Apartments.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:apartments.com/new-york-ny Manhattan 2 bedroom 2 bathroom available now",
+      "title": "Apartments for Rent in 10035 - New York, NY",
+      "snippet": "See all 116 apartments in 10035, New York, NY currently available for rent. Each Apartments.com listing has verified information like property rating, ...",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [],
+      "priority": 81,
+      "dedupeKey": "apartments.com/new-york-ny-10035",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/building/198-6-avenue-new_york/2",
+      "canonicalUrl": "https://streeteasy.com/building/198-6-avenue-new_york/2",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:streeteasy.com/building Manhattan 2 bedroom 2 bath available now Chelsea Tribeca SoHo",
+      "title": "198 6th Avenue #2 in Soho, Manhattan - StreetEasy",
+      "snippet": "198 6th Avenue, New York, Ny, 10013: Welcome home to the Residences at 198 Sixth Ave, a collection of renovated apartments nestled in the heart of Soho.",
+      "trackHints": [],
+      "neighborhoodHints": [
+        "Greenwich Village",
+        "SoHo",
+        "Tribeca",
+        "Little Italy"
+      ],
+      "priority": 80,
+      "dedupeKey": "streeteasy.com/building/198-6-avenue-new_york/2",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/building/236-west-15-street-new_york/55a",
+      "canonicalUrl": "https://streeteasy.com/building/236-west-15-street-new_york/55a",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:streeteasy.com/building Manhattan 3 bedroom 3 bath available now Tribeca SoHo Chelsea",
+      "title": "236 West 15th Street #55A in Chelsea, Manhattan | StreetEasy",
+      "snippet": "This thoughtfully designed 3-bedroom, 2-bathroom home features a sleek, fully integrated kitchen with premium Smeg appliances, including a ...",
+      "trackHints": [],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "Flatiron"
+      ],
+      "priority": 80,
+      "dedupeKey": "streeteasy.com/building/236-west-15-street-new_york/55a",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/building/241-west-20-street-new_york/3",
+      "canonicalUrl": "https://streeteasy.com/building/241-west-20-street-new_york/3",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:streeteasy.com/building Manhattan 3 bedroom 3 bath available now Tribeca SoHo Chelsea",
+      "title": "241 West 20th Street #3 in Chelsea, Manhattan - Rentals - StreetEasy",
+      "snippet": "This gut-renovated true 3-bedroom residence offers a seamless combination of modern design, premium finishes, and exceptional natural light in the heart of ...",
+      "trackHints": [],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "Flatiron"
+      ],
+      "priority": 80,
+      "dedupeKey": "streeteasy.com/building/241-west-20-street-new_york/3",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.trulia.com/for_rent/New_York,East_Village,NY/APARTMENT,APARTMENT_COMMUNITY,CONDO_type/washerdryer_uamenities/7_p/",
+      "canonicalUrl": "https://trulia.com/for_rent/New_York,East_Village,NY/APARTMENT,APARTMENT_COMMUNITY,CONDO_type/washerdryer_uamenities/7_p",
+      "domain": "trulia.com",
+      "providerHint": "trulia.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "East Village Manhattan 2 bedroom 2 bath rental availability washer dryer dishwasher",
+      "title": "East Village, New York, NY Apartments For Rent with Washer & Dryer",
+      "snippet": "Search 944 Apartments For Rent with Washer & Dryer in East Village, New York, New York. Explore rentals by neighborhoods, schools, local guides and more on ...",
+      "trackHints": [],
+      "neighborhoodHints": [
+        "East Village"
+      ],
+      "priority": 80,
+      "dedupeKey": "trulia.com/for_rent/new_york,east_village,ny/apartment,apartment_community,condo_type/washerdryer_uamenities/7_p",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.trulia.com/for_rent/New_York,Lower_East_Side,NY/",
+      "canonicalUrl": "https://trulia.com/for_rent/New_York,Lower_East_Side,NY",
+      "domain": "trulia.com",
+      "providerHint": "trulia.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "East Village Lower East Side Manhattan 1 bedroom rental building availability",
+      "title": "Apartments For Rent in Lower East Side; New York, NY - 175 Rentals",
+      "snippet": "Search 175 Apartments & Rental Properties in Lower East Side, New York, New York. Explore rentals by neighborhoods, schools, ...",
+      "trackHints": [],
+      "neighborhoodHints": [
+        "Lower East Side"
+      ],
+      "priority": 80,
+      "dedupeKey": "trulia.com/for_rent/new_york,lower_east_side,ny",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.trulia.com/for_rent/New_York,West_Village,NY/dishwasher_uamenities/4_p/",
+      "canonicalUrl": "https://trulia.com/for_rent/New_York,West_Village,NY/dishwasher_uamenities/4_p",
+      "domain": "trulia.com",
+      "providerHint": "trulia.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "West Village Manhattan 1 bedroom rental availability laundry dishwasher",
+      "title": "Apartments For Rent in West Village; New York, NY with Dishwasher",
+      "snippet": "Search 420 rentals with Dishwasher in West Village, New York, New York. Explore rentals by neighborhoods, schools, local guides and more on Trulia! Page 4.",
+      "trackHints": [],
+      "neighborhoodHints": [
+        "West Village"
+      ],
+      "priority": 80,
+      "dedupeKey": "trulia.com/for_rent/new_york,west_village,ny/dishwasher_uamenities/4_p",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.zillow.com/east-village-manhattan-new-york-ny/apartments-with-washer-dryer/",
+      "canonicalUrl": "https://zillow.com/east-village-manhattan-new-york-ny/apartments-with-washer-dryer",
+      "domain": "zillow.com",
+      "providerHint": "Zillow",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "East Village Manhattan 2 bedroom 2 bath rental availability washer dryer dishwasher",
+      "title": "Apartments For Rent in East Village New York with Washer & Dryer",
+      "snippet": "Find your next apartment in East Village New York with washer and dryer included in unit. Use our detailed filters to find the perfect place.",
+      "trackHints": [],
+      "neighborhoodHints": [
+        "East Village",
+        "Lower East Side"
+      ],
+      "priority": 80,
+      "dedupeKey": "zillow.com/east-village-manhattan-new-york-ny/apartments-with-washer-dryer",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.zillow.com/flatiron-district-manhattan-new-york-ny/apartments/",
+      "canonicalUrl": "https://zillow.com/flatiron-district-manhattan-new-york-ny/apartments",
+      "domain": "zillow.com",
+      "providerHint": "Zillow",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Flatiron Gramercy Manhattan 1 bedroom rental building availability",
+      "title": "Apartments For Rent in Flatiron District New York - 85 Rentals | Zillow",
+      "snippet": "85 rentals available. Sort: Recommended. Sorted by Recommended. $6,547/mo. Total monthly price. 1 bd; 1 ba; -- sqft. Apartment for rent. Anagram Nomad, 10 E ...",
+      "trackHints": [],
+      "neighborhoodHints": [
+        "Chelsea",
+        "East Village",
+        "Flatiron"
+      ],
+      "priority": 80,
+      "dedupeKey": "zillow.com/flatiron-district-manhattan-new-york-ny/apartments",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.zillow.com/west-village-manhattan-new-york-ny/apartments-with-washer-dryer/",
+      "canonicalUrl": "https://zillow.com/west-village-manhattan-new-york-ny/apartments-with-washer-dryer",
+      "domain": "zillow.com",
+      "providerHint": "Zillow",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "West Village Manhattan 1 bedroom rental availability laundry dishwasher",
+      "title": "Apartments For Rent in West Village New York with Washer & Dryer",
+      "snippet": "Apartments For Rent in West Village New York with Washer & Dryer ; $6,795/mo · 141 W 10th St APT 4, New York, NY 10014. LISTING BY: REAL NEW YORK · 1 hour ago.",
+      "trackHints": [],
+      "neighborhoodHints": [
+        "West Village"
+      ],
+      "priority": 80,
+      "dedupeKey": "zillow.com/west-village-manhattan-new-york-ny/apartments-with-washer-dryer",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.apartments.com/new-york-ny-10019/5/",
+      "canonicalUrl": "https://apartments.com/new-york-ny-10019/5",
+      "domain": "apartments.com",
+      "providerHint": "Apartments.com",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:apartments.com/new-york-ny Manhattan 2 bedroom 2 bathroom available now",
+      "title": "Apartments for Rent in 10019 - New York, NY",
+      "snippet": "See all 226 apartments in 10019, New York, NY currently available for rent. Each Apartments.com listing has verified information ...",
+      "trackHints": [
+        "1br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "East Village",
+        "Lower East Side"
+      ],
+      "priority": 79,
+      "dedupeKey": "apartments.com/new-york-ny-10019/5",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.renthop.com/apartments-for-rent/chelsea-new-york-ny/1-bedroom",
+      "canonicalUrl": "https://renthop.com/apartments-for-rent/chelsea-new-york-ny/1-bedroom",
+      "domain": "renthop.com",
+      "providerHint": "RentHop",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Chelsea NYC rental building availability 1 bedroom Manhattan",
+      "title": "1-Bedroom Apartments for Rent in Chelsea, New York, NY - RentHop",
+      "snippet": "See all 112 1-bedroom apartments in Chelsea, New York, NY available for rent. Use our filters to search by amenities, price, or quality to find your perfect ...",
+      "trackHints": [
+        "1br",
+        "2br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "Tribeca",
+        "Gramercy"
+      ],
+      "priority": 79,
+      "dedupeKey": "renthop.com/apartments-for-rent/chelsea-new-york-ny/1-bedroom",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.renthop.com/apartments-for-rent/chelsea-new-york-ny/2-bedroom",
+      "canonicalUrl": "https://renthop.com/apartments-for-rent/chelsea-new-york-ny/2-bedroom",
+      "domain": "renthop.com",
+      "providerHint": "RentHop",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Chelsea Manhattan 2 bedroom 2 bath rental availability",
+      "title": "2-Bedroom Apartments for Rent in Chelsea, New York, NY - RentHop",
+      "snippet": "See all 58 2-bedroom apartments in Chelsea, New York, NY available for rent. Use our filters to search by amenities, price, or quality to find your perfect ...",
+      "trackHints": [
+        "1br",
+        "2br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "Tribeca",
+        "Gramercy"
+      ],
+      "priority": 79,
+      "dedupeKey": "renthop.com/apartments-for-rent/chelsea-new-york-ny/2-bedroom",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.renthop.com/apartments-for-rent/chelsea-new-york-ny/3-bedroom",
+      "canonicalUrl": "https://renthop.com/apartments-for-rent/chelsea-new-york-ny/3-bedroom",
+      "domain": "renthop.com",
+      "providerHint": "RentHop",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Chelsea Manhattan true 3 bedroom 3 bath rental availability",
+      "title": "3-Bedroom Apartments for Rent in Chelsea, New York, NY - RentHop",
+      "snippet": "See all 15 3-bedroom apartments in Chelsea, New York, NY available for rent. Use our filters to search by amenities, price, or quality to find your perfect ...",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "Tribeca",
+        "Gramercy"
+      ],
+      "priority": 79,
+      "dedupeKey": "renthop.com/apartments-for-rent/chelsea-new-york-ny/3-bedroom",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.renthop.com/apartments-for-rent/crown-heights-new-york-ny/3-bedroom",
+      "canonicalUrl": "https://renthop.com/apartments-for-rent/crown-heights-new-york-ny/3-bedroom",
+      "domain": "renthop.com",
+      "providerHint": "RentHop",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:renthop.com Manhattan 3 bedroom 3 bathroom rental availability",
+      "title": "3-Bedroom Apartments for Rent in Crown Heights, New York, NY",
+      "snippet": "See all 29 3-bedroom apartments in Crown Heights, New York, NY available for rent. Use our filters to search by amenities, price, or quality to find your ...",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "Gramercy",
+        "Stuy Town"
+      ],
+      "priority": 79,
+      "dedupeKey": "renthop.com/apartments-for-rent/crown-heights-new-york-ny/3-bedroom",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.renthop.com/apartments-for-rent/east-village-new-york-ny/1-bedroom",
+      "canonicalUrl": "https://renthop.com/apartments-for-rent/east-village-new-york-ny/1-bedroom",
+      "domain": "renthop.com",
+      "providerHint": "RentHop",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "East Village Lower East Side Manhattan 1 bedroom rental building availability",
+      "title": "1-Bedroom Apartments for Rent in East Village, New York, NY",
+      "snippet": "See all 177 1-bedroom apartments in East Village, New York, NY available for rent. Use our filters to search by amenities, price, or quality to find your ...",
+      "trackHints": [
+        "1br",
+        "2br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "Tribeca",
+        "Gramercy",
+        "Stuy Town"
+      ],
+      "priority": 79,
+      "dedupeKey": "renthop.com/apartments-for-rent/east-village-new-york-ny/1-bedroom",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.renthop.com/apartments-for-rent/east-village-new-york-ny/3-bedroom",
+      "canonicalUrl": "https://renthop.com/apartments-for-rent/east-village-new-york-ny/3-bedroom",
+      "domain": "renthop.com",
+      "providerHint": "RentHop",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:renthop.com Manhattan 3 bedroom 3 bathroom rental availability",
+      "title": "3-Bedroom Apartments for Rent in East Village, New York, NY",
+      "snippet": "See all 116 3-bedroom apartments in East Village, New York, NY available for rent. Use our filters to search by amenities, price, or quality to find your ...",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "Tribeca",
+        "Gramercy",
+        "Stuy Town"
+      ],
+      "priority": 79,
+      "dedupeKey": "renthop.com/apartments-for-rent/east-village-new-york-ny/3-bedroom",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.renthop.com/apartments-for-rent/east-village-new-york-ny/washer-dryer",
+      "canonicalUrl": "https://renthop.com/apartments-for-rent/east-village-new-york-ny/washer-dryer",
+      "domain": "renthop.com",
+      "providerHint": "RentHop",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "East Village Manhattan 2 bedroom 2 bath rental availability washer dryer dishwasher",
+      "title": "Washer / Dryer Apartments for Rent in East Village, New York, NY",
+      "snippet": "See all 411 washer / dryer apartments in East Village, New York, NY available for rent. Use our filters to search by amenities, price, or quality to find ...",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "Tribeca",
+        "Gramercy",
+        "Stuy Town"
+      ],
+      "priority": 79,
+      "dedupeKey": "renthop.com/apartments-for-rent/east-village-new-york-ny/washer-dryer",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.renthop.com/apartments-for-rent/financial-district-new-york-ny/3-bedroom",
+      "canonicalUrl": "https://renthop.com/apartments-for-rent/financial-district-new-york-ny/3-bedroom",
+      "domain": "renthop.com",
+      "providerHint": "RentHop",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:renthop.com Manhattan 3 bedroom 3 bathroom rental availability",
+      "title": "3-Bedroom Apartments for Rent in Financial District, New York, NY",
+      "snippet": "See all 241 3-bedroom apartments in Financial District, New York, NY available for rent. Use our filters to search by amenities, price, or quality to find ...",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "Tribeca",
+        "Gramercy",
+        "Stuy Town"
+      ],
+      "priority": 79,
+      "dedupeKey": "renthop.com/apartments-for-rent/financial-district-new-york-ny/3-bedroom",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.renthop.com/apartments-for-rent/gramercy-park-new-york-ny/1-bedroom",
+      "canonicalUrl": "https://renthop.com/apartments-for-rent/gramercy-park-new-york-ny/1-bedroom",
+      "domain": "renthop.com",
+      "providerHint": "RentHop",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Flatiron Gramercy Manhattan 1 bedroom rental building availability",
+      "title": "1-Bedroom Apartments for Rent in Gramercy Park, New York, NY",
+      "snippet": "See all 12 1-bedroom apartments in Gramercy Park, New York, NY available for rent. Use our filters to search by amenities, price, or quality to find your ...",
+      "trackHints": [
+        "1br",
+        "2br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "Tribeca",
+        "Gramercy"
+      ],
+      "priority": 79,
+      "dedupeKey": "renthop.com/apartments-for-rent/gramercy-park-new-york-ny/1-bedroom",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.renthop.com/apartments-for-rent/manhattan-new-york-ny/3-bedroom",
+      "canonicalUrl": "https://renthop.com/apartments-for-rent/manhattan-new-york-ny/3-bedroom",
+      "domain": "renthop.com",
+      "providerHint": "RentHop",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:renthop.com Manhattan 3 bedroom 3 bathroom rental availability",
+      "title": "3-Bedroom Apartments for Rent in Manhattan, New York, NY",
+      "snippet": "See all 1176 3-bedroom apartments in Manhattan, New York, NY available for rent. Use our filters to search by amenities, price, or quality to find your ...",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "Tribeca",
+        "Little Italy",
+        "Gramercy"
+      ],
+      "priority": 79,
+      "dedupeKey": "renthop.com/apartments-for-rent/manhattan-new-york-ny/3-bedroom",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.renthop.com/apartments-for-rent/midtown-manhattan-new-york-ny/3-bedroom",
+      "canonicalUrl": "https://renthop.com/apartments-for-rent/midtown-manhattan-new-york-ny/3-bedroom",
+      "domain": "renthop.com",
+      "providerHint": "RentHop",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:renthop.com Manhattan 3 bedroom 3 bathroom rental availability",
+      "title": "3-Bedroom Apartments for Rent in Midtown Manhattan, New York, NY",
+      "snippet": "See all 395 3-bedroom apartments in Midtown Manhattan, New York, NY available for rent. Use our filters to search by amenities, price, or quality to find ...",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "Tribeca",
+        "Gramercy"
+      ],
+      "priority": 79,
+      "dedupeKey": "renthop.com/apartments-for-rent/midtown-manhattan-new-york-ny/3-bedroom",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.renthop.com/apartments-for-rent/murray-hill-new-york-ny/3-bedroom",
+      "canonicalUrl": "https://renthop.com/apartments-for-rent/murray-hill-new-york-ny/3-bedroom",
+      "domain": "renthop.com",
+      "providerHint": "RentHop",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:renthop.com Manhattan 3 bedroom 3 bathroom rental availability",
+      "title": "3-Bedroom Apartments for Rent in Murray Hill, New York, NY",
+      "snippet": "See all 40 3-bedroom apartments in Murray Hill, New York, NY available for rent. Use our filters to search by amenities, price, or quality to find your ...",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "Tribeca",
+        "Gramercy"
+      ],
+      "priority": 79,
+      "dedupeKey": "renthop.com/apartments-for-rent/murray-hill-new-york-ny/3-bedroom",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.renthop.com/apartments-for-rent/tribeca-new-york-ny/3-bedroom",
+      "canonicalUrl": "https://renthop.com/apartments-for-rent/tribeca-new-york-ny/3-bedroom",
+      "domain": "renthop.com",
+      "providerHint": "RentHop",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Tribeca Manhattan true 3 bedroom 3 bath rental availability",
+      "title": "3-Bedroom Apartments for Rent in Tribeca, New York, NY - 18 Rentals",
+      "snippet": "See all 18 3-bedroom apartments in Tribeca, New York, NY available for rent. Use our filters to search by amenities, price, or quality to find your perfect ...",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "Tribeca",
+        "Gramercy",
+        "Stuy Town"
+      ],
+      "priority": 79,
+      "dedupeKey": "renthop.com/apartments-for-rent/tribeca-new-york-ny/3-bedroom",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.renthop.com/apartments-for-rent/upper-west-side-new-york-ny/3-bedroom",
+      "canonicalUrl": "https://renthop.com/apartments-for-rent/upper-west-side-new-york-ny/3-bedroom",
+      "domain": "renthop.com",
+      "providerHint": "RentHop",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:renthop.com Manhattan 3 bedroom 3 bathroom rental availability",
+      "title": "3-Bedroom Apartments for Rent in Upper West Side, New York, NY",
+      "snippet": "See all 119 3-bedroom apartments in Upper West Side, New York, NY available for rent. Use our filters to search by amenities, price, or quality to find your ...",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "Tribeca",
+        "Gramercy"
+      ],
+      "priority": 79,
+      "dedupeKey": "renthop.com/apartments-for-rent/upper-west-side-new-york-ny/3-bedroom",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.renthop.com/apartments-for-rent/west-village-new-york-ny/1-bedroom",
+      "canonicalUrl": "https://renthop.com/apartments-for-rent/west-village-new-york-ny/1-bedroom",
+      "domain": "renthop.com",
+      "providerHint": "RentHop",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "West Village Manhattan 1 bedroom rental availability laundry dishwasher",
+      "title": "1-Bedroom Apartments for Rent in West Village, New York, NY",
+      "snippet": "See all 155 1-bedroom apartments in West Village, New York, NY available for rent. Use our filters to search by amenities, price, or quality to find your ...",
+      "trackHints": [
+        "1br",
+        "2br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "Tribeca",
+        "Gramercy",
+        "Stuy Town"
+      ],
+      "priority": 79,
+      "dedupeKey": "renthop.com/apartments-for-rent/west-village-new-york-ny/1-bedroom",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.renthop.com/apartments-for-rent/west-village-new-york-ny/2-bedroom",
+      "canonicalUrl": "https://renthop.com/apartments-for-rent/west-village-new-york-ny/2-bedroom",
+      "domain": "renthop.com",
+      "providerHint": "RentHop",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "West Village Greenwich Village Manhattan 2 bedroom 2 bath rental availability",
+      "title": "2-Bedroom Apartments for Rent in West Village, New York, NY",
+      "snippet": "See all 39 2-bedroom apartments in West Village, New York, NY available for rent. Use our filters to search by amenities, price, or quality to find your ...",
+      "trackHints": [
+        "1br",
+        "2br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "Tribeca",
+        "Gramercy",
+        "Stuy Town"
+      ],
+      "priority": 79,
+      "dedupeKey": "renthop.com/apartments-for-rent/west-village-new-york-ny/2-bedroom",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.renthop.com/listings/34th-st-9th-ave/na/58441495",
+      "canonicalUrl": "https://renthop.com/listings/34th-st-9th-ave/na/58441495",
+      "domain": "renthop.com",
+      "providerHint": "RentHop",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:renthop.com Manhattan 3 bedroom 3 bathroom rental availability",
+      "title": "34th St & 9th Ave — Listing History and Nearby Rentals - RentHop",
+      "snippet": "360 West 34th Street. Hudson Yards, Midtown Manhattan, Manhattan, 10001. $3,589 - $3,867. LEASED / EXPIRED.",
+      "trackHints": [
+        "1br",
+        "2br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "Tribeca",
+        "Gramercy"
+      ],
+      "priority": 79,
+      "dedupeKey": "renthop.com/listings/34th-st-9th-ave/na/58441495",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/building/10-downing-street-new_york",
+      "canonicalUrl": "https://streeteasy.com/building/10-downing-street-new_york",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:streeteasy.com/building Manhattan 1 bedroom available now Chelsea West Village Greenwich Village",
+      "title": "10 Downing Street, New York, NY 10014 - West Village - StreetEasy",
+      "snippet": "Visit listing for breakdown of costs and fees. Available: Now. 1 of 2. 1 bed. 1 bath. 812 ft². Listing by Stonehenge NYC LLC. #2F. $9,100. Price ...",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "SoHo"
+      ],
+      "priority": 79,
+      "dedupeKey": "streeteasy.com/building/10-downing-street-new_york",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/building/beatrice-105-west-29th-street-new_york",
+      "canonicalUrl": "https://streeteasy.com/building/beatrice-105-west-29th-street-new_york",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:streeteasy.com/building Manhattan 3 bedroom 3 bath available now Tribeca SoHo Chelsea",
+      "title": "Beatrice at 105 West 29th Street in Chelsea - StreetEasy",
+      "snippet": "Located between Manhattan's Chelsea and NoMad neighborhoods, Beatrice is a sleek tower perched atop the Eventi Hotel offering exquisite apartments starting ...",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "Flatiron"
+      ],
+      "priority": 79,
+      "dedupeKey": "streeteasy.com/building/beatrice-105-west-29th-street-new_york",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://streeteasy.com/building/the-westminster",
+      "canonicalUrl": "https://streeteasy.com/building/the-westminster",
+      "domain": "streeteasy.com",
+      "providerHint": "StreetEasy",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:streeteasy.com/building Manhattan 2 bedroom 2 bath available now Chelsea Tribeca SoHo",
+      "title": "The Westminster at 180 West 20th Street in Chelsea - StreetEasy",
+      "snippet": "Featuring studio, one and two-bedroom apartments, The Westminster is conveniently located within walking distance of Union Square and the Meatpacking District.",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "Flatiron"
+      ],
+      "priority": 79,
+      "dedupeKey": "streeteasy.com/building/the-westminster",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.zillow.com/chelsea-manhattan-new-york-ny/apartments-2-bedrooms/",
+      "canonicalUrl": "https://zillow.com/chelsea-manhattan-new-york-ny/apartments-2-bedrooms",
+      "domain": "zillow.com",
+      "providerHint": "Zillow",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Chelsea Manhattan 2 bedroom 2 bath rental availability",
+      "title": "2 Bedroom Apartments For Rent in Chelsea New York | Zillow",
+      "snippet": "2 Bedroom Apartments for Rent in Chelsea New York. Special offers. 57 rentals available. Sort: Recommended. Sorted by Recommended. $9,569+ 2 bds.",
+      "trackHints": [
+        "2br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea"
+      ],
+      "priority": 79,
+      "dedupeKey": "zillow.com/chelsea-manhattan-new-york-ny/apartments-2-bedrooms",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.zillow.com/greenwich-village-manhattan-new-york-ny/apartments-1-bedrooms/",
+      "canonicalUrl": "https://zillow.com/greenwich-village-manhattan-new-york-ny/apartments-1-bedrooms",
+      "domain": "zillow.com",
+      "providerHint": "Zillow",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Greenwich Village Manhattan 1 bedroom rental availability renovated",
+      "title": "1 Bedroom Apartments For Rent in Greenwich Village New York",
+      "snippet": "1 Bedroom Apartments for Rent in Greenwich Village New York. Special offers. 37 rentals available. Sort: Recommended. Sorted by Recommended. $3,850+ 1 bdFees ...",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Greenwich Village"
+      ],
+      "priority": 79,
+      "dedupeKey": "zillow.com/greenwich-village-manhattan-new-york-ny/apartments-1-bedrooms",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.zillow.com/greenwich-village-manhattan-new-york-ny/apartments-2-bedrooms/",
+      "canonicalUrl": "https://zillow.com/greenwich-village-manhattan-new-york-ny/apartments-2-bedrooms",
+      "domain": "zillow.com",
+      "providerHint": "Zillow",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "West Village Greenwich Village Manhattan 2 bedroom 2 bath rental availability",
+      "title": "2 Bedroom Apartments For Rent in Greenwich Village New York",
+      "snippet": "2 Bedroom Apartments for Rent in Greenwich Village New York. Special offers. 22 rentals available. Sort: Recommended. Sorted by Recommended.",
+      "trackHints": [
+        "2br"
+      ],
+      "neighborhoodHints": [
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side"
+      ],
+      "priority": 79,
+      "dedupeKey": "zillow.com/greenwich-village-manhattan-new-york-ny/apartments-2-bedrooms",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.zillow.com/homedetails/1-Bank-St-APT-2B-New-York-NY-10014/2107843755_zpid/",
+      "canonicalUrl": "https://zillow.com/homedetails/1-Bank-St-APT-2B-New-York-NY-10014/2107843755_zpid",
+      "domain": "zillow.com",
+      "providerHint": "Zillow",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:zillow.com/homedetails Manhattan 1 bedroom rental Chelsea West Village",
+      "title": "1 Bank St APT 2B, New York, NY 10014 | Zillow",
+      "snippet": "1 Bank St APT 2B, New York, NY 10014 is an apartment unit listed for rent at $6750 /mo. The -- sqft unit is a 1 bed, 1 bath apartment unit.",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "West Village"
+      ],
+      "priority": 79,
+      "dedupeKey": "zillow.com/homedetails/1-bank-st-apt-2b-new-york-ny-10014/2107843755_zpid",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.zillow.com/homedetails/313-W-14th-St-1F-New-York-NY-10014/462146558_zpid/",
+      "canonicalUrl": "https://zillow.com/homedetails/313-W-14th-St-1F-New-York-NY-10014/462146558_zpid",
+      "domain": "zillow.com",
+      "providerHint": "Zillow",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:zillow.com/homedetails Manhattan 1 bedroom rental Chelsea West Village",
+      "title": "313 W 14th St #1F, New York, NY 10014 | Zillow",
+      "snippet": "313 W 14th St #1F, New York, NY 10014 is an apartment unit listed for rent at $4000 /mo. The -- sqft unit is a 1 bed, 1 bath apartment unit.",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village"
+      ],
+      "priority": 79,
+      "dedupeKey": "zillow.com/homedetails/313-w-14th-st-1f-new-york-ny-10014/462146558_zpid",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.zillow.com/homedetails/322-W-14th-St-APT-4B-New-York-NY-10014/2125942435_zpid/",
+      "canonicalUrl": "https://zillow.com/homedetails/322-W-14th-St-APT-4B-New-York-NY-10014/2125942435_zpid",
+      "domain": "zillow.com",
+      "providerHint": "Zillow",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:zillow.com/homedetails Manhattan 1 bedroom rental Chelsea West Village",
+      "title": "322 W 14th St APT 4B, New York, NY 10014 | Zillow",
+      "snippet": "This renovated 1-bedroom Apartment in the heart of the Meatpacking district/Chelsea offers a smart layout, modern finishes, and convenient building perks.",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village"
+      ],
+      "priority": 79,
+      "dedupeKey": "zillow.com/homedetails/322-w-14th-st-apt-4b-new-york-ny-10014/2125942435_zpid",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.zillow.com/lower-east-side-manhattan-new-york-ny/apartments-1-bedrooms/",
+      "canonicalUrl": "https://zillow.com/lower-east-side-manhattan-new-york-ny/apartments-1-bedrooms",
+      "domain": "zillow.com",
+      "providerHint": "Zillow",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "East Village Lower East Side Manhattan 1 bedroom rental building availability",
+      "title": "1 Bedroom Apartments For Rent in Lower East Side New York | Zillow",
+      "snippet": "1 Bedroom Apartments for Rent in Lower East Side New York. Special offers. 49 rentals available. Sort: Recommended. Sorted by Recommended.",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Lower East Side"
+      ],
+      "priority": 79,
+      "dedupeKey": "zillow.com/lower-east-side-manhattan-new-york-ny/apartments-1-bedrooms",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.zillow.com/soho-manhattan-new-york-ny/apartments-2-bedrooms/",
+      "canonicalUrl": "https://zillow.com/soho-manhattan-new-york-ny/apartments-2-bedrooms",
+      "domain": "zillow.com",
+      "providerHint": "Zillow",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "SoHo NoHo Tribeca Manhattan 2 bedroom 2 bath rental availability",
+      "title": "2 Bedroom Apartments For Rent in SoHo New York - Zillow",
+      "snippet": "2 Bedroom Apartments for Rent in SoHo New York. Special offers. 34 rentals available. Sort: Recommended. Sorted by Recommended. $7,000/moFees may apply.",
+      "trackHints": [
+        "2br"
+      ],
+      "neighborhoodHints": [
+        "SoHo"
+      ],
+      "priority": 79,
+      "dedupeKey": "zillow.com/soho-manhattan-new-york-ny/apartments-2-bedrooms",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.zillow.com/homedetails/250-W-15th-St-APT-3I-New-York-NY-10011/72515382_zpid/",
+      "canonicalUrl": "https://zillow.com/homedetails/250-W-15th-St-APT-3I-New-York-NY-10011/72515382_zpid",
+      "domain": "zillow.com",
+      "providerHint": "Zillow",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:zillow.com/homedetails Manhattan 1 bedroom rental Chelsea West Village",
+      "title": "250 W 15th St APT 3I, New York, NY 10011 - Zillow",
+      "snippet": "250 W 15th St APT 3I, New York, NY 10011 is an apartment unit listed for rent at $6300 /mo. The -- sqft unit is a 1 bed, 1 bath apartment unit.",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [],
+      "priority": 76,
+      "dedupeKey": "zillow.com/homedetails/250-w-15th-st-apt-3i-new-york-ny-10011/72515382_zpid",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.zillow.com/homedetails/260-W-10th-St-APT-1E-New-York-NY-10014/244731327_zpid/",
+      "canonicalUrl": "https://zillow.com/homedetails/260-W-10th-St-APT-1E-New-York-NY-10014/244731327_zpid",
+      "domain": "zillow.com",
+      "providerHint": "Zillow",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:zillow.com/homedetails Manhattan 1 bedroom rental Chelsea West Village",
+      "title": "260 W 10th St APT 1E, New York, NY 10014 | Zillow",
+      "snippet": "260 W 10th St APT 1E, New York, NY 10014 is an apartment unit listed for rent at $8500 /mo. The 1250 Square Feet unit is a 1 bed, 1 bath apartment unit.",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [],
+      "priority": 76,
+      "dedupeKey": "zillow.com/homedetails/260-w-10th-st-apt-1e-new-york-ny-10014/244731327_zpid",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.zillow.com/homedetails/82-Christopher-St-1B-New-York-NY-10014/2070088090_zpid/",
+      "canonicalUrl": "https://zillow.com/homedetails/82-Christopher-St-1B-New-York-NY-10014/2070088090_zpid",
+      "domain": "zillow.com",
+      "providerHint": "Zillow",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:zillow.com/homedetails Manhattan 1 bedroom rental Chelsea West Village",
+      "title": "82 Christopher St #1B, New York, NY 10014 - Zillow",
+      "snippet": "82 Christopher St #1B, New York, NY 10014 is an apartment unit listed for rent at $4500 /mo. The -- sqft unit is a 1 bed, 1 bath apartment unit.",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [],
+      "priority": 76,
+      "dedupeKey": "zillow.com/homedetails/82-christopher-st-1b-new-york-ny-10014/2070088090_zpid",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.zillow.com/chelsea-manhattan-new-york-ny/apartments/",
+      "canonicalUrl": "https://zillow.com/chelsea-manhattan-new-york-ny/apartments",
+      "domain": "zillow.com",
+      "providerHint": "Zillow",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Chelsea NYC rental building availability 1 bedroom Manhattan",
+      "title": "Apartments For Rent in Chelsea New York - 324 Rentals | Zillow",
+      "snippet": "Apartments For Rent in Chelsea New York - 324 Rentals ; $5,075+ Studio · 21 Chelsea | 120 W 21st St, New York, NY · 21 Chelsea · $5,075+Studio · $6,016+1bd ; $4,510 ...",
+      "trackHints": [],
+      "neighborhoodHints": [
+        "Chelsea"
+      ],
+      "priority": 75,
+      "dedupeKey": "zillow.com/chelsea-manhattan-new-york-ny/apartments",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.zillow.com/east-village-manhattan-new-york-ny/apartments-with-washer-dryer/3_p/",
+      "canonicalUrl": "https://zillow.com/east-village-manhattan-new-york-ny/apartments-with-washer-dryer/3_p",
+      "domain": "zillow.com",
+      "providerHint": "Zillow",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "East Village Manhattan 2 bedroom 2 bath rental availability washer dryer dishwasher",
+      "title": "Apartments For Rent in East Village New York with Washer & Dryer",
+      "snippet": "Apartments For Rent in East Village New York with Washer & Dryer · $5,750/moFees may apply. 2 bds; 1 ba · $4,400+ 1 bdFees may apply · 310 E 2nd St, New York, NY.",
+      "trackHints": [],
+      "neighborhoodHints": [
+        "East Village",
+        "Lower East Side"
+      ],
+      "priority": 75,
+      "dedupeKey": "zillow.com/east-village-manhattan-new-york-ny/apartments-with-washer-dryer/3_p",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.realtor.com/apartments/Chelsea_Manhattan_NY/beds-1-1",
+      "canonicalUrl": "https://realtor.com/apartments/Chelsea_Manhattan_NY/beds-1-1",
+      "domain": "realtor.com",
+      "providerHint": "realtor.com",
+      "sourceKind": "portal_building",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Chelsea NYC rental building availability 1 bedroom Manhattan",
+      "title": "1 Bedroom Apartments for Rent in Chelsea, Manhattan | Realtor.com®",
+      "snippet": "Discover 1 bedroom apartments and homes for rent in Chelsea, Manhattan, NY. Explore 281 listings and find your perfect place.",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea"
+      ],
+      "priority": 73,
+      "dedupeKey": "realtor.com/apartments/chelsea_manhattan_ny/beds-1-1",
+      "flags": [
+        "portal",
+        "inventory_signal",
+        "availability_signal"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.realtor.com/apartments/Gramercy-Park_Manhattan_NY/beds-1-1",
+      "canonicalUrl": "https://realtor.com/apartments/Gramercy-Park_Manhattan_NY/beds-1-1",
+      "domain": "realtor.com",
+      "providerHint": "realtor.com",
+      "sourceKind": "portal_building",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Flatiron Gramercy Manhattan 1 bedroom rental building availability",
+      "title": "1 Bedroom Apartments for Rent in Gramercy Park, Manhattan",
+      "snippet": "Discover 1 bedroom apartments and homes for rent in Gramercy Park, Manhattan, NY. Explore 40 listings and find your perfect place.",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Gramercy"
+      ],
+      "priority": 73,
+      "dedupeKey": "realtor.com/apartments/gramercy-park_manhattan_ny/beds-1-1",
+      "flags": [
+        "portal",
+        "inventory_signal",
+        "availability_signal"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.realtor.com/apartments/Greenwich-Village_Manhattan_NY/beds-1-1",
+      "canonicalUrl": "https://realtor.com/apartments/Greenwich-Village_Manhattan_NY/beds-1-1",
+      "domain": "realtor.com",
+      "providerHint": "realtor.com",
+      "sourceKind": "portal_building",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Greenwich Village Manhattan 1 bedroom rental availability renovated",
+      "title": "1 Bedroom Apartments for Rent in Greenwich Village, Manhattan",
+      "snippet": "Discover 1 bedroom apartments and homes for rent in Greenwich Village, Manhattan, NY. Explore 64 listings and find your perfect place.",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Greenwich Village"
+      ],
+      "priority": 73,
+      "dedupeKey": "realtor.com/apartments/greenwich-village_manhattan_ny/beds-1-1",
+      "flags": [
+        "portal",
+        "inventory_signal",
+        "availability_signal"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.realtor.com/apartments/Lower-East-Side_Manhattan_NY/beds-1-1",
+      "canonicalUrl": "https://realtor.com/apartments/Lower-East-Side_Manhattan_NY/beds-1-1",
+      "domain": "realtor.com",
+      "providerHint": "realtor.com",
+      "sourceKind": "portal_building",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "East Village Lower East Side Manhattan 1 bedroom rental building availability",
+      "title": "1 Bedroom Apartments for Rent in Lower East Side, Manhattan",
+      "snippet": "Discover 1 bedroom apartments and homes for rent in Lower East Side, Manhattan, NY. Explore 37 listings and find your perfect place.",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Lower East Side"
+      ],
+      "priority": 73,
+      "dedupeKey": "realtor.com/apartments/lower-east-side_manhattan_ny/beds-1-1",
+      "flags": [
+        "portal",
+        "inventory_signal",
+        "availability_signal"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.realtor.com/apartments/NoHo_Manhattan_NY/beds-2-2",
+      "canonicalUrl": "https://realtor.com/apartments/NoHo_Manhattan_NY/beds-2-2",
+      "domain": "realtor.com",
+      "providerHint": "realtor.com",
+      "sourceKind": "portal_building",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "SoHo NoHo Tribeca Manhattan 2 bedroom 2 bath rental availability",
+      "title": "2 Bedroom Apartments for Rent in NoHo, Manhattan | Realtor.com®",
+      "snippet": "Discover 2 bedroom apartments and homes for rent in NoHo, Manhattan, NY. Explore 6 listings and find your perfect place.",
+      "trackHints": [
+        "2br"
+      ],
+      "neighborhoodHints": [
+        "NoHo"
+      ],
+      "priority": 73,
+      "dedupeKey": "realtor.com/apartments/noho_manhattan_ny/beds-2-2",
+      "flags": [
+        "portal",
+        "inventory_signal",
+        "availability_signal"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.realtor.com/apartments/NoHo_Manhattan_NY/beds-3-3",
+      "canonicalUrl": "https://realtor.com/apartments/NoHo_Manhattan_NY/beds-3-3",
+      "domain": "realtor.com",
+      "providerHint": "realtor.com",
+      "sourceKind": "portal_building",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "SoHo NoHo Manhattan true 3 bedroom 3 bath rental availability",
+      "title": "3 Bedroom Apartments for Rent in NoHo, Manhattan | Realtor.com®",
+      "snippet": "Discover 3 bedroom apartments and homes for rent in NoHo, Manhattan, NY. Explore 5 listings and find your perfect place.",
+      "trackHints": [
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "NoHo"
+      ],
+      "priority": 73,
+      "dedupeKey": "realtor.com/apartments/noho_manhattan_ny/beds-3-3",
+      "flags": [
+        "portal",
+        "inventory_signal",
+        "availability_signal"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.realtor.com/apartments/Tribeca_Manhattan_NY/beds-3-3",
+      "canonicalUrl": "https://realtor.com/apartments/Tribeca_Manhattan_NY/beds-3-3",
+      "domain": "realtor.com",
+      "providerHint": "realtor.com",
+      "sourceKind": "portal_building",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Tribeca Manhattan true 3 bedroom 3 bath rental availability",
+      "title": "3 Bedroom Apartments for Rent in Tribeca, Manhattan | Realtor.com®",
+      "snippet": "Discover 3 bedroom apartments and homes for rent in Tribeca, Manhattan, NY. Explore 29 listings and find your perfect place.",
+      "trackHints": [
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Tribeca"
+      ],
+      "priority": 73,
+      "dedupeKey": "realtor.com/apartments/tribeca_manhattan_ny/beds-3-3",
+      "flags": [
+        "portal",
+        "inventory_signal",
+        "availability_signal"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.zillow.com/homedetails/222-W-14th-St-APT-3N-New-York-NY-10011/31500647_zpid/",
+      "canonicalUrl": "https://zillow.com/homedetails/222-W-14th-St-APT-3N-New-York-NY-10011/31500647_zpid",
+      "domain": "zillow.com",
+      "providerHint": "Zillow",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:zillow.com/homedetails Manhattan 1 bedroom rental Chelsea West Village",
+      "title": "222 W 14th St APT 3N, New York, NY 10011 | MLS #S1766563 | Zillow",
+      "snippet": "Zillow has 9 photos of this $1175000 1 bed, 1 bath, 783 sqft condo home located at 222 W 14th St APT 3N, New York, NY 10011 built in 1987. MLS #S1766563.",
+      "trackHints": [
+        "1br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village"
+      ],
+      "priority": 73,
+      "dedupeKey": "zillow.com/homedetails/222-w-14th-st-apt-3n-new-york-ny-10011/31500647_zpid",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.zillow.com/homedetails/301-W-22nd-St-APT-61-New-York-NY-10011/2111663945_zpid/",
+      "canonicalUrl": "https://zillow.com/homedetails/301-W-22nd-St-APT-61-New-York-NY-10011/2111663945_zpid",
+      "domain": "zillow.com",
+      "providerHint": "Zillow",
+      "sourceKind": "portal_unit",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "site:zillow.com/homedetails Manhattan 1 bedroom rental Chelsea West Village",
+      "title": "301 W 22nd St APT 61, New York, NY 10011 | Zillow",
+      "snippet": "301 W 22nd St APT 61, New York, NY 10011 is an apartment unit listed for rent at $7500 /mo. The -- sqft unit is a 3 beds, 1 bath apartment unit.",
+      "trackHints": [],
+      "neighborhoodHints": [],
+      "priority": 72,
+      "dedupeKey": "zillow.com/homedetails/301-w-22nd-st-apt-61-new-york-ny-10011/2111663945_zpid",
+      "flags": [
+        "portal",
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.metropolitanpropertygroup.com/SoHoThreeBedrooms",
+      "canonicalUrl": "https://metropolitanpropertygroup.com/SoHoThreeBedrooms",
+      "domain": "metropolitanpropertygroup.com",
+      "providerHint": "metropolitanpropertygroup.com",
+      "sourceKind": "generic_listing",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "SoHo NoHo Manhattan true 3 bedroom 3 bath rental availability",
+      "title": "Soho Three Bedroom Apartments - NYC - Metropolitan Property Group",
+      "snippet": "Soho Three Bedroom Apartment Rentals, No Fee Three Bedroom Apartments for rent in Soho. Search Soho NYC real estate for an apartment rental. Call today.",
+      "trackHints": [
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "SoHo"
+      ],
+      "priority": 65,
+      "dedupeKey": "metropolitanpropertygroup.com/sohothreebedrooms",
+      "flags": [
+        "inventory_signal",
+        "availability_signal",
+        "price_signal"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.renthop.com/apartments-for-rent/greenwich-village-new-york-ny/1-bedroom",
+      "canonicalUrl": "https://renthop.com/apartments-for-rent/greenwich-village-new-york-ny/1-bedroom",
+      "domain": "renthop.com",
+      "providerHint": "RentHop",
+      "sourceKind": "portal_building",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Greenwich Village Manhattan 1 bedroom rental availability renovated",
+      "title": "1-Bedroom Apartments for Rent in Greenwich Village, New York, NY",
+      "snippet": "See all 80 1-bedroom apartments in Greenwich Village, New York, NY available for rent. Use our filters to search by amenities, price, or quality to find ...",
+      "trackHints": [
+        "1br",
+        "2br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "Tribeca",
+        "Gramercy",
+        "Stuy Town"
+      ],
+      "priority": 61,
+      "dedupeKey": "renthop.com/apartments-for-rent/greenwich-village-new-york-ny/1-bedroom",
+      "flags": [
+        "portal",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.apartmentadvisor.com/apartments/flatiron-district-new-york-ny",
+      "canonicalUrl": "https://apartmentadvisor.com/apartments/flatiron-district-new-york-ny",
+      "domain": "apartmentadvisor.com",
+      "providerHint": "apartmentadvisor.com",
+      "sourceKind": "generic_listing",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Flatiron Gramercy Manhattan 1 bedroom rental building availability",
+      "title": "Flatiron District, New York, NY Rentals | 2 Great Deals",
+      "snippet": "Search over 89 apartments in Flatiron District, New York, NY currently available for rent. Use ApartmentAdvisor to find the best apartment deals.",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "SoHo",
+        "Gramercy",
+        "Flatiron"
+      ],
+      "priority": 56,
+      "dedupeKey": "apartmentadvisor.com/apartments/flatiron-district-new-york-ny",
+      "flags": [
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.homes.com/manhattan-ny/east-village-neighborhood/homes-for-rent/2-bedroom/",
+      "canonicalUrl": "https://homes.com/manhattan-ny/east-village-neighborhood/homes-for-rent/2-bedroom",
+      "domain": "homes.com",
+      "providerHint": "homes.com",
+      "sourceKind": "generic_listing",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "East Village Manhattan 2 bedroom 2 bath rental availability washer dryer dishwasher",
+      "title": "2-Bedroom Homes for Rent in East Village, Manhattan",
+      "snippet": "Search 30 2-bedroom homes for rent in the East Village neighborhood of Manhattan. See detailed rental info and photos. Discover other nearby neighborhoods ...",
+      "trackHints": [
+        "1br",
+        "2br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "SoHo",
+        "Little Italy",
+        "Gramercy",
+        "Flatiron"
+      ],
+      "priority": 56,
+      "dedupeKey": "homes.com/manhattan-ny/east-village-neighborhood/homes-for-rent/2-bedroom",
+      "flags": [
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://www.homes.com/manhattan-ny/west-village-neighborhood/homes-for-rent/2-bedroom/",
+      "canonicalUrl": "https://homes.com/manhattan-ny/west-village-neighborhood/homes-for-rent/2-bedroom",
+      "domain": "homes.com",
+      "providerHint": "homes.com",
+      "sourceKind": "generic_listing",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "West Village Greenwich Village Manhattan 2 bedroom 2 bath rental availability",
+      "title": "2-Bedroom Homes for Rent in West Village, Manhattan",
+      "snippet": "Search 35 2-bedroom homes for rent in the West Village neighborhood of Manhattan. See detailed rental info and photos. Discover other nearby neighborhoods ...",
+      "trackHints": [
+        "2br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "SoHo",
+        "Tribeca",
+        "Gramercy",
+        "Flatiron"
+      ],
+      "priority": 56,
+      "dedupeKey": "homes.com/manhattan-ny/west-village-neighborhood/homes-for-rent/2-bedroom",
+      "flags": [
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    },
+    {
+      "url": "https://hotpads.com/tribeca-manhattan-new-york-ny/3-bedroom-apartments-for-rent",
+      "canonicalUrl": "https://hotpads.com/tribeca-manhattan-new-york-ny/3-bedroom-apartments-for-rent",
+      "domain": "hotpads.com",
+      "providerHint": "hotpads.com",
+      "sourceKind": "generic_listing",
+      "discoveryMethod": "firecrawl_search",
+      "discoveryQuery": "Tribeca Manhattan true 3 bedroom 3 bath rental availability",
+      "title": "3 Bedroom Apartments for Rent in Tribeca, New York, NY | HotPads",
+      "snippet": "The average rent for 3 bedroom rentals in Tribeca is $14,362. How many 3 bedroom rentals are available now in Tribeca, New York, NY? There are currently 13 ...",
+      "trackHints": [
+        "1br",
+        "3br"
+      ],
+      "neighborhoodHints": [
+        "Chelsea",
+        "West Village",
+        "Greenwich Village",
+        "East Village",
+        "Lower East Side",
+        "SoHo",
+        "Tribeca",
+        "Little Italy",
+        "Gramercy",
+        "Flatiron"
+      ],
+      "priority": 56,
+      "dedupeKey": "hotpads.com/tribeca-manhattan-new-york-ny/3-bedroom-apartments-for-rent",
+      "flags": [
+        "unit_like",
+        "inventory_signal",
+        "availability_signal",
+        "price_signal",
+        "floorplan_signal",
+        "soft_deprioritized"
+      ],
+      "filteredReason": null
+    }
+  ]
+}

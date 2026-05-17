@@ -1,3 +1,5 @@
+import { IconCalendarFillDuo18 } from "nucleo-ui-fill-duo-18";
+import { Icon } from "@/components/ui/icon";
 import { Typography } from "@/components/ui/typography";
 import { parseAvailability, type Apartment } from "@/lib/apartment";
 import { cn } from "@/lib/utils";
@@ -26,13 +28,39 @@ function MoveIn({ apartment }: MoveInProps) {
 }
 
 function ImmediateCard() {
+  const today = new Date();
+  const month = today
+    .toLocaleString("en-US", { month: "short" })
+    .toUpperCase();
+  const day = today.getDate();
+  // Spotlight at top-right that fades the decorative date down + left.
+  const maskGradient =
+    "radial-gradient(120% 100% at 100% 0%, #000 0%, #000 30%, transparent 80%)";
+
   return (
-    <div className="flex flex-col items-start gap-1 rounded-[20px] bg-surface-sunken p-4">
-      <p className="text-[16px] font-medium leading-[18px] tracking-[-0.1px] text-primary">
-        Available immediately
-      </p>
-      <p className="text-[14px] font-normal leading-[18px] tracking-[-0.24px] text-secondary">
-        Move in any day.
+    <div className="squircle relative flex flex-1 min-h-[168px] flex-col items-start justify-end overflow-hidden rounded-[32px] bg-surface-sunken p-6">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 flex select-none flex-col items-end pr-5 pt-3 text-primary opacity-20"
+        style={{
+          maskImage: maskGradient,
+          WebkitMaskImage: maskGradient,
+        }}
+      >
+        <span className="text-[38px] font-medium leading-none tracking-[-0.24px]">
+          {month}
+        </span>
+        <span className="text-[84px] font-bold leading-[0.9] tracking-[-0.05em]">
+          {day}
+        </span>
+      </div>
+      <Icon
+        glyph={IconCalendarFillDuo18}
+        size={24}
+        className="text-secondary"
+      />
+      <p className="mt-1.5 text-[16px] font-medium leading-[18px] tracking-[-0.1px] text-primary">
+        Available now
       </p>
     </div>
   );

@@ -72,10 +72,15 @@ function HomePage() {
   const [selectedId, setSelectedId] = useApartmentSelection();
   const viewportShift = useViewportShift();
 
-  // Re-lock dim whenever a new place is opened (initial click OR switching
-  // apartments via another card while the drawer is open).
+  // Only re-arm the dim lock when the drawer transitions from CLOSED to
+  // OPEN. Switching apartments while the drawer is already open carries
+  // over the existing hover-driven dim state, so the page doesn't snap
+  // back to dimmed under a cursor that's still outside the drawer.
+  const prevSelectedIdRef = useRef(selectedId);
   useEffect(() => {
-    if (selectedId) {
+    const prev = prevSelectedIdRef.current;
+    prevSelectedIdRef.current = selectedId;
+    if (prev === null && selectedId !== null) {
       setHasEnteredDrawer(false);
       setIsDrawerHovered(false);
     }
@@ -86,11 +91,23 @@ function HomePage() {
     if (hovered) setHasEnteredDrawer(true);
   };
 
+  // Lock page scroll while the pointer is over the drawer. The drawer's
+  // own `overflow-y-auto` container still scrolls; only the body is pinned.
+  useEffect(() => {
+    if (!isDrawerHovered) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isDrawerHovered]);
+
   const updateFilters = (patch: Partial<FilterValues>) =>
     setFilters((prev) => ({ ...prev, ...patch }));
 
   const filtersActive = useMemo(() => {
     if (filters.favoritesOnly) return true;
+    if (filters.touredOnly) return true;
     if (filters.bathroomsMin > 0) return true;
     const min = parsePrice(filters.costMin);
     if (min !== undefined && min > 0) return true;
@@ -115,6 +132,7 @@ function HomePage() {
       if (apartment.status === "archived") return false;
       if (track !== "all" && apartment.track !== track) return false;
       if (filters.favoritesOnly && apartment.isFavorite !== true) return false;
+      if (filters.touredOnly && apartment.tourStatus !== "toured") return false;
       const price = apartment.offer.price;
       if (costMin !== undefined && (price === undefined || price < costMin))
         return false;
@@ -138,9 +156,15 @@ function HomePage() {
       return true;
     });
 
-    // Favorites first, then model shortlist, then everything else. Array.sort
-    // is stable, so the server's rank/lastVerifiedAt order is preserved
-    // within each group.
+    if (filters.sort === "newest") {
+      return [...filtered].sort(
+        (a, b) => (b.createdAt ?? 0) - (a.createdAt ?? 0),
+      );
+    }
+
+    // "relevant": favorites first, then model shortlist, then everything
+    // else. Array.sort is stable, so the server's rank/lastVerifiedAt order
+    // is preserved within each group.
     const priority = (apartment: Apartment): number => {
       if (apartment.isFavorite === true) return 0;
       if (apartment.status === "shortlist") return 1;

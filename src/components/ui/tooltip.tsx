@@ -100,7 +100,7 @@ const TooltipContent = React.forwardRef<
                     "var(--radix-tooltip-content-transform-origin)",
                 }}
                 className={cn(
-                  "max-w-[200px] rounded-[14px] bg-card text-foreground shadow-tooltip",
+                  "squircle max-w-[200px] rounded-[26px] bg-card text-foreground shadow-tooltip",
                   compact
                     ? "px-3 py-2 text-[14px] font-semibold leading-none"
                     : "px-4 py-3 text-[14px] leading-[18px]",

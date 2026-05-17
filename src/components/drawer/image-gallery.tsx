@@ -22,7 +22,7 @@ function ImageGallery({ apartmentId, images }: ImageGalleryProps) {
     return (
       <div
         aria-hidden
-        className="aspect-[1920/1080] w-full rounded-[20px] bg-muted shadow-card-1"
+        className="squircle aspect-[1920/1080] w-full rounded-[32px] bg-muted shadow-card-1"
       />
     );
   }
@@ -31,7 +31,7 @@ function ImageGallery({ apartmentId, images }: ImageGalleryProps) {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="relative aspect-[1920/1080] w-full overflow-hidden rounded-[20px] bg-muted shadow-card-1">
+      <div className="squircle relative aspect-[1920/1080] w-full overflow-hidden rounded-[32px] bg-muted shadow-card-1">
         <FadeImage
           key={active.url ?? "active"}
           src={active.url ?? undefined}
@@ -54,7 +54,7 @@ function ImageGallery({ apartmentId, images }: ImageGalleryProps) {
               aria-label={`Show photo ${index + 1}`}
               aria-current={isActive}
               className={cn(
-                "relative h-[90px] w-[142px] shrink-0 overflow-hidden rounded-[16px] bg-surface-sunken",
+                "squircle relative h-[90px] w-[142px] shrink-0 overflow-hidden rounded-[28px] bg-surface-sunken",
                 "shadow-card-1 outline-none transition-opacity",
                 !isActive && "opacity-80 hover:opacity-100",
               )}

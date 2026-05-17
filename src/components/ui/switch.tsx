@@ -54,7 +54,7 @@ const Switch = React.forwardRef<
 				}}
 				transition={layoutTransition}
 				className={cn(
-					"group/switch relative inline-flex h-7 w-11 shrink-0 cursor-default items-center rounded-full px-[3px] outline-none before:absolute before:-inset-0.75 before:pointer-events-none before:content-[''] focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+					"group/switch relative inline-flex h-5 w-8 shrink-0 cursor-default items-center rounded-full px-[2px] outline-none before:absolute before:-inset-1.5 before:pointer-events-none before:content-[''] focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
 					checked ? "bg-switch-on" : "bg-switch-off",
 					"transition-colors",
 					className,
@@ -65,7 +65,7 @@ const Switch = React.forwardRef<
 					initial={false}
 					layout
 					transition={layoutTransition}
-					className="pointer-events-none block h-[22px] w-[22px] rounded-full bg-card shadow-switch-thumb group-active/switch:w-[26px] transition-[width]"
+					className="pointer-events-none block h-4 w-4 rounded-full bg-card shadow-switch-thumb group-active/switch:w-[18px] transition-[width]"
 				/>
 			</MotionSwitchRoot>
 		);

@@ -75,6 +75,7 @@ const PopoverContent = React.forwardRef<
               sideOffset={sideOffset}
               align={align}
               collisionPadding={collisionPadding}
+              data-overlay-content=""
               className="z-50"
               forceMount
               {...props}
@@ -96,7 +97,7 @@ const PopoverContent = React.forwardRef<
                     "var(--radix-popover-content-transform-origin)",
                 }}
                 className={cn(
-                  "rounded-[24px] bg-card text-foreground shadow-tooltip",
+                  "squircle rounded-[36px] bg-card text-foreground shadow-tooltip",
                   "outline-none",
                   className,
                 )}

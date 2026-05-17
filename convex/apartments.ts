@@ -282,6 +282,44 @@ export const setFavorite = mutation({
   },
 });
 
+export const setTourStatus = mutation({
+  args: {
+    id: v.id("apartments"),
+    tourStatus: v.union(
+      v.literal("not_yet"),
+      v.literal("touring"),
+      v.literal("toured"),
+    ),
+  },
+  handler: async (ctx, args) => {
+    const apartmentDoc = await ctx.db.get(args.id);
+    if (apartmentDoc === null) {
+      throw new Error("Apartment not found");
+    }
+    await ctx.db.patch(args.id, {
+      tourStatus: args.tourStatus,
+      updatedAt: Date.now(),
+    });
+  },
+});
+
+export const setUserNotes = mutation({
+  args: {
+    id: v.id("apartments"),
+    userNotes: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const apartmentDoc = await ctx.db.get(args.id);
+    if (apartmentDoc === null) {
+      throw new Error("Apartment not found");
+    }
+    await ctx.db.patch(args.id, {
+      userNotes: args.userNotes,
+      updatedAt: Date.now(),
+    });
+  },
+});
+
 export const remove = mutation({
   args: { id: v.id("apartments") },
   handler: async (ctx, args) => {

@@ -4,14 +4,24 @@ import {
   IconBathtubFillDuo18,
   IconCurrencyDollarFillDuo18,
   IconHeartFillDuo18,
+  IconUserArrowRightFillDuo18,
 } from "nucleo-ui-fill-duo-18";
 import { IconMinusFill18, IconPlusFill18 } from "nucleo-ui-fill-18";
+import {
+  ButtonGroup,
+  ButtonGroupItem,
+} from "@/components/ui/button-group";
 import { Icon } from "@/components/ui/icon";
 import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
 
+export type SortMode = "relevant" | "newest";
+
 export interface FilterValues {
+  sort: SortMode;
+  touredOnly: boolean;
   favoritesOnly: boolean;
   costMin: string;
   costMax: string;
@@ -19,6 +29,8 @@ export interface FilterValues {
 }
 
 export const DEFAULT_FILTER_VALUES: FilterValues = {
+  sort: "relevant",
+  touredOnly: false,
   favoritesOnly: false,
   costMin: "",
   costMax: "",
@@ -33,6 +45,12 @@ export interface FilterMenuProps {
 function FilterMenu({ values, onChange }: FilterMenuProps) {
   return (
     <div className="flex w-[278px] flex-col gap-4 p-4">
+      <SortRow value={values.sort} onChange={(sort) => onChange({ sort })} />
+      <Separator />
+      <TouredRow
+        value={values.touredOnly}
+        onChange={(touredOnly) => onChange({ touredOnly })}
+      />
       <FavoritesRow
         value={values.favoritesOnly}
         onChange={(favoritesOnly) => onChange({ favoritesOnly })}
@@ -47,6 +65,30 @@ function FilterMenu({ values, onChange }: FilterMenuProps) {
         onChange={(bathroomsMin) => onChange({ bathroomsMin })}
       />
     </div>
+  );
+}
+
+interface SortRowProps {
+  value: SortMode;
+  onChange: (next: SortMode) => void;
+}
+
+function SortRow({ value, onChange }: SortRowProps) {
+  return (
+    <ButtonGroup aria-label="Sort apartments">
+      <ButtonGroupItem
+        active={value === "relevant"}
+        onClick={() => onChange("relevant")}
+      >
+        Relevant
+      </ButtonGroupItem>
+      <ButtonGroupItem
+        active={value === "newest"}
+        onClick={() => onChange("newest")}
+      >
+        Newest first
+      </ButtonGroupItem>
+    </ButtonGroup>
   );
 }
 
@@ -78,6 +120,25 @@ function FavoritesRow({ value, onChange }: FavoritesRowProps) {
   return (
     <div className="flex items-center justify-between">
       <RowLabel label="Favorites" glyph={IconHeartFillDuo18} htmlFor={id} />
+      <Switch id={id} checked={value} onCheckedChange={onChange} />
+    </div>
+  );
+}
+
+interface TouredRowProps {
+  value: boolean;
+  onChange: (next: boolean) => void;
+}
+
+function TouredRow({ value, onChange }: TouredRowProps) {
+  const id = useId();
+  return (
+    <div className="flex items-center justify-between">
+      <RowLabel
+        label="Toured"
+        glyph={IconUserArrowRightFillDuo18}
+        htmlFor={id}
+      />
       <Switch id={id} checked={value} onCheckedChange={onChange} />
     </div>
   );
@@ -192,7 +253,7 @@ function NumberStepper({
   return (
     <div
       className={cn(
-        "flex h-9 items-center justify-center gap-2.5 rounded-[12px] bg-card px-3",
+        "squircle flex h-9 items-center justify-center gap-2.5 rounded-[24px] bg-card px-3",
         "shadow-input",
       )}
     >

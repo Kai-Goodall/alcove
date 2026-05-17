@@ -1,3 +1,4 @@
+import { IconFilterFill18 } from "nucleo-ui-fill-18";
 import { IconFilterFillDuo18 } from "nucleo-ui-fill-duo-18";
 import { FilterMenu, type FilterValues } from "@/components/filter-menu";
 import { Icon } from "@/components/ui/icon";
@@ -63,7 +64,10 @@ function FilterBar({
                 filtersActive ? "text-primary" : "text-secondary",
               )}
             >
-              <Icon glyph={IconFilterFillDuo18} size={18} />
+              <Icon
+                glyph={filtersActive ? IconFilterFill18 : IconFilterFillDuo18}
+                size={18}
+              />
             </button>
           </PopoverTrigger>
           <PopoverContent align="center" sideOffset={10}>

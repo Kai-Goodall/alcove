@@ -89,6 +89,22 @@ function HomePage() {
   const updateFilters = (patch: Partial<FilterValues>) =>
     setFilters((prev) => ({ ...prev, ...patch }));
 
+  const filtersActive = useMemo(() => {
+    if (filters.favoritesOnly) return true;
+    if (filters.bathroomsMin > 0) return true;
+    const min = parsePrice(filters.costMin);
+    if (min !== undefined && min > 0) return true;
+    const userMax = parsePrice(filters.costMax);
+    if (userMax !== undefined && apartments) {
+      const dataMax = apartments.reduce((m, a) => {
+        const p = a.offer.price;
+        return typeof p === "number" && p > m ? p : m;
+      }, 0);
+      if (userMax < dataMax) return true;
+    }
+    return false;
+  }, [filters, apartments]);
+
   const visible = useMemo(() => {
     if (apartments === undefined) return undefined;
     const trimmed = query.trim().toLowerCase();
@@ -168,6 +184,7 @@ function HomePage() {
               onQueryChange={setQuery}
               filters={filters}
               onFiltersChange={updateFilters}
+              filtersActive={filtersActive}
             />
           </div>
           <ApartmentGrid

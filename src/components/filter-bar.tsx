@@ -29,6 +29,7 @@ export interface FilterBarProps {
   onQueryChange: (next: string) => void;
   filters: FilterValues;
   onFiltersChange: (next: Partial<FilterValues>) => void;
+  filtersActive: boolean;
 }
 
 function FilterBar({
@@ -38,6 +39,7 @@ function FilterBar({
   onQueryChange,
   filters,
   onFiltersChange,
+  filtersActive,
 }: FilterBarProps) {
   return (
     <div className="flex items-center justify-between">
@@ -53,10 +55,12 @@ function FilterBar({
             <button
               type="button"
               aria-label="Open filters"
+              aria-pressed={filtersActive}
               className={cn(
-                "inline-flex size-[18px] items-center justify-center rounded-full text-secondary outline-none",
+                "inline-flex size-[18px] items-center justify-center rounded-full outline-none",
                 "transition-colors hover:text-foreground",
                 "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                filtersActive ? "text-primary" : "text-secondary",
               )}
             >
               <Icon glyph={IconFilterFillDuo18} size={18} />

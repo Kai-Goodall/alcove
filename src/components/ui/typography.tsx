@@ -2,15 +2,16 @@ import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
-const typographyVariants = cva("tracking-normal", {
+const typographyVariants = cva("", {
   variants: {
     variant: {
-      h1: "text-balance text-[26px] font-semibold leading-[30px]",
-      h2: "text-balance text-[21px] font-semibold leading-[26px]",
-      h3: "text-balance text-[16px] font-semibold leading-[20px]",
-      body: "text-pretty text-[14px] leading-[18px] text-muted-foreground",
-      label: "text-[14px] font-medium leading-none",
-      caption: "text-pretty text-[13px] leading-[16px] text-muted-foreground",
+      h1: "text-balance text-[26px] font-medium leading-[26px] tracking-[-0.38px]",
+      h2: "text-balance text-[20px] font-medium leading-[26px] tracking-[-0.2px]",
+      h3: "text-balance text-[16px] font-medium leading-[18px] tracking-[-0.1px]",
+      body: "text-pretty text-[14px] font-normal leading-[18px] tracking-[-0.24px] text-muted-foreground",
+      label: "text-[14px] font-medium leading-none tracking-[-0.2px]",
+      caption:
+        "text-pretty text-[13px] font-normal leading-[16px] tracking-[-0.2px] text-muted-foreground",
     },
   },
   defaultVariants: {

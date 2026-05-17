@@ -1,0 +1,1160 @@
+{
+  "runs": [
+    {
+      "id": "daily-manhattan-apartment-search-2026-05-13",
+      "runDate": "2026-05-13",
+      "summary": "Shortlist focused on 1BR Chelsea/West Village fits, one clean 2BR/2BA EVE option, and over-budget monitor inventory.",
+      "notes": "Backfilled from the final assistant output of the 2026-05-13 daily Manhattan apartment search automation run.",
+      "sourcesSearched": [
+        "StreetEasy",
+        "Equity Apartments",
+        "EVE East Village",
+        "direct building availability pages"
+      ],
+      "blindSpots": [
+        "Some StreetEasy listings expose incomplete HVAC or floor-plan detail.",
+        "Several high-quality 2BR listings were above the preferred cap or had only one bathroom."
+      ],
+      "listings": [
+        {
+          "key": "equity:beatrice:1br",
+          "url": "https://www.equityapartments.com/new-york-city/chelsea/beatrice-apartments",
+          "provider": "Equity Apartments",
+          "name": "Beatrice Apartments 1BR",
+          "streetAddress": "105 W 29th St",
+          "neighborhood": "Chelsea / NoMad",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 1,
+          "price": 5926,
+          "priceDisplay": "from $5,926",
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "squareFeet": 643,
+          "availabilityStarts": "2026-05-13",
+          "availabilityDisplay": "unit available 2026-05-13",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "high",
+          "commute": {
+            "minutes": 20,
+            "route": "R/W subway or low-20s walk",
+            "notes": "R/W commute estimated around 18-22 minutes."
+          },
+          "amenities": [
+            "In-unit washer/dryer",
+            "Dishwasher",
+            "Floor-to-ceiling windows",
+            "Central heat and air conditioning",
+            "Modern kitchen",
+            "Modern bathroom"
+          ],
+          "mustHaveEvidence": "Direct Equity page showed in-unit laundry, dishwasher, floor-to-ceiling windows, central heat/AC, and modern bath/kitchen.",
+          "furnitureFit": "643 sq ft plan appears plausible for the 100 inch sofa and living setup; still confirm living-room dimensions.",
+          "caveats": [
+            "Above the preferred 1BR ceiling."
+          ],
+          "notes": "Best 1BR fit on the run despite price pressure."
+        },
+        {
+          "url": "https://streeteasy.com/building/10-morton-street-new_york/5a",
+          "provider": "StreetEasy",
+          "name": "10 Morton Street #5A",
+          "streetAddress": "10 Morton Street",
+          "unit": "5A",
+          "neighborhood": "West Village",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 2,
+          "price": 4850,
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "availabilityDisplay": "available now",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "low",
+          "commute": {
+            "minutes": 16,
+            "route": "walk",
+            "notes": "Roughly 15-18 minutes walking to 1 Example Plaza."
+          },
+          "amenities": [
+            "Washer/dryer",
+            "Dishwasher",
+            "Renovated kitchen",
+            "Renovated bathroom"
+          ],
+          "mustHaveEvidence": "StreetEasy page described washer/dryer, dishwasher, bright windows, gut renovation, and marble finishes.",
+          "furnitureFit": "Likely tight; no clean floor-plan dimensions were available.",
+          "caveats": [
+            "Space risk due missing floor plan."
+          ],
+          "notes": "Verified live and under budget with strongest commute of the May 13 West Village options."
+        },
+        {
+          "url": "https://streeteasy.com/building/53-leroy-street-new_york/1a",
+          "provider": "StreetEasy",
+          "name": "53 Leroy Street #1A",
+          "streetAddress": "53 Leroy Street",
+          "unit": "1A",
+          "neighborhood": "West Village",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 3,
+          "price": 5295,
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "availabilityDisplay": "available now",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "low",
+          "commute": {
+            "minutes": 16,
+            "route": "walk",
+            "notes": "Roughly 14-17 minutes walking."
+          },
+          "amenities": [
+            "Washer/dryer",
+            "Dishwasher",
+            "Renovated bathroom",
+            "High ceilings",
+            "Oversized windows"
+          ],
+          "mustHaveEvidence": "StreetEasy page mentioned washer/dryer, dishwasher, newly renovated bathroom, high ceilings, and oversized windows.",
+          "caveats": [
+            "Medium-low confidence due incomplete dimensions."
+          ],
+          "notes": "Good neighborhood and commute; lower confidence than Beatrice."
+        },
+        {
+          "key": "eve:2as-6as",
+          "url": "https://eve.nyc/floorplans/2as-6as/",
+          "provider": "EVE East Village",
+          "name": "EVE East Village 2AS",
+          "streetAddress": "433 E 13th Street",
+          "neighborhood": "East Village",
+          "status": "shortlist",
+          "track": "2br",
+          "rank": 1,
+          "price": 7850,
+          "bedrooms": 2,
+          "bathrooms": 2,
+          "squareFeet": 944,
+          "availabilityDisplay": "available now",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "high",
+          "commute": {
+            "minutes": 25,
+            "route": "walk or bus plus walk",
+            "notes": "About 25-28 minutes walking or 20-25 minutes by bus plus walk."
+          },
+          "amenities": [
+            "Washer/dryer",
+            "Dishwasher",
+            "Floor plan",
+            "Virtual tour"
+          ],
+          "mustHaveEvidence": "Direct floor-plan page included PDF and virtual tour.",
+          "furnitureFit": "944 sq ft 2BR/2BA plan likely fits target living-room setup.",
+          "notes": "Best 2BR/2BA option in the May 13 run."
+        },
+        {
+          "key": "equity:ten23:2br",
+          "url": "https://www.equityapartments.com/new-york-city/chelsea/ten23-apartments",
+          "provider": "Equity Apartments",
+          "name": "Ten23 Apartments 2BR",
+          "neighborhood": "Chelsea",
+          "status": "shortlist",
+          "track": "2br",
+          "rank": 2,
+          "price": 8340,
+          "bedrooms": 2,
+          "bathrooms": 1,
+          "squareFeet": 867,
+          "availabilityStarts": "2026-05-13",
+          "availabilityDisplay": "availability shown 2026-05-13",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "high",
+          "commute": {
+            "minutes": 20,
+            "route": "C/E subway or walk",
+            "notes": "About 18-22 minutes by C/E or roughly 30 minutes walking."
+          },
+          "amenities": [
+            "Dishwasher",
+            "Stackable washer/dryer",
+            "Air conditioning",
+            "Floor-to-ceiling windows"
+          ],
+          "mustHaveEvidence": "Direct page showed dishwasher, stackable washer/dryer, room AC, and floor-to-ceiling windows.",
+          "caveats": [
+            "Only one bathroom.",
+            "Over the preferred 2BR budget."
+          ],
+          "notes": "High confidence quality but a weaker match on budget and bath count."
+        },
+        {
+          "url": "https://streeteasy.com/building/the-ludlow/15g?infeed=1",
+          "provider": "StreetEasy",
+          "name": "188 Ludlow Street #15G",
+          "streetAddress": "188 Ludlow Street",
+          "unit": "15G",
+          "neighborhood": "Lower East Side",
+          "status": "monitor",
+          "track": "1br",
+          "price": 5600,
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "squareFeet": 650,
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "unknown",
+          "caveats": [
+            "Laundry and AC evidence was not explicit."
+          ],
+          "notes": "Live 1BR monitor; space likely but must-haves were weaker."
+        },
+        {
+          "key": "equity:777-6th:building-inventory",
+          "url": "https://www.equityapartments.com/new-york-city/chelsea/777-6th-avenue-apartments",
+          "provider": "Equity Apartments",
+          "name": "777 6th Avenue Apartments inventory",
+          "streetAddress": "777 6th Avenue",
+          "neighborhood": "Chelsea",
+          "status": "monitor",
+          "track": "unknown",
+          "priceDisplay": "1BRs $6,369-$6,889; 2BR/2BA $9,870",
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "squareFeetMin": 704,
+          "squareFeetMax": 1086,
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "high",
+          "commute": {
+            "minutes": 18,
+            "route": "walk or R/W subway"
+          },
+          "caveats": [
+            "Strong quality but above stretch budget for the available inventory."
+          ],
+          "notes": "Building-level monitor with 1BR and 2BR/2BA inventory."
+        },
+        {
+          "key": "equity:beatrice:2br-monitor",
+          "url": "https://www.equityapartments.com/new-york-city/chelsea/beatrice-apartments",
+          "provider": "Equity Apartments",
+          "name": "Beatrice Apartments 2BR inventory",
+          "streetAddress": "105 W 29th St",
+          "neighborhood": "Chelsea / NoMad",
+          "status": "monitor",
+          "track": "2br",
+          "priceDisplay": "$9,445+",
+          "priceMin": 9445,
+          "bedrooms": 2,
+          "bathrooms": 2,
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "high",
+          "caveats": [
+            "Above budget and later timing."
+          ],
+          "notes": "High-quality 2BR inventory to monitor for price movement."
+        },
+        {
+          "url": "https://streeteasy.com/building/the-east/1703?featured=1",
+          "provider": "StreetEasy",
+          "name": "644 E 14th Street #1703",
+          "streetAddress": "644 E 14th Street",
+          "unit": "1703",
+          "neighborhood": "East Village",
+          "status": "monitor",
+          "track": "2br",
+          "price": 9295,
+          "bedrooms": 2,
+          "bathrooms": 2,
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "unknown",
+          "caveats": [
+            "Over budget.",
+            "No clean move-in date."
+          ],
+          "notes": "Active but not shortlist-worthy."
+        },
+        {
+          "url": "https://streeteasy.com/building/eve-433-east-13th-street-new_york/5js",
+          "provider": "StreetEasy",
+          "name": "433 E 13th Street #5JS",
+          "streetAddress": "433 E 13th Street",
+          "unit": "5JS",
+          "neighborhood": "East Village",
+          "status": "excluded",
+          "track": "2br",
+          "freshness": "stale_or_mismatch",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "unknown",
+          "floorPlanConfidence": "unknown",
+          "rejectionReasons": [
+            "Stale or mismatched listing state during verification."
+          ],
+          "notes": "Excluded from the May 13 run after live page verification."
+        },
+        {
+          "url": "https://streeteasy.com/building/the-east/1201",
+          "provider": "StreetEasy",
+          "name": "644 E 14th Street #1201",
+          "streetAddress": "644 E 14th Street",
+          "unit": "1201",
+          "neighborhood": "East Village",
+          "status": "excluded",
+          "track": "2br",
+          "freshness": "stale_or_mismatch",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "unknown",
+          "floorPlanConfidence": "unknown",
+          "rejectionReasons": [
+            "Stale page; later runs confirmed it rented on 2026-03-13."
+          ],
+          "notes": "Do not include unless a fresh unit page appears."
+        },
+        {
+          "url": "https://streeteasy.com/building/saranac-95-worth-street-new_york/1003",
+          "provider": "StreetEasy",
+          "name": "95 Worth Street #1003",
+          "streetAddress": "95 Worth Street",
+          "unit": "1003",
+          "neighborhood": "Tribeca",
+          "status": "excluded",
+          "track": "unknown",
+          "freshness": "stale_or_mismatch",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "unknown",
+          "floorPlanConfidence": "unknown",
+          "rejectionReasons": [
+            "Stale or unavailable listing state."
+          ],
+          "notes": "Excluded stale Saranac candidate."
+        },
+        {
+          "url": "https://streeteasy.com/building/saranac-95-worth-street-new_york/8010",
+          "provider": "StreetEasy",
+          "name": "95 Worth Street #8010",
+          "streetAddress": "95 Worth Street",
+          "unit": "8010",
+          "neighborhood": "Tribeca",
+          "status": "excluded",
+          "track": "unknown",
+          "freshness": "stale_or_mismatch",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "unknown",
+          "floorPlanConfidence": "unknown",
+          "rejectionReasons": [
+            "Stale or unavailable listing state."
+          ],
+          "notes": "Excluded stale Saranac candidate."
+        }
+      ]
+    },
+    {
+      "id": "daily-manhattan-apartment-search-2026-05-15",
+      "runDate": "2026-05-15",
+      "summary": "Best finds were Beatrice and Chelsea 1BRs, Chelsea29 #19C for 2BR/2BA, and several compromise 3BRs.",
+      "notes": "Backfilled from the final assistant output of the 2026-05-15 daily Manhattan apartment search automation run.",
+      "sourcesSearched": [
+        "StreetEasy",
+        "Equity Apartments",
+        "Chelsea29",
+        "EVE East Village",
+        "One Manhattan Square"
+      ],
+      "blindSpots": [
+        "Several promising building floor-plan pages did not expose clean exact unit availability.",
+        "3BR options generally missed the 3BR/3BA target or exceeded stretch budget."
+      ],
+      "listings": [
+        {
+          "key": "equity:beatrice:1br",
+          "url": "https://www.equityapartments.com/new-york-city/chelsea/beatrice-apartments",
+          "provider": "Equity Apartments",
+          "name": "Beatrice Apartments 1BR",
+          "streetAddress": "105 W 29th St",
+          "neighborhood": "Chelsea / NoMad",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 1,
+          "price": 5831,
+          "priceDisplay": "$5,831",
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "squareFeet": 643,
+          "floorLevel": "28",
+          "availabilityStarts": "2026-05-15",
+          "availabilityDisplay": "available 2026-05-15",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-15",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "high",
+          "commute": {
+            "minutes": 18,
+            "route": "R/W subway or walk",
+            "notes": "15-18 minutes by R/W or 22-25 minutes walking."
+          },
+          "amenities": [
+            "In-unit washer/dryer",
+            "Dishwasher",
+            "Central heat and air conditioning",
+            "Modern kitchen",
+            "Modern bathroom"
+          ],
+          "mustHaveEvidence": "Direct Equity availability backed the core must-haves and floor-plan confidence.",
+          "furnitureFit": "Best 1BR furniture-fit confidence of the run.",
+          "notes": "Top May 15 1BR recommendation."
+        },
+        {
+          "url": "https://streeteasy.com/building/308-west-21-street-new_york/a4",
+          "provider": "StreetEasy",
+          "name": "308 W 21st Street #A4",
+          "streetAddress": "308 W 21st Street",
+          "unit": "A4",
+          "neighborhood": "Chelsea",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 2,
+          "price": 5000,
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "availabilityStarts": "2026-06-01",
+          "availabilityDisplay": "available 2026-06-01",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-15",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "unknown",
+          "commute": {
+            "minutes": 23,
+            "route": "C/E subway or walk",
+            "notes": "20-25 minutes via C/E or low-20s on foot."
+          },
+          "amenities": [
+            "Washer/dryer",
+            "Dishwasher",
+            "Renovated kitchen",
+            "Marble bathroom",
+            "Private patio"
+          ],
+          "mustHaveEvidence": "StreetEasy page showed washer/dryer, dishwasher, renovated marble bath, and private patio.",
+          "caveats": [
+            "HVAC not explicit."
+          ],
+          "notes": "Good under-budget Chelsea 1BR with patio; HVAC needs confirmation."
+        },
+        {
+          "url": "https://streeteasy.com/building/440-west-22-street-new_york/2r",
+          "provider": "StreetEasy",
+          "name": "440 W 22nd Street #2R",
+          "streetAddress": "440 W 22nd Street",
+          "unit": "2R",
+          "neighborhood": "Chelsea",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 3,
+          "price": 4850,
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "squareFeet": 800,
+          "areaDisplay": "page says 800 sq ft; description said approximately 820 sq ft",
+          "availabilityDisplay": "available now",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-15",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "medium",
+          "commute": {
+            "minutes": 21,
+            "route": "C/E subway",
+            "notes": "20-22 minutes by C/E."
+          },
+          "amenities": [
+            "Washer/dryer",
+            "Dishwasher",
+            "Renovated townhouse"
+          ],
+          "mustHaveEvidence": "StreetEasy page showed washer/dryer, dishwasher, and renovated townhouse character.",
+          "caveats": [
+            "No pets.",
+            "HVAC not explicit."
+          ],
+          "notes": "Large 1BR for the budget but has pet and HVAC caveats."
+        },
+        {
+          "url": "https://streeteasy.com/building/chelsea29-221-west-29-street-new_york/7b",
+          "provider": "StreetEasy",
+          "name": "Chelsea29 #7B",
+          "streetAddress": "221 W 29th Street",
+          "unit": "7B",
+          "neighborhood": "Chelsea",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 4,
+          "price": 5335,
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "squareFeet": 687,
+          "availabilityStarts": "2026-07-11",
+          "availabilityDisplay": "available 2026-07-11",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-15",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "high",
+          "commute": {
+            "minutes": 18,
+            "route": "R/W subway"
+          },
+          "amenities": [
+            "Central air",
+            "Washer/dryer",
+            "Dishwasher",
+            "Floor plan"
+          ],
+          "mustHaveEvidence": "Newer building with central air, washer/dryer, dishwasher, and floor plan.",
+          "caveats": [
+            "Later than ideal move-in date."
+          ],
+          "notes": "High-confidence option if July timing works."
+        },
+        {
+          "url": "https://streeteasy.com/building/chelsea29-221-west-29-street-new_york/19c",
+          "provider": "StreetEasy",
+          "name": "Chelsea29 #19C",
+          "streetAddress": "221 W 29th Street",
+          "unit": "19C",
+          "neighborhood": "Chelsea",
+          "status": "shortlist",
+          "track": "2br",
+          "rank": 1,
+          "price": 7750,
+          "bedrooms": 2,
+          "bathrooms": 2,
+          "squareFeet": 1041,
+          "availabilityStarts": "2026-07-02",
+          "availabilityDisplay": "available 2026-07-02",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-15",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "high",
+          "commute": {
+            "minutes": 18,
+            "route": "R/W subway"
+          },
+          "amenities": [
+            "Central air",
+            "Washer/dryer",
+            "Dishwasher",
+            "Floor plan"
+          ],
+          "mustHaveEvidence": "High-confidence 2BR/2BA with strong floor-plan information.",
+          "caveats": [
+            "Later than ideal move-in date."
+          ],
+          "notes": "Best 2BR/2BA from the May 15 run."
+        },
+        {
+          "url": "https://streeteasy.com/building/10-bleecker-street-new_york/4",
+          "provider": "StreetEasy",
+          "name": "10 Bleecker Street #4",
+          "streetAddress": "10 Bleecker Street",
+          "unit": "4",
+          "neighborhood": "NoHo",
+          "status": "shortlist",
+          "track": "3br",
+          "rank": 1,
+          "price": 13000,
+          "bedrooms": 3,
+          "bathrooms": 2,
+          "availabilityStarts": "2026-06-15",
+          "availabilityDisplay": "available 2026-06-15",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-15",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "medium",
+          "commute": {
+            "minutes": 7,
+            "route": "walk",
+            "notes": "5-8 minute walk to 1 Example Plaza."
+          },
+          "amenities": [
+            "Central air",
+            "Washer/dryer",
+            "Dishwasher",
+            "Brand new renovation"
+          ],
+          "mustHaveEvidence": "Central air, washer/dryer, dishwasher, and brand-new renovation.",
+          "caveats": [
+            "Currently configured as 2BR/2BA.",
+            "Not a true 3BR/3BA."
+          ],
+          "notes": "Excellent location and renovation, but a flex-3 compromise."
+        },
+        {
+          "url": "https://streeteasy.com/building/one-manhattan-square/62e",
+          "provider": "StreetEasy",
+          "name": "252 South Street #62E",
+          "streetAddress": "252 South Street",
+          "unit": "62E",
+          "neighborhood": "Two Bridges / Lower East Side",
+          "status": "shortlist",
+          "track": "3br",
+          "rank": 2,
+          "price": 11895,
+          "bedrooms": 3,
+          "bathrooms": 2,
+          "squareFeet": 1400,
+          "availabilityDisplay": "available now",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-15",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "medium",
+          "commute": {
+            "minutes": 20,
+            "route": "F subway",
+            "notes": "18-22 minutes via F train."
+          },
+          "amenities": [
+            "Washer/dryer",
+            "Dishwasher",
+            "Open kitchen-living layout"
+          ],
+          "caveats": [
+            "Only two bathrooms.",
+            "Model photos."
+          ],
+          "notes": "Budget-friendly 3BR compromise with weaker bath count."
+        },
+        {
+          "url": "https://streeteasy.com/building/one-manhattan-square/34a",
+          "provider": "StreetEasy",
+          "name": "252 South Street #34A",
+          "streetAddress": "252 South Street",
+          "unit": "34A",
+          "neighborhood": "Two Bridges / Lower East Side",
+          "status": "monitor",
+          "track": "2br",
+          "price": 9700,
+          "bedrooms": 2,
+          "bathrooms": 2,
+          "squareFeet": 1163,
+          "availabilityStarts": "2026-06-13",
+          "availabilityDisplay": "available 2026-06-13",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-15",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "medium",
+          "caveats": [
+            "Over the 2BR cap.",
+            "Model photos."
+          ],
+          "notes": "Monitor only."
+        },
+        {
+          "url": "https://streeteasy.com/building/41-white-street-new_york/5b",
+          "provider": "StreetEasy",
+          "name": "41 White Street #5B",
+          "streetAddress": "41 White Street",
+          "unit": "5B",
+          "neighborhood": "Tribeca",
+          "status": "monitor",
+          "track": "3br",
+          "price": 16500,
+          "bedrooms": 3,
+          "bathrooms": 3,
+          "availabilityStarts": "2026-06-01",
+          "availabilityDisplay": "available 2026-06-01",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-15",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "medium",
+          "caveats": [
+            "Above stretch budget."
+          ],
+          "notes": "True 3BR/3BA but too expensive."
+        },
+        {
+          "url": "https://streeteasy.com/building/535-broadway_new_york/3",
+          "provider": "StreetEasy",
+          "name": "535 Broadway #3",
+          "streetAddress": "535 Broadway",
+          "unit": "3",
+          "neighborhood": "SoHo",
+          "status": "monitor",
+          "track": "3br",
+          "price": 15250,
+          "bedrooms": 3,
+          "bathrooms": 2,
+          "squareFeet": 2400,
+          "availabilityDisplay": "available now",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-15",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "medium",
+          "commute": {
+            "minutes": 1,
+            "route": "walk",
+            "notes": "Immediately next to 1 Example Plaza."
+          },
+          "caveats": [
+            "Above stretch budget.",
+            "Only two bathrooms."
+          ],
+          "notes": "Huge and perfect location, but poor budget/bath fit."
+        },
+        {
+          "key": "streeteasy:one-manhattan-square:building",
+          "url": "https://streeteasy.com/building/one-manhattan-square",
+          "provider": "StreetEasy",
+          "name": "One Manhattan Square building",
+          "streetAddress": "252 South Street",
+          "neighborhood": "Two Bridges / Lower East Side",
+          "status": "monitor",
+          "track": "unknown",
+          "freshness": "availability_page_only",
+          "verifiedOn": "2026-05-15",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "unknown",
+          "notes": "Building monitor because several units were close but compromised."
+        },
+        {
+          "url": "https://streeteasy.com/building/ava-high-line/856",
+          "provider": "StreetEasy",
+          "name": "AVA High Line #856",
+          "unit": "856",
+          "neighborhood": "Chelsea / High Line",
+          "status": "excluded",
+          "track": "unknown",
+          "freshness": "stale_or_mismatch",
+          "verifiedOn": "2026-05-15",
+          "photoConfidence": "unknown",
+          "floorPlanConfidence": "unknown",
+          "rejectionReasons": [
+            "Stale or rented as of 2026-04-30."
+          ],
+          "notes": "Excluded stale AVA High Line candidate."
+        },
+        {
+          "url": "https://streeteasy.com/building/one-manhattan-square/41b",
+          "provider": "StreetEasy",
+          "name": "252 South Street #41B",
+          "streetAddress": "252 South Street",
+          "unit": "41B",
+          "neighborhood": "Two Bridges / Lower East Side",
+          "status": "excluded",
+          "track": "unknown",
+          "freshness": "stale_or_mismatch",
+          "verifiedOn": "2026-05-15",
+          "photoConfidence": "unknown",
+          "floorPlanConfidence": "unknown",
+          "rejectionReasons": [
+            "Stale or rented as of 2026-03-02."
+          ],
+          "notes": "Excluded stale One Manhattan Square candidate."
+        },
+        {
+          "key": "eve:3dn-6dn",
+          "url": "https://eve.nyc/floorplans/3dn-6dn/",
+          "provider": "EVE East Village",
+          "name": "EVE East Village 3DN-6DN floor plan",
+          "streetAddress": "433 E 13th Street",
+          "neighborhood": "East Village",
+          "status": "monitor",
+          "track": "3br",
+          "priceDisplay": "call for pricing",
+          "bedrooms": 3,
+          "freshness": "availability_page_only",
+          "verifiedOn": "2026-05-15",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "high",
+          "caveats": [
+            "Call-for-pricing only."
+          ],
+          "notes": "Potential floor-plan monitor; no usable price/date."
+        }
+      ]
+    },
+    {
+      "id": "daily-manhattan-apartment-search-2026-05-16",
+      "runDate": "2026-05-16",
+      "summary": "Best live 1BRs were Beatrice, 53 Leroy, 42 Grove, and 10 Morton; no clean 2BR shortlist; strongest 3BR-track options were 303 Greenwich #7BC and 152 9th Ave #3.",
+      "notes": "Backfilled from the final assistant output of the 2026-05-16 daily Manhattan apartment search automation run.",
+      "sourcesSearched": [
+        "StreetEasy",
+        "Equity Apartments",
+        "Chelsea29",
+        "Verde Chelsea",
+        "StuyTown"
+      ],
+      "blindSpots": [
+        "Chelsea29 floor-plan page looked promising but did not expose exact unit-level price/date cleanly.",
+        "Track B had no main shortlist because the strongest live option missed the bath count and timing."
+      ],
+      "listings": [
+        {
+          "key": "equity:beatrice:1br",
+          "url": "https://www.equityapartments.com/new-york-city/chelsea/beatrice-apartments",
+          "provider": "Equity Apartments",
+          "name": "Beatrice Apartments 1BR",
+          "streetAddress": "105 W 29th St",
+          "neighborhood": "Chelsea / NoMad",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 1,
+          "priceMin": 5831,
+          "priceMax": 5890,
+          "priceDisplay": "$5,831-$5,890",
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "squareFeetMin": 611,
+          "squareFeetMax": 643,
+          "availabilityStarts": "2026-05-15",
+          "availabilityDisplay": "available 2026-05-15",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-16",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "high",
+          "commute": {
+            "minutes": 20,
+            "route": "R/W subway or walk",
+            "notes": "18-22 minutes by R/W or walking."
+          },
+          "amenities": [
+            "In-unit laundry",
+            "Dishwasher",
+            "Floor-to-ceiling windows",
+            "Central heat and air conditioning",
+            "Modern kitchen",
+            "Modern bathroom"
+          ],
+          "mustHaveEvidence": "Direct Equity page showed in-unit laundry, dishwasher, floor-to-ceiling windows, central heat/AC, and modern bath/kitchen.",
+          "furnitureFit": "643 sq ft version is workable; 611 sq ft version is closer and needs dimension confirmation.",
+          "caveats": [
+            "Near the top of the 1BR budget."
+          ],
+          "notes": "Top live 1BR recommendation on 2026-05-16."
+        },
+        {
+          "url": "https://streeteasy.com/building/53-leroy-street-new_york/1a",
+          "provider": "StreetEasy",
+          "name": "53 Leroy Street #1A",
+          "streetAddress": "53 Leroy Street",
+          "unit": "1A",
+          "neighborhood": "West Village",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 2,
+          "price": 5500,
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "availabilityStarts": "2026-06-01",
+          "availabilityDisplay": "available 2026-06-01",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-16",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "low",
+          "commute": {
+            "minutes": 20,
+            "route": "walk",
+            "notes": "18-22 minutes walking."
+          },
+          "amenities": [
+            "Washer/dryer",
+            "Dishwasher",
+            "Renovated marble bathroom",
+            "High ceilings",
+            "Oversized windows"
+          ],
+          "mustHaveEvidence": "StreetEasy page showed washer/dryer, dishwasher, renovated marble bath, high ceilings, and oversized windows.",
+          "caveats": [
+            "No square footage or floor plan."
+          ],
+          "notes": "Good West Village fit if dimensions check out."
+        },
+        {
+          "url": "https://streeteasy.com/building/42-grove-street-new_york/4f",
+          "provider": "StreetEasy",
+          "name": "42 Grove Street #4F",
+          "streetAddress": "42 Grove Street",
+          "unit": "4F",
+          "neighborhood": "West Village",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 3,
+          "price": 5495,
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "availabilityStarts": "2026-06-10",
+          "availabilityDisplay": "available 2026-06-10",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-16",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "low",
+          "commute": {
+            "minutes": 20,
+            "route": "walk"
+          },
+          "amenities": [
+            "Washer/dryer",
+            "Dishwasher",
+            "Air conditioning",
+            "Renovated bathroom"
+          ],
+          "mustHaveEvidence": "StreetEasy page showed washer/dryer, dishwasher, AC, renovated bath, and not-stock photos.",
+          "caveats": [
+            "No floor plan or dimensions."
+          ],
+          "notes": "Strong neighborhood fit; dimension risk remains."
+        },
+        {
+          "url": "https://streeteasy.com/building/10-morton-street-new_york/5a",
+          "provider": "StreetEasy",
+          "name": "10 Morton Street #5A",
+          "streetAddress": "10 Morton Street",
+          "unit": "5A",
+          "neighborhood": "West Village",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 4,
+          "price": 4395,
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "availabilityStarts": "2026-06-01",
+          "availabilityDisplay": "available 2026-06-01",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-16",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "low",
+          "commute": {
+            "minutes": 19,
+            "route": "walk",
+            "notes": "18-20 minutes walking."
+          },
+          "amenities": [
+            "Washer/dryer",
+            "Dishwasher",
+            "Air conditioning",
+            "Newly renovated kitchen",
+            "Newly renovated bathroom"
+          ],
+          "mustHaveEvidence": "StreetEasy page showed washer/dryer, dishwasher, AC, and newly renovated kitchen/bath.",
+          "furnitureFit": "Tightest space of the 1BR shortlist.",
+          "notes": "Best budget fit, weaker on space."
+        },
+        {
+          "url": "https://streeteasy.com/building/stuytown/9h",
+          "provider": "StreetEasy",
+          "name": "626 E 20th Street #9H",
+          "streetAddress": "626 E 20th Street",
+          "unit": "9H",
+          "neighborhood": "StuyTown",
+          "status": "monitor",
+          "track": "2br",
+          "price": 6649,
+          "bedrooms": 2,
+          "bathrooms": 1,
+          "availabilityStarts": "2026-07-11",
+          "availabilityDisplay": "available 2026-07-11",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-16",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "unknown",
+          "caveats": [
+            "Only one bathroom.",
+            "July timing is later than preferred."
+          ],
+          "notes": "Strongest Track B near-miss, monitor only."
+        },
+        {
+          "url": "https://streeteasy.com/building/the-tribeca/7bc",
+          "provider": "StreetEasy",
+          "name": "303 Greenwich Street #7BC",
+          "streetAddress": "303 Greenwich Street",
+          "unit": "7BC",
+          "neighborhood": "Tribeca",
+          "status": "shortlist",
+          "track": "3br",
+          "rank": 1,
+          "price": 14500,
+          "bedrooms": 2,
+          "bathrooms": 3,
+          "rooms": 7,
+          "squareFeet": 2021,
+          "availabilityStarts": "2026-07-01",
+          "availabilityDisplay": "available 2026-07-01",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-16",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "medium",
+          "commute": {
+            "minutes": 14,
+            "route": "walk",
+            "notes": "12-15 minutes walking."
+          },
+          "amenities": [
+            "Washer/dryer",
+            "Chef kitchen",
+            "Sub-Zero appliances",
+            "Viking appliances",
+            "Bosch appliances",
+            "Office",
+            "Library"
+          ],
+          "mustHaveEvidence": "Page showed washer/dryer, chef kitchen, premium appliances, large room count, office, and library.",
+          "furnitureFit": "Strongest space of the run at 2,021 sq ft.",
+          "caveats": [
+            "Page-labeled as 2BR, not true 3BR.",
+            "July timing."
+          ],
+          "notes": "Best Track C space fit despite bedroom-label caveat."
+        },
+        {
+          "url": "https://streeteasy.com/building/152-9-avenue-new_york/3?similarHDP2=1",
+          "provider": "StreetEasy",
+          "name": "152 9th Avenue #3",
+          "streetAddress": "152 9th Avenue",
+          "unit": "3",
+          "neighborhood": "Chelsea",
+          "status": "shortlist",
+          "track": "3br",
+          "rank": 2,
+          "price": 13900,
+          "bedrooms": 3,
+          "bathrooms": 2.5,
+          "fullBathrooms": 2,
+          "partialBathrooms": 1,
+          "squareFeet": 1800,
+          "areaDisplay": "approximately 1,800 sq ft",
+          "availabilityDisplay": "available now",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-16",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "medium",
+          "commute": {
+            "minutes": 18,
+            "route": "E subway",
+            "notes": "15-20 minutes via E."
+          },
+          "amenities": [
+            "Washer/dryer",
+            "Dishwasher",
+            "Floor-to-ceiling windows",
+            "Modern finishes",
+            "Private elevator",
+            "Roof access"
+          ],
+          "mustHaveEvidence": "Page showed washer/dryer, dishwasher, floor-to-ceiling windows, modern finish, private elevator, and roof access.",
+          "caveats": [
+            "Misses the third full bathroom."
+          ],
+          "notes": "Strong Track C fit except 2.5BA."
+        },
+        {
+          "key": "chelsea29:floorplans",
+          "url": "https://www.chelsea29.com/floorplans",
+          "provider": "Chelsea29",
+          "name": "Chelsea29 floor plans",
+          "streetAddress": "221 W 29th Street",
+          "neighborhood": "Chelsea",
+          "status": "monitor",
+          "track": "unknown",
+          "freshness": "availability_page_only",
+          "verifiedOn": "2026-05-16",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "high",
+          "caveats": [
+            "Floor-plan-level only.",
+            "Broken price parsing or no clean unit date."
+          ],
+          "notes": "Promising 1BR and 2BR/2BA floor plans, but exact unit availability was not reliable enough."
+        },
+        {
+          "url": "https://streeteasy.com/building/the-east/1201",
+          "provider": "StreetEasy",
+          "name": "644 E 14th Street #1201",
+          "streetAddress": "644 E 14th Street",
+          "unit": "1201",
+          "neighborhood": "East Village",
+          "status": "excluded",
+          "track": "2br",
+          "freshness": "stale_or_mismatch",
+          "verifiedOn": "2026-05-16",
+          "photoConfidence": "unknown",
+          "floorPlanConfidence": "unknown",
+          "rejectionReasons": [
+            "Rented on 2026-03-13."
+          ],
+          "notes": "Explicitly excluded stale candidate."
+        },
+        {
+          "url": "https://streeteasy.com/building/the-chrystie/1201",
+          "provider": "StreetEasy",
+          "name": "229 Chrystie Street #1201",
+          "streetAddress": "229 Chrystie Street",
+          "unit": "1201",
+          "neighborhood": "Lower East Side",
+          "status": "excluded",
+          "track": "unknown",
+          "freshness": "stale_or_mismatch",
+          "verifiedOn": "2026-05-16",
+          "photoConfidence": "unknown",
+          "floorPlanConfidence": "unknown",
+          "rejectionReasons": [
+            "No longer available as of 2024-05-10."
+          ],
+          "notes": "Explicitly excluded stale candidate."
+        },
+        {
+          "url": "https://streeteasy.com/building/231-west-20-street-new_york/4",
+          "provider": "StreetEasy",
+          "name": "231 W 20th Street #4",
+          "streetAddress": "231 W 20th Street",
+          "unit": "4",
+          "neighborhood": "Chelsea",
+          "status": "excluded",
+          "track": "unknown",
+          "freshness": "stale_or_mismatch",
+          "verifiedOn": "2026-05-16",
+          "photoConfidence": "unknown",
+          "floorPlanConfidence": "unknown",
+          "rejectionReasons": [
+            "Stale or mismatched page."
+          ],
+          "notes": "Excluded stale/mismatched candidate."
+        },
+        {
+          "url": "https://streeteasy.com/building/verde-chelsea/1011b?similarHDP2=1",
+          "provider": "StreetEasy",
+          "name": "Verde Chelsea #8B exposed from #1011B page",
+          "neighborhood": "Chelsea",
+          "status": "monitor",
+          "track": "3br",
+          "price": 14250,
+          "freshness": "availability_page_only",
+          "verifiedOn": "2026-05-16",
+          "photoConfidence": "low",
+          "floorPlanConfidence": "low",
+          "caveats": [
+            "No exact unit page open."
+          ],
+          "notes": "Page exposed #8B at $14,250 but did not provide a clean exact unit page in the run."
+        }
+      ]
+    }
+  ]
+}

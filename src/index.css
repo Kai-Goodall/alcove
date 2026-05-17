@@ -9,6 +9,9 @@
   --color-card-foreground: var(--card-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-surface-sunken: var(--surface-sunken);
   --color-border: var(--border);
   --color-ring: var(--ring);
   --color-placeholder: var(--placeholder);
@@ -45,15 +48,18 @@
   --font-sans: "Inter", ui-sans-serif, -apple-system, BlinkMacSystemFont,
     "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
 
-  --background: #f4f3f1;
-  --foreground: #373331;
+  --background: #f3f2f2;
+  --foreground: #3a3632;
   --card: #fffefd;
-  --card-foreground: #373331;
+  --card-foreground: #3a3632;
   --muted: #e8e5e2;
-  --muted-foreground: #746f6a;
+  --muted-foreground: #7a7a7a;
+  --primary: #3a3632;
+  --secondary: #7a7a7a;
+  --surface-sunken: #f3f2f2;
   --border: #d8d3cf;
   --ring: #5b5652;
-  --placeholder: #b7b1ab;
+  --placeholder: #bcb6b2;
   --danger: #ee654f;
   --input-muted: #f7f7f6;
 
@@ -101,6 +107,9 @@
   --card-foreground: #f2eee9;
   --muted: #2e2a26;
   --muted-foreground: #b3aaa2;
+  --primary: #f2eee9;
+  --secondary: #b3aaa2;
+  --surface-sunken: #1d1b18;
   --border: #3a352f;
   --ring: #d7cec5;
   --placeholder: #81776e;
@@ -145,3 +154,4 @@ body {
 ::selection {
   background: rgb(240 105 82 / 0.24);
 }
+

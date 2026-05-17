@@ -1,0 +1,1333 @@
+{
+  "runs": [
+    {
+      "id": "daily-manhattan-apartment-search-2026-05-12-initial",
+      "runDate": "2026-05-12",
+      "summary": "Initial studio/1BR-focused Manhattan search before the automation was expanded into the later 1BR/2BR/3BR tracks.",
+      "notes": "Backfilled from the May 12 automation session final shortlist.",
+      "sourcesSearched": [
+        "Stonehenge",
+        "Brodsky",
+        "Equity Apartments",
+        "Avalon",
+        "StuyTown",
+        "Zillow",
+        "RentHop",
+        "Apartments.com",
+        "Redfin",
+        "PadMapper",
+        "nybits",
+        "PropertyClub",
+        "Leasebreak",
+        "Craigslist"
+      ],
+      "blindSpots": [
+        "Several direct availability pages were JS-heavy.",
+        "Some syndicated listings used representative photos or stale mirrored availability.",
+        "Floor-plan dimensions were often missing, making furniture-fit confidence lower."
+      ],
+      "listings": [
+        {
+          "key": "apartmentfinder:143-mulberry:3a",
+          "url": "https://www.apartmentfinder.com/New-York/New-York-Apartments/143-Mulberry-St-Apartments-xqbxk6n",
+          "provider": "ApartmentFinder",
+          "name": "143 Mulberry Street #3A",
+          "streetAddress": "143 Mulberry Street",
+          "unit": "3A",
+          "neighborhood": "Little Italy / Nolita",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 1,
+          "price": 5495,
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "availabilityDisplay": "available now",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-12",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "medium",
+          "commute": {
+            "minutes": 8,
+            "route": "walk",
+            "notes": "About 7-10 minutes walking to 1 Example Plaza."
+          },
+          "amenities": [
+            "Dishwasher",
+            "Building laundry",
+            "A/C and heat units",
+            "Elevator",
+            "Roof deck",
+            "Open kitchen with island",
+            "High ceilings"
+          ],
+          "mustHaveEvidence": "Listing described dishwasher, laundry room, HVAC/individual A/C and heat units, elevator, roof deck, high ceilings, strong sunlight, and renovated open kitchen.",
+          "furnitureFit": "Described as a jumbo 1BR/flex-2, making the 100 inch couch and coffee table plausible; exact living-room dimensions still need confirmation.",
+          "caveats": [
+            "Laundry is building-level.",
+            "Not a direct owner page."
+          ],
+          "notes": "The original run also referenced an older Zillow comp with more photos: https://www.zillow.com/homedetails/143-Mulberry-St-5D-New-York-NY-10013/2086430895_zpid/"
+        },
+        {
+          "url": "https://www.zillow.com/homedetails/229-Chrystie-St-620-0-New-York-NY-10002/462090305_zpid/",
+          "provider": "Zillow",
+          "name": "229 Chrystie Street #620-0",
+          "streetAddress": "229 Chrystie Street",
+          "unit": "620-0",
+          "neighborhood": "Lower East Side",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 2,
+          "price": 5900,
+          "priceDisplay": "$5,900-$5,980 grouped with #737-A",
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "availabilityDisplay": "available now",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-12",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "unknown",
+          "commute": {
+            "minutes": 14,
+            "route": "walk",
+            "notes": "About 12-15 minutes walking."
+          },
+          "amenities": [
+            "Modern kitchen",
+            "Modern bathroom",
+            "Bright living room",
+            "Concierge",
+            "Shared laundry"
+          ],
+          "mustHaveEvidence": "Zillow photo set showed modern kitchen, bright living room, modern bath, concierge, and on-site/shared laundry.",
+          "caveats": [
+            "At the top of stretch budget.",
+            "Zillow marked the listing as income-restricted; confirm eligibility."
+          ]
+        },
+        {
+          "url": "https://www.zillow.com/homedetails/229-Chrystie-St-737-A-New-York-NY-10002/459666407_zpid/",
+          "provider": "Zillow",
+          "name": "229 Chrystie Street #737-A",
+          "streetAddress": "229 Chrystie Street",
+          "unit": "737-A",
+          "neighborhood": "Lower East Side",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 3,
+          "price": 5980,
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "availabilityDisplay": "available now",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-12",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "unknown",
+          "commute": {
+            "minutes": 14,
+            "route": "walk"
+          },
+          "amenities": [
+            "Modern kitchen",
+            "Modern bathroom",
+            "Bright living room",
+            "Concierge",
+            "Shared laundry"
+          ],
+          "caveats": [
+            "At the top of stretch budget.",
+            "Income-restricted eligibility needed confirmation."
+          ],
+          "notes": "Grouped with #620-0 in the original shortlist."
+        },
+        {
+          "key": "stonehenge:780-greenwich:1d",
+          "url": "https://www.stonehengenyc.com/apartments/780owner-1D",
+          "provider": "Stonehenge",
+          "name": "780 Greenwich Street #1D",
+          "streetAddress": "780 Greenwich Street",
+          "unit": "1D",
+          "neighborhood": "West Village / Meatpacking",
+          "status": "shortlist",
+          "track": "unknown",
+          "rank": 4,
+          "price": 5795,
+          "bedrooms": 0,
+          "bathrooms": 1,
+          "availabilityDisplay": "available now",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-12",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "high",
+          "commute": {
+            "minutes": 20,
+            "route": "walk",
+            "notes": "About 18-22 minutes walking."
+          },
+          "amenities": [
+            "Renovated studio",
+            "Bright eastern exposure",
+            "Open kitchen with island",
+            "Sleeping alcove",
+            "Four closets",
+            "Building laundry",
+            "Floor plan",
+            "3D tour"
+          ],
+          "furnitureFit": "Best studio candidate from the initial run, but the 100 inch couch still made it conditional.",
+          "caveats": [
+            "Studio, not a 1BR.",
+            "Dishwasher and A/C were not explicit in the indexed text."
+          ]
+        },
+        {
+          "key": "zillow:111-worth:1br-search",
+          "url": "https://www.zillow.com/tribeca-manhattan-new-york-ny/apartments-1-bedrooms/",
+          "provider": "Zillow",
+          "name": "111 Worth Street 1BR inventory",
+          "streetAddress": "111 Worth Street",
+          "neighborhood": "Tribeca",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 5,
+          "priceMin": 5981,
+          "priceDisplay": "$5,981+",
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "squareFeetMin": 674,
+          "squareFeetMax": 685,
+          "freshness": "availability_page_only",
+          "verifiedOn": "2026-05-12",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "medium",
+          "commute": {
+            "minutes": 17,
+            "route": "walk"
+          },
+          "amenities": [
+            "Dishwasher",
+            "Concierge",
+            "Lounge",
+            "Roof deck",
+            "Laundry room"
+          ],
+          "furnitureFit": "Safest pure furniture fit among cleaner 1BRs near the target geography.",
+          "caveats": [
+            "Slightly above preferred ceiling.",
+            "No in-unit laundry.",
+            "Exact current unit availability needed reconfirmation."
+          ],
+          "notes": "Original run referenced unit examples 4W and 5V."
+        },
+        {
+          "url": "https://www.apartments.com/20-cornelia-st-new-york-ny-unit-2/whryg1k/",
+          "provider": "Apartments.com",
+          "name": "20 Cornelia Street Unit 2",
+          "streetAddress": "20 Cornelia Street",
+          "unit": "2",
+          "neighborhood": "West Village",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 6,
+          "price": 4895,
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "availabilityDisplay": "available now",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-12",
+          "photoConfidence": "low",
+          "floorPlanConfidence": "unknown",
+          "commute": {
+            "minutes": 15,
+            "route": "walk"
+          },
+          "amenities": [
+            "Dishwasher",
+            "Stainless kitchen",
+            "Two large closets",
+            "King bedroom"
+          ],
+          "caveats": [
+            "Could not confirm laundry.",
+            "Could not confirm A/C."
+          ],
+          "notes": "Original run also referenced a Linecity mirror: https://www.linecity.com/listing/3627250/20-Cornelia-Street-Greenwich-Village-Manhattan-NY-Rent"
+        },
+        {
+          "key": "stonehenge:8-gramercy-park-south:studios",
+          "url": "https://www.stonehengenyc.com/buildings/8-gramercy-park",
+          "provider": "Stonehenge",
+          "name": "8 Gramercy Park South studio inventory",
+          "streetAddress": "8 Gramercy Park South",
+          "neighborhood": "Gramercy",
+          "status": "shortlist",
+          "track": "unknown",
+          "rank": 7,
+          "priceMin": 4395,
+          "priceMax": 4550,
+          "priceDisplay": "$4,395-$4,550",
+          "bedrooms": 0,
+          "bathrooms": 1,
+          "freshness": "availability_page_only",
+          "verifiedOn": "2026-05-12",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "medium",
+          "commute": {
+            "minutes": 19,
+            "route": "walk or R/W/6"
+          },
+          "amenities": [
+            "Building laundry",
+            "Renovated/common-area polish",
+            "Separate dining area or sunken living room"
+          ],
+          "caveats": [
+            "Studio layouts are not slam-dunk for queen plus 100 inch couch.",
+            "One listing had interior exposure.",
+            "Dishwasher and A/C were not explicit."
+          ],
+          "notes": "Original run referenced #005D and #003C."
+        },
+        {
+          "url": "https://www.zillow.com/homedetails/34-E-4th-St-3NW-New-York-NY-10003/2062909266_zpid/",
+          "provider": "Zillow",
+          "name": "34 E 4th Street #3NW",
+          "streetAddress": "34 E 4th Street",
+          "unit": "3NW",
+          "neighborhood": "NoHo",
+          "status": "monitor",
+          "track": "1br",
+          "availabilityStarts": "2026-07-01",
+          "availabilityDisplay": "available 2026-07-01",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-12",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "unknown",
+          "amenities": [
+            "Dishwasher",
+            "Washer/dryer combo",
+            "Open city views"
+          ],
+          "caveats": [
+            "July 1 timing misses the ideal window."
+          ]
+        },
+        {
+          "key": "equity:600-washington:building",
+          "url": "https://www.equityapartments.com/new-york-city/west-village/600-washington-apartments",
+          "provider": "Equity Apartments",
+          "name": "600 Washington Apartments",
+          "streetAddress": "600 Washington Street",
+          "neighborhood": "West Village",
+          "status": "monitor",
+          "track": "unknown",
+          "squareFeetMin": 407,
+          "squareFeetMax": 425,
+          "availabilityDisplay": "studios mostly 2026-06-19 or later",
+          "freshness": "availability_page_only",
+          "verifiedOn": "2026-05-12",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "high",
+          "caveats": [
+            "Current studios were too tight for the couch setup.",
+            "Timing mostly 2026-06-19 or later."
+          ]
+        },
+        {
+          "key": "avalon:bowery-place",
+          "url": "https://www.avaloncommunities.com/new-york/new-york-city-apartments/avalon-bowery-place/",
+          "provider": "Avalon",
+          "name": "Avalon Bowery Place",
+          "neighborhood": "NoHo / Bowery",
+          "status": "monitor",
+          "track": "unknown",
+          "squareFeet": 431,
+          "freshness": "availability_page_only",
+          "verifiedOn": "2026-05-12",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "medium",
+          "caveats": [
+            "431 sq ft studio was too risky for furniture fit.",
+            "1BR pricing ran high."
+          ]
+        },
+        {
+          "key": "brodsky:24-fifth-avenue",
+          "url": "https://brodsky.com/rentals/greenwich-village/24-fifth-avenue",
+          "provider": "Brodsky",
+          "name": "24 Fifth Avenue",
+          "streetAddress": "24 Fifth Avenue",
+          "neighborhood": "Greenwich Village",
+          "status": "monitor",
+          "track": "unknown",
+          "freshness": "availability_page_only",
+          "verifiedOn": "2026-05-12",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "low",
+          "caveats": [
+            "Mostly studios.",
+            "Could not verify dishwasher/A/C or enough layout detail."
+          ]
+        },
+        {
+          "key": "brodsky:208-west-23rd",
+          "url": "https://brodsky.com/rentals/chelsea/208-west-23rd-street",
+          "provider": "Brodsky",
+          "name": "208 W 23rd Street",
+          "streetAddress": "208 W 23rd Street",
+          "neighborhood": "Chelsea",
+          "status": "monitor",
+          "track": "unknown",
+          "freshness": "availability_page_only",
+          "verifiedOn": "2026-05-12",
+          "photoConfidence": "low",
+          "floorPlanConfidence": "low",
+          "caveats": [
+            "Weak unit-level finish evidence.",
+            "Likely too weak on studio size."
+          ]
+        },
+        {
+          "url": "https://streeteasy.com/building/10-morton-street-new_york/5a",
+          "provider": "StreetEasy",
+          "name": "10 Morton Street #5A",
+          "streetAddress": "10 Morton Street",
+          "unit": "5A",
+          "neighborhood": "West Village",
+          "status": "monitor",
+          "track": "1br",
+          "freshness": "unverified",
+          "verifiedOn": "2026-05-12",
+          "photoConfidence": "unknown",
+          "floorPlanConfidence": "unknown",
+          "notes": "Surfaced in StreetEasy search but was not ranked ahead of the shortlist in the initial run."
+        }
+      ]
+    },
+    {
+      "id": "daily-manhattan-apartment-search-2026-05-13-expanded",
+      "runDate": "2026-05-13",
+      "summary": "Fresh run after expanding the automation to 1BR, 2BR, and 3BR tracks.",
+      "notes": "Backfilled from the expanded-track May 13 run in the May 12 session.",
+      "sourcesSearched": [
+        "Equity Apartments",
+        "Related Rentals",
+        "Rockrose",
+        "Avalon",
+        "StreetEasy",
+        "Zillow",
+        "Trulia"
+      ],
+      "blindSpots": [
+        "JS-heavy direct inventory pages.",
+        "Unit pages surfaced by search that resolved to stale/off-market records.",
+        "Promising listings with missing floor plans."
+      ],
+      "listings": [
+        {
+          "key": "equity:beatrice:1br",
+          "url": "https://www.equityapartments.com/new-york-city/chelsea/beatrice-apartments",
+          "provider": "Equity Apartments",
+          "name": "Beatrice Apartments 1BR",
+          "streetAddress": "105 W 29th St",
+          "neighborhood": "Chelsea / NoMad",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 1,
+          "price": 5985,
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "squareFeet": 620,
+          "floorLevel": "44",
+          "availabilityStarts": "2026-05-13",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "high",
+          "commute": {
+            "minutes": 20,
+            "route": "R/W subway or walk"
+          },
+          "amenities": [
+            "Dishwasher",
+            "Floor-to-ceiling windows",
+            "Individually controlled heat and A/C",
+            "Stainless appliances",
+            "Floor plan",
+            "3D tour"
+          ],
+          "mustHaveEvidence": "Direct Equity page showed floor-to-ceiling windows, eastern exposure, Empire State view, photos/video/3D/floor plan, dishwasher, stainless appliances, and individually controlled heat/A/C.",
+          "furnitureFit": "620 sq ft was considered enough for the queen, 100 inch couch with ottoman, and coffee table.",
+          "caveats": [
+            "Laundry was not called out as in-unit; assume building-level until confirmed."
+          ]
+        },
+        {
+          "url": "https://streeteasy.com/building/250-east-houston/5k",
+          "provider": "StreetEasy",
+          "name": "250 East Houston Street #5K",
+          "streetAddress": "250 East Houston Street",
+          "unit": "5K",
+          "neighborhood": "East Village / Lower East Side",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 2,
+          "price": 5995,
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "availabilityStarts": "2026-05-08",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "unknown",
+          "commute": {
+            "minutes": 17,
+            "route": "walk"
+          },
+          "amenities": [
+            "Central air",
+            "Dishwasher",
+            "Full-size washer/dryer",
+            "Floor-to-ceiling windows",
+            "Private outdoor space",
+            "Doorman",
+            "Elevator",
+            "Gym"
+          ],
+          "caveats": [
+            "No square footage shown."
+          ]
+        },
+        {
+          "url": "https://www.zillow.com/homedetails/241-W-13th-St-APT-A-New-York-NY-10011/2127488413_zpid/",
+          "provider": "Zillow",
+          "name": "241 W 13th Street Apt A",
+          "streetAddress": "241 W 13th Street",
+          "unit": "A",
+          "neighborhood": "West Village / Chelsea",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 3,
+          "price": 4995,
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "availabilityDisplay": "available now",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "unknown",
+          "commute": {
+            "minutes": 20,
+            "route": "walk"
+          },
+          "amenities": [
+            "Central air",
+            "In-unit laundry",
+            "Dishwasher",
+            "Gut-renovated finishes",
+            "Spa-style bath",
+            "Picture windows"
+          ],
+          "caveats": [
+            "Ground-floor daylight risk.",
+            "No square footage shown."
+          ]
+        },
+        {
+          "url": "https://www.zillow.com/homedetails/251-E-2nd-St-3C-New-York-NY-10009/2072570810_zpid/",
+          "provider": "Zillow",
+          "name": "251 E 2nd Street #3C",
+          "streetAddress": "251 E 2nd Street",
+          "unit": "3C",
+          "neighborhood": "East Village",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 4,
+          "price": 5100,
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "availabilityDisplay": "available now",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "unknown",
+          "commute": {
+            "minutes": 18,
+            "route": "walk"
+          },
+          "amenities": [
+            "Central air",
+            "Dishwasher",
+            "In-unit washer/dryer",
+            "Natural light"
+          ],
+          "caveats": [
+            "Exact dimensions needed."
+          ]
+        },
+        {
+          "key": "streeteasy:47-and-a-half-east-1:#4",
+          "url": "https://streeteasy.com/building/47-and-a-half-east-1-street-new_york?unit_type=rentals",
+          "provider": "StreetEasy",
+          "name": "47 1/2 East 1st Street #4",
+          "streetAddress": "47 1/2 East 1st Street",
+          "unit": "4",
+          "neighborhood": "East Village",
+          "status": "shortlist",
+          "track": "2br",
+          "rank": 1,
+          "price": 6495,
+          "bedrooms": 2,
+          "bathrooms": 2,
+          "availabilityStarts": "2026-07-01",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "unknown",
+          "commute": {
+            "minutes": 17,
+            "route": "walk"
+          },
+          "amenities": [
+            "Dishwasher",
+            "Washer/dryer",
+            "Private outdoor space"
+          ],
+          "caveats": [
+            "July 1 timing.",
+            "Exact dimensions were not exposed."
+          ]
+        },
+        {
+          "url": "https://www.zillow.com/homedetails/165-1st-Ave-APT-3-New-York-NY-10003/2077363863_zpid/",
+          "provider": "Zillow",
+          "name": "165 1st Avenue Apt 3",
+          "streetAddress": "165 1st Avenue",
+          "unit": "3",
+          "neighborhood": "East Village",
+          "status": "shortlist",
+          "track": "2br",
+          "rank": 2,
+          "price": 6500,
+          "bedrooms": 2,
+          "bathrooms": 1,
+          "availabilityStarts": "2026-07-01",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "unknown",
+          "commute": {
+            "minutes": 22,
+            "route": "walk"
+          },
+          "amenities": [
+            "Dishwasher",
+            "In-unit laundry",
+            "Renovated kitchen",
+            "Marble bathroom"
+          ],
+          "caveats": [
+            "Only one bathroom.",
+            "July 1 timing."
+          ]
+        },
+        {
+          "key": "equity:ten23:2br",
+          "url": "https://www.equityapartments.com/new-york-city/chelsea/ten23-apartments",
+          "provider": "Equity Apartments",
+          "name": "Ten23 Apartments 2BR",
+          "neighborhood": "Chelsea",
+          "status": "shortlist",
+          "track": "2br",
+          "rank": 3,
+          "price": 8185,
+          "bedrooms": 2,
+          "bathrooms": 1,
+          "squareFeet": 867,
+          "availabilityStarts": "2026-05-13",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "high",
+          "commute": {
+            "minutes": 24,
+            "route": "C/E subway plus walk"
+          },
+          "amenities": [
+            "Floor-to-ceiling windows",
+            "Luxury building",
+            "Floor plan"
+          ],
+          "caveats": [
+            "Only one bathroom."
+          ]
+        },
+        {
+          "key": "eve:2as-6as",
+          "url": "https://eve.nyc/floorplans/2as-6as/",
+          "provider": "EVE East Village",
+          "name": "EVE East Village 2AS",
+          "streetAddress": "433 E 13th Street",
+          "neighborhood": "East Village",
+          "status": "shortlist",
+          "track": "2br",
+          "rank": 4,
+          "price": 7850,
+          "bedrooms": 2,
+          "bathrooms": 2,
+          "squareFeet": 944,
+          "availabilityDisplay": "available now",
+          "freshness": "availability_page_only",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "high",
+          "commute": {
+            "minutes": 24,
+            "route": "walk"
+          },
+          "caveats": [
+            "Exact page needed re-opening before ranking first."
+          ]
+        },
+        {
+          "url": "https://www.trulia.com/home/241-w-13th-st-10-new-york-ny-10011-2128584796",
+          "provider": "Trulia",
+          "name": "241 W 13th Street #10",
+          "streetAddress": "241 W 13th Street",
+          "unit": "10",
+          "neighborhood": "West Village",
+          "status": "shortlist",
+          "track": "3br",
+          "rank": 1,
+          "price": 8950,
+          "bedrooms": 3,
+          "bathrooms": 2,
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "medium",
+          "commute": {
+            "minutes": 20,
+            "route": "walk"
+          },
+          "amenities": [
+            "In-unit washer/dryer",
+            "Dishwasher",
+            "A/C",
+            "Picture windows",
+            "Renovated finishes"
+          ],
+          "caveats": [
+            "Description said Sept 1 lease start while header said available now.",
+            "Only two bathrooms."
+          ]
+        },
+        {
+          "url": "https://www.trulia.com/home/28-bedford-st-1a-new-york-ny-10014-461972209",
+          "provider": "Trulia",
+          "name": "28 Bedford Street #1A",
+          "streetAddress": "28 Bedford Street",
+          "unit": "1A",
+          "neighborhood": "West Village",
+          "status": "shortlist",
+          "track": "3br",
+          "rank": 2,
+          "price": 11500,
+          "bedrooms": 3,
+          "bathrooms": 2,
+          "availabilityStarts": "2026-05-01",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "medium",
+          "commute": {
+            "minutes": 16,
+            "route": "walk"
+          },
+          "amenities": [
+            "In-unit washer/dryer",
+            "Dishwasher",
+            "Soaring ceilings"
+          ],
+          "caveats": [
+            "Only two bathrooms."
+          ]
+        },
+        {
+          "key": "rockrose:200-water:224",
+          "url": "https://rockrose.com/zh/listing/224-2/",
+          "provider": "Rockrose",
+          "name": "200 Water Street #224",
+          "streetAddress": "200 Water Street",
+          "unit": "224",
+          "neighborhood": "Financial District",
+          "status": "shortlist",
+          "track": "3br",
+          "rank": 3,
+          "price": 9500,
+          "bedrooms": 3,
+          "bathrooms": 2,
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "medium",
+          "commute": {
+            "minutes": 23,
+            "route": "4/5 or J plus walk"
+          },
+          "amenities": [
+            "Renovated finish",
+            "Open kitchen",
+            "Dining alcove",
+            "Dishwasher",
+            "Building laundry"
+          ],
+          "caveats": [
+            "Outside core neighborhood preference.",
+            "In-unit laundry and A/C not explicit.",
+            "Only two bathrooms."
+          ]
+        },
+        {
+          "url": "https://streeteasy.com/building/560-hudson-street-new_york/5",
+          "provider": "StreetEasy",
+          "name": "560 Hudson Street #5",
+          "streetAddress": "560 Hudson Street",
+          "unit": "5",
+          "neighborhood": "West Village",
+          "status": "monitor",
+          "track": "1br",
+          "price": 6295,
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "availabilityStarts": "2026-07-01",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "unknown",
+          "caveats": [
+            "Over 1BR cap.",
+            "July 1 timing."
+          ]
+        },
+        {
+          "url": "https://streeteasy.com/building/1-christopher-street-new_york/6a?featured=1",
+          "provider": "StreetEasy",
+          "name": "1 Christopher Street #6A",
+          "streetAddress": "1 Christopher Street",
+          "unit": "6A",
+          "neighborhood": "West Village",
+          "status": "monitor",
+          "track": "1br",
+          "price": 9995,
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "medium",
+          "caveats": [
+            "Far over the 1BR cap."
+          ]
+        },
+        {
+          "url": "https://www.trulia.com/home/152-2nd-ave-4a-new-york-ny-10003-2102664413",
+          "provider": "Trulia",
+          "name": "152 2nd Avenue #4A",
+          "streetAddress": "152 2nd Avenue",
+          "unit": "4A",
+          "neighborhood": "East Village",
+          "status": "excluded",
+          "track": "3br",
+          "bedrooms": 3,
+          "bathrooms": 2,
+          "freshness": "stale_or_mismatch",
+          "verifiedOn": "2026-05-13",
+          "photoConfidence": "unknown",
+          "floorPlanConfidence": "unknown",
+          "rejectionReasons": [
+            "Opened page was explicitly off market."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "daily-manhattan-apartment-search-2026-05-14",
+      "runDate": "2026-05-14",
+      "summary": "Live pool was thinner than snippets suggested; Beatrice, Peter Cooper, 777 6th, and 125 Delancey were strongest 1BRs, while true 3BR/3BA supply was scarce.",
+      "notes": "Backfilled from the May 14 daily Manhattan apartment search automation run.",
+      "sourcesSearched": [
+        "Equity Apartments",
+        "StreetEasy",
+        "Beam/StuyTown",
+        "direct operator pages"
+      ],
+      "blindSpots": [
+        "Many good-looking hits opened as rented, off-market, delisted, in contract, or stale building pages.",
+        "Several operator sites did not expose reliable unit-level extraction unless the exact live page opened cleanly."
+      ],
+      "listings": [
+        {
+          "key": "equity:beatrice:1br",
+          "url": "https://www.equityapartments.com/new-york-city/chelsea/beatrice-apartments",
+          "provider": "Equity Apartments",
+          "name": "Beatrice Apartments 1BR",
+          "streetAddress": "105 W 29th St",
+          "neighborhood": "Chelsea",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 1,
+          "priceMin": 5831,
+          "priceDisplay": "from $5,831",
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "squareFeet": 643,
+          "availabilityStarts": "2026-05-14",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-14",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "high",
+          "commute": {
+            "minutes": 17,
+            "route": "N/R/W to Prince or walk"
+          },
+          "amenities": [
+            "Dishwasher",
+            "Washer/dryer",
+            "Central heat and A/C",
+            "Floor-to-ceiling windows"
+          ],
+          "furnitureFit": "Good for couch plus coffee table; main wall length should still be confirmed."
+        },
+        {
+          "url": "https://streeteasy.com/building/5-peter-cooper-road-new_york/14h",
+          "provider": "StreetEasy",
+          "name": "5 Peter Cooper Road #14H",
+          "streetAddress": "5 Peter Cooper Road",
+          "unit": "14H",
+          "neighborhood": "Peter Cooper / StuyTown",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 2,
+          "price": 5243,
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "squareFeet": 944,
+          "availabilityDisplay": "available now",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-14",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "medium",
+          "commute": {
+            "minutes": 22,
+            "route": "L plus walk or longer walk"
+          },
+          "amenities": [
+            "Renovated unit",
+            "Dishwasher"
+          ],
+          "furnitureFit": "Very strong due unusually generous 944 sq ft.",
+          "caveats": [
+            "Laundry and HVAC not explicit on the opened unit page."
+          ]
+        },
+        {
+          "key": "equity:777-6th:1br",
+          "url": "https://www.equityapartments.com/new-york-city/chelsea/777-6th-avenue-apartments",
+          "provider": "Equity Apartments",
+          "name": "777 6th Avenue 1BR",
+          "streetAddress": "777 6th Avenue",
+          "neighborhood": "Chelsea",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 3,
+          "price": 5990,
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "squareFeet": 636,
+          "availabilityStarts": "2026-05-20",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-14",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "high",
+          "commute": {
+            "minutes": 15,
+            "route": "N/R/W to Prince or walk"
+          },
+          "amenities": [
+            "Dishwasher",
+            "Large windows",
+            "Strong finish quality"
+          ],
+          "caveats": [
+            "Just under hard cap.",
+            "No clean explicit laundry confirmation from opened page."
+          ]
+        },
+        {
+          "url": "https://streeteasy.com/building/the-essex/604",
+          "provider": "StreetEasy",
+          "name": "125 Delancey Street #604",
+          "streetAddress": "125 Delancey Street",
+          "unit": "604",
+          "neighborhood": "Lower East Side",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 4,
+          "price": 5900,
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "availabilityDisplay": "available now",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-14",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "medium",
+          "commute": {
+            "minutes": 15,
+            "route": "F/M/J/Z plus short walk or walk"
+          },
+          "amenities": [
+            "Washer/dryer",
+            "Dishwasher",
+            "Strong windows/light",
+            "Private patio"
+          ],
+          "caveats": [
+            "HVAC not explicit.",
+            "Living-room dimensions were not explicit."
+          ]
+        },
+        {
+          "url": "https://streeteasy.com/building/153-norfolk-street-new_york/5d",
+          "provider": "StreetEasy",
+          "name": "153 Norfolk Street #5D",
+          "streetAddress": "153 Norfolk Street",
+          "unit": "5D",
+          "neighborhood": "Lower East Side",
+          "status": "shortlist",
+          "track": "2br",
+          "rank": 1,
+          "price": 4200,
+          "bedrooms": 2,
+          "bathrooms": 2,
+          "availabilityStarts": "2026-06-02",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-14",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "unknown",
+          "commute": {
+            "minutes": 15,
+            "route": "F/M/J/Z plus walk or walk"
+          },
+          "amenities": [
+            "Washer/dryer",
+            "Two full baths",
+            "Renovated feel",
+            "Oversized windows"
+          ],
+          "caveats": [
+            "Could not verify dishwasher.",
+            "Could not verify HVAC.",
+            "No square footage or floor plan exposed."
+          ]
+        },
+        {
+          "url": "https://streeteasy.com/building/the-tribeca/7bc",
+          "provider": "StreetEasy",
+          "name": "303 Greenwich Street #7BC",
+          "streetAddress": "303 Greenwich Street",
+          "unit": "7BC",
+          "neighborhood": "Tribeca",
+          "status": "shortlist",
+          "track": "3br",
+          "rank": 1,
+          "price": 14500,
+          "bedrooms": 3,
+          "bathrooms": 3,
+          "squareFeet": 1361,
+          "availabilityStarts": "2026-07-01",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-14",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "high",
+          "commute": {
+            "minutes": 21,
+            "route": "walk or one subway line to Canal plus walk"
+          },
+          "amenities": [
+            "Washer/dryer",
+            "Dishwasher",
+            "Floor plan"
+          ],
+          "caveats": [
+            "Third bedroom reads more like office/flex.",
+            "July 1 timing."
+          ]
+        },
+        {
+          "url": "https://streeteasy.com/building/152-9-avenue-new_york/3",
+          "provider": "StreetEasy",
+          "name": "152 9th Avenue #3",
+          "streetAddress": "152 9th Avenue",
+          "unit": "3",
+          "neighborhood": "Chelsea",
+          "status": "shortlist",
+          "track": "3br",
+          "rank": 2,
+          "price": 13900,
+          "bedrooms": 3,
+          "bathrooms": 2.5,
+          "fullBathrooms": 2,
+          "partialBathrooms": 1,
+          "availabilityDisplay": "available now",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-14",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "medium",
+          "commute": {
+            "minutes": 24,
+            "route": "A/C/E plus walk or longer walk"
+          },
+          "amenities": [
+            "Washer/dryer",
+            "Dishwasher",
+            "Oversized windows",
+            "Large terrace",
+            "Open-concept living"
+          ],
+          "caveats": [
+            "Misses the 3 full bath preference.",
+            "No square footage shown."
+          ]
+        },
+        {
+          "url": "https://streeteasy.com/building/180-pearl-street-new_york/1514",
+          "provider": "StreetEasy",
+          "name": "180 Pearl Street #1514",
+          "streetAddress": "180 Pearl Street",
+          "unit": "1514",
+          "neighborhood": "Financial District",
+          "status": "shortlist",
+          "track": "3br",
+          "rank": 3,
+          "price": 12000,
+          "bedrooms": 3,
+          "bathrooms": 3,
+          "availabilityStarts": "2026-07-01",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-14",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "high",
+          "commute": {
+            "minutes": 18,
+            "route": "J/Z/4/5 plus walk"
+          },
+          "amenities": [
+            "Washer/dryer",
+            "Dishwasher",
+            "Strong kitchen/bath finishes"
+          ],
+          "caveats": [
+            "Outside core neighborhood set.",
+            "July 1 timing."
+          ]
+        },
+        {
+          "url": "https://streeteasy.com/building/saranac-95-worth-street-new_york/1505",
+          "provider": "StreetEasy",
+          "name": "95 Worth Street #1505",
+          "streetAddress": "95 Worth Street",
+          "unit": "1505",
+          "neighborhood": "Tribeca",
+          "status": "monitor",
+          "track": "2br",
+          "price": 9500,
+          "bedrooms": 2,
+          "bathrooms": 2,
+          "availabilityDisplay": "available now",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-14",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "medium",
+          "caveats": [
+            "Over 2BR cap."
+          ]
+        },
+        {
+          "key": "equity:parc-east:building",
+          "url": "https://www.equityapartments.com/new-york-city/gramercy-park-murray-hill/parc-east-apartments",
+          "provider": "Equity Apartments",
+          "name": "Parc East Apartments",
+          "neighborhood": "Kips Bay / Gramercy-adjacent",
+          "status": "monitor",
+          "track": "unknown",
+          "freshness": "availability_page_only",
+          "verifiedOn": "2026-05-14",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "medium",
+          "caveats": [
+            "Best dates were later than ideal.",
+            "Live 2BR/2BA and 3BR/3BA floor plans were not currently available."
+          ]
+        },
+        {
+          "url": "https://streeteasy.com/building/20-exchange-place-new_york/ph5501",
+          "provider": "StreetEasy",
+          "name": "20 Exchange Place PH5501",
+          "streetAddress": "20 Exchange Place",
+          "unit": "PH5501",
+          "neighborhood": "Financial District",
+          "status": "monitor",
+          "track": "3br",
+          "price": 13995,
+          "bedrooms": 3,
+          "bathrooms": 2,
+          "availabilityStarts": "2026-05-20",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-14",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "medium",
+          "caveats": [
+            "Not a 3BR/3BA.",
+            "Outside preferred neighborhood set."
+          ]
+        },
+        {
+          "url": "https://streeteasy.com/building/the-east/1101",
+          "provider": "StreetEasy",
+          "name": "644 E 14th Street #1101",
+          "streetAddress": "644 E 14th Street",
+          "unit": "1101",
+          "neighborhood": "East Village",
+          "status": "excluded",
+          "track": "unknown",
+          "freshness": "stale_or_mismatch",
+          "verifiedOn": "2026-05-14",
+          "photoConfidence": "unknown",
+          "floorPlanConfidence": "unknown",
+          "rejectionReasons": [
+            "Temporarily off market as of 2026-05-08."
+          ]
+        },
+        {
+          "url": "https://streeteasy.com/building/270-east-10-street-new_york/1a",
+          "provider": "StreetEasy",
+          "name": "270 E 10th Street #1A",
+          "streetAddress": "270 E 10th Street",
+          "unit": "1A",
+          "neighborhood": "East Village",
+          "status": "excluded",
+          "track": "unknown",
+          "freshness": "stale_or_mismatch",
+          "verifiedOn": "2026-05-14",
+          "photoConfidence": "unknown",
+          "floorPlanConfidence": "unknown",
+          "rejectionReasons": [
+            "Rented on 2026-05-09."
+          ]
+        },
+        {
+          "url": "https://streeteasy.com/building/7-peter-cooper-road-new_york/01c",
+          "provider": "StreetEasy",
+          "name": "7 Peter Cooper Road #1C",
+          "streetAddress": "7 Peter Cooper Road",
+          "unit": "1C",
+          "neighborhood": "Peter Cooper / StuyTown",
+          "status": "excluded",
+          "track": "unknown",
+          "freshness": "stale_or_mismatch",
+          "verifiedOn": "2026-05-14",
+          "photoConfidence": "unknown",
+          "floorPlanConfidence": "unknown",
+          "rejectionReasons": [
+            "Rented on 2026-05-02."
+          ]
+        },
+        {
+          "url": "https://streeteasy.com/building/12-stuyvesant-oval-new_york/08a",
+          "provider": "StreetEasy",
+          "name": "12 Stuyvesant Oval #8A",
+          "streetAddress": "12 Stuyvesant Oval",
+          "unit": "8A",
+          "neighborhood": "StuyTown",
+          "status": "excluded",
+          "track": "unknown",
+          "freshness": "stale_or_mismatch",
+          "verifiedOn": "2026-05-14",
+          "photoConfidence": "unknown",
+          "floorPlanConfidence": "unknown",
+          "rejectionReasons": [
+            "No longer available as of 2026-05-13."
+          ]
+        },
+        {
+          "url": "https://streeteasy.com/building/153-norfolk-street-new_york/2e",
+          "provider": "StreetEasy",
+          "name": "153 Norfolk Street #2E",
+          "streetAddress": "153 Norfolk Street",
+          "unit": "2E",
+          "neighborhood": "Lower East Side",
+          "status": "excluded",
+          "track": "unknown",
+          "freshness": "stale_or_mismatch",
+          "verifiedOn": "2026-05-14",
+          "photoConfidence": "unknown",
+          "floorPlanConfidence": "unknown",
+          "rejectionReasons": [
+            "Rented on 2026-05-05."
+          ]
+        },
+        {
+          "url": "https://streeteasy.com/building/iris-tribeca/11a",
+          "provider": "StreetEasy",
+          "name": "19 Park Place #11A",
+          "streetAddress": "19 Park Place",
+          "unit": "11A",
+          "neighborhood": "Tribeca",
+          "status": "excluded",
+          "track": "unknown",
+          "freshness": "stale_or_mismatch",
+          "verifiedOn": "2026-05-14",
+          "photoConfidence": "unknown",
+          "floorPlanConfidence": "unknown",
+          "rejectionReasons": [
+            "Delisted on 2026-05-08."
+          ]
+        },
+        {
+          "url": "https://streeteasy.com/building/313-gramercy-place/8c",
+          "provider": "StreetEasy",
+          "name": "313 E 22nd Street #8C",
+          "streetAddress": "313 E 22nd Street",
+          "unit": "8C",
+          "neighborhood": "Gramercy",
+          "status": "excluded",
+          "track": "unknown",
+          "freshness": "stale_or_mismatch",
+          "verifiedOn": "2026-05-14",
+          "photoConfidence": "unknown",
+          "floorPlanConfidence": "unknown",
+          "rejectionReasons": [
+            "In contract."
+          ]
+        },
+        {
+          "url": "https://streeteasy.com/building/164-attorney-street-new_york",
+          "provider": "StreetEasy",
+          "name": "164 Attorney Street",
+          "streetAddress": "164 Attorney Street",
+          "neighborhood": "Lower East Side",
+          "status": "excluded",
+          "track": "unknown",
+          "freshness": "stale_or_mismatch",
+          "verifiedOn": "2026-05-14",
+          "photoConfidence": "unknown",
+          "floorPlanConfidence": "unknown",
+          "rejectionReasons": [
+            "No current units."
+          ]
+        }
+      ]
+    }
+  ]
+}

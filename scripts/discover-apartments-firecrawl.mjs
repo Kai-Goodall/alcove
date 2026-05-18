@@ -220,7 +220,7 @@ export async function main(argv = process.argv.slice(2)) {
 }
 
 export function shapeCandidate(rawItem) {
-  const url = rawItem.url?.trim();
+  const url = normalizeRawUrl(rawItem.url);
   const canonicalUrl = canonicalizeUrl(url);
   const domain = hostnameFromUrl(canonicalUrl);
   const providerHint = inferProviderHint(domain, rawItem.providerHint);
@@ -259,7 +259,7 @@ export function shapeCandidate(rawItem) {
     discoveryMethod: rawItem.discoveryMethod,
     discoveryQuery: rawItem.discoveryQuery,
     mapRoot: rawItem.mapRoot,
-    title: rawItem.title ?? null,
+    title: typeof rawItem.title === "string" ? rawItem.title : null,
     snippet: pickSnippet(rawItem),
     trackHints,
     neighborhoodHints,
@@ -476,10 +476,10 @@ async function firecrawlMap({ apiKey, baseUrl, root, limit }) {
 
   const links = response?.links ?? response?.data?.links ?? [];
   return {
-    items: links.map((url) => ({
-      url,
-      title: null,
-      snippet: null,
+    items: links.map((link) => ({
+      url: normalizeRawUrl(link),
+      title: typeof link === "object" ? link.title ?? null : null,
+      snippet: typeof link === "object" ? link.description ?? null : null,
       providerHint: root.provider,
       discoveryMethod: "firecrawl_map",
       mapRoot: root.url,
@@ -532,6 +532,21 @@ function pickSnippet(rawItem) {
   const source = rawItem.snippet ?? rawItem.markdown;
   if (!source) return null;
   return source.replace(/\s+/g, " ").trim().slice(0, 320);
+}
+
+function normalizeRawUrl(value) {
+  if (typeof value === "string") {
+    return value.trim();
+  }
+  if (value && typeof value === "object") {
+    if (typeof value.url === "string") {
+      return value.url.trim();
+    }
+    if (typeof value.href === "string") {
+      return value.href.trim();
+    }
+  }
+  return "";
 }
 
 function classifySourceKind({ url, domain, text }) {

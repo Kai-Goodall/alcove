@@ -1,9 +1,11 @@
 node_modules
 dist
+.next
 .DS_Store
 .codex-artifacts
 *.tsbuildinfo
 
-.env.local
+.env*.local
 .vercel
 .claude
+next-env.d.ts

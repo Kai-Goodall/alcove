@@ -36,10 +36,13 @@ const args = parseArgs(process.argv.slice(2));
 loadEnvLocal();
 
 const dataFile = resolve(process.cwd(), args.file ?? DEFAULT_DATA_FILE);
-const convexUrl = process.env.VITE_CONVEX_URL ?? process.env.CONVEX_URL;
+const convexUrl =
+  process.env.NEXT_PUBLIC_CONVEX_URL ?? process.env.CONVEX_URL;
 
 if (!convexUrl) {
-  throw new Error("Missing VITE_CONVEX_URL. Check .env.local or pass CONVEX_URL.");
+  throw new Error(
+    "Missing NEXT_PUBLIC_CONVEX_URL. Check .env.local or pass CONVEX_URL.",
+  );
 }
 
 const client = new ConvexHttpClient(convexUrl);

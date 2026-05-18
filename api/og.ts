@@ -27,9 +27,14 @@ type Apartment = NonNullable<
 };
 
 export default async function handler(request: Request): Promise<Response> {
+  const t0 = Date.now();
+  const log = (msg: string) =>
+    console.log(`[og] +${Date.now() - t0}ms ${msg}`);
+
   const url = new URL(request.url, "http://localhost");
   const id = url.searchParams.get("apartment");
   if (!id) return text("Missing apartment", 400);
+  log(`start id=${id}`);
 
   const convexUrl = process.env.VITE_CONVEX_URL ?? process.env.CONVEX_URL;
   if (!convexUrl) return text("Convex URL not configured", 500);
@@ -40,7 +45,9 @@ export default async function handler(request: Request): Promise<Response> {
     apartment = (await client.query(anyApi.apartments.get, {
       id: id as Id<"apartments">,
     })) as Apartment | null;
-  } catch {
+    log(`convex query ok images=${apartment?.images?.length ?? 0}`);
+  } catch (err) {
+    log(`convex query failed: ${(err as Error).message}`);
     return text("Failed to load apartment", 502);
   }
   if (!apartment) return text("Apartment not found", 404);
@@ -50,12 +57,18 @@ export default async function handler(request: Request): Promise<Response> {
 
   const buffers = (
     await Promise.all(
-      photos.map(async (p) => {
+      photos.map(async (p, i) => {
         try {
           const res = await fetch(p.url!);
-          if (!res.ok) return null;
-          return Buffer.from(await res.arrayBuffer());
-        } catch {
+          if (!res.ok) {
+            log(`image ${i} status=${res.status}`);
+            return null;
+          }
+          const buf = Buffer.from(await res.arrayBuffer());
+          log(`image ${i} bytes=${buf.length}`);
+          return buf;
+        } catch (err) {
+          log(`image ${i} fetch error: ${(err as Error).message}`);
           return null;
         }
       }),
@@ -64,10 +77,12 @@ export default async function handler(request: Request): Promise<Response> {
 
   if (buffers.length === 0) return text("Image download failed", 502);
 
+  log(`compositing buffers=${buffers.length}`);
   const png =
     buffers.length >= 5
       ? await renderGrid(buffers)
       : await renderSingle(buffers[0]);
+  log(`composited bytes=${png.length}`);
 
   return new Response(new Uint8Array(png), {
     status: 200,

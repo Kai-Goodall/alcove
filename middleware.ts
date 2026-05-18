@@ -32,7 +32,9 @@ export default async function middleware(request: Request): Promise<Response | u
     return;
   }
 
-  const meta = buildMetaTags(apartment, url);
+  const ogImage = new URL("/api/og", url);
+  ogImage.searchParams.set("apartment", apartmentId);
+  const meta = buildMetaTags(apartment, url, ogImage.toString());
   const html = (await originResponse.text()).replace(
     /<\/head>/i,
     `${meta}\n</head>`,
@@ -67,10 +69,12 @@ async function fetchApartment(
 function buildMetaTags(
   apartment: NonNullable<Awaited<ReturnType<typeof fetchApartment>>>,
   url: URL,
+  ogImageUrl: string,
 ): string {
   const title = pickTitle(apartment);
   const description = pickDescription(apartment);
-  const image = pickImage(apartment);
+  const fallbackImage = pickImage(apartment);
+  const image = apartment.images.some((i) => i.url) ? ogImageUrl : fallbackImage;
   const canonical = url.toString();
 
   const tags: string[] = [];
@@ -86,6 +90,8 @@ function buildMetaTags(
   push(`<meta property="og:url" content="${escape(canonical)}" />`);
   if (image) {
     push(`<meta property="og:image" content="${escape(image)}" />`);
+    push(`<meta property="og:image:width" content="1200" />`);
+    push(`<meta property="og:image:height" content="630" />`);
     push(`<meta name="twitter:image" content="${escape(image)}" />`);
     push(`<meta name="twitter:card" content="summary_large_image" />`);
   } else {

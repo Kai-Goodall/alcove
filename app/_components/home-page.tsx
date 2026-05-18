@@ -22,9 +22,8 @@ import { useApartmentSelection } from "@/_lib/use-apartment-selection";
 
 const COLUMN_WIDTH = 800;
 const DRAWER_WIDTH = 525;
-// Grid + drawer treated as one block (zero gap matches the 1440px baseline,
-// where the grid's right edge meets the drawer's left edge).
-const COMBINED_WIDTH = COLUMN_WIDTH + DRAWER_WIDTH;
+const DRAWER_GAP = 24;
+const COMBINED_WIDTH = COLUMN_WIDTH + DRAWER_GAP + DRAWER_WIDTH;
 const MIN_SIDE_MARGIN = 32;
 
 function parsePrice(value: string): number | undefined {

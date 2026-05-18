@@ -144,8 +144,13 @@ function pickDescription(
 function pickImage(
   apartment: NonNullable<Awaited<ReturnType<typeof fetchApartment>>>,
 ): string | undefined {
-  const photo = apartment.images.find((i) => i.kind === "photo" && i.url);
-  return photo?.url ?? apartment.images.find((i) => i.url)?.url ?? undefined;
+  const usable = apartment.images.filter((i) => i.url);
+  const representative = usable.find(
+    (i) => i.kind === "photo" && i.image.representativeOfPage === true,
+  );
+  const chosen =
+    representative ?? usable.find((i) => i.kind === "photo") ?? usable[0];
+  return chosen?.url ?? undefined;
 }
 
 function truncate(value: string, max: number): string {

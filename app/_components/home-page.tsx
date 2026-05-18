@@ -21,7 +21,11 @@ import {
 import { useApartmentSelection } from "@/_lib/use-apartment-selection";
 
 const COLUMN_WIDTH = 800;
-const DRAWER_LEFT_MARGIN = 83;
+const DRAWER_WIDTH = 525;
+// Grid + drawer treated as one block (zero gap matches the 1440px baseline,
+// where the grid's right edge meets the drawer's left edge).
+const COMBINED_WIDTH = COLUMN_WIDTH + DRAWER_WIDTH;
+const MIN_SIDE_MARGIN = 32;
 
 function parsePrice(value: string): number | undefined {
   const digits = value.replace(/[^0-9]/g, "");
@@ -29,7 +33,7 @@ function parsePrice(value: string): number | undefined {
   return Number(digits);
 }
 
-function useViewportShift() {
+function useContainerLayout() {
   const [width, setWidth] = useState<number>(() =>
     typeof window === "undefined" ? 1440 : window.innerWidth,
   );
@@ -40,7 +44,9 @@ function useViewportShift() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  return Math.max(0, (width - COLUMN_WIDTH) / 2 - DRAWER_LEFT_MARGIN);
+  const sideMargin = Math.max(MIN_SIDE_MARGIN, (width - COMBINED_WIDTH) / 2);
+  const viewportShift = Math.max(0, (width - COLUMN_WIDTH) / 2 - sideMargin);
+  return { sideMargin, viewportShift };
 }
 
 function HomePage() {
@@ -72,7 +78,7 @@ function HomePage() {
   }, [apartments]);
 
   const [selectedId, setSelectedId] = useApartmentSelection();
-  const viewportShift = useViewportShift();
+  const { sideMargin, viewportShift } = useContainerLayout();
 
   // Only re-arm the dim lock when the drawer transitions from CLOSED to
   // OPEN. Switching apartments while the drawer is already open carries
@@ -228,6 +234,7 @@ function HomePage() {
             initialApartment={initialSelected}
             onClose={() => setSelectedId(null)}
             onHoverChange={handleDrawerHoverChange}
+            rightOffset={sideMargin}
           />
         ) : null}
       </AnimatePresence>

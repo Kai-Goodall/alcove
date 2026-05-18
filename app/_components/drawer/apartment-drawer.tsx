@@ -22,12 +22,15 @@ export interface ApartmentDrawerProps {
 	onClose: () => void;
 	/** Notified when the pointer enters or leaves the drawer. */
 	onHoverChange?: (hovered: boolean) => void;
+	/** Distance from the viewport's right edge, in px. */
+	rightOffset: number;
 }
 
 function ApartmentDrawer({
 	initialApartment,
 	onClose,
 	onHoverChange,
+	rightOffset,
 }: ApartmentDrawerProps) {
 	const drawerRef = useRef<HTMLDivElement>(null);
 	const scrollRef = useRef<HTMLDivElement>(null);
@@ -88,7 +91,8 @@ function ApartmentDrawer({
 			transition={{ type: "spring", duration: 0.34, bounce: 0 }}
 			onMouseEnter={() => onHoverChange?.(true)}
 			onMouseLeave={() => onHoverChange?.(false)}
-			className="squircle pointer-events-auto fixed top-16 bottom-16 right-8 z-30 w-[525px] max-w-[calc(100vw-32px)] overflow-hidden rounded-[48px] bg-card shadow-card-2"
+			style={{ right: rightOffset }}
+			className="squircle pointer-events-auto fixed top-16 bottom-16 z-30 w-[525px] max-w-[calc(100vw-32px)] overflow-hidden rounded-[48px] bg-card shadow-card-2"
 		>
 			<div
 				ref={scrollRef}

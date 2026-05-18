@@ -1,6 +1,6 @@
 import sharp from "sharp";
 import { ConvexHttpClient } from "convex/browser";
-import { api } from "../convex/_generated/api";
+import { anyApi } from "convex/server";
 import type { Id } from "../convex/_generated/dataModel";
 
 export const config = {
@@ -37,7 +37,7 @@ export default async function handler(request: Request): Promise<Response> {
   let apartment: Apartment | null;
   try {
     const client = new ConvexHttpClient(convexUrl);
-    apartment = (await client.query(api.apartments.get, {
+    apartment = (await client.query(anyApi.apartments.get, {
       id: id as Id<"apartments">,
     })) as Apartment | null;
   } catch {

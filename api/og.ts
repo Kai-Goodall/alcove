@@ -59,7 +59,9 @@ export default async function handler(request: Request): Promise<Response> {
     await Promise.all(
       photos.map(async (p, i) => {
         try {
-          const res = await fetch(p.url!);
+          const res = await fetch(p.url!, {
+            signal: AbortSignal.timeout(8000),
+          });
           if (!res.ok) {
             log(`image ${i} status=${res.status}`);
             return null;
@@ -79,7 +81,7 @@ export default async function handler(request: Request): Promise<Response> {
 
   log(`compositing buffers=${buffers.length}`);
   const png =
-    buffers.length >= 5
+    buffers.length >= 2
       ? await renderGrid(buffers)
       : await renderSingle(buffers[0]);
   log(`composited bytes=${png.length}`);
@@ -133,7 +135,7 @@ async function renderGrid(buffers: Buffer[]): Promise<Buffer> {
 
   const composites = await Promise.all(
     cells.map(async (cell, i) => ({
-      input: await sharp(buffers[i])
+      input: await sharp(buffers[i % buffers.length])
         .resize(cell.width, cell.height, { fit: "cover", position: "centre" })
         .toBuffer(),
       left: cell.left,

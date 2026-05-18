@@ -27,7 +27,7 @@ type Apartment = NonNullable<
 };
 
 export default async function handler(request: Request): Promise<Response> {
-  const url = new URL(request.url);
+  const url = new URL(request.url, "http://localhost");
   const id = url.searchParams.get("apartment");
   if (!id) return text("Missing apartment", 400);
 

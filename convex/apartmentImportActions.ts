@@ -7,7 +7,7 @@ import { createHash } from "node:crypto";
 import { v } from "convex/values";
 import * as z from "zod/v4";
 import { api, internal } from "./_generated/api";
-import { internalAction } from "./_generated/server";
+import { action, internalAction } from "./_generated/server";
 import type { Id } from "./_generated/dataModel";
 import type { ActionCtx } from "./_generated/server";
 
@@ -94,13 +94,98 @@ type ImageCandidate = {
   score?: number;
 };
 
+type PageEvidence = {
+  canonicalUrl?: string;
+  title?: string;
+  ogTitle?: string;
+  metaDescription?: string;
+  jsonLdSummaries: string[];
+  addressHints: string[];
+  priceHints: string[];
+  layoutHints: string[];
+  amenityHints: string[];
+};
+
+type RepairImportJob = {
+  _id: Id<"apartmentImportJobs">;
+  normalizedUrl: string;
+  apartmentId?: Id<"apartments">;
+};
+
+type ManualAddRepairCandidate = {
+  apartmentId: Id<"apartments">;
+  sourceKey: string;
+  sourceUrl: string;
+};
+
+type RepairImportTarget = {
+  origin: "import-job" | "manual-add-row";
+  jobId?: Id<"apartmentImportJobs">;
+  sourceUrl: string;
+  apartmentId: Id<"apartments">;
+  sourceKey?: string;
+};
+
+type RepairCompletedImportsResult = {
+  dryRun: boolean;
+  checked: number;
+  candidates: number;
+  repaired: number;
+  failed: number;
+  results: Array<{
+    origin: "import-job" | "manual-add-row";
+    jobId?: Id<"apartmentImportJobs">;
+    sourceUrl: string;
+    apartmentId?: Id<"apartments">;
+    status: "candidate" | "skipped" | "repaired" | "failed";
+    problems?: string[];
+    warnings?: string[];
+    error?: string;
+  }>;
+};
+
+const NullableStringSchema = z.string().nullable();
+const NullableNumberSchema = z.number().nullable();
+const NullableBooleanSchema = z.boolean().nullable();
+
+const AgentListingSchema = z.object({
+  url: z.string(),
+  sourceKey: NullableStringSchema,
+  provider: NullableStringSchema,
+  name: NullableStringSchema,
+  buildingName: NullableStringSchema,
+  unit: NullableStringSchema,
+  addressLink: NullableStringSchema,
+  streetAddress: NullableStringSchema,
+  neighborhood: NullableStringSchema,
+  price: NullableNumberSchema,
+  priceDisplay: NullableStringSchema,
+  bedrooms: NullableNumberSchema,
+  bathrooms: NullableNumberSchema,
+  squareFeet: NullableNumberSchema,
+  availabilityDisplay: NullableStringSchema,
+  laundry: z.string(),
+  dishwasher: z.string(),
+  amenities: z.array(z.string()),
+  petsAllowed: NullableBooleanSchema,
+  tourUrl: NullableStringSchema,
+  verificationNote: NullableStringSchema,
+  notes: NullableStringSchema,
+  caveats: z.array(z.string()),
+  rejectionReasons: z.array(z.string()),
+  tags: z.array(z.string()),
+});
+
 const AgentExtractionSchema = z.object({
   summary: z.string(),
-  listing: z.record(z.string(), z.unknown()),
+  listing: AgentListingSchema,
   sourcesSearched: z.array(z.string()),
   blindSpots: z.array(z.string()),
   warnings: z.array(z.string()),
 });
+
+type AgentListing = z.infer<typeof AgentListingSchema>;
+type AgentExtraction = z.infer<typeof AgentExtractionSchema>;
 
 const DEFAULT_MODEL = "claude-sonnet-4-6";
 const DEFAULT_IMAGE_LIMIT = 4;
@@ -131,9 +216,9 @@ const AVAILABILITY_BY_STATUS: Record<ApartmentStatus, string> = {
 };
 
 const EXTRACTION_PROMPT = `
-You are the Alcove apartment import agent. Research exactly one apartment link and return one compact listing object for the Alcove database.
+You are the Alcove apartment import agent. Research exactly one apartment link and return field-by-field structured data for the Alcove database.
 
-Use the provided URL as the source of truth, then use web search/fetch to fill gaps from direct building, broker, operator, or portal pages. Be strict about live verification. Do not invent unavailable fields.
+Use the provided URL as the source of truth, then use web search/fetch to fill gaps from direct building, broker, operator, or portal pages. Be strict about live verification. Do not invent unavailable fields. Return null only for nullable fields that are genuinely not verified. Use "unknown" for laundry and dishwasher only after checking listing text, amenity lists, unit/building details, photos, floor plan evidence, and direct operator/broker pages.
 
 Ranking standards:
 - Main shortlist means strong enough to tour, not merely plausible.
@@ -145,16 +230,23 @@ Ranking standards:
 - 2BR budget up to $9,000; true 2BR/2BA is expected for shortlist.
 - 3BR budget up to $14,000, stretch to $15,000 only if unusually strong; true 3BR/3BA is expected for shortlist.
 
-Return a compact JSON listing shaped like the existing importer expects. Important fields:
-url, sourceKey or key, provider, name, addressLink, description, streetAddress, unit, neighborhood, status, track, price, priceDisplay, bedrooms, bathrooms, squareFeet, availabilityDisplay, availabilityStarts, freshness, verificationNote, commute, amenities, laundry, dishwasher, tourUrl, mustHaveEvidence, daylight, kitchen, bathroom, floorPlan, furnitureFit, photoConfidence, floorPlanConfidence, caveats, rejectionReasons, notes, rawNotes, tags.
+Structured output rules:
+- The schema is intentionally compact so it can be grammar-constrained reliably. Put each fact into its field; do not invent extra JSON keys.
+- name must be specific and useful: preferably "Building #Unit" or "Street Address #Unit". Do not use generic names like "Apartment listing", "StreetEasy listing", "Rental unit", "Available apartment", or a neighborhood-only title when a building, address, or unit exists.
+- buildingName is the named building when present, otherwise null. unit is the exact unit/apartment identifier when present, otherwise null.
+- streetAddress is the formatted street/unit address line as verified from the source. If the source separates unit, include the street in streetAddress and unit in unit; name should still include the unit.
+- addressLink should be a source, maps, or detail URL that verifies the address. If there is no separate address URL, set addressLink to the verified listing URL.
+- price must be numeric monthly rent in USD when verified. Put formatted price text in priceDisplay.
+- bedrooms and bathrooms must be numbers, including 0 for a verified studio and decimals like 1.5 when present.
+- laundry and dishwasher must be exactly "yes", "no", or "unknown".
+- amenities is for user-facing amenity labels only. Do not put prose there.
+- notes must be short, under about 360 characters, and should explain fit/caveats such as daylight, renovation, floor plan, or furniture fit. Never dump page text or restate all structured fields in notes.
+- sourcesSearched should list real URLs/domains searched or fetched.
 
 Required field guardrail for manual add:
 - Do not return a listing just because the URL card looks promising. Open/fetch the detail page first and extract the core fields from the page itself.
-- Required fields are name, url, addressLink, streetAddress, price, bedrooms, bathrooms, laundry, and dishwasher. If one is missing from the source page, keep looking on the detail page, embedded structured data, unit row, official building availability page, broker page, or property-manager page before giving up.
-- name must be specific and useful, preferably building plus unit or address plus unit. Do not use generic names like "Apartment listing", "StreetEasy listing", or a neighborhood-only title when a building, address, or unit exists.
-- addressLink should be a source, maps, or detail URL that verifies the address. If there is no separate address URL, set addressLink to the verified listing URL.
-- laundry and dishwasher must be exactly "yes", "no", or "unknown". Use "unknown" only after checking listing text, amenity lists, unit/building details, photos, and floor plan evidence.
-- If price, bedrooms, bathrooms, streetAddress, or a verifying addressLink still cannot be verified after deeper searching, say so in warnings and return the best structured object with those fields absent; the importer will reject it instead of adding an incomplete active row.
+- Required rich fields are name, url, addressLink, streetAddress, price, bedrooms, bathrooms, laundry, and dishwasher. If one is missing from the source page, keep looking on the detail page, embedded structured data, unit row, official building availability page, broker page, or property-manager page before giving up.
+- If price, bedrooms, bathrooms, streetAddress, or a verifying addressLink still cannot be verified after deeper searching, say exactly what is missing in warnings and return null/unknown in the structured field; the importer will reject it instead of adding an incomplete active row.
 
 Allowed status values: shortlist, monitor, excluded, archived.
 Allowed track values: 1br, 2br, 3br, unknown.
@@ -189,30 +281,18 @@ export const run = internalAction({
         status: "researching",
         message: "Researching the listing with Claude.",
       });
-      const extraction = await extractWithClaude(
+      const extracted = await extractValidatedListing(
         job.normalizedUrl,
         pageSnapshot,
       );
+      warnings.push(...extracted.warnings);
 
       await ctx.runMutation(internal.apartmentImports.setStatus, {
         jobId: args.jobId,
         status: "extracting",
         message: "Normalizing apartment details.",
       });
-      warnings.push(...extraction.warnings);
-      const listing = normalizeAgentListing(
-        extraction.listing,
-        job.normalizedUrl,
-        pageSnapshot.finalUrl,
-      );
-      const missingRequiredFields = requiredAgentFieldGaps(listing);
-      if (missingRequiredFields.length > 0) {
-        throw new Error(
-          `Claude could not verify required apartment fields: ${missingRequiredFields.join(
-            ", ",
-          )}. Open the source or a direct building/detail page and retry.`,
-        );
-      }
+      const { extraction, listing } = extracted;
 
       await ctx.runMutation(internal.apartmentImports.setStatus, {
         jobId: args.jobId,
@@ -300,10 +380,235 @@ export const run = internalAction({
   },
 });
 
-async function extractWithClaude(
+export const repairCompletedImports = action({
+  args: {
+    limit: v.optional(v.number()),
+    dryRun: v.optional(v.boolean()),
+    force: v.optional(v.boolean()),
+  },
+  handler: async (ctx, args): Promise<RepairCompletedImportsResult> => {
+    const jobs = (await ctx.runQuery(
+      internal.apartmentImports.listCompletedForRepair,
+      { limit: args.limit },
+    )) as RepairImportJob[];
+    const manualCandidates = (await ctx.runQuery(
+      internal.apartments.listManualAddRepairCandidates,
+      { limit: args.limit },
+    )) as ManualAddRepairCandidate[];
+    const targets = uniqueRepairTargets([
+      ...jobs
+        .filter((job): job is RepairImportJob & { apartmentId: Id<"apartments"> } =>
+          Boolean(job.apartmentId),
+        )
+        .map((job) => ({
+          origin: "import-job" as const,
+          jobId: job._id,
+          sourceUrl: job.normalizedUrl,
+          apartmentId: job.apartmentId,
+        })),
+      ...manualCandidates.map((candidate) => ({
+        origin: "manual-add-row" as const,
+        sourceUrl: candidate.sourceUrl,
+        apartmentId: candidate.apartmentId,
+        sourceKey: candidate.sourceKey,
+      })),
+    ]);
+    const dryRun = args.dryRun ?? true;
+    const force = args.force ?? false;
+    const results: RepairCompletedImportsResult["results"] = [];
+
+    for (const target of targets) {
+      const existingApartment = await ctx.runQuery(api.apartments.get, {
+        id: target.apartmentId,
+      });
+      if (existingApartment === null) {
+        results.push({
+          origin: target.origin,
+          jobId: target.jobId,
+          sourceUrl: target.sourceUrl,
+          apartmentId: target.apartmentId,
+          status: "skipped",
+          problems: ["apartment not found"],
+        });
+        continue;
+      }
+
+      const problems = structuredRepairProblems(existingApartment);
+      if (!force && problems.length === 0) {
+        results.push({
+          origin: target.origin,
+          jobId: target.jobId,
+          sourceUrl: target.sourceUrl,
+          apartmentId: target.apartmentId,
+          status: "skipped",
+        });
+        continue;
+      }
+
+      if (dryRun) {
+        results.push({
+          origin: target.origin,
+          jobId: target.jobId,
+          sourceUrl: target.sourceUrl,
+          apartmentId: target.apartmentId,
+          status: "candidate",
+          problems,
+        });
+        continue;
+      }
+
+      const warnings: string[] = [];
+      try {
+        const pageSnapshot = await fetchPageSnapshot(target.sourceUrl);
+        if (pageSnapshot.error) {
+          warnings.push(`Source page fetch failed: ${pageSnapshot.error}`);
+        }
+        const { extraction, listing, warnings: extractionWarnings } =
+          await extractValidatedListing(target.sourceUrl, pageSnapshot);
+        warnings.push(...extractionWarnings);
+        listing.sourceKey = target.sourceKey ?? existingApartment.sourceKey;
+
+        const now = Date.now();
+        const runDate = new Date(now).toISOString().slice(0, 10);
+        const searchRunId: Id<"searchRuns"> = await ctx.runMutation(
+          api.searchRuns.create,
+          {
+            startedAt: now,
+            notes: compactLines([
+              `repairManualAddUrl:${target.sourceUrl}`,
+              target.jobId && `apartmentImportJob:${target.jobId}`,
+              `apartmentId:${target.apartmentId}`,
+              limitText(extraction.summary, 360),
+            ]).join("\n"),
+          },
+        );
+        const apartment = buildApartment(
+          {
+            id: `manual-add-repair-${target.jobId ?? target.apartmentId}`,
+            runDate,
+            summary: extraction.summary,
+          },
+          listing,
+          searchRunId,
+          now,
+        );
+        const apartmentId: Id<"apartments"> = await ctx.runMutation(
+          api.apartments.upsert,
+          { apartment },
+        );
+
+        await ctx.runMutation(api.searchRuns.finish, {
+          id: searchRunId,
+          status: "completed",
+          summary: limitText(extraction.summary, 700),
+          sourcesSearched: unique([
+            target.sourceUrl,
+            pageSnapshot.finalUrl,
+            ...extraction.sourcesSearched,
+          ]).filter(Boolean),
+          blindSpots: unique([
+            ...extraction.blindSpots,
+            ...warnings.filter((warning) =>
+              /blocked|failed|missing|could not verify/i.test(warning),
+            ),
+          ]),
+          notes: compactLines([
+            `repairManualAddUrl:${target.sourceUrl}`,
+            target.jobId && `apartmentImportJob:${target.jobId}`,
+            `apartmentId:${apartmentId}`,
+          ]).join("\n"),
+        });
+
+        results.push({
+          origin: target.origin,
+          jobId: target.jobId,
+          sourceUrl: target.sourceUrl,
+          apartmentId,
+          status: "repaired",
+          problems,
+          warnings: unique(warnings),
+        });
+      } catch (error) {
+        results.push({
+          origin: target.origin,
+          jobId: target.jobId,
+          sourceUrl: target.sourceUrl,
+          apartmentId: target.apartmentId,
+          status: "failed",
+          problems,
+          warnings: unique(warnings),
+          error: error instanceof Error ? error.message : String(error),
+        });
+      }
+    }
+
+    return {
+      dryRun,
+      checked: targets.length,
+      candidates: results.filter((result) => result.status === "candidate")
+        .length,
+      repaired: results.filter((result) => result.status === "repaired")
+        .length,
+      failed: results.filter((result) => result.status === "failed").length,
+      results,
+    };
+  },
+});
+
+async function extractValidatedListing(
   sourceUrl: string,
   pageSnapshot: Awaited<ReturnType<typeof fetchPageSnapshot>>,
 ) {
+  const warnings: string[] = [];
+  let extraction = await extractWithClaude(sourceUrl, pageSnapshot);
+  let listing = normalizeAgentListing(
+    extraction.listing,
+    sourceUrl,
+    pageSnapshot.finalUrl,
+  );
+  let missingRequiredFields = requiredAgentFieldGaps(listing);
+
+  if (missingRequiredFields.length > 0) {
+    warnings.push(
+      `First Claude extraction missed required fields: ${missingRequiredFields.join(
+        ", ",
+      )}. Retrying with validator feedback.`,
+    );
+    extraction = await extractWithClaude(sourceUrl, pageSnapshot, {
+      missingRequiredFields,
+      previousListing: extraction.listing,
+    });
+    listing = normalizeAgentListing(
+      extraction.listing,
+      sourceUrl,
+      pageSnapshot.finalUrl,
+    );
+    missingRequiredFields = requiredAgentFieldGaps(listing);
+  }
+
+  if (missingRequiredFields.length > 0) {
+    throw new Error(
+      `Claude could not verify required apartment fields: ${missingRequiredFields.join(
+        ", ",
+      )}. Open the source or a direct building/detail page and retry.`,
+    );
+  }
+
+  return {
+    extraction,
+    listing,
+    warnings: unique([...warnings, ...extraction.warnings]),
+  };
+}
+
+async function extractWithClaude(
+  sourceUrl: string,
+  pageSnapshot: Awaited<ReturnType<typeof fetchPageSnapshot>>,
+  retry?: {
+    missingRequiredFields: string[];
+    previousListing: AgentListing;
+  },
+): Promise<AgentExtraction> {
   if (!process.env.ANTHROPIC_API_KEY) {
     throw new Error("Missing ANTHROPIC_API_KEY in Convex environment.");
   }
@@ -315,7 +620,7 @@ async function extractWithClaude(
     system: EXTRACTION_PROMPT,
     tools: [
       {
-        type: "web_search_20250305",
+        type: "web_search_20260209",
         name: "web_search",
         max_uses: 5,
         user_location: {
@@ -327,11 +632,10 @@ async function extractWithClaude(
         },
       },
       {
-        type: "web_fetch_20250910",
+        type: "web_fetch_20260209",
         name: "web_fetch",
         max_uses: 6,
         max_content_tokens: 60000,
-        citations: { enabled: true },
       },
     ],
     messages: [
@@ -341,6 +645,11 @@ async function extractWithClaude(
           `Import this apartment link: ${sourceUrl}`,
           pageSnapshot.finalUrl !== sourceUrl &&
             `The source request resolved to: ${pageSnapshot.finalUrl}`,
+          `Observed evidence extracted from the source HTML:\n${JSON.stringify(
+            pageSnapshot.evidence,
+            null,
+            2,
+          ).slice(0, 8000)}`,
           pageSnapshot.text &&
             `Fetched page text snapshot:\n${pageSnapshot.text.slice(0, 12000)}`,
           pageSnapshot.imageCandidates.length > 0 &&
@@ -348,6 +657,14 @@ async function extractWithClaude(
               .slice(0, 12)
               .map((candidate) => candidate.url)
               .join("\n")}`,
+          retry &&
+            `Validator retry: the previous structured result was rejected because these required fields were missing or generic: ${retry.missingRequiredFields.join(
+              ", ",
+            )}.\nPrevious listing JSON:\n${JSON.stringify(
+              retry.previousListing,
+              null,
+              2,
+            ).slice(0, 5000)}\nReturn a corrected structured object. Do not fill a field unless evidence supports it; if core fields remain unavailable, keep them null/unknown and warnings should say exactly what could not be verified.`,
         ]).join("\n\n"),
       },
     ],
@@ -378,6 +695,7 @@ async function fetchPageSnapshot(sourceUrl: string) {
         finalUrl: sourceUrl,
         html: "",
         text: "",
+        evidence: emptyPageEvidence(),
         imageCandidates: [] as ImageCandidate[],
         error: `${response.status} ${response.statusText}`,
       };
@@ -389,6 +707,7 @@ async function fetchPageSnapshot(sourceUrl: string) {
       finalUrl,
       html,
       text: htmlToText(html),
+      evidence: extractPageEvidence(html, finalUrl),
       imageCandidates: collectImageUrls(html, finalUrl).map((url) => ({
         url,
         referer: finalUrl,
@@ -401,6 +720,7 @@ async function fetchPageSnapshot(sourceUrl: string) {
       finalUrl: sourceUrl,
       html: "",
       text: "",
+      evidence: emptyPageEvidence(),
       imageCandidates: [] as ImageCandidate[],
       error: error instanceof Error ? error.message : String(error),
     };
@@ -418,7 +738,7 @@ async function attachImages(
 ) {
   const existingImages = await ctx.runQuery(api.images.listForApartment, {
     apartmentId,
-  });
+  }) as Array<{ sourceUrl?: string }>;
   const existingSources = new Set(
     existingImages.map((image) => image.sourceUrl).filter(Boolean),
   );
@@ -561,13 +881,13 @@ function buildApartment(
     listing: {
       url: listing.url,
       name: listing.name,
-      description: listing.description ?? listing.notes,
+      description: limitText(listing.description ?? listing.notes, 700),
       provider,
       additionalProperty: listingProperties,
     },
     apartment: {
       name: listing.name,
-      description: listing.description ?? listing.notes,
+      description: limitText(listing.description ?? listing.notes, 700),
       accommodationCategory: categoryForTrack(track),
       address: buildAddress(listing),
       floorSize:
@@ -641,10 +961,10 @@ function buildApartment(
           `Does not meet stricter shortlist standard: ${statusDecision.reason}`,
       ]),
       rawNotes: compactLines([
-        listing.notes,
-        listing.rawNotes,
-        run.summary,
-      ]).join("\n"),
+        limitText(listing.notes, 360),
+        limitText(listing.rawNotes, 360),
+        limitText(run.summary, 360),
+      ]).join("\n") || undefined,
     },
     tags: compact([
       run.id,
@@ -657,77 +977,67 @@ function buildApartment(
 }
 
 function normalizeAgentListing(
-  raw: Record<string, unknown>,
+  raw: AgentListing,
   sourceUrl: string,
   finalUrl: string,
 ): CompactListing {
-  const url = stringField(raw, "url") ?? finalUrl ?? sourceUrl;
-  const bedrooms = numberField(raw, "bedrooms");
+  const url = normalizedString(raw.url) ?? finalUrl ?? sourceUrl;
+  const unit = normalizedString(raw.unit);
+  const streetAddress = normalizedString(raw.streetAddress);
+  const bedrooms = finiteNumber(raw.bedrooms);
+  const bathrooms = finiteNumber(raw.bathrooms);
+  const name =
+    specificDisplayName(raw.name, raw, streetAddress, unit) ??
+    specificDisplayName(
+      compactLines([raw.buildingName, unitForDisplay(unit)]).join(" "),
+      raw,
+      streetAddress,
+      unit,
+    ) ??
+    specificDisplayName(
+      compactLines([streetAddress, unitForDisplay(unit)]).join(" "),
+      raw,
+      streetAddress,
+      unit,
+    );
   const listing: CompactListing = {
     url,
-    key: stringField(raw, "key"),
-    sourceKey: stringField(raw, "sourceKey"),
-    provider: stringField(raw, "provider") ?? providerFromUrl(url),
-    name: stringField(raw, "name"),
-    addressLink: stringField(raw, "addressLink") ?? url,
-    description: stringField(raw, "description"),
-    streetAddress: stringField(raw, "streetAddress"),
-    addressLocality: stringField(raw, "addressLocality") ?? "New York",
-    addressRegion: stringField(raw, "addressRegion") ?? "NY",
-    postalCode: stringField(raw, "postalCode"),
-    unit: stringField(raw, "unit"),
-    neighborhood: stringField(raw, "neighborhood"),
-    status: statusField(raw, "status") ?? "monitor",
-    track: trackField(raw, "track") ?? trackFromBedrooms(bedrooms),
-    rank: numberField(raw, "rank"),
-    score: numberField(raw, "score"),
-    price: numberField(raw, "price"),
-    priceMin: numberField(raw, "priceMin"),
-    priceMax: numberField(raw, "priceMax"),
-    priceDisplay: stringField(raw, "priceDisplay"),
-    priceCurrency: stringField(raw, "priceCurrency") ?? "USD",
+    sourceKey: normalizedString(raw.sourceKey),
+    provider: normalizedString(raw.provider) ?? providerFromUrl(url),
+    name,
+    addressLink: normalizedString(raw.addressLink) ?? url,
+    streetAddress,
+    addressLocality: "New York",
+    addressRegion: "NY",
+    unit,
+    neighborhood: normalizedString(raw.neighborhood),
+    status: "monitor",
+    track: trackFromBedrooms(bedrooms),
+    price: finiteNumber(raw.price),
+    priceDisplay: normalizedString(raw.priceDisplay),
+    priceCurrency: "USD",
     bedrooms,
-    bathrooms: numberField(raw, "bathrooms"),
-    fullBathrooms: numberField(raw, "fullBathrooms"),
-    partialBathrooms: numberField(raw, "partialBathrooms"),
-    squareFeet: numberField(raw, "squareFeet"),
-    squareFeetMin: numberField(raw, "squareFeetMin"),
-    squareFeetMax: numberField(raw, "squareFeetMax"),
-    floorLevel: stringField(raw, "floorLevel"),
-    rooms: numberField(raw, "rooms"),
-    layout: stringField(raw, "layout"),
-    areaDisplay: stringField(raw, "areaDisplay"),
-    availability: stringField(raw, "availability"),
-    availabilityStarts: stringField(raw, "availabilityStarts"),
-    availabilityDisplay: stringField(raw, "availabilityDisplay"),
-    freshness: freshnessField(raw, "freshness"),
-    verificationNote: stringField(raw, "verificationNote"),
-    commute: commuteField(raw.commute),
-    amenities: stringArrayField(raw, "amenities"),
-    laundry: yesNoUnknownField(raw, "laundry"),
-    dishwasher: yesNoUnknownField(raw, "dishwasher"),
-    petsAllowed: booleanField(raw, "petsAllowed"),
-    tourUrl: stringField(raw, "tourUrl"),
-    mustHaveEvidence: stringField(raw, "mustHaveEvidence"),
-    daylight: stringField(raw, "daylight"),
-    kitchen: stringField(raw, "kitchen"),
-    bathroom: stringField(raw, "bathroom"),
-    floorPlan: stringField(raw, "floorPlan"),
-    furnitureFit: stringField(raw, "furnitureFit"),
-    photoConfidence: confidenceField(raw, "photoConfidence"),
-    floorPlanConfidence: confidenceField(raw, "floorPlanConfidence"),
-    caveats: stringArrayField(raw, "caveats"),
-    rejectionReasons: stringArrayField(raw, "rejectionReasons"),
-    notes: stringField(raw, "notes"),
-    rawNotes: stringField(raw, "rawNotes"),
-    tags: stringArrayField(raw, "tags"),
+    bathrooms,
+    squareFeet: finiteNumber(raw.squareFeet),
+    availabilityDisplay: normalizedString(raw.availabilityDisplay),
+    freshness: "verified_live",
+    verificationNote: limitText(normalizedString(raw.verificationNote), 360),
+    amenities: unique(
+      raw.amenities
+        .map((amenity) => normalizedString(amenity))
+        .filter((amenity): amenity is string => Boolean(amenity)),
+    ),
+    laundry: yesNoUnknownFromValue(raw.laundry),
+    dishwasher: yesNoUnknownFromValue(raw.dishwasher),
+    petsAllowed: raw.petsAllowed ?? undefined,
+    tourUrl: normalizedString(raw.tourUrl),
+    photoConfidence: "unknown",
+    floorPlanConfidence: "unknown",
+    caveats: boundedStrings(raw.caveats, 180),
+    rejectionReasons: boundedStrings(raw.rejectionReasons, 180),
+    notes: limitText(normalizedString(raw.notes), 360),
+    tags: boundedStrings(raw.tags, 60),
   };
-
-  if (!listing.name) {
-    listing.name =
-      compactLines([listing.streetAddress, listing.unit]).join(" ") ||
-      providerFromUrl(url);
-  }
 
   return listing;
 }
@@ -741,7 +1051,11 @@ function requiredAgentFieldGaps(listing: CompactListing) {
       ? (listing.fullBathrooms ?? 0) + (listing.partialBathrooms ?? 0)
       : undefined);
 
-  if (!listing.name) gaps.push("name");
+  if (!listing.name) {
+    gaps.push("name");
+  } else if (isGenericListingName(listing.name)) {
+    gaps.push("specific name");
+  }
   if (!listing.url) gaps.push("url");
   if (!listing.addressLink) gaps.push("addressLink");
   if (!listing.streetAddress) gaps.push("streetAddress");
@@ -752,6 +1066,68 @@ function requiredAgentFieldGaps(listing: CompactListing) {
   if (!listing.dishwasher) gaps.push("dishwasher");
 
   return gaps;
+}
+
+function structuredRepairProblems(apartment: {
+  apartment: {
+    name?: string;
+    address?: { streetAddress?: string };
+    numberOfBedrooms?: number;
+    numberOfBathroomsTotal?: number;
+    numberOfFullBathrooms?: number;
+    amenityFeature?: Array<{ name: string; value?: boolean | number | string }>;
+    additionalProperty?: Array<{ name: string; value?: boolean | number | string }>;
+  };
+  listing: { name?: string };
+  offer: { price?: number };
+  assessment: { rawNotes?: string };
+}) {
+  const problems: string[] = [];
+  const name = apartment.apartment.name ?? apartment.listing.name;
+  const amenities = apartment.apartment.amenityFeature ?? [];
+  const properties = apartment.apartment.additionalProperty ?? [];
+  const laundryProperty = properties.find((property) => property.name === "laundry");
+  const dishwasherProperty = properties.find(
+    (property) => property.name === "dishwasher",
+  );
+  const hasLaundryAmenity = amenities.some((feature) =>
+    /laundry|washer|dryer/i.test(feature.name),
+  );
+  const hasDishwasherAmenity = amenities.some((feature) =>
+    /dishwash/i.test(feature.name),
+  );
+
+  if (!name || isGenericListingName(name)) problems.push("name");
+  if (apartment.offer.price === undefined) problems.push("price");
+  if (!apartment.apartment.address?.streetAddress) problems.push("streetAddress");
+  if (apartment.apartment.numberOfBedrooms === undefined) {
+    problems.push("bedrooms");
+  }
+  if (
+    (apartment.apartment.numberOfBathroomsTotal ??
+      apartment.apartment.numberOfFullBathrooms) === undefined
+  ) {
+    problems.push("bathrooms");
+  }
+  if (!laundryProperty && !hasLaundryAmenity) problems.push("laundry");
+  if (!dishwasherProperty && !hasDishwasherAmenity) problems.push("dishwasher");
+  if ((apartment.assessment.rawNotes ?? "").length > 800) {
+    problems.push("rawNotes");
+  }
+
+  return problems;
+}
+
+function uniqueRepairTargets(targets: RepairImportTarget[]) {
+  const seen = new Set<string>();
+  return targets.filter((target) => {
+    const key = target.apartmentId;
+    if (seen.has(key)) {
+      return false;
+    }
+    seen.add(key);
+    return true;
+  });
 }
 
 function normalizedAmenities(listing: CompactListing) {
@@ -959,6 +1335,197 @@ function buildImageSearchQueries(listing: CompactListing) {
       .map((query) => query.replace(/\s+/g, " ").trim())
       .filter((query) => query.length > 12),
   ).slice(0, 4);
+}
+
+function emptyPageEvidence(): PageEvidence {
+  return {
+    jsonLdSummaries: [],
+    addressHints: [],
+    priceHints: [],
+    layoutHints: [],
+    amenityHints: [],
+  };
+}
+
+function extractPageEvidence(html: string, pageUrl: string): PageEvidence {
+  const text = htmlToText(html);
+  const evidence: PageEvidence = {
+    ...emptyPageEvidence(),
+    canonicalUrl: canonicalUrlFromHtml(html, pageUrl),
+    title: titleFromHtml(html),
+    ogTitle: metaContent(html, ["og:title", "twitter:title"]),
+    metaDescription: metaContent(html, ["description", "og:description"]),
+    jsonLdSummaries: jsonLdSummariesFromHtml(html),
+    addressHints: snippetsMatching(text, [
+      /\b\d{1,5}\s+[A-Z][A-Za-z0-9'.-]+(?:\s+[A-Z][A-Za-z0-9'.-]+){0,5}\s+(?:Street|St|Avenue|Ave|Road|Rd|Place|Pl|Broadway|Boulevard|Blvd|Lane|Ln|Drive|Dr)\b/gi,
+      /\b(?:Apt|Apartment|Unit|#)\s*[A-Z0-9-]+\b/gi,
+    ]),
+    priceHints: snippetsMatching(text, [
+      /\$\s?\d{1,3}(?:,\d{3})+(?:\s*\/\s*(?:mo|month))?/gi,
+      /\b(?:rent|price)\b.{0,80}\$\s?\d{1,3}(?:,\d{3})+/gi,
+    ]),
+    layoutHints: snippetsMatching(text, [
+      /\b(?:studio|alcove studio|one bedroom|two bedroom|three bedroom|\d+(?:\.\d+)?\s*bed(?:room)?s?)\b/gi,
+      /\b\d+(?:\.\d+)?\s*bath(?:room)?s?\b/gi,
+      /\b\d{3,5}\s*(?:sq\.?\s*ft|square feet|ft²)\b/gi,
+    ]),
+    amenityHints: snippetsMatching(text, [
+      /\b(?:in[- ]unit washer|washer\/dryer|washer dryer|laundry|dishwasher|doorman|concierge|elevator|fitness|gym|pet friendly|pets allowed|air conditioning|central air)\b.{0,120}/gi,
+      /.{0,80}\b(?:in[- ]unit washer|washer\/dryer|washer dryer|laundry|dishwasher)\b.{0,80}/gi,
+    ]),
+  };
+
+  return prune(evidence);
+}
+
+function canonicalUrlFromHtml(html: string, pageUrl: string) {
+  for (const tag of html.matchAll(/<link\b[^>]*>/gi)) {
+    const attrs = attributesFromTag(tag[0]);
+    if (attrs.rel?.toLowerCase() === "canonical" && attrs.href) {
+      try {
+        return new URL(attrs.href, pageUrl).toString();
+      } catch {
+        return attrs.href;
+      }
+    }
+  }
+  return undefined;
+}
+
+function titleFromHtml(html: string) {
+  const match = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+  return match ? compactText(decodeHtml(match[1])) : undefined;
+}
+
+function metaContent(html: string, names: string[]) {
+  const targets = new Set(names.map((name) => name.toLowerCase()));
+  for (const tag of html.matchAll(/<meta\b[^>]*>/gi)) {
+    const attrs = attributesFromTag(tag[0]);
+    const name = (attrs.property ?? attrs.name ?? "").toLowerCase();
+    if (targets.has(name) && attrs.content) {
+      return compactText(attrs.content);
+    }
+  }
+  return undefined;
+}
+
+function jsonLdSummariesFromHtml(html: string) {
+  const summaries: string[] = [];
+  for (const match of html.matchAll(
+    /<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi,
+  )) {
+    try {
+      const parsed = JSON.parse(decodeHtml(match[1]).trim());
+      summaries.push(...summarizeJsonLd(parsed));
+    } catch {
+      // Invalid JSON-LD is common enough; source text still provides hints.
+    }
+  }
+  return unique(summaries).slice(0, 12);
+}
+
+function summarizeJsonLd(node: unknown): string[] {
+  if (Array.isArray(node)) {
+    return node.flatMap(summarizeJsonLd);
+  }
+  if (!node || typeof node !== "object") {
+    return [];
+  }
+
+  const raw = node as Record<string, unknown>;
+  const values = compactLines([
+    typeof raw["@type"] === "string" && `type:${raw["@type"]}`,
+    typeof raw.name === "string" && `name:${raw.name}`,
+    typeof raw.description === "string" && `description:${raw.description}`,
+    typeof raw.url === "string" && `url:${raw.url}`,
+    typeof raw.price === "number" && `price:${raw.price}`,
+    typeof raw.price === "string" && `price:${raw.price}`,
+    addressSummary(raw.address),
+    offerSummary(raw.offers),
+    floorSizeSummary(raw.floorSize),
+    amenitySummary(raw.amenityFeature),
+  ]);
+
+  const children = Object.entries(raw)
+    .filter(([key]) => !["@context", "@type"].includes(key))
+    .flatMap(([, value]) =>
+      value && typeof value === "object" ? summarizeJsonLd(value) : [],
+    );
+  return compact([
+    values.length > 0 ? limitText(values.join(" | "), 700) : undefined,
+    ...children,
+  ]);
+}
+
+function addressSummary(value: unknown) {
+  if (!value || typeof value !== "object") {
+    return undefined;
+  }
+  const raw = value as Record<string, unknown>;
+  return compactLines([
+    raw.streetAddress,
+    raw.addressLocality,
+    raw.addressRegion,
+    raw.postalCode,
+  ]).join(", ");
+}
+
+function offerSummary(value: unknown): string | undefined {
+  if (Array.isArray(value)) {
+    return compact(value.map(offerSummary)).join(" / ") || undefined;
+  }
+  if (!value || typeof value !== "object") {
+    return undefined;
+  }
+  const raw = value as Record<string, unknown>;
+  const price = raw.price ?? raw.priceSpecification;
+  return compactLines([price && `offer:${JSON.stringify(price).slice(0, 180)}`]).join(
+    " ",
+  );
+}
+
+function floorSizeSummary(value: unknown) {
+  if (!value || typeof value !== "object") {
+    return undefined;
+  }
+  const raw = value as Record<string, unknown>;
+  return compactLines([raw.value, raw.minValue, raw.maxValue, raw.unitText]).join(
+    " ",
+  );
+}
+
+function amenitySummary(value: unknown) {
+  if (!Array.isArray(value)) {
+    return undefined;
+  }
+  return value
+    .map((item) =>
+      item && typeof item === "object"
+        ? (item as Record<string, unknown>).name
+        : item,
+    )
+    .filter((item): item is string => typeof item === "string")
+    .join(", ");
+}
+
+function snippetsMatching(text: string, patterns: RegExp[]) {
+  const snippets: string[] = [];
+  for (const pattern of patterns) {
+    pattern.lastIndex = 0;
+    for (const match of text.matchAll(pattern)) {
+      const index = match.index ?? 0;
+      const start = Math.max(0, index - 120);
+      const end = Math.min(text.length, index + match[0].length + 120);
+      const snippet = limitText(compactText(text.slice(start, end)), 420);
+      if (snippet) {
+        snippets.push(snippet);
+      }
+      if (snippets.length >= 10) {
+        return unique(snippets);
+      }
+    }
+  }
+  return unique(snippets);
 }
 
 function collectImageUrls(html: string, pageUrl: string) {
@@ -1545,10 +2112,9 @@ function propertyValue(
   return prune({ name, value, unitText });
 }
 
-function stringField(raw: Record<string, unknown>, key: string) {
-  const value = raw[key];
+function normalizedString(value: unknown) {
   if (typeof value === "string") {
-    const trimmed = value.trim();
+    const trimmed = compactText(value);
     return trimmed.length > 0 ? trimmed : undefined;
   }
   if (typeof value === "number" || typeof value === "boolean") {
@@ -1557,8 +2123,7 @@ function stringField(raw: Record<string, unknown>, key: string) {
   return undefined;
 }
 
-function numberField(raw: Record<string, unknown>, key: string) {
-  const value = raw[key];
+function finiteNumber(value: unknown) {
   if (typeof value === "number" && Number.isFinite(value)) {
     return value;
   }
@@ -1569,31 +2134,8 @@ function numberField(raw: Record<string, unknown>, key: string) {
   return undefined;
 }
 
-function booleanField(raw: Record<string, unknown>, key: string) {
-  const value = raw[key];
-  if (typeof value === "boolean") {
-    return value;
-  }
-  if (typeof value === "string") {
-    if (/^(true|yes)$/i.test(value)) return true;
-    if (/^(false|no)$/i.test(value)) return false;
-  }
-  return undefined;
-}
-
-function yesNoUnknownField(
-  raw: Record<string, unknown>,
-  key: string,
-): YesNoUnknown | undefined {
-  const value = raw[key];
-  if (typeof value === "boolean") {
-    return value ? "yes" : "no";
-  }
-  if (typeof value !== "string") {
-    return undefined;
-  }
-
-  const normalized = value.trim().toLowerCase();
+function yesNoUnknownFromValue(value: unknown): YesNoUnknown | undefined {
+  const normalized = normalizedString(value)?.toLowerCase();
   if (!normalized) {
     return undefined;
   }
@@ -1608,85 +2150,75 @@ function yesNoUnknownField(
   ) {
     return "unknown";
   }
-  return undefined;
-}
-
-function stringArrayField(raw: Record<string, unknown>, key: string) {
-  const value = raw[key];
-  if (Array.isArray(value)) {
-    return value
-      .map((item) => (typeof item === "string" ? item.trim() : String(item)))
-      .filter(Boolean);
-  }
-  if (typeof value === "string" && value.trim()) {
-    return [value.trim()];
+  if (/washer|dryer|laundry|dishwasher|in[- ]unit|in building/.test(normalized)) {
+    return "yes";
   }
   return undefined;
 }
 
-function statusField(
-  raw: Record<string, unknown>,
-  key: string,
-): ApartmentStatus | undefined {
-  const value = stringField(raw, key);
-  return value === "shortlist" ||
-    value === "monitor" ||
-    value === "excluded" ||
-    value === "archived"
-    ? value
-    : undefined;
+function boundedStrings(items: string[], maxLength: number) {
+  return unique(
+    items
+      .map((item) => limitText(item, maxLength))
+      .filter((item): item is string => Boolean(item)),
+  );
 }
 
-function trackField(
-  raw: Record<string, unknown>,
-  key: string,
-): Track | undefined {
-  const value = stringField(raw, key);
-  return value === "1br" ||
-    value === "2br" ||
-    value === "3br" ||
-    value === "unknown"
-    ? value
-    : undefined;
-}
-
-function freshnessField(
-  raw: Record<string, unknown>,
-  key: string,
-): Freshness | undefined {
-  const value = stringField(raw, key);
-  return value === "verified_live" ||
-    value === "availability_page_only" ||
-    value === "stale_or_mismatch" ||
-    value === "unverified"
-    ? value
-    : undefined;
-}
-
-function confidenceField(
-  raw: Record<string, unknown>,
-  key: string,
-): Confidence | undefined {
-  const value = stringField(raw, key);
-  return value === "high" ||
-    value === "medium" ||
-    value === "low" ||
-    value === "blocked" ||
-    value === "unknown"
-    ? value
-    : undefined;
-}
-
-function commuteField(value: unknown): CompactListing["commute"] {
-  if (!value || typeof value !== "object") {
+function specificDisplayName(
+  candidate: string | null | undefined,
+  raw: AgentListing,
+  streetAddress?: string,
+  unit?: string,
+) {
+  const cleaned = cleanListingName(candidate);
+  if (!cleaned || isGenericListingName(cleaned)) {
     return undefined;
   }
-  const raw = value as Record<string, unknown>;
-  return prune({
-    minutes: numberField(raw, "minutes"),
-    route: stringField(raw, "route"),
-    notes: stringField(raw, "notes"),
-  });
+
+  const displayUnit = unitForDisplay(unit);
+  if (displayUnit && !cleaned.toLowerCase().includes(displayUnit.toLowerCase())) {
+    const buildingName = cleanListingName(raw.buildingName);
+    if (buildingName && cleaned.toLowerCase() === buildingName.toLowerCase()) {
+      return `${buildingName} ${displayUnit}`;
+    }
+    if (streetAddress && cleaned.toLowerCase() === streetAddress.toLowerCase()) {
+      return `${streetAddress} ${displayUnit}`;
+    }
+  }
+
+  return cleaned;
+}
+
+function cleanListingName(value: string | null | undefined) {
+  const cleaned = normalizedString(value)
+    ?.replace(/\s+\|\s+.*$/, "")
+    .replace(/\s+-\s+(?:Apartments for Rent|StreetEasy|Zillow|Trulia).*$/i, "")
+    .trim();
+  return cleaned || undefined;
+}
+
+function unitForDisplay(unit?: string) {
+  const cleaned = normalizedString(unit)
+    ?.replace(/^(?:apt|apartment|unit)\s*/i, "")
+    .trim();
+  if (!cleaned) {
+    return undefined;
+  }
+  return cleaned.startsWith("#") ? cleaned : `#${cleaned}`;
+}
+
+function isGenericListingName(name: string) {
+  const normalized = name.toLowerCase().replace(/[^a-z0-9# ]+/g, " ").trim();
+  if (
+    /^(apartment|apartment listing|rental|rental listing|available apartment|street easy|street easy listing|streeteasy|streeteasy listing|zillow|zillow listing|trulia|trulia listing|apartments\.com|apartments\.com listing|unit|listing)$/.test(
+      normalized,
+    )
+  ) {
+    return true;
+  }
+  return /^(chelsea|west village|east village|lower east side|soho|noho|tribeca|little italy|greenwich village|gramercy|flatiron|stuy town|nomad|no mad) apartment$/i.test(
+    name,
+  );
 }
 
 function attributesFromTag(tag: string) {
@@ -1865,12 +2397,25 @@ function compact<T>(items: Array<T | undefined | null | false | "">): T[] {
   return items.filter(Boolean) as T[];
 }
 
-function compactLines(
-  items: Array<string | number | boolean | undefined | null | false>,
-) {
-  return compact(items)
+function compactLines(items: Array<unknown>) {
+  return items
+    .filter((item) => item !== undefined && item !== null && item !== false)
     .map((item) => String(item).trim())
     .filter(Boolean);
+}
+
+function compactText(value: string) {
+  return value.replace(/\s+/g, " ").trim();
+}
+
+function limitText(value: string | undefined | null, maxLength: number) {
+  const trimmed = value ? compactText(value) : "";
+  if (!trimmed) {
+    return undefined;
+  }
+  return trimmed.length > maxLength
+    ? `${trimmed.slice(0, maxLength - 1).trimEnd()}...`
+    : trimmed;
 }
 
 function prune<T>(value: T): T {

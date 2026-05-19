@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { mutation, query } from "./_generated/server";
+import { internalQuery, mutation, query } from "./_generated/server";
 import type { Doc } from "./_generated/dataModel";
 import type { QueryCtx } from "./_generated/server";
 
@@ -193,6 +193,28 @@ export const list = query({
     return await Promise.all(
       apartments.map(async (apartmentDoc) => withImages(ctx, apartmentDoc)),
     );
+  },
+});
+
+export const listManualAddRepairCandidates = internalQuery({
+  args: { limit: v.optional(v.number()) },
+  handler: async (ctx, args) => {
+    const limit = Math.min(Math.max(args.limit ?? 10, 1), 50);
+    const apartments = await ctx.db.query("apartments").collect();
+    return apartments
+      .filter((apartmentDoc) =>
+        (apartmentDoc.listing.additionalProperty ?? []).some(
+          (property) =>
+            property.name === "importSource" && property.value === "manual-add",
+        ),
+      )
+      .sort((a, b) => b.updatedAt - a.updatedAt)
+      .slice(0, limit)
+      .map((apartmentDoc) => ({
+        apartmentId: apartmentDoc._id,
+        sourceKey: apartmentDoc.sourceKey,
+        sourceUrl: apartmentDoc.listing.url,
+      }));
   },
 });
 

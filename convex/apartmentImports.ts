@@ -2,6 +2,7 @@ import { ConvexError, v } from "convex/values";
 import { internal } from "./_generated/api";
 import {
   internalMutation,
+  internalQuery,
   mutation,
   query,
 } from "./_generated/server";
@@ -88,6 +89,19 @@ export const listRecent = query({
       .withIndex("by_created_at")
       .order("desc")
       .take(10);
+  },
+});
+
+export const listCompletedForRepair = internalQuery({
+  args: { limit: v.optional(v.number()) },
+  handler: async (ctx, args) => {
+    const limit = Math.min(Math.max(args.limit ?? 10, 1), 50);
+    const jobs = await ctx.db
+      .query("apartmentImportJobs")
+      .withIndex("by_status", (q) => q.eq("status", "completed"))
+      .order("desc")
+      .take(limit);
+    return jobs.filter((job) => job.apartmentId !== undefined);
   },
 });
 

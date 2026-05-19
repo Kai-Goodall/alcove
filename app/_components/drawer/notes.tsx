@@ -39,11 +39,15 @@ function Notes({ apartment }: NotesProps) {
   );
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  // Re-sync if the apartment changes underneath us (drawer content swap).
+  // Re-sync only when the drawer swaps to a different apartment. We must NOT
+  // depend on `persistedUserNotes` here: typing triggers a debounced save,
+  // Convex echoes the new value back through `apartment.userNotes`, and that
+  // would clobber whatever the user has typed since the last save.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     setUserNotes(persistedUserNotes);
     setIsEditorOpen(persistedUserNotes.length > 0);
-  }, [apartment._id, persistedUserNotes]);
+  }, [apartment._id]);
 
   const setUserNotesMutation = useMutation(api.apartments.setUserNotes);
 

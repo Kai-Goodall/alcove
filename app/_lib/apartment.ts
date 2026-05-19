@@ -33,7 +33,12 @@ export function formatPrice(price: number | undefined): string {
 export function formatStreetAddress(
   address: Apartment["apartment"]["address"],
 ): string | undefined {
-  return address?.streetAddress?.trim() || undefined;
+  const raw = address?.streetAddress?.trim();
+  if (!raw) return undefined;
+  // Some importers concatenate locality/region into streetAddress
+  // ("123 Main St, New York, NY"). Keep only the first segment so the
+  // drawer subtitle stays a single line.
+  return raw.split(",")[0]!.trim() || undefined;
 }
 
 export function formatFullAddress(

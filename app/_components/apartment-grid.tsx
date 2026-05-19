@@ -1,4 +1,4 @@
-import { AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import { ApartmentCard } from "@/_components/apartment-card";
 import type { Apartment } from "@/_lib/apartment";
 
@@ -6,21 +6,10 @@ const MIN_LOADING_CARDS = 6;
 
 export interface ApartmentGridProps {
 	apartments: Apartment[] | undefined;
-	/**
-	 * Serialized filter state. Included in each card's key so that changing
-	 * filters remounts every visible card, triggering exit + enter animations
-	 * for the entire set — not just items that actually entered/left the
-	 * filtered subset.
-	 */
-	filterKey: string;
 	onSelect: (id: Apartment["_id"]) => void;
 }
 
-function ApartmentGrid({
-	apartments,
-	filterKey,
-	onSelect,
-}: ApartmentGridProps) {
+function ApartmentGrid({ apartments, onSelect }: ApartmentGridProps) {
 	if (apartments !== undefined && apartments.length === 0) {
 		return (
 			<div className="flex min-h-[240px] w-full flex-col items-center justify-center text-center text-secondary">
@@ -31,34 +20,38 @@ function ApartmentGrid({
 		);
 	}
 
-	const isLoading = apartments === undefined;
-	const slots: (Apartment | undefined)[] = isLoading
-		? Array.from({ length: MIN_LOADING_CARDS })
-		: apartments;
-
 	return (
-		<GridShell>
-			<AnimatePresence mode="popLayout">
-				{slots.map((apartment, index) => (
-					<ApartmentCard
-						key={
-							apartment
-								? `${filterKey}:${apartment._id}`
-								: `${filterKey}:skeleton-${index}`
-						}
-						apartment={apartment}
-						skeleton={apartment === undefined}
-						onSelect={onSelect}
-						index={index}
-					/>
-				))}
-			</AnimatePresence>
-		</GridShell>
+		<motion.div
+			className="grid w-full grid-cols-3 gap-3"
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+			transition={{ duration: 0.3, ease: "easeOut" }}
+		>
+			{apartments === undefined
+				? Array.from({ length: MIN_LOADING_CARDS }).map((_, index) => (
+						<motion.div
+							key={`skeleton-${index}`}
+							initial={{ opacity: 0, y: 6 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{
+								duration: 0.32,
+								ease: "easeOut",
+								delay: index * 0.04,
+							}}
+						>
+							<ApartmentCard skeleton index={index} />
+						</motion.div>
+					))
+				: apartments.map((apartment, index) => (
+						<ApartmentCard
+							key={apartment._id}
+							apartment={apartment}
+							onSelect={onSelect}
+							index={index}
+						/>
+					))}
+		</motion.div>
 	);
-}
-
-function GridShell({ children }: { children: React.ReactNode }) {
-	return <div className="grid w-full grid-cols-3 gap-3">{children}</div>;
 }
 
 export { ApartmentGrid };

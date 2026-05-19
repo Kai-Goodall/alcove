@@ -1,25 +1,18 @@
 import { useEffect, useRef, useState } from "react";
-import { motion } from "motion/react";
 import { cn } from "@/_lib/utils";
 
-type MotionSafeImgProps = Omit<
-	React.ImgHTMLAttributes<HTMLImageElement>,
-	"onAnimationStart" | "onDrag" | "onDragEnd" | "onDragStart"
->;
-
-export type FadeImageProps = MotionSafeImgProps;
+export type FadeImageProps = React.ImgHTMLAttributes<HTMLImageElement>;
 
 /**
- * <img> that fades from opacity 0 → 1 once the underlying image is ready.
- *
- * Implementation uses motion's JS-driven animation instead of a CSS
- * `transition-opacity` class. Why: with a class-driven transition, if React
- * commits the initial `opacity:0` render and the eventual `opacity:1` render
- * inside the same paint cycle (which happens for cached or near-instant
- * loads), the browser never sees a "previous" opacity value and the
- * transition silently no-ops — that's the splat. Motion emits its own
- * animation frames so the value always interpolates from `initial` to
- * `animate`, regardless of React's render timing.
+ * <img> that fades in once it's fully decoded. We use `HTMLImageElement.decode()`
+ * rather than the `load` event because:
+ *   - `load` fires when the bytes are fetched, *before* decode completes — so
+ *     attaching to it can still produce a jank-y reveal.
+ *   - For HTTP-cached images, `load` can fire before React attaches the
+ *     listener, leaving us stuck at opacity:0 forever.
+ * `decode()` resolves in a microtask after both fetch + decode, which also
+ * guarantees the initial opacity:0 paints once before we flip to opacity:1
+ * (giving CSS the previous-value it needs to transition from).
  */
 function FadeImage({
 	className,
@@ -32,34 +25,38 @@ function FadeImage({
 	const ref = useRef<HTMLImageElement>(null);
 
 	useEffect(() => {
+		const img = ref.current;
+		if (!img || !src) return;
 		setLoaded(false);
-		// Handle the cached case: if the browser already has the image, no
-		// `load` event will fire after the listener attaches. Re-check once
-		// the new src has settled into the DOM.
-		const id = requestAnimationFrame(() => {
-			const img = ref.current;
-			if (img?.complete && img.naturalWidth > 0) setLoaded(true);
-		});
-		return () => cancelAnimationFrame(id);
+		let cancelled = false;
+		img
+			.decode()
+			.catch(() => {
+				/* decode can reject for broken images; settle anyway so we don't
+				   sit blank forever. */
+			})
+			.finally(() => {
+				if (!cancelled) setLoaded(true);
+			});
+		return () => {
+			cancelled = true;
+		};
 	}, [src]);
 
 	return (
-		<motion.img
+		<img
 			ref={ref}
 			src={src}
-			initial={{ opacity: 0 }}
-			animate={{ opacity: loaded ? 1 : 0 }}
-			transition={{ duration: 0.3, ease: "easeOut" }}
-			onLoad={(event) => {
-				setLoaded(true);
-				onLoad?.(event);
-			}}
+			onLoad={onLoad}
 			onError={(event) => {
-				// Settle on error so the slot doesn't sit blank forever.
 				setLoaded(true);
 				onError?.(event);
 			}}
-			className={cn(className)}
+			className={cn(
+				"transition-opacity duration-300 ease-out",
+				loaded ? "opacity-100" : "opacity-0",
+				className,
+			)}
 			{...rest}
 		/>
 	);

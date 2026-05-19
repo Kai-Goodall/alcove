@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
+import { AddApartmentDrawer } from "@/_components/drawer/add-apartment-drawer";
 import { ApartmentDrawer } from "@/_components/drawer/apartment-drawer";
 import { ApartmentGrid } from "@/_components/apartment-grid";
 import { FilterBar, type TrackFilter } from "@/_components/filter-bar";
@@ -77,6 +78,8 @@ function HomePage() {
   }, [apartments]);
 
   const [selectedId, setSelectedId] = useApartmentSelection();
+  const [isAddOpen, setIsAddOpen] = useState(false);
+  const isDrawerOpen = selectedId !== null || isAddOpen;
   const { sideMargin, viewportShift } = useContainerLayout();
 
   // Only re-arm the dim lock when the drawer transitions from CLOSED to
@@ -92,6 +95,15 @@ function HomePage() {
       setIsDrawerHovered(false);
     }
   }, [selectedId]);
+  const prevIsAddOpenRef = useRef(isAddOpen);
+  useEffect(() => {
+    const prev = prevIsAddOpenRef.current;
+    prevIsAddOpenRef.current = isAddOpen;
+    if (!prev && isAddOpen) {
+      setHasEnteredDrawer(false);
+      setIsDrawerHovered(false);
+    }
+  }, [isAddOpen]);
 
   const handleDrawerHoverChange = (hovered: boolean) => {
     setIsDrawerHovered(hovered);
@@ -100,14 +112,16 @@ function HomePage() {
 
   // Lock page scroll while the pointer is over the drawer. The drawer's
   // own `overflow-y-auto` container still scrolls; only the body is pinned.
+  // Also gate on `isDrawerOpen` so the lock releases when the drawer closes
+  // mid-hover (otherwise onMouseLeave never fires and the body stays locked).
   useEffect(() => {
-    if (!isDrawerHovered) return;
+    if (!isDrawerHovered || !isDrawerOpen) return;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = previousOverflow;
     };
-  }, [isDrawerHovered]);
+  }, [isDrawerHovered, isDrawerOpen]);
 
   const updateFilters = (patch: Partial<FilterValues>) =>
     setFilters((prev) => ({ ...prev, ...patch }));
@@ -191,7 +205,6 @@ function HomePage() {
     return apartments.find((apartment) => apartment._id === selectedId);
   }, [apartments, selectedId]);
 
-  const isDrawerOpen = initialSelected !== undefined;
   // The page is always shifted aside while the drawer is open. The dim
   // (opacity + blur) is held until the user has entered the drawer once;
   // after that, it tracks pointer hover.
@@ -213,7 +226,7 @@ function HomePage() {
       >
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-3.5">
-            <Header onApartmentAdded={setSelectedId} />
+            <Header onOpenAdd={() => setIsAddOpen(true)} />
             <FilterBar
               track={track}
               onTrackChange={setTrack}
@@ -224,11 +237,7 @@ function HomePage() {
               filtersActive={filtersActive}
             />
           </div>
-          <ApartmentGrid
-            apartments={visible}
-            filterKey={`${track}|${query.trim().toLowerCase()}`}
-            onSelect={setSelectedId}
-          />
+          <ApartmentGrid apartments={visible} onSelect={setSelectedId} />
         </div>
       </motion.div>
 
@@ -238,6 +247,17 @@ function HomePage() {
             key="drawer"
             initialApartment={initialSelected}
             onClose={() => setSelectedId(null)}
+            onHoverChange={handleDrawerHoverChange}
+            rightOffset={sideMargin}
+          />
+        ) : isAddOpen ? (
+          <AddApartmentDrawer
+            key="add-drawer"
+            onClose={() => setIsAddOpen(false)}
+            onApartmentAdded={(apartmentId) => {
+              setIsAddOpen(false);
+              setSelectedId(apartmentId);
+            }}
             onHoverChange={handleDrawerHoverChange}
             rightOffset={sideMargin}
           />

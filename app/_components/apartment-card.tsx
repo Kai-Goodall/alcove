@@ -1,4 +1,3 @@
-import { motion } from "motion/react";
 import { FadeImage } from "@/_components/ui/fade-image";
 import { Icon } from "@/_components/ui/icon";
 import { FavoriteHeart } from "@/_components/favorite-heart";
@@ -45,7 +44,7 @@ function ApartmentCard({
 	};
 
 	return (
-		<motion.article
+		<article
 			role={isSkeleton ? undefined : "button"}
 			tabIndex={isSkeleton ? -1 : 0}
 			onClick={isSkeleton ? undefined : handleSelect}
@@ -57,28 +56,13 @@ function ApartmentCard({
 			data-apartment-card={isSkeleton ? undefined : ""}
 			className={cn(
 				"group/card squircle relative flex flex-col gap-1 overflow-hidden rounded-[40px] bg-card p-2",
-				"shadow-card-1 outline-none transition-opacity duration-200 ease-ui-out",
+				"shadow-card-1 outline-none",
+				"transition duration-200 ease-[cubic-bezier(0.34,1.3,0.64,1)] will-change-transform",
 				isSkeleton
 					? "cursor-default"
-					: "cursor-pointer focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+					: "cursor-pointer hover:-translate-y-1 hover:opacity-100 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
 				isHidden ? "opacity-60" : "opacity-100",
 			)}
-			initial={{ y: 6 }}
-			animate={{ y: 0 }}
-			exit={{
-				opacity: 0,
-				transition: { duration: 0.16, ease: [0.4, 0, 1, 1] },
-			}}
-			whileHover={{
-				opacity: 1,
-				y: -4,
-				transition: { type: "spring", bounce: 0.3, visualDuration: 0.2 },
-			}}
-			transition={{
-				duration: 0.32,
-				ease: "easeOut",
-				delay: Math.min(index, 9) * 0.04,
-			}}
 		>
 			{isSkeleton ? (
 				<SkeletonContent />
@@ -88,7 +72,7 @@ function ApartmentCard({
 					{apartment!.status === "shortlist" ? <ShortlistRibbon /> : null}
 				</>
 			)}
-		</motion.article>
+		</article>
 	);
 }
 

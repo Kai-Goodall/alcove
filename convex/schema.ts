@@ -155,6 +155,8 @@ export default defineSchema({
     searchRunId: v.optional(v.id("searchRuns")),
     /** Manually toggled by the user from the UI; distinct from `status`. */
     isFavorite: v.optional(v.boolean()),
+    /** Soft-hide from the main ranking while keeping the listing accessible. */
+    hidden: v.optional(v.boolean()),
     /** Free-form notes added by the user, shown above the AI assessment. */
     userNotes: v.optional(v.string()),
     /** User-set tour progress. Undefined treated as "not_yet". */

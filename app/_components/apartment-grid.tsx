@@ -41,7 +41,11 @@ function ApartmentGrid({
 			<AnimatePresence mode="popLayout">
 				{slots.map((apartment, index) => (
 					<ApartmentCard
-						key={`${filterKey}:${index}`}
+						key={
+							apartment
+								? `${filterKey}:${apartment._id}`
+								: `${filterKey}:skeleton-${index}`
+						}
 						apartment={apartment}
 						skeleton={apartment === undefined}
 						onSelect={onSelect}

@@ -282,6 +282,23 @@ export const setFavorite = mutation({
   },
 });
 
+export const setHidden = mutation({
+  args: {
+    id: v.id("apartments"),
+    hidden: v.boolean(),
+  },
+  handler: async (ctx, args) => {
+    const apartmentDoc = await ctx.db.get(args.id);
+    if (apartmentDoc === null) {
+      throw new Error("Apartment not found");
+    }
+    await ctx.db.patch(args.id, {
+      hidden: args.hidden,
+      updatedAt: Date.now(),
+    });
+  },
+});
+
 export const setTourStatus = mutation({
   args: {
     id: v.id("apartments"),

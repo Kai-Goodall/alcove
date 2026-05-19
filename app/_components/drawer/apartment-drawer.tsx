@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { useQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { ImageGallery } from "@/_components/drawer/image-gallery";
 import { StatCards } from "@/_components/drawer/stat-cards";
@@ -15,6 +15,10 @@ import {
 	getDisplayName,
 	type Apartment,
 } from "@/_lib/apartment";
+
+const RELATIVE_FORMATTER = new Intl.RelativeTimeFormat("en", {
+	numeric: "auto",
+});
 
 export interface ApartmentDrawerProps {
 	/** The initially-loaded apartment passed from the grid; renders instantly. */
@@ -119,11 +123,70 @@ function ApartmentDrawer({
 								<Location apartment={apartment} />
 							</div>
 							<Notes apartment={apartment} />
+							<DrawerFooter apartment={apartment} />
 						</div>
 					</motion.div>
 				</AnimatePresence>
 			</div>
 		</motion.aside>
+	);
+}
+
+function formatAddedAt(timestamp: number): string {
+	const diffMs = Date.now() - timestamp;
+	const minutes = Math.floor(diffMs / 60_000);
+	const hours = Math.floor(minutes / 60);
+	const days = Math.floor(hours / 24);
+	const months = Math.floor(days / 30);
+	const years = Math.floor(days / 365);
+	if (years >= 1) return RELATIVE_FORMATTER.format(-years, "year");
+	if (months >= 1) return RELATIVE_FORMATTER.format(-months, "month");
+	if (days >= 1) return RELATIVE_FORMATTER.format(-days, "day");
+	if (hours >= 1) return RELATIVE_FORMATTER.format(-hours, "hour");
+	if (minutes >= 1) return RELATIVE_FORMATTER.format(-minutes, "minute");
+	return "just now";
+}
+
+function DrawerFooter({ apartment }: { apartment: Apartment }) {
+	const isHidden = apartment.hidden === true;
+	const setHidden = useMutation(
+		api.apartments.setHidden,
+	).withOptimisticUpdate((localStore, args) => {
+		const lists = localStore.getAllQueries(api.apartments.list);
+		for (const { args: listArgs, value } of lists) {
+			if (!value) continue;
+			localStore.setQuery(
+				api.apartments.list,
+				listArgs,
+				value.map((apt) =>
+					apt._id === args.id ? { ...apt, hidden: args.hidden } : apt,
+				),
+			);
+		}
+		const detail = localStore.getQuery(api.apartments.get, { id: args.id });
+		if (detail) {
+			localStore.setQuery(
+				api.apartments.get,
+				{ id: args.id },
+				{ ...detail, hidden: args.hidden },
+			);
+		}
+	});
+
+	return (
+		<div className="flex items-center justify-between gap-4 px-4 pt-1 text-[14px] font-medium leading-[16px] tracking-[-0.3px] text-secondary">
+			<p>Added {formatAddedAt(apartment.createdAt)}</p>
+			<button
+				type="button"
+				aria-pressed={isHidden}
+				onClick={() => {
+					void setHidden({ id: apartment._id, hidden: !isHidden });
+				}}
+				className="rounded-full outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card"
+			>
+				{isHidden ? "Unhide" : "Hide"}
+			</button>
+		</div>
 	);
 }
 

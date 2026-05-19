@@ -165,7 +165,9 @@ function HomePage() {
 
     if (filters.sort === "newest") {
       return [...filtered].sort(
-        (a, b) => (b.createdAt ?? 0) - (a.createdAt ?? 0),
+        (a, b) =>
+          Number(a.hidden === true) - Number(b.hidden === true) ||
+          (b.createdAt ?? 0) - (a.createdAt ?? 0),
       );
     }
 
@@ -177,7 +179,11 @@ function HomePage() {
       if (apartment.status === "shortlist") return 1;
       return 2;
     };
-    return [...filtered].sort((a, b) => priority(a) - priority(b));
+    return [...filtered].sort(
+      (a, b) =>
+        Number(a.hidden === true) - Number(b.hidden === true) ||
+        priority(a) - priority(b),
+    );
   }, [apartments, track, query, filters]);
 
   const initialSelected = useMemo<Apartment | undefined>(() => {

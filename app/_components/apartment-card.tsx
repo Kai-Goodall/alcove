@@ -30,6 +30,7 @@ function ApartmentCard({
 	index,
 }: ApartmentCardProps) {
 	const isSkeleton = skeleton || !apartment;
+	const isHidden = apartment?.hidden === true;
 
 	const handleSelect = () => {
 		if (isSkeleton || !apartment || !onSelect) return;
@@ -62,12 +63,13 @@ function ApartmentCard({
 					: "cursor-pointer focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
 			)}
 			initial={{ opacity: 0, y: 6 }}
-			animate={{ opacity: 1, y: 0 }}
+			animate={{ opacity: isHidden ? 0.6 : 1, y: 0 }}
 			exit={{
 				opacity: 0,
 				transition: { duration: 0.16, ease: [0.4, 0, 1, 1] },
 			}}
 			whileHover={{
+				opacity: 1,
 				y: -4,
 				transition: { type: "spring", bounce: 0.3, visualDuration: 0.2 },
 			}}

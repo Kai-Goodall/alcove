@@ -29,25 +29,6 @@ function getAssessmentBody(apartment: Apartment): string | undefined {
   return undefined;
 }
 
-const RELATIVE_FORMATTER = new Intl.RelativeTimeFormat("en", {
-  numeric: "auto",
-});
-
-function formatAddedAt(timestamp: number): string {
-  const diffMs = Date.now() - timestamp;
-  const minutes = Math.floor(diffMs / 60_000);
-  const hours = Math.floor(minutes / 60);
-  const days = Math.floor(hours / 24);
-  const months = Math.floor(days / 30);
-  const years = Math.floor(days / 365);
-  if (years >= 1) return RELATIVE_FORMATTER.format(-years, "year");
-  if (months >= 1) return RELATIVE_FORMATTER.format(-months, "month");
-  if (days >= 1) return RELATIVE_FORMATTER.format(-days, "day");
-  if (hours >= 1) return RELATIVE_FORMATTER.format(-hours, "hour");
-  if (minutes >= 1) return RELATIVE_FORMATTER.format(-minutes, "minute");
-  return "just now";
-}
-
 function Notes({ apartment }: NotesProps) {
   const aiBody = getAssessmentBody(apartment);
   const persistedUserNotes = apartment.userNotes ?? "";
@@ -150,9 +131,6 @@ function Notes({ apartment }: NotesProps) {
             ) : null}
           </div>
         </div>
-        <p className="px-4 text-[14px] font-medium leading-[16px] tracking-[-0.3px] text-secondary">
-          Added {formatAddedAt(apartment.createdAt)}
-        </p>
       </div>
     </section>
   );

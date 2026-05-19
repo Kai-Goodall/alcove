@@ -74,7 +74,7 @@ function Notes({ apartment }: NotesProps) {
   }
 
   return (
-    <section className="flex flex-1 flex-col gap-3.5 min-w-0">
+    <section className="flex min-w-0 flex-col gap-3.5">
       <Typography variant="h2" className="text-foreground">
         Notes
       </Typography>

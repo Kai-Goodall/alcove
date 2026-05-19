@@ -30,6 +30,19 @@ const freshness = v.union(
   v.literal("unverified"),
 );
 
+const imageStorageProvider = v.union(v.literal("convex"), v.literal("r2"));
+
+const apartmentImportStatus = v.union(
+  v.literal("queued"),
+  v.literal("fetching_source"),
+  v.literal("researching"),
+  v.literal("extracting"),
+  v.literal("upserting"),
+  v.literal("uploading_images"),
+  v.literal("completed"),
+  v.literal("failed"),
+);
+
 const quantitativeValue = v.object({
   value: v.optional(v.number()),
   minValue: v.optional(v.number()),
@@ -178,7 +191,18 @@ export default defineSchema({
 
   apartmentImages: defineTable({
     apartmentId: v.id("apartments"),
-    storageId: v.id("_storage"),
+    storageProvider: v.optional(imageStorageProvider),
+    storageId: v.optional(v.id("_storage")),
+    r2: v.optional(
+      v.object({
+        bucket: v.string(),
+        key: v.string(),
+        etag: v.optional(v.string()),
+        contentLength: v.optional(v.number()),
+        migratedAt: v.optional(v.number()),
+        uploadedAt: v.optional(v.number()),
+      }),
+    ),
     image: v.object({
       name: v.optional(v.string()),
       caption: v.optional(v.string()),
@@ -213,4 +237,31 @@ export default defineSchema({
     blindSpots: v.optional(v.array(v.string())),
     notes: v.optional(v.string()),
   }).index("by_started_at", ["startedAt"]),
+
+  apartmentImportJobs: defineTable({
+    sourceUrl: v.string(),
+    normalizedUrl: v.string(),
+    status: apartmentImportStatus,
+    statusMessage: v.optional(v.string()),
+    events: v.array(
+      v.object({
+        at: v.number(),
+        status: apartmentImportStatus,
+        message: v.string(),
+      }),
+    ),
+    scheduledFunctionId: v.optional(v.id("_scheduled_functions")),
+    searchRunId: v.optional(v.id("searchRuns")),
+    apartmentId: v.optional(v.id("apartments")),
+    attachedImageCount: v.optional(v.number()),
+    imageFailureCount: v.optional(v.number()),
+    warnings: v.optional(v.array(v.string())),
+    error: v.optional(v.string()),
+    startedAt: v.optional(v.number()),
+    completedAt: v.optional(v.number()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index("by_created_at", ["createdAt"])
+    .index("by_status", ["status"]),
 });

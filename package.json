@@ -11,12 +11,15 @@
     "convex:dev": "convex dev",
     "convex:deploy": "convex deploy",
     "discover:apartments": "node scripts/discover-apartments-firecrawl.mjs",
-    "import:apartment-runs": "node scripts/import-apartment-runs.mjs"
+    "import:apartment-runs": "node scripts/import-apartment-runs.mjs",
+    "migrate:images:r2": "node scripts/migrate-images-to-r2.mjs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.96.0",
+    "@aws-sdk/client-s3": "^3.1049.0",
     "@tailwindcss/postcss": "^4.3.0",
     "@tanstack/react-query": "^5.100.10",
     "class-variance-authority": "^0.7.1",
@@ -34,7 +37,8 @@
     "react-dom": "^19.2.6",
     "react-number-format": "^5.4.5",
     "sharp": "^0.34.5",
-    "tailwind-merge": "^3.6.0"
+    "tailwind-merge": "^3.6.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/node": "25.9.0",

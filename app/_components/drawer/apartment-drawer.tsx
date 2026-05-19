@@ -122,8 +122,10 @@ function ApartmentDrawer({
 								<MoveIn apartment={apartment} />
 								<Location apartment={apartment} />
 							</div>
-							<Notes apartment={apartment} />
-							<DrawerFooter apartment={apartment} />
+							<div className="flex flex-col gap-3.5">
+								<Notes apartment={apartment} />
+								<DrawerFooter apartment={apartment} />
+							</div>
 						</div>
 					</motion.div>
 				</AnimatePresence>
@@ -149,32 +151,32 @@ function formatAddedAt(timestamp: number): string {
 
 function DrawerFooter({ apartment }: { apartment: Apartment }) {
 	const isHidden = apartment.hidden === true;
-	const setHidden = useMutation(
-		api.apartments.setHidden,
-	).withOptimisticUpdate((localStore, args) => {
-		const lists = localStore.getAllQueries(api.apartments.list);
-		for (const { args: listArgs, value } of lists) {
-			if (!value) continue;
-			localStore.setQuery(
-				api.apartments.list,
-				listArgs,
-				value.map((apt) =>
-					apt._id === args.id ? { ...apt, hidden: args.hidden } : apt,
-				),
-			);
-		}
-		const detail = localStore.getQuery(api.apartments.get, { id: args.id });
-		if (detail) {
-			localStore.setQuery(
-				api.apartments.get,
-				{ id: args.id },
-				{ ...detail, hidden: args.hidden },
-			);
-		}
-	});
+	const setHidden = useMutation(api.apartments.setHidden).withOptimisticUpdate(
+		(localStore, args) => {
+			const lists = localStore.getAllQueries(api.apartments.list);
+			for (const { args: listArgs, value } of lists) {
+				if (!value) continue;
+				localStore.setQuery(
+					api.apartments.list,
+					listArgs,
+					value.map((apt) =>
+						apt._id === args.id ? { ...apt, hidden: args.hidden } : apt,
+					),
+				);
+			}
+			const detail = localStore.getQuery(api.apartments.get, { id: args.id });
+			if (detail) {
+				localStore.setQuery(
+					api.apartments.get,
+					{ id: args.id },
+					{ ...detail, hidden: args.hidden },
+				);
+			}
+		},
+	);
 
 	return (
-		<div className="flex items-center justify-between gap-4 px-4 pt-1 text-[14px] font-medium leading-[16px] tracking-[-0.3px] text-secondary">
+		<div className="flex items-center justify-between gap-4 px-4 text-[14px] font-medium leading-[16px] tracking-[-0.3px] text-secondary">
 			<p>Added {formatAddedAt(apartment.createdAt)}</p>
 			<button
 				type="button"
@@ -216,7 +218,7 @@ function ApartmentSummary({ apartment }: { apartment: Apartment }) {
 			</div>
 			<div className="flex items-center gap-2.5">
 				{apartment.offer.price !== undefined ? (
-					<span className="text-[16px] font-medium leading-[18px] tracking-[-0.1px] text-foreground tabular-nums">
+					<span className="text-[16px] font-medium leading-[18px] tracking-[-0.1px] text-foreground">
 						{formatPrice(apartment.offer.price)}
 					</span>
 				) : null}

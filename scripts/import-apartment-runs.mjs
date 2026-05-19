@@ -1,8 +1,16 @@
-import { readFileSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "../convex/_generated/api.js";
+import {
+  createR2Client,
+  ensureR2Bucket,
+  getR2Config,
+  loadEnvLocal,
+  putR2Object,
+  r2ContentUrl,
+  r2ObjectKey,
+} from "./r2.mjs";
 
 const DEFAULT_DATA_FILE = "data/automation-backfill/runs.json";
 const DEFAULT_IMAGE_LIMIT = 4;
@@ -34,6 +42,9 @@ const AVAILABILITY_BY_STATUS = {
 
 const args = parseArgs(process.argv.slice(2));
 loadEnvLocal();
+if (args.bucket) {
+  process.env.R2_BUCKET_NAME = args.bucket;
+}
 
 const dataFile = resolve(process.cwd(), args.file ?? DEFAULT_DATA_FILE);
 const convexUrl =
@@ -52,6 +63,22 @@ const shouldFetchImages = args.images !== "false" && !args["no-images"];
 const shouldSearchImages =
   args["search-images"] !== "false" && !args["no-search-images"];
 const shouldDryRun = Boolean(args["dry-run"]);
+const imageStorage = args["image-storage"] ?? "r2";
+
+if (!["r2", "convex"].includes(imageStorage)) {
+  throw new Error("--image-storage must be either r2 or convex.");
+}
+
+const r2Config =
+  shouldFetchImages && imageStorage === "r2" && !shouldDryRun
+    ? getR2Config()
+    : null;
+const r2Client = r2Config ? createR2Client(r2Config) : null;
+
+if (r2Client && args["create-bucket"] !== "false" && !args["no-create-bucket"]) {
+  const bucketState = await ensureR2Bucket(r2Client, r2Config.bucket);
+  console.log(`r2 bucket ${r2Config.bucket}: ${bucketState}`);
+}
 
 let upsertedCount = 0;
 let imageCount = 0;
@@ -95,6 +122,9 @@ for (const run of importData.runs) {
       const result = await attachPageImages(client, apartmentId, listing, {
         imageLimit,
         shouldSearchImages,
+        imageStorage,
+        r2Client,
+        r2Config,
       });
       imageCount += result.attached;
       imageFailureCount += result.failures;
@@ -283,35 +313,71 @@ async function attachPageImages(client, apartmentId, listing, options) {
         continue;
       }
 
-      const uploadUrl = await client.mutation(api.images.generateUploadUrl, {});
-      const uploadResponse = await fetch(uploadUrl, {
-        method: "POST",
-        headers: { "Content-Type": downloaded.contentType },
-        body: downloaded.bytes,
-      });
+      if (options.imageStorage === "r2") {
+        const order = existingImages.length + attached;
+        const key = r2ObjectKey({
+          apartmentId,
+          sourceUrl: candidate.url,
+          bytes: downloaded.bytes,
+          contentType: downloaded.contentType,
+          order,
+        });
+        const uploaded = await putR2Object(options.r2Client, {
+          bucket: options.r2Config.bucket,
+          key,
+          bytes: downloaded.bytes,
+          contentType: downloaded.contentType,
+          sourceUrl: candidate.url,
+        });
 
-      if (!uploadResponse.ok) {
-        failures += 1;
-        console.warn(
-          `  convex upload failed for ${candidate.url}: ${uploadResponse.status}`,
-        );
-        continue;
+        await client.mutation(api.images.attachR2, {
+          apartmentId,
+          bucket: options.r2Config.bucket,
+          key,
+          contentUrl: r2ContentUrl(key, options.r2Config),
+          etag: uploaded.etag,
+          contentLength: downloaded.bytes.byteLength,
+          kind: candidate.kind ?? imageKindFromUrl(candidate.url),
+          sourceUrl: candidate.url,
+          order,
+          image: {
+            name: `${listing.name} image ${order + 1}`,
+            caption: candidate.caption,
+            encodingFormat: downloaded.contentType,
+            representativeOfPage: order === 0,
+          },
+        });
+      } else {
+        const uploadUrl = await client.mutation(api.images.generateUploadUrl, {});
+        const uploadResponse = await fetch(uploadUrl, {
+          method: "POST",
+          headers: { "Content-Type": downloaded.contentType },
+          body: downloaded.bytes,
+        });
+
+        if (!uploadResponse.ok) {
+          failures += 1;
+          console.warn(
+            `  convex upload failed for ${candidate.url}: ${uploadResponse.status}`,
+          );
+          continue;
+        }
+
+        const { storageId } = await uploadResponse.json();
+        await client.mutation(api.images.attach, {
+          apartmentId,
+          storageId,
+          kind: candidate.kind ?? imageKindFromUrl(candidate.url),
+          sourceUrl: candidate.url,
+          order: existingImages.length + attached,
+          image: {
+            name: `${listing.name} image ${existingImages.length + attached + 1}`,
+            caption: candidate.caption,
+            encodingFormat: downloaded.contentType,
+            representativeOfPage: existingImages.length + attached === 0,
+          },
+        });
       }
-
-      const { storageId } = await uploadResponse.json();
-      await client.mutation(api.images.attach, {
-        apartmentId,
-        storageId,
-        kind: candidate.kind ?? imageKindFromUrl(candidate.url),
-        sourceUrl: candidate.url,
-        order: existingImages.length + attached,
-        image: {
-          name: `${listing.name} image ${existingImages.length + attached + 1}`,
-          caption: candidate.caption,
-          encodingFormat: downloaded.contentType,
-          representativeOfPage: existingImages.length + attached === 0,
-        },
-      });
       attached += 1;
     } catch (error) {
       failures += 1;
@@ -1017,21 +1083,6 @@ function parseArgs(rawArgs) {
     parsed[key] = value ?? true;
     return parsed;
   }, {});
-}
-
-function loadEnvLocal() {
-  try {
-    const text = readFileSync(resolve(process.cwd(), ".env.local"), "utf8");
-    for (const line of text.split("\n")) {
-      const match = line.match(/^\s*([\w.-]+)\s*=\s*(.+?)\s*$/);
-      if (!match || process.env[match[1]]) {
-        continue;
-      }
-      process.env[match[1]] = match[2].replace(/^["']|["']$/g, "");
-    }
-  } catch {
-    // The script also supports CONVEX_URL/VITE_CONVEX_URL from the shell.
-  }
 }
 
 function unique(items) {

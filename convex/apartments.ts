@@ -346,7 +346,9 @@ export const remove = mutation({
       .collect();
 
     for (const image of images) {
-      await ctx.storage.delete(image.storageId);
+      if (image.storageId) {
+        await ctx.storage.delete(image.storageId);
+      }
       await ctx.db.delete(image._id);
     }
     await ctx.db.delete(args.id);
@@ -365,7 +367,9 @@ async function withImages(ctx: QueryCtx, apartmentDoc: Doc<"apartments">) {
     images: await Promise.all(
       images.map(async (image) => ({
         ...image,
-        url: await ctx.storage.getUrl(image.storageId),
+        url:
+          image.image.contentUrl ??
+          (image.storageId ? await ctx.storage.getUrl(image.storageId) : null),
       })),
     ),
   };

@@ -57,13 +57,14 @@ function ApartmentCard({
 			data-apartment-card={isSkeleton ? undefined : ""}
 			className={cn(
 				"group/card squircle relative flex flex-col gap-1 overflow-hidden rounded-[40px] bg-card p-2",
-				"shadow-card-1 outline-none",
+				"shadow-card-1 outline-none transition-opacity duration-200 ease-ui-out",
 				isSkeleton
 					? "cursor-default"
 					: "cursor-pointer focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+				isHidden ? "opacity-60" : "opacity-100",
 			)}
-			initial={{ opacity: 0, y: 6 }}
-			animate={{ opacity: isHidden ? 0.6 : 1, y: 0 }}
+			initial={{ y: 6 }}
+			animate={{ y: 0 }}
 			exit={{
 				opacity: 0,
 				transition: { duration: 0.16, ease: [0.4, 0, 1, 1] },
@@ -160,17 +161,13 @@ interface MetaRowProps {
 function MetaRow({ price, beds, baths }: MetaRowProps) {
 	const items: React.ReactNode[] = [];
 	if (price !== undefined) {
-		items.push(
-			<span key="price" className="tabular-nums">
-				{formatPrice(price)}
-			</span>,
-		);
+		items.push(<span key="price">{formatPrice(price)}</span>);
 	}
 	if (beds !== undefined) {
 		items.push(
 			<span key="beds" className="flex items-center gap-0.5">
 				<Icon glyph={BedroomIcon} size={14} />
-				<span className="tabular-nums">{beds}</span>
+				<span>{beds}</span>
 			</span>,
 		);
 	}
@@ -178,7 +175,7 @@ function MetaRow({ price, beds, baths }: MetaRowProps) {
 		items.push(
 			<span key="baths" className="flex items-center gap-0.5">
 				<Icon glyph={BathroomIcon} size={14} />
-				<span className="tabular-nums">{baths}</span>
+				<span>{baths}</span>
 			</span>,
 		);
 	}

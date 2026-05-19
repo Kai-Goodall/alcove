@@ -153,7 +153,12 @@ function HomePage() {
       if (apartment.status === "archived") return false;
       if (track !== "all" && apartment.track !== track) return false;
       if (filters.favoritesOnly && apartment.isFavorite !== true) return false;
-      if (filters.touredOnly && apartment.tourStatus !== "toured") return false;
+      if (
+        filters.touredOnly &&
+        apartment.tourStatus !== "toured" &&
+        apartment.tourStatus !== "touring"
+      )
+        return false;
       const price = apartment.offer.price;
       if (costMin !== undefined && (price === undefined || price < costMin))
         return false;

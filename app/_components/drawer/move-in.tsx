@@ -42,7 +42,7 @@ function ImmediateCard() {
 	return (
 		<div
 			ref={ref}
-			className="relative flex flex-1 min-h-[168px] flex-col items-start justify-end overflow-hidden bg-surface-sunken p-6"
+			className="relative flex flex-1 min-h-[168px] flex-col items-start justify-end overflow-hidden rounded-[20px] bg-surface-sunken p-6"
 		>
 			<div
 				aria-hidden

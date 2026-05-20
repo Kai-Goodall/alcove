@@ -20,7 +20,7 @@ function ButtonGroup({ children, className, ...props }: ButtonGroupProps) {
       ref={ref}
       role="group"
       className={cn(
-        "inline-flex h-[34px] w-full items-stretch overflow-hidden bg-card shadow-button",
+        "inline-flex h-[34px] w-full items-stretch overflow-hidden rounded-[10px] bg-card shadow-button",
         "divide-x divide-border/70",
         className,
       )}

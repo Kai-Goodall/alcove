@@ -61,7 +61,7 @@ function PairCard({ children }: { children: React.ReactNode }) {
 	return (
 		<div
 			ref={ref}
-			className="flex shrink-0 items-stretch bg-surface-sunken"
+			className="flex shrink-0 items-stretch rounded-[20px] bg-surface-sunken"
 		>
 			{children}
 		</div>
@@ -90,7 +90,7 @@ function SingleStat({ glyph, label }: StatItemProps) {
 	return (
 		<div
 			ref={ref}
-			className="flex w-[135px] shrink-0 flex-col items-start justify-center gap-1.5 bg-surface-sunken p-4"
+			className="flex w-[135px] shrink-0 flex-col items-start justify-center gap-1.5 rounded-[20px] bg-surface-sunken p-4"
 		>
 			<Icon glyph={glyph} size={20} className="text-secondary" />
 			<span className="text-[16px] font-medium leading-[18px] tracking-[-0.1px] text-primary">

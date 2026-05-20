@@ -90,7 +90,7 @@ function Notes({ apartment }: NotesProps) {
           ref={bodyRef}
           onClick={handleContainerClick}
           className={cn(
-            "flex flex-col overflow-hidden bg-surface-sunken transition-colors",
+            "flex flex-col overflow-hidden rounded-[20px] bg-surface-sunken transition-colors",
             !isEditorOpen && "cursor-pointer hover:bg-muted",
           )}
         >

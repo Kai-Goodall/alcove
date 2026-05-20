@@ -60,7 +60,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         whileFocus={{ boxShadow: focusBoxShadow }}
         transition={transition}
         className={cn(
-          "h-9 w-full px-3 text-[14px] leading-none text-foreground outline-none placeholder:text-placeholder",
+          "h-9 w-full rounded-xl px-3 text-[14px] leading-none text-foreground outline-none placeholder:text-placeholder",
           className,
         )}
         {...props}

@@ -81,7 +81,7 @@ const SelectContent = React.forwardRef<
           align={align}
           data-overlay-content=""
           className={cn(
-            "z-50 min-w-[137px] bg-card text-foreground shadow-tooltip outline-none",
+            "z-50 min-w-[137px] rounded-[16px] bg-card text-foreground shadow-tooltip outline-none",
             className,
           )}
           style={{
@@ -126,7 +126,7 @@ const SelectItem = React.forwardRef<
     <SelectPrimitive.Item
       ref={setRefs}
       className={cn(
-        "flex w-full cursor-pointer items-center justify-end px-3 py-2 outline-none",
+        "flex w-full cursor-pointer items-center justify-end rounded-[12px] px-3 py-2 outline-none",
         "text-[14px] font-medium leading-none tracking-[-0.2px] text-primary",
         "transition-colors",
         "data-[highlighted]:bg-surface-sunken data-[state=checked]:text-secondary",

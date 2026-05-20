@@ -74,7 +74,7 @@ function Placeholder() {
     <div
       ref={ref}
       aria-hidden
-      className="aspect-[1920/1080] w-full bg-muted shadow-card-1"
+      className="aspect-[1920/1080] w-full rounded-[20px] bg-muted shadow-card-1"
     />
   );
 }
@@ -85,7 +85,7 @@ function Hero({ image }: { image: Apartment["images"][number] }) {
   return (
     <div
       ref={ref}
-      className="relative aspect-[1920/1080] w-full overflow-hidden bg-muted shadow-card-1"
+      className="relative aspect-[1920/1080] w-full overflow-hidden rounded-[20px] bg-muted shadow-card-1"
     >
       <FadeImage
         key={image.url ?? "active"}
@@ -106,7 +106,7 @@ function MobileSlide({ image }: { image: Apartment["images"][number] }) {
   return (
     <div
       ref={ref}
-      className="relative aspect-[1920/1080] w-[calc(100vw-2rem)] shrink-0 snap-center overflow-hidden bg-muted shadow-card-1"
+      className="relative aspect-[1920/1080] w-[calc(100vw-2rem)] shrink-0 snap-center overflow-hidden rounded-[20px] bg-muted shadow-card-1"
     >
       {image.url ? (
         <FadeImage
@@ -139,7 +139,7 @@ function Thumbnail({ image, isActive, onClick, index }: ThumbnailProps) {
       aria-label={`Show photo ${index + 1}`}
       aria-current={isActive}
       className={cn(
-        "relative h-[90px] w-[142px] shrink-0 overflow-hidden bg-surface-sunken",
+        "relative h-[90px] w-[142px] shrink-0 overflow-hidden rounded-[16px] bg-surface-sunken",
         "shadow-card-1 outline-none transition-opacity",
         !isActive && "opacity-80 hover:opacity-100",
       )}

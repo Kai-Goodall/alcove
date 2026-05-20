@@ -148,7 +148,7 @@ function ApartmentDrawer({
 							isMobile={isMobile}
 						/>
 						<div className="flex flex-col gap-5 px-4 pb-4">
-							<ApartmentSummary apartment={apartment} />
+							<ApartmentSummary apartment={apartment} isMobile={isMobile} />
 							<StatCards apartment={apartment} />
 							<div className="flex flex-col gap-5 sm:flex-row sm:items-stretch">
 								<MoveIn apartment={apartment} />
@@ -224,9 +224,43 @@ function DrawerFooter({ apartment }: { apartment: Apartment }) {
 	);
 }
 
-function ApartmentSummary({ apartment }: { apartment: Apartment }) {
+function ApartmentSummary({
+	apartment,
+	isMobile,
+}: {
+	apartment: Apartment;
+	isMobile: boolean;
+}) {
 	const street = formatStreetAddress(apartment.apartment.address);
 	const listingHref = apartment.listing.url;
+
+	if (isMobile) {
+		return (
+			<div className="flex flex-col gap-2">
+				<h1 className="text-[26px] font-medium leading-[30px] tracking-[-0.38px] text-foreground">
+					{getDisplayName(apartment)}
+				</h1>
+				<div className="flex items-center justify-between gap-3">
+					<FavoriteHeart
+						apartmentId={apartment._id}
+						isFavorite={apartment.isFavorite === true}
+						size={24}
+						context="drawer"
+						className="shrink-0"
+					/>
+					<TourSelect
+						apartmentId={apartment._id}
+						tourStatus={apartment.tourStatus}
+					/>
+				</div>
+				<AddressLine
+					price={apartment.offer.price}
+					street={street}
+					listingHref={listingHref}
+				/>
+			</div>
+		);
+	}
 
 	return (
 		<div className="flex flex-col gap-2">
@@ -248,35 +282,53 @@ function ApartmentSummary({ apartment }: { apartment: Apartment }) {
 					tourStatus={apartment.tourStatus}
 				/>
 			</div>
-			<div className="flex items-center gap-2.5">
-				{apartment.offer.price !== undefined ? (
-					<span className="text-[16px] font-medium leading-[18px] tracking-[-0.1px] text-foreground">
-						{formatPrice(apartment.offer.price)}
+			<AddressLine
+				price={apartment.offer.price}
+				street={street}
+				listingHref={listingHref}
+			/>
+		</div>
+	);
+}
+
+function AddressLine({
+	price,
+	street,
+	listingHref,
+}: {
+	price: number | undefined;
+	street: string | undefined;
+	listingHref: string | undefined;
+}) {
+	return (
+		<div className="flex items-center gap-2.5">
+			{price !== undefined ? (
+				<span className="text-[16px] font-medium leading-[18px] tracking-[-0.1px] text-foreground">
+					{formatPrice(price)}
+				</span>
+			) : null}
+			{price !== undefined && street ? (
+				<span
+					aria-hidden
+					className="block size-1 rounded-full bg-secondary/50"
+				/>
+			) : null}
+			{street ? (
+				listingHref ? (
+					<a
+						href={listingHref}
+						target="_blank"
+						rel="noreferrer noopener"
+						className="text-[16px] font-medium leading-[18px] tracking-[-0.1px] text-secondary underline underline-offset-2 hover:text-foreground"
+					>
+						{street}
+					</a>
+				) : (
+					<span className="text-[16px] font-medium leading-[18px] tracking-[-0.1px] text-secondary">
+						{street}
 					</span>
-				) : null}
-				{apartment.offer.price !== undefined && street ? (
-					<span
-						aria-hidden
-						className="block size-1 rounded-full bg-secondary/50"
-					/>
-				) : null}
-				{street ? (
-					listingHref ? (
-						<a
-							href={listingHref}
-							target="_blank"
-							rel="noreferrer noopener"
-							className="text-[16px] font-medium leading-[18px] tracking-[-0.1px] text-secondary underline underline-offset-2 hover:text-foreground"
-						>
-							{street}
-						</a>
-					) : (
-						<span className="text-[16px] font-medium leading-[18px] tracking-[-0.1px] text-secondary">
-							{street}
-						</span>
-					)
-				) : null}
-			</div>
+				)
+			) : null}
 		</div>
 	);
 }

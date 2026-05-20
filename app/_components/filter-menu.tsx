@@ -1,4 +1,4 @@
-import { useId } from "react";
+import { useId, useRef } from "react";
 import { NumericFormat } from "react-number-format";
 import {
 	IconBathtubFillDuo18,
@@ -12,6 +12,7 @@ import { Icon } from "@/_components/ui/icon";
 import { Input } from "@/_components/ui/input";
 import { Separator } from "@/_components/ui/separator";
 import { Switch } from "@/_components/ui/switch";
+import { useSquircle } from "@/_lib/use-squircle";
 import { cn } from "@/_lib/utils";
 
 export type SortMode = "relevant" | "newest";
@@ -247,10 +248,13 @@ function NumberStepper({
 	onDecrement,
 	onIncrement,
 }: NumberStepperProps) {
+	const ref = useRef<HTMLDivElement>(null);
+	useSquircle(ref, 12);
 	return (
 		<div
+			ref={ref}
 			className={cn(
-				"squircle flex h-9 items-center justify-center gap-2.5 rounded-[24px] bg-card px-3",
+				"flex h-9 items-center justify-center gap-2.5 bg-card px-3",
 				"shadow-input",
 			)}
 		>

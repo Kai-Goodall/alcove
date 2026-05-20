@@ -1,6 +1,7 @@
 import * as React from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Tooltip as TooltipPrimitive } from "radix-ui";
+import { useSquircle } from "@/_lib/use-squircle";
 import { cn } from "@/_lib/utils";
 
 const TooltipProvider = TooltipPrimitive.Provider;
@@ -59,6 +60,8 @@ const TooltipContent = React.forwardRef<
   ) => {
     const open = React.useContext(TooltipOpenContext);
     const shouldReduceMotion = useReducedMotion();
+    const squircleRef = React.useRef<HTMLDivElement>(null);
+    useSquircle(squircleRef, 14);
     const enterTransition = shouldReduceMotion
       ? { duration: 0 }
       : { type: "spring" as const, duration: 0.15, bounce: 0 };
@@ -78,6 +81,7 @@ const TooltipContent = React.forwardRef<
               {...props}
             >
               <motion.div
+                ref={squircleRef}
                 initial={
                   shouldReduceMotion
                     ? false
@@ -100,7 +104,7 @@ const TooltipContent = React.forwardRef<
                     "var(--radix-tooltip-content-transform-origin)",
                 }}
                 className={cn(
-                  "squircle max-w-[200px] rounded-[26px] bg-card text-foreground shadow-tooltip",
+                  "max-w-[200px] bg-card text-foreground shadow-tooltip",
                   compact
                     ? "px-3 py-2 text-[14px] font-semibold leading-none"
                     : "px-4 py-3 text-[14px] leading-[18px]",

@@ -1,3 +1,5 @@
+import { useRef } from "react";
+import { useSquircle } from "@/_lib/use-squircle";
 import { cn } from "@/_lib/utils";
 
 export interface ButtonGroupProps
@@ -11,11 +13,14 @@ export interface ButtonGroupProps
  * their own active/inactive surface.
  */
 function ButtonGroup({ children, className, ...props }: ButtonGroupProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  useSquircle(ref, 10);
   return (
     <div
+      ref={ref}
       role="group"
       className={cn(
-        "squircle inline-flex h-[34px] w-full items-stretch overflow-hidden rounded-[22px] bg-card shadow-button",
+        "inline-flex h-[34px] w-full items-stretch overflow-hidden bg-card shadow-button",
         "divide-x divide-border/70",
         className,
       )}

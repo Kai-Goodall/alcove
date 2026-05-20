@@ -1,7 +1,9 @@
+import { useRef } from "react";
 import { IconCalendarFillDuo18 } from "nucleo-ui-fill-duo-18";
 import { Icon } from "@/_components/ui/icon";
 import { Typography } from "@/_components/ui/typography";
 import { parseAvailability, type Apartment } from "@/_lib/apartment";
+import { useSquircle } from "@/_lib/use-squircle";
 import { cn } from "@/_lib/utils";
 
 const DAY_INITIALS = ["S", "M", "T", "W", "T", "F", "S"] as const;
@@ -34,9 +36,14 @@ function ImmediateCard() {
 	// Spotlight at top-right that fades the decorative date down + left.
 	const maskGradient =
 		"radial-gradient(120% 100% at 100% 0%, #000 0%, #000 30%, transparent 80%)";
+	const ref = useRef<HTMLDivElement>(null);
+	useSquircle(ref, 20);
 
 	return (
-		<div className="squircle relative flex flex-1 min-h-[168px] flex-col items-start justify-end overflow-hidden rounded-[32px] bg-surface-sunken p-6">
+		<div
+			ref={ref}
+			className="relative flex flex-1 min-h-[168px] flex-col items-start justify-end overflow-hidden bg-surface-sunken p-6"
+		>
 			<div
 				aria-hidden
 				className="pointer-events-none absolute inset-0 flex select-none flex-col items-end pr-5 pt-3 text-primary opacity-20"

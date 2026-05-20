@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { FadeImage } from "@/_components/ui/fade-image";
 import { Icon } from "@/_components/ui/icon";
 import { FavoriteHeart } from "@/_components/favorite-heart";
@@ -12,6 +13,7 @@ import {
 	getDisplayName,
 	getRepresentativeImage,
 } from "@/_lib/apartment";
+import { useSquircle } from "@/_lib/use-squircle";
 import { cn } from "@/_lib/utils";
 
 export interface ApartmentCardProps {
@@ -30,6 +32,8 @@ function ApartmentCard({
 }: ApartmentCardProps) {
 	const isSkeleton = skeleton || !apartment;
 	const isHidden = apartment?.hidden === true;
+	const cardRef = useRef<HTMLElement>(null);
+	useSquircle(cardRef, 20);
 
 	const handleSelect = () => {
 		if (isSkeleton || !apartment || !onSelect) return;
@@ -45,6 +49,7 @@ function ApartmentCard({
 
 	return (
 		<article
+			ref={cardRef}
 			role={isSkeleton ? undefined : "button"}
 			tabIndex={isSkeleton ? -1 : 0}
 			onClick={isSkeleton ? undefined : handleSelect}
@@ -55,7 +60,7 @@ function ApartmentCard({
 			aria-hidden={isSkeleton}
 			data-apartment-card={isSkeleton ? undefined : ""}
 			className={cn(
-				"group/card squircle relative flex flex-col gap-1 overflow-hidden rounded-[40px] bg-card p-2",
+				"group/card relative flex flex-col gap-1 overflow-hidden bg-card p-2",
 				"shadow-card-1 outline-none",
 				"transition duration-200 ease-[cubic-bezier(0.34,1.3,0.64,1)] will-change-transform",
 				isSkeleton
@@ -87,10 +92,15 @@ function CardContent({
 	const beds = getBedroomCount(apartment);
 	const baths = getBathroomCount(apartment);
 	const isPriority = index < 3;
+	const imageRef = useRef<HTMLDivElement>(null);
+	useSquircle(imageRef, 12);
 
 	return (
 		<>
-			<div className="squircle relative aspect-[1920/1080] w-full overflow-hidden rounded-[24px] bg-muted shadow-card-1">
+			<div
+				ref={imageRef}
+				className="relative aspect-[1920/1080] w-full overflow-hidden bg-muted shadow-card-1"
+			>
 				{image?.url ? (
 					<FadeImage
 						src={image.url}
@@ -122,11 +132,14 @@ function CardContent({
 }
 
 function SkeletonContent() {
+	const ref = useRef<HTMLDivElement>(null);
+	useSquircle(ref, 12);
 	return (
 		<>
 			<div
+				ref={ref}
 				aria-hidden
-				className="squircle aspect-[1920/1080] w-full animate-pulse rounded-[24px] bg-muted shadow-card-1"
+				className="aspect-[1920/1080] w-full animate-pulse bg-muted shadow-card-1"
 			/>
 			<div aria-hidden className="flex flex-col gap-2 px-2 py-1.5">
 				<div className="h-[16px] w-2/3 animate-pulse rounded bg-muted" />

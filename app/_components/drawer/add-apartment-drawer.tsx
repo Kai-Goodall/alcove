@@ -9,6 +9,7 @@ import { Button } from "@/_components/ui/button";
 import { Icon } from "@/_components/ui/icon";
 import { Input } from "@/_components/ui/input";
 import { Typography } from "@/_components/ui/typography";
+import { useSquircle } from "@/_lib/use-squircle";
 import { cn } from "@/_lib/utils";
 
 type ImportJob = {
@@ -51,6 +52,7 @@ function AddApartmentDrawer({
   isMobile = false,
 }: AddApartmentDrawerProps) {
   const drawerRef = useRef<HTMLDivElement>(null);
+  useSquircle(drawerRef, isMobile ? 0 : 36);
   const [url, setUrl] = useState("");
   const [jobId, setJobId] = useState<Id<"apartmentImportJobs"> | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -151,7 +153,7 @@ function AddApartmentDrawer({
         "pointer-events-auto fixed z-30 flex flex-col overflow-hidden bg-card",
         isMobile
           ? "inset-0 rounded-none"
-          : "squircle top-16 bottom-16 w-[525px] max-w-[calc(100vw-32px)] rounded-[48px] shadow-card-2",
+          : "top-16 bottom-16 w-[525px] max-w-[calc(100vw-32px)] shadow-card-2",
       )}
     >
       {isMobile ? (

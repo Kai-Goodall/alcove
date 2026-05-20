@@ -1,4 +1,4 @@
-import type { ComponentType } from "react";
+import { type ComponentType, useRef } from "react";
 import type { IconProps as NucleoIconProps } from "nucleo-ui-fill-18";
 import { Icon } from "@/_components/ui/icon";
 import {
@@ -7,6 +7,7 @@ import {
 	pickAmenities,
 	type Apartment,
 } from "@/_lib/apartment";
+import { useSquircle } from "@/_lib/use-squircle";
 
 export interface StatCardsProps {
 	apartment: Apartment;
@@ -25,7 +26,7 @@ function StatCards({ apartment }: StatCardsProps) {
 	return (
 		<div className="-mx-4 flex items-stretch gap-2 overflow-x-auto px-4 [scrollbar-width:none] sm:mx-0 sm:overflow-visible sm:px-0 [&::-webkit-scrollbar]:hidden">
 			{hasPair ? (
-				<div className="squircle flex shrink-0 items-stretch rounded-[32px] bg-surface-sunken">
+				<PairCard>
 					{beds !== undefined ? (
 						<StatItem
 							glyph={BedroomIcon}
@@ -41,7 +42,7 @@ function StatCards({ apartment }: StatCardsProps) {
 							label={`${baths} ${baths === 1 ? "bath" : "baths"}`}
 						/>
 					) : null}
-				</div>
+				</PairCard>
 			) : null}
 			{amenities.map((amenity) => (
 				<SingleStat
@@ -50,6 +51,19 @@ function StatCards({ apartment }: StatCardsProps) {
 					label={amenity.label}
 				/>
 			))}
+		</div>
+	);
+}
+
+function PairCard({ children }: { children: React.ReactNode }) {
+	const ref = useRef<HTMLDivElement>(null);
+	useSquircle(ref, 20);
+	return (
+		<div
+			ref={ref}
+			className="flex shrink-0 items-stretch bg-surface-sunken"
+		>
+			{children}
 		</div>
 	);
 }
@@ -71,8 +85,13 @@ function StatItem({ glyph, label }: StatItemProps) {
 }
 
 function SingleStat({ glyph, label }: StatItemProps) {
+	const ref = useRef<HTMLDivElement>(null);
+	useSquircle(ref, 20);
 	return (
-		<div className="squircle flex w-[135px] shrink-0 flex-col items-start justify-center gap-1.5 rounded-[32px] bg-surface-sunken p-4">
+		<div
+			ref={ref}
+			className="flex w-[135px] shrink-0 flex-col items-start justify-center gap-1.5 bg-surface-sunken p-4"
+		>
 			<Icon glyph={glyph} size={20} className="text-secondary" />
 			<span className="text-[16px] font-medium leading-[18px] tracking-[-0.1px] text-primary">
 				{label}

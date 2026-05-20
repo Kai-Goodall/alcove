@@ -156,10 +156,7 @@ body {
   background: rgb(240 105 82 / 0.24);
 }
 
-/* Opt-in squircle utility — pair with any `rounded-*` value. Squircle
-   curvature reads ~4px tighter than a circular arc at the same radius,
-   so bump the radius accordingly when adopting it. */
-@utility squircle {
-  corner-shape: squircle;
-}
+/* Squircles are now applied via `useSquircle()` from `@lisse/react` —
+   it generates a clip-path that matches Figma's algorithm exactly, so
+   the visual radius matches the configured radius (no bump needed). */
 

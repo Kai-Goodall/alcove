@@ -1,0 +1,232 @@
+{
+  "runDate": "2026-05-19",
+  "generatedAt": "2026-05-19T15:41:55.406Z",
+  "configVersion": 1,
+  "status": "degraded",
+  "degraded": true,
+  "degradedReasons": [
+    "Unique candidate pool is below threshold: 0 < 25.",
+    "Direct-operator candidate pool is below threshold: 0 < 5."
+  ],
+  "queries": [
+    "Chelsea NYC rental building availability 1 bedroom Manhattan",
+    "West Village Manhattan 1 bedroom rental availability laundry dishwasher",
+    "Greenwich Village Manhattan 1 bedroom rental availability renovated",
+    "Flatiron Gramercy Manhattan 1 bedroom rental building availability",
+    "East Village Lower East Side Manhattan 1 bedroom rental building availability",
+    "Chelsea Manhattan 2 bedroom 2 bath rental availability",
+    "West Village Greenwich Village Manhattan 2 bedroom 2 bath rental availability",
+    "SoHo NoHo Tribeca Manhattan 2 bedroom 2 bath rental availability",
+    "East Village Manhattan 2 bedroom 2 bath rental availability washer dryer dishwasher",
+    "Tribeca Manhattan true 3 bedroom 3 bath rental availability",
+    "SoHo NoHo Manhattan true 3 bedroom 3 bath rental availability",
+    "Chelsea Manhattan true 3 bedroom 3 bath rental availability",
+    "site:streeteasy.com/building Manhattan 1 bedroom available now Chelsea West Village Greenwich Village",
+    "site:streeteasy.com/building Manhattan 2 bedroom 2 bath available now Chelsea Tribeca SoHo",
+    "site:streeteasy.com/building Manhattan 3 bedroom 3 bath available now Tribeca SoHo Chelsea",
+    "site:zillow.com/homedetails Manhattan 1 bedroom rental Chelsea West Village",
+    "site:apartments.com/new-york-ny Manhattan 2 bedroom 2 bathroom available now",
+    "site:renthop.com Manhattan 3 bedroom 3 bathroom rental availability"
+  ],
+  "mappedRoots": [
+    {
+      "provider": "Equity Apartments",
+      "url": "https://www.equityapartments.com/new-york-city/",
+      "search": "chelsea west village gramercy tribeca apartment availability floor plan 1 bedroom 2 bedroom 3 bedroom"
+    },
+    {
+      "provider": "Avalon Communities",
+      "url": "https://www.avaloncommunities.com/new-york/new-york-city-apartments/",
+      "search": "new york city apartment availability floor plan 1 bedroom 2 bedroom 3 bedroom"
+    },
+    {
+      "provider": "Brodsky",
+      "url": "https://brodsky.com/rentals/",
+      "search": "west village greenwich village chelsea apartment available one bedroom two bedroom three bedroom"
+    },
+    {
+      "provider": "Stonehenge NYC",
+      "url": "https://www.stonehengenyc.com/apartments",
+      "search": "manhattan available apartment floorplan one bedroom two bedroom three bedroom"
+    },
+    {
+      "provider": "Rockrose",
+      "url": "https://rockrose.com/zh/listing/",
+      "search": "new york available apartment 1 bed 2 bed 3 bed"
+    },
+    {
+      "provider": "EVE NYC",
+      "url": "https://eve.nyc/floorplans/",
+      "search": "available floorplans 1 bedroom 2 bedroom 3 bedroom"
+    },
+    {
+      "provider": "StuyTown / Beam Living",
+      "url": "https://www.stuytown.com/nyc-apartments-for-rent",
+      "search": "available apartments 1 bedroom 2 bedroom 3 bedroom"
+    },
+    {
+      "provider": "The Chelsea / Greystar",
+      "url": "https://www.thechelseaapts.com/new-york/the-chelsea/conventional",
+      "search": "available apartment floorplan 1 bedroom 2 bedroom"
+    },
+    {
+      "provider": "Chelsea29",
+      "url": "https://www.chelsea29.com/floorplans",
+      "search": "available floorplans 1 bedroom 2 bedroom"
+    }
+  ],
+  "stats": {
+    "rawSearchCount": 0,
+    "rawMapCount": 0,
+    "rawCount": 0,
+    "uniqueCount": 0,
+    "keptCount": 0,
+    "directOperatorCount": 0,
+    "filteredCount": 0,
+    "filteredReasonCounts": {},
+    "errorCount": 27,
+    "searchLimit": 8,
+    "mapLimit": 60,
+    "maxCandidates": 120,
+    "degradedThreshold": 25,
+    "directOperatorThreshold": 5
+  },
+  "errors": [
+    {
+      "stage": "search",
+      "target": "West Village Manhattan 1 bedroom rental availability laundry dishwasher",
+      "message": "402 Payment Required: {\"success\":false,\"error\":\"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value.\"}"
+    },
+    {
+      "stage": "search",
+      "target": "Greenwich Village Manhattan 1 bedroom rental availability renovated",
+      "message": "402 Payment Required: {\"success\":false,\"error\":\"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value.\"}"
+    },
+    {
+      "stage": "search",
+      "target": "Chelsea NYC rental building availability 1 bedroom Manhattan",
+      "message": "402 Payment Required: {\"success\":false,\"error\":\"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value.\"}"
+    },
+    {
+      "stage": "search",
+      "target": "East Village Lower East Side Manhattan 1 bedroom rental building availability",
+      "message": "402 Payment Required: {\"success\":false,\"error\":\"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value.\"}"
+    },
+    {
+      "stage": "search",
+      "target": "Flatiron Gramercy Manhattan 1 bedroom rental building availability",
+      "message": "402 Payment Required: {\"success\":false,\"error\":\"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value.\"}"
+    },
+    {
+      "stage": "search",
+      "target": "Chelsea Manhattan 2 bedroom 2 bath rental availability",
+      "message": "402 Payment Required: {\"success\":false,\"error\":\"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value.\"}"
+    },
+    {
+      "stage": "search",
+      "target": "West Village Greenwich Village Manhattan 2 bedroom 2 bath rental availability",
+      "message": "402 Payment Required: {\"success\":false,\"error\":\"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value.\"}"
+    },
+    {
+      "stage": "search",
+      "target": "SoHo NoHo Tribeca Manhattan 2 bedroom 2 bath rental availability",
+      "message": "402 Payment Required: {\"success\":false,\"error\":\"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value.\"}"
+    },
+    {
+      "stage": "search",
+      "target": "East Village Manhattan 2 bedroom 2 bath rental availability washer dryer dishwasher",
+      "message": "402 Payment Required: {\"success\":false,\"error\":\"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value.\"}"
+    },
+    {
+      "stage": "search",
+      "target": "Tribeca Manhattan true 3 bedroom 3 bath rental availability",
+      "message": "402 Payment Required: {\"success\":false,\"error\":\"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value.\"}"
+    },
+    {
+      "stage": "search",
+      "target": "SoHo NoHo Manhattan true 3 bedroom 3 bath rental availability",
+      "message": "402 Payment Required: {\"success\":false,\"error\":\"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value.\"}"
+    },
+    {
+      "stage": "search",
+      "target": "Chelsea Manhattan true 3 bedroom 3 bath rental availability",
+      "message": "402 Payment Required: {\"success\":false,\"error\":\"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value.\"}"
+    },
+    {
+      "stage": "search",
+      "target": "site:streeteasy.com/building Manhattan 1 bedroom available now Chelsea West Village Greenwich Village",
+      "message": "402 Payment Required: {\"success\":false,\"error\":\"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value.\"}"
+    },
+    {
+      "stage": "search",
+      "target": "site:streeteasy.com/building Manhattan 2 bedroom 2 bath available now Chelsea Tribeca SoHo",
+      "message": "402 Payment Required: {\"success\":false,\"error\":\"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value.\"}"
+    },
+    {
+      "stage": "search",
+      "target": "site:streeteasy.com/building Manhattan 3 bedroom 3 bath available now Tribeca SoHo Chelsea",
+      "message": "402 Payment Required: {\"success\":false,\"error\":\"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value.\"}"
+    },
+    {
+      "stage": "search",
+      "target": "site:renthop.com Manhattan 3 bedroom 3 bathroom rental availability",
+      "message": "402 Payment Required: {\"success\":false,\"error\":\"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value.\"}"
+    },
+    {
+      "stage": "search",
+      "target": "site:zillow.com/homedetails Manhattan 1 bedroom rental Chelsea West Village",
+      "message": "402 Payment Required: {\"success\":false,\"error\":\"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value.\"}"
+    },
+    {
+      "stage": "search",
+      "target": "site:apartments.com/new-york-ny Manhattan 2 bedroom 2 bathroom available now",
+      "message": "402 Payment Required: {\"success\":false,\"error\":\"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value.\"}"
+    },
+    {
+      "stage": "map",
+      "target": "https://www.equityapartments.com/new-york-city/",
+      "message": "402 Payment Required: {\"success\":false,\"error\":\"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value.\"}"
+    },
+    {
+      "stage": "map",
+      "target": "https://www.avaloncommunities.com/new-york/new-york-city-apartments/",
+      "message": "402 Payment Required: {\"success\":false,\"error\":\"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value.\"}"
+    },
+    {
+      "stage": "map",
+      "target": "https://brodsky.com/rentals/",
+      "message": "402 Payment Required: {\"success\":false,\"error\":\"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value.\"}"
+    },
+    {
+      "stage": "map",
+      "target": "https://www.stonehengenyc.com/apartments",
+      "message": "402 Payment Required: {\"success\":false,\"error\":\"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value.\"}"
+    },
+    {
+      "stage": "map",
+      "target": "https://eve.nyc/floorplans/",
+      "message": "429 Too Many Requests: {\"success\":false,\"error\":\"Rate limit exceeded. Consumed (req/min): 6, Remaining (req/min): 0. Upgrade your plan at https://firecrawl.dev/pricing for increased rate limits or please retry after 60s, resets at Tue May 19 2026 15:42:56 GMT+000"
+    },
+    {
+      "stage": "map",
+      "target": "https://www.stuytown.com/nyc-apartments-for-rent",
+      "message": "429 Too Many Requests: {\"success\":false,\"error\":\"Rate limit exceeded. Consumed (req/min): 7, Remaining (req/min): 0. Upgrade your plan at https://firecrawl.dev/pricing for increased rate limits or please retry after 60s, resets at Tue May 19 2026 15:42:56 GMT+000"
+    },
+    {
+      "stage": "map",
+      "target": "https://rockrose.com/zh/listing/",
+      "message": "402 Payment Required: {\"success\":false,\"error\":\"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value.\"}"
+    },
+    {
+      "stage": "map",
+      "target": "https://www.chelsea29.com/floorplans",
+      "message": "429 Too Many Requests: {\"success\":false,\"error\":\"Rate limit exceeded. Consumed (req/min): 8, Remaining (req/min): 0. Upgrade your plan at https://firecrawl.dev/pricing for increased rate limits or please retry after 60s, resets at Tue May 19 2026 15:42:56 GMT+000"
+    },
+    {
+      "stage": "map",
+      "target": "https://www.thechelseaapts.com/new-york/the-chelsea/conventional",
+      "message": "429 Too Many Requests: {\"success\":false,\"error\":\"Rate limit exceeded. Consumed (req/min): 9, Remaining (req/min): 0. Upgrade your plan at https://firecrawl.dev/pricing for increased rate limits or please retry after 60s, resets at Tue May 19 2026 15:42:56 GMT+000"
+    }
+  ],
+  "candidates": []
+}

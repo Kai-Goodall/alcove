@@ -1,6 +1,7 @@
 import * as React from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Popover as PopoverPrimitive } from "radix-ui";
+import { useSquircle } from "@/_lib/use-squircle";
 import { cn } from "@/_lib/utils";
 
 const PopoverTrigger = PopoverPrimitive.Trigger;
@@ -65,6 +66,8 @@ const PopoverContent = React.forwardRef<
     ref,
   ) => {
     const open = React.useContext(PopoverOpenContext);
+    const squircleRef = React.useRef<HTMLDivElement>(null);
+    useSquircle(squircleRef, 24);
 
     return (
       <AnimatePresence>
@@ -81,6 +84,7 @@ const PopoverContent = React.forwardRef<
               {...props}
             >
               <motion.div
+                ref={squircleRef}
                 // No enter animation per spec — appears instantly. Exit only.
                 initial={false}
                 animate={{ opacity: 1 }}
@@ -97,7 +101,7 @@ const PopoverContent = React.forwardRef<
                     "var(--radix-popover-content-transform-origin)",
                 }}
                 className={cn(
-                  "squircle rounded-[36px] bg-card text-foreground shadow-tooltip",
+                  "bg-card text-foreground shadow-tooltip",
                   "outline-none",
                   className,
                 )}

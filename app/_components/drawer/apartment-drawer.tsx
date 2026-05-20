@@ -17,6 +17,7 @@ import {
 	getDisplayName,
 	type Apartment,
 } from "@/_lib/apartment";
+import { useSquircle } from "@/_lib/use-squircle";
 import { cn } from "@/_lib/utils";
 
 const RELATIVE_FORMATTER = new Intl.RelativeTimeFormat("en", {
@@ -44,6 +45,9 @@ function ApartmentDrawer({
 }: ApartmentDrawerProps) {
 	const drawerRef = useRef<HTMLDivElement>(null);
 	const scrollRef = useRef<HTMLDivElement>(null);
+	// 0 on mobile (no rounding — full-screen sheet) so the clip-path stays
+	// a plain rectangle and doesn't interfere with `rounded-none`.
+	useSquircle(drawerRef, isMobile ? 0 : 36);
 
 	// Convex pushes updates on this query — keeps the drawer fresh if the doc
 	// changes (e.g. status flips elsewhere) while preserving the initial paint.
@@ -116,7 +120,7 @@ function ApartmentDrawer({
 				"pointer-events-auto fixed z-30 overflow-hidden bg-card",
 				isMobile
 					? "inset-0 rounded-none"
-					: "squircle top-16 bottom-16 w-[525px] max-w-[calc(100vw-32px)] rounded-[48px] shadow-card-2",
+					: "top-16 bottom-16 w-[525px] max-w-[calc(100vw-32px)] shadow-card-2",
 			)}
 		>
 			{isMobile ? (

@@ -1,0 +1,509 @@
+{
+  "runs": [
+    {
+      "id": "daily-manhattan-apartment-search-2026-05-20",
+      "runDate": "2026-05-20",
+      "summary": "Firecrawl discovery degraded again and returned zero usable candidates, so this run fell back to a broad live-search workflow. The strict shortlist stayed intentionally small: The East #1205 is the best under-cap 1BR, The East #1201 is the cleanest live 2BR/2BA under budget, and Iris Tribeca #11A is the only true 3BR/3BA strong enough to justify the $15,000 stretch. Beatrice slipped just over the 1BR hard cap, while several West Village and East Village leads stayed monitor-only because floor-plan, HVAC, or exact-layout proof remained incomplete.",
+      "notes": "This run began with `npm run discover:apartments -- --date 2026-05-20 --out data/firecrawl-discovery/2026-05-20.json`. The discovery file returned `status: degraded`, `degraded: true`, zero retained candidates, zero direct-operator candidates, and 27 fetch failures, so discovery was replaced with a broad live-search workflow rather than seeding from stored candidates. Firecrawl query set used the standard 18-query pack spanning 1BR, 2BR/2BA, and true 3BR/3BA discovery plus StreetEasy/Zillow/Apartments.com/RentHop site queries. Mapped roots were Equity Apartments, Avalon Communities, Brodsky, Stonehenge NYC, Rockrose, EVE NYC, StuyTown / Beam Living, The Chelsea / Greystar, and Chelsea29. Verification then proceeded from opened live pages only, prioritizing direct operator pages and exact StreetEasy unit pages.",
+      "sourcesSearched": [
+        "Firecrawl discovery script (degraded fallback)",
+        "Broad search-engine discovery",
+        "StreetEasy exact unit pages",
+        "Equity Apartments",
+        "Avalon Communities"
+      ],
+      "blindSpots": [
+        "Firecrawl degraded completely again today: zero retained candidates, zero direct-operator candidates, and 27 fetch failures across all search and map attempts.",
+        "Firecrawl query set used the standard 18 discovery queries; mapped roots were Equity Apartments, Avalon Communities, Brodsky, Stonehenge NYC, Rockrose, EVE NYC, StuyTown / Beam Living, The Chelsea / Greystar, and Chelsea29.",
+        "Some direct-operator pages still verified inventory only at the building availability-page level rather than through a dedicated unit detail page.",
+        "StreetEasy often exposed exact live unit pages, but some pages still omitted square footage or room dimensions even when a floor plan image was present.",
+        "EVE East Village still surfaced only stale cache results for specific units while the direct operator flow remained too generic to re-verify the same exact apartment live.",
+        "No fresh West Village or Chelsea 2BR/2BA direct-operator page cleared the proof bar today; the strongest 2BRs were East Village or Kips Bay adjacent."
+      ],
+      "listings": [
+        {
+          "key": "streeteasy:the-east:1205",
+          "url": "https://streeteasy.com/building/the-east/1205?featured=1",
+          "provider": "StreetEasy",
+          "name": "The East #1205",
+          "streetAddress": "644 East 14th Street",
+          "unit": "1205",
+          "neighborhood": "East Village",
+          "status": "shortlist",
+          "track": "1br",
+          "rank": 1,
+          "price": 5295,
+          "priceDisplay": "$5,295",
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "rooms": 3,
+          "availabilityDisplay": "Available now",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-20",
+          "verificationNote": "Opened the exact StreetEasy unit page on 2026-05-20; the page showed #1205 at $5,295, 1 bed / 1 bath, available now, with a floor plan image plus explicit central air, dishwasher, washer/dryer, and oversized-window natural-light copy.",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "high",
+          "commute": {
+            "minutes": 29,
+            "route": "Walk or L to Union Square then N/Q/R to Prince",
+            "notes": "Longer and less direct than the west-side leaders, but still workable and usually around 30 minutes."
+          },
+          "amenities": [
+            "Central air",
+            "Dishwasher",
+            "Washer/dryer",
+            "Floor plan",
+            "Oversized windows",
+            "Roof deck",
+            "Gym"
+          ],
+          "mustHaveEvidence": "The opened page explicitly listed central air, dishwasher, washer/dryer, and described oversized windows flooding the living and sleeping areas with natural light. A floor plan image was present on the same page.",
+          "furnitureFit": "Likely yes. The 3-room one-bedroom layout and visible floor plan suggest a real living area that should plausibly take the 100 inch couch plus coffee table, but confirm exact wall length during the tour.",
+          "caveats": [
+            "East Village commute is longer and less direct than the best Chelsea or West Village options."
+          ],
+          "notes": "New this run and the strongest under-cap 1BR with the cleanest live must-have proof."
+        },
+        {
+          "key": "streeteasy:the-east:1201",
+          "url": "https://streeteasy.com/building/the-east/1201",
+          "provider": "StreetEasy",
+          "name": "The East #1201",
+          "streetAddress": "644 East 14th Street",
+          "unit": "1201",
+          "neighborhood": "East Village",
+          "status": "shortlist",
+          "track": "2br",
+          "rank": 1,
+          "price": 7980,
+          "priceDisplay": "$7,980",
+          "bedrooms": 2,
+          "bathrooms": 2,
+          "rooms": 5,
+          "availabilityDisplay": "Available now",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-20",
+          "verificationNote": "Opened the exact StreetEasy unit page on 2026-05-20; the page showed #1201 at $7,980, 2 beds / 2 baths, available now, with a floor plan image, explicit central air, dishwasher, washer/dryer, and oversized-window natural-light description.",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "high",
+          "commute": {
+            "minutes": 29,
+            "route": "Walk or L to Union Square then N/Q/R to Prince",
+            "notes": "Transfer-heavy by subway, but still within the acceptable range and offset by the apartment quality and price."
+          },
+          "amenities": [
+            "Central air",
+            "Dishwasher",
+            "Washer/dryer",
+            "Floor plan",
+            "Oversized windows",
+            "Doorman",
+            "Roof deck"
+          ],
+          "mustHaveEvidence": "The opened unit page explicitly listed central air, dishwasher, washer/dryer, and described oversized windows in the living room and bedrooms with skyline and river views. A floor plan image was present on the same page.",
+          "furnitureFit": "High confidence yes. The 5-room 2BR/2BA layout with a real living room should comfortably absorb the 100 inch couch plus ottoman and coffee table.",
+          "caveats": [
+            "East Village commute is less direct than the best west-side options."
+          ],
+          "notes": "New this run and the cleanest live 2BR/2BA under $9,000."
+        },
+        {
+          "key": "streeteasy:iris-tribeca:11a",
+          "url": "https://streeteasy.com/building/iris-tribeca/11a",
+          "provider": "StreetEasy",
+          "name": "Iris Tribeca #11A",
+          "streetAddress": "19 Park Place",
+          "unit": "11A",
+          "neighborhood": "Tribeca",
+          "status": "shortlist",
+          "track": "3br",
+          "rank": 1,
+          "price": 15000,
+          "priceDisplay": "$15,000",
+          "bedrooms": 3,
+          "bathrooms": 3,
+          "rooms": 5,
+          "squareFeet": 1587,
+          "availabilityDisplay": "Available now",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-20",
+          "verificationNote": "Opened the exact StreetEasy unit page on 2026-05-20; the page showed #11A at $15,000, 1,587 sq ft, 3 beds / 3 baths, available now, with floor plan image, explicit central air, dishwasher, washer/dryer, balcony, and strong light copy.",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "high",
+          "commute": {
+            "minutes": 12,
+            "route": "Walk",
+            "notes": "Excellent Tribeca-to-SoHo walk commute with a one-stop R/W fallback."
+          },
+          "amenities": [
+            "Central air",
+            "Dishwasher",
+            "Washer/dryer",
+            "Floor plan",
+            "Balcony",
+            "Doorman",
+            "Gym",
+            "Roof deck"
+          ],
+          "mustHaveEvidence": "The opened unit page explicitly listed central air, dishwasher, washer/dryer, balcony, and described north and south light across a full-floor 3BR/3BA layout. Photos and a floor plan image were present on the same page.",
+          "furnitureFit": "High confidence yes. At 1,587 sq ft with a full-floor loft-style layout, this is the clearest true 3BR/3BA living-room fit in the run.",
+          "caveats": [
+            "This uses the top-end $15,000 stretch budget."
+          ],
+          "notes": "Still viable from prior runs, but promoted this run because the exact live page remains excellent and it is the only true 3BR/3BA strong enough to justify the stretch."
+        },
+        {
+          "key": "equity:beatrice:1bed-i2-floor31",
+          "url": "https://www.equityapartments.com/new-york-city/chelsea/beatrice-apartments",
+          "provider": "Equity Apartments",
+          "name": "Beatrice Apartments 1 Bedroom I.2 floor 31",
+          "streetAddress": "105 W 29th Street",
+          "neighborhood": "Chelsea / NoMad",
+          "status": "monitor",
+          "track": "1br",
+          "price": 6002,
+          "priceDisplay": "$6,002",
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "squareFeet": 643,
+          "floorLevel": "31",
+          "availabilityStarts": "2026-05-20",
+          "availabilityDisplay": "Available 5/20/2026",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-20",
+          "verificationNote": "Opened the live Equity availability page on 2026-05-20; the same page showed the 643 sq ft 1BR on floor 31 at $6,002 and the shared apartment-amenity list with in-home washer/dryer, dishwasher, floor-to-ceiling windows, and central heat/AC.",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "high",
+          "commute": {
+            "minutes": 19,
+            "route": "R/W to Prince Street or a low-20s walk",
+            "notes": "Excellent no-transfer commute with a strong walking fallback."
+          },
+          "amenities": [
+            "In-home washer and dryer",
+            "Dishwasher",
+            "Floor-to-ceiling windows",
+            "Central heat and AC in all rooms",
+            "10 foot ceilings",
+            "3D floor plan"
+          ],
+          "mustHaveEvidence": "The opened Equity page explicitly listed in-home washer and dryer, dishwasher, floor-to-ceiling windows, and central heat and AC in all rooms, while the availability table showed the live 643 sq ft 1BR at $6,002.",
+          "furnitureFit": "High confidence yes. The 643 sq ft floor plan should comfortably fit the couch and coffee table setup.",
+          "caveats": [
+            "Two dollars above the 1BR hard cap."
+          ],
+          "rejectionReasons": [
+            "Outside the strict 1BR hard cap."
+          ],
+          "notes": "Still a very strong apartment, but today it missed shortlist status because the live price ticked just above $6,000."
+        },
+        {
+          "key": "streeteasy:53-leroy:1c",
+          "url": "https://streeteasy.com/building/53-leroy-street-new_york/1c/",
+          "provider": "StreetEasy",
+          "name": "53 Leroy Street #1C",
+          "streetAddress": "53 Leroy Street",
+          "unit": "1C",
+          "neighborhood": "West Village",
+          "status": "monitor",
+          "track": "1br",
+          "price": 5995,
+          "priceDisplay": "$5,995",
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "rooms": 2,
+          "availabilityDisplay": "Available now",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-20",
+          "verificationNote": "Opened the exact StreetEasy unit page on 2026-05-20; the page showed #1C at $5,995, available now, with explicit in-unit washer/dryer, dishwasher, private garden, renovated bathroom, and high ceilings.",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "low",
+          "commute": {
+            "minutes": 15,
+            "route": "Walk",
+            "notes": "Very strong West Village walk commute."
+          },
+          "amenities": [
+            "Washer/dryer",
+            "Dishwasher",
+            "Private garden",
+            "Renovated bathroom",
+            "High ceilings"
+          ],
+          "mustHaveEvidence": "The opened page explicitly listed in-unit washer/dryer, dishwasher, private garden, a newly renovated bathroom, and high ceilings.",
+          "furnitureFit": "Unresolved. The page did not expose a floor plan or square footage, so the couch fit needs an in-person check.",
+          "caveats": [
+            "No floor plan or square footage on the opened page.",
+            "A/C and heating were not explicit."
+          ],
+          "rejectionReasons": [
+            "Floor-plan and size confidence are too low for strict shortlist status."
+          ],
+          "notes": "Still viable and still one of the best walk-commute 1BRs, but it remains monitor-only because the size proof is thin."
+        },
+        {
+          "key": "streeteasy:10-morton:5a",
+          "url": "https://streeteasy.com/property/6832866-10-morton-street-5a",
+          "provider": "StreetEasy",
+          "name": "10 Morton Street #5A",
+          "streetAddress": "10 Morton Street",
+          "unit": "5A",
+          "neighborhood": "West Village",
+          "status": "monitor",
+          "track": "1br",
+          "price": 5100,
+          "priceDisplay": "$5,100",
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "availabilityDisplay": "Active StreetEasy rental page",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-20",
+          "verificationNote": "Opened the exact StreetEasy unit page on 2026-05-20; the page still showed #5A at $5,100 with explicit bright windows, in-unit washer/dryer, gut renovation, stainless appliances, dishwasher, and marble finishes.",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "low",
+          "commute": {
+            "minutes": 16,
+            "route": "Walk",
+            "notes": "Excellent West Village walk commute."
+          },
+          "amenities": [
+            "Bright windows",
+            "Washer/dryer",
+            "Dishwasher",
+            "Gut renovation",
+            "Stainless steel appliances",
+            "Marble finishes"
+          ],
+          "mustHaveEvidence": "The opened page explicitly described bright windows, an in-unit washer/dryer, gut renovation, stainless steel appliances, dishwasher, and marble finishes.",
+          "furnitureFit": "Unresolved. The opened page did not expose a floor plan or size data for a confident sofa-layout call.",
+          "caveats": [
+            "No floor plan or square footage on the opened page.",
+            "A/C and heating were not explicit."
+          ],
+          "rejectionReasons": [
+            "Size and HVAC proof are still too incomplete for the strict 1BR shortlist bar."
+          ],
+          "notes": "Good price and location, but still too little floor-plan proof."
+        },
+        {
+          "key": "avalon:west-chelsea:001-613",
+          "url": "https://www.avaloncommunities.com/new-york/new-york-city-apartments/avalon-west-chelsea/",
+          "provider": "Avalon Communities",
+          "name": "Avalon West Chelsea unit 001-613",
+          "streetAddress": "282 11th Avenue",
+          "unit": "001-613",
+          "neighborhood": "West Chelsea",
+          "status": "monitor",
+          "track": "1br",
+          "price": 5505,
+          "priceDisplay": "$5,505",
+          "bedrooms": 1,
+          "bathrooms": 1,
+          "squareFeet": 644,
+          "availabilityDisplay": "Available now",
+          "freshness": "availability_page_only",
+          "verifiedOn": "2026-05-20",
+          "verificationNote": "Opened the live Avalon West Chelsea availability page on 2026-05-20; the page showed unit 001-613 at $5,505, 1 bed / 1 bath, 644 sq ft, available now. The same opened page also listed in-unit washer/dryer and fully equipped modern kitchens with stainless steel appliances, but it did not explicitly call out dishwasher or HVAC on the accessible text.",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "high",
+          "commute": {
+            "minutes": 29,
+            "route": "Walk or C/E to Spring Street plus walk",
+            "notes": "Reasonable, but less direct than the best downtown or village options."
+          },
+          "amenities": [
+            "In-unit washer/dryer",
+            "Stainless steel appliances",
+            "Floor plan",
+            "Fitness center"
+          ],
+          "mustHaveEvidence": "The opened Avalon page verified the exact unit row, 644 sq ft, and price, and separately listed in-unit washer/dryer plus fully equipped kitchens with stainless steel appliances at the community level.",
+          "furnitureFit": "Likely yes based on 644 sq ft and a visible floor plan.",
+          "caveats": [
+            "Dishwasher and HVAC were not explicit on the opened page text.",
+            "Exact unit verification came from the building availability page rather than a dedicated unit detail page."
+          ],
+          "rejectionReasons": [
+            "Must-have tie-out was not explicit enough for strict shortlist status."
+          ],
+          "notes": "New this run and worth monitoring because the west-side location and size are attractive if the missing appliance/HVAC details can be cleared quickly."
+        },
+        {
+          "key": "streeteasy:209-east-25:1a",
+          "url": "https://streeteasy.com/building/209-east-25-street-new_york/1a?similarHDP2=1",
+          "provider": "StreetEasy",
+          "name": "209 East 25th Street #1A",
+          "streetAddress": "209 East 25th Street",
+          "unit": "1A",
+          "neighborhood": "Kips Bay / Gramercy edge",
+          "status": "monitor",
+          "track": "2br",
+          "price": 5495,
+          "priceDisplay": "$5,495",
+          "bedrooms": 2,
+          "bathrooms": 2,
+          "rooms": 4,
+          "availabilityDisplay": "Available now",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-20",
+          "verificationNote": "Opened the exact StreetEasy unit page on 2026-05-20; the page showed #1A at $5,495, 2 beds / 2 baths, available now, with a virtual tour and explicit dishwasher plus washer/dryer.",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "low",
+          "commute": {
+            "minutes": 22,
+            "route": "Walk to R/W at 23rd Street then Prince Street",
+            "notes": "Workable one-line commute after a short walk, but less ideal than closer downtown inventory."
+          },
+          "amenities": [
+            "Dishwasher",
+            "Washer/dryer",
+            "3D virtual tour",
+            "Renovated finishes"
+          ],
+          "mustHaveEvidence": "The opened page explicitly listed dishwasher and washer/dryer and described the apartment as a renovated 2 bedroom / 2 bath.",
+          "furnitureFit": "Possible but unproven. The 3D tour helps, but the opened page did not expose a floor plan or square footage.",
+          "caveats": [
+            "No floor plan or square footage on the opened page.",
+            "Central air or dedicated A/C was not explicit.",
+            "Kips Bay is adjacent rather than a core target neighborhood."
+          ],
+          "rejectionReasons": [
+            "The HVAC and size proof are too soft for strict shortlist status."
+          ],
+          "notes": "Still a credible value 2BR/2BA, but the proof bar is weaker than The East."
+        },
+        {
+          "key": "streeteasy:the-tribeca:7bc",
+          "url": "https://streeteasy.com/building/the-tribeca/7bc",
+          "provider": "StreetEasy",
+          "name": "303 Greenwich Street #7BC",
+          "streetAddress": "303 Greenwich Street",
+          "unit": "7BC",
+          "neighborhood": "Tribeca",
+          "status": "monitor",
+          "track": "3br",
+          "price": 14500,
+          "priceDisplay": "$14,500",
+          "bedrooms": 3,
+          "bathrooms": 3,
+          "rooms": 6,
+          "squareFeet": 1361,
+          "availabilityStarts": "2026-07-01",
+          "availabilityDisplay": "Available 7/1/2026",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-20",
+          "verificationNote": "Opened the exact StreetEasy unit page on 2026-05-20; the page showed #7BC at $14,500, 1,361 sq ft, available 7/1/2026, with explicit central air, dishwasher, washer/dryer, photos, and a floor plan image.",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "high",
+          "commute": {
+            "minutes": 13,
+            "route": "Walk",
+            "notes": "Very easy Tribeca walk commute."
+          },
+          "amenities": [
+            "Central air",
+            "Dishwasher",
+            "Washer/dryer",
+            "Floor plan",
+            "Oversized windows",
+            "Roof deck"
+          ],
+          "mustHaveEvidence": "The opened page explicitly listed central air, dishwasher, washer/dryer, and described oversized western-facing windows plus a floor plan image.",
+          "furnitureFit": "Likely yes for the main living room, but the exact third bedroom is a flexible partition rather than a true fixed room.",
+          "caveats": [
+            "Convertible third bedroom via a foldable wall rather than a true fixed 3BR.",
+            "Available July 1 rather than the ideal June 1-7 window."
+          ],
+          "rejectionReasons": [
+            "Not a true fixed-wall 3BR.",
+            "Timing is later than ideal."
+          ],
+          "notes": "Still a plausible stretch play because the commute and full-bath count are strong, but it misses the true-3BR bar."
+        },
+        {
+          "key": "streeteasy:the-east:1101",
+          "url": "https://streeteasy.com/building/the-east/1101",
+          "provider": "StreetEasy",
+          "name": "The East #1101",
+          "streetAddress": "644 East 14th Street",
+          "unit": "1101",
+          "neighborhood": "East Village",
+          "status": "monitor",
+          "track": "2br",
+          "price": 7950,
+          "priceDisplay": "$7,950",
+          "bedrooms": 2,
+          "bathrooms": 2,
+          "rooms": 5,
+          "availabilityDisplay": "Available now",
+          "freshness": "verified_live",
+          "verifiedOn": "2026-05-20",
+          "verificationNote": "Opened the exact StreetEasy unit page on 2026-05-20; the page showed #1101 at $7,950, 2 beds / 2 baths, available now, with explicit central air, dishwasher, washer/dryer, photos, and a floor plan image.",
+          "photoConfidence": "high",
+          "floorPlanConfidence": "high",
+          "commute": {
+            "minutes": 29,
+            "route": "Walk or L to Union Square then N/Q/R to Prince",
+            "notes": "Similar commute to #1201 and the same building quality profile."
+          },
+          "amenities": [
+            "Central air",
+            "Dishwasher",
+            "Washer/dryer",
+            "Floor plan",
+            "Oversized windows",
+            "Doorman"
+          ],
+          "mustHaveEvidence": "The opened page explicitly listed central air, dishwasher, washer/dryer, and described oversized windows with skyline and river views.",
+          "furnitureFit": "High confidence yes. Same basic large-format The East living-room story as #1201.",
+          "caveats": [
+            "Same-building near-duplicate of shortlist unit #1201, so one tour can likely cover both."
+          ],
+          "rejectionReasons": [
+            "Not meaningfully distinct enough from the stronger sibling shortlist unit."
+          ],
+          "notes": "New this run and still strong; kept in monitor only because #1201 is the cleaner primary pick from the same building."
+        },
+        {
+          "key": "streeteasy:eve-east-village:2as",
+          "url": "https://streeteasy.com/building/eve-433-east-13th-street-new_york/2as?featured=1",
+          "provider": "StreetEasy",
+          "name": "EVE East Village #2AS",
+          "streetAddress": "433 East 13th Street",
+          "unit": "2AS",
+          "neighborhood": "East Village",
+          "status": "excluded",
+          "track": "2br",
+          "price": 7995,
+          "priceDisplay": "$7,995 (old unit data only)",
+          "bedrooms": 2,
+          "bathrooms": 2,
+          "availabilityDisplay": "Current live unit not re-verified; surfaced only as an older cache result",
+          "freshness": "stale_or_mismatch",
+          "verifiedOn": "2026-05-20",
+          "verificationNote": "The exact StreetEasy hit that surfaced today was crawled 7 months ago, and recent direct-operator verification for the same EVE floor plan now routes to a generic availability/contact flow instead of exposing a live unit row. Exact current price and availability therefore could not be trusted.",
+          "photoConfidence": "medium",
+          "floorPlanConfidence": "medium",
+          "commute": {
+            "minutes": 27,
+            "route": "Walk or bus plus walk",
+            "notes": "Commute would be acceptable if the unit were actually live."
+          },
+          "amenities": [
+            "Historical floor plan / cache only"
+          ],
+          "mustHaveEvidence": "Older unit data previously suggested a true 2BR/2BA layout, but the current live operator path no longer exposed the same exact apartment.",
+          "furnitureFit": "Previously looked plausible, but the exact live unit is no longer verifiable.",
+          "caveats": [
+            "Search result stale.",
+            "Direct operator page no longer exposes the exact unit."
+          ],
+          "rejectionReasons": [
+            "Stale or mismatched listing evidence."
+          ],
+          "notes": "Dropped again this run because the exact unit still cannot be re-verified live."
+        }
+      ]
+    }
+  ]
+}

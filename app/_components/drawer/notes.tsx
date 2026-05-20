@@ -5,6 +5,7 @@ import { api } from "../../../convex/_generated/api";
 import { Separator } from "@/_components/ui/separator";
 import { Typography } from "@/_components/ui/typography";
 import type { Apartment } from "@/_lib/apartment";
+import { useSquircle } from "@/_lib/use-squircle";
 import { cn } from "@/_lib/utils";
 
 export interface NotesProps {
@@ -38,6 +39,8 @@ function Notes({ apartment }: NotesProps) {
     persistedUserNotes.length > 0,
   );
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
+  useSquircle(bodyRef, 20);
 
   // Re-sync only when the drawer swaps to a different apartment. We must NOT
   // depend on `persistedUserNotes` here: typing triggers a debounced save,
@@ -84,9 +87,10 @@ function Notes({ apartment }: NotesProps) {
       </Typography>
       <div className="flex flex-col gap-2">
         <div
+          ref={bodyRef}
           onClick={handleContainerClick}
           className={cn(
-            "squircle flex flex-col overflow-hidden rounded-[32px] bg-surface-sunken transition-colors",
+            "flex flex-col overflow-hidden bg-surface-sunken transition-colors",
             !isEditorOpen && "cursor-pointer hover:bg-muted",
           )}
         >

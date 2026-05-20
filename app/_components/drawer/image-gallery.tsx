@@ -68,55 +68,67 @@ function ImageGallery({
 }
 
 function Placeholder() {
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const ref = useRef<HTMLDivElement>(null);
-  useSquircle(ref, 20);
+  useSquircle(ref, 20, { wrapperRef });
   return (
-    <div
-      ref={ref}
-      aria-hidden
-      className="aspect-[1920/1080] w-full rounded-[20px] bg-muted shadow-card-1-clip"
-    />
-  );
-}
-
-function Hero({ image }: { image: Apartment["images"][number] }) {
-  const ref = useRef<HTMLDivElement>(null);
-  useSquircle(ref, 20);
-  return (
-    <div
-      ref={ref}
-      className="relative aspect-[1920/1080] w-full overflow-hidden rounded-[20px] bg-muted shadow-card-1-clip"
-    >
-      <FadeImage
-        key={image.url ?? "active"}
-        src={image.url ?? undefined}
-        alt={image.image.caption ?? ""}
-        loading="eager"
-        fetchPriority="high"
-        decoding="async"
-        className="absolute inset-0 size-full object-cover"
+    <div ref={wrapperRef} className="relative">
+      <div
+        ref={ref}
+        aria-hidden
+        className="aspect-[1920/1080] w-full rounded-[20px] bg-muted shadow-card-1"
       />
     </div>
   );
 }
 
-function MobileSlide({ image }: { image: Apartment["images"][number] }) {
+function Hero({ image }: { image: Apartment["images"][number] }) {
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const ref = useRef<HTMLDivElement>(null);
-  useSquircle(ref, 20);
+  useSquircle(ref, 20, { wrapperRef });
   return (
-    <div
-      ref={ref}
-      className="relative aspect-[1920/1080] w-[calc(100vw-2rem)] shrink-0 snap-center overflow-hidden rounded-[20px] bg-muted shadow-card-1-clip"
-    >
-      {image.url ? (
+    <div ref={wrapperRef} className="relative">
+      <div
+        ref={ref}
+        className="relative aspect-[1920/1080] w-full overflow-hidden rounded-[20px] bg-muted shadow-card-1"
+      >
         <FadeImage
-          src={image.url}
+          key={image.url ?? "active"}
+          src={image.url ?? undefined}
           alt={image.image.caption ?? ""}
-          loading="lazy"
+          loading="eager"
+          fetchPriority="high"
           decoding="async"
           className="absolute inset-0 size-full object-cover"
         />
-      ) : null}
+      </div>
+    </div>
+  );
+}
+
+function MobileSlide({ image }: { image: Apartment["images"][number] }) {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
+  useSquircle(ref, 20, { wrapperRef });
+  return (
+    <div
+      ref={wrapperRef}
+      className="relative w-[calc(100vw-2rem)] shrink-0 snap-center"
+    >
+      <div
+        ref={ref}
+        className="relative aspect-[1920/1080] w-full overflow-hidden rounded-[20px] bg-muted shadow-card-1"
+      >
+        {image.url ? (
+          <FadeImage
+            src={image.url}
+            alt={image.image.caption ?? ""}
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 size-full object-cover"
+          />
+        ) : null}
+      </div>
     </div>
   );
 }
@@ -129,31 +141,34 @@ interface ThumbnailProps {
 }
 
 function Thumbnail({ image, isActive, onClick, index }: ThumbnailProps) {
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const ref = useRef<HTMLButtonElement>(null);
-  useSquircle(ref, 16);
+  useSquircle(ref, 16, { wrapperRef });
   return (
-    <button
-      ref={ref}
-      type="button"
-      onClick={onClick}
-      aria-label={`Show photo ${index + 1}`}
-      aria-current={isActive}
-      className={cn(
-        "relative h-[90px] w-[142px] shrink-0 overflow-hidden rounded-[16px] bg-surface-sunken",
-        "shadow-card-1-clip outline-none transition-opacity",
-        !isActive && "opacity-80 hover:opacity-100",
-      )}
-    >
-      {image.url ? (
-        <FadeImage
-          src={image.url}
-          alt=""
-          loading="lazy"
-          decoding="async"
-          className="absolute inset-0 size-full object-cover"
-        />
-      ) : null}
-    </button>
+    <div ref={wrapperRef} className="relative shrink-0">
+      <button
+        ref={ref}
+        type="button"
+        onClick={onClick}
+        aria-label={`Show photo ${index + 1}`}
+        aria-current={isActive}
+        className={cn(
+          "relative h-[90px] w-[142px] overflow-hidden rounded-[16px] bg-surface-sunken",
+          "shadow-card-1 outline-none transition-opacity",
+          !isActive && "opacity-80 hover:opacity-100",
+        )}
+      >
+        {image.url ? (
+          <FadeImage
+            src={image.url}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 size-full object-cover"
+          />
+        ) : null}
+      </button>
+    </div>
   );
 }
 

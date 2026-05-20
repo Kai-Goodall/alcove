@@ -66,8 +66,9 @@ const PopoverContent = React.forwardRef<
     ref,
   ) => {
     const open = React.useContext(PopoverOpenContext);
+    const wrapperRef = React.useRef<HTMLDivElement>(null);
     const squircleRef = React.useRef<HTMLDivElement>(null);
-    useSquircle(squircleRef, 24);
+    useSquircle(squircleRef, 24, { wrapperRef });
 
     return (
       <AnimatePresence>
@@ -84,7 +85,8 @@ const PopoverContent = React.forwardRef<
               {...props}
             >
               <motion.div
-                ref={squircleRef}
+                ref={wrapperRef}
+                className="relative"
                 // No enter animation per spec — appears instantly. Exit only.
                 initial={false}
                 animate={{ opacity: 1 }}
@@ -100,13 +102,16 @@ const PopoverContent = React.forwardRef<
                   transformOrigin:
                     "var(--radix-popover-content-transform-origin)",
                 }}
-                className={cn(
-                  "rounded-[24px] bg-card text-foreground shadow-tooltip-clip",
-                  "outline-none",
-                  className,
-                )}
               >
-                {children}
+                <div
+                  ref={squircleRef}
+                  className={cn(
+                    "rounded-[24px] bg-card text-foreground shadow-tooltip outline-none",
+                    className,
+                  )}
+                >
+                  {children}
+                </div>
               </motion.div>
             </PopoverPrimitive.Content>
           </PopoverPrimitive.Portal>

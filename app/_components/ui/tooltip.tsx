@@ -60,8 +60,9 @@ const TooltipContent = React.forwardRef<
   ) => {
     const open = React.useContext(TooltipOpenContext);
     const shouldReduceMotion = useReducedMotion();
+    const wrapperRef = React.useRef<HTMLDivElement>(null);
     const squircleRef = React.useRef<HTMLDivElement>(null);
-    useSquircle(squircleRef, 14);
+    useSquircle(squircleRef, 14, { wrapperRef });
     const enterTransition = shouldReduceMotion
       ? { duration: 0 }
       : { type: "spring" as const, duration: 0.15, bounce: 0 };
@@ -81,7 +82,8 @@ const TooltipContent = React.forwardRef<
               {...props}
             >
               <motion.div
-                ref={squircleRef}
+                ref={wrapperRef}
+                className="relative"
                 initial={
                   shouldReduceMotion
                     ? false
@@ -103,15 +105,19 @@ const TooltipContent = React.forwardRef<
                   transformOrigin:
                     "var(--radix-tooltip-content-transform-origin)",
                 }}
-                className={cn(
-                  "max-w-[200px] rounded-[14px] bg-card text-foreground shadow-tooltip-clip",
-                  compact
-                    ? "px-3 py-2 text-[14px] font-semibold leading-none"
-                    : "px-4 py-3 text-[14px] leading-[18px]",
-                  className,
-                )}
               >
-                {children}
+                <div
+                  ref={squircleRef}
+                  className={cn(
+                    "max-w-[200px] rounded-[14px] bg-card text-foreground shadow-tooltip",
+                    compact
+                      ? "px-3 py-2 text-[14px] font-semibold leading-none"
+                      : "px-4 py-3 text-[14px] leading-[18px]",
+                    className,
+                  )}
+                >
+                  {children}
+                </div>
               </motion.div>
             </TooltipPrimitive.Content>
           </TooltipPrimitive.Portal>

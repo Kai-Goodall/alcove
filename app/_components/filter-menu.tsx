@@ -248,14 +248,16 @@ function NumberStepper({
 	onDecrement,
 	onIncrement,
 }: NumberStepperProps) {
+	const wrapperRef = useRef<HTMLDivElement>(null);
 	const ref = useRef<HTMLDivElement>(null);
-	useSquircle(ref, 12);
+	useSquircle(ref, 12, { wrapperRef });
 	return (
+		<div ref={wrapperRef} className="relative">
 		<div
 			ref={ref}
 			className={cn(
 				"flex h-9 items-center justify-center gap-2.5 rounded-[12px] bg-card px-3",
-				"shadow-input-clip",
+				"shadow-input",
 			)}
 		>
 			<StepperButton
@@ -275,6 +277,7 @@ function NumberStepper({
 			>
 				<Icon glyph={IconPlusFill18} size={12} />
 			</StepperButton>
+		</div>
 		</div>
 	);
 }

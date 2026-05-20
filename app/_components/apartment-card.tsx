@@ -32,8 +32,12 @@ function ApartmentCard({
 }: ApartmentCardProps) {
 	const isSkeleton = skeleton || !apartment;
 	const isHidden = apartment?.hidden === true;
+	// `wrapperRef` hosts the SVG shadow overlay; `cardRef` is the squircle
+	// surface. Hover transforms live on the wrapper so the SVG follows the
+	// card when it lifts. See `useSquircle` JSDoc.
+	const wrapperRef = useRef<HTMLDivElement>(null);
 	const cardRef = useRef<HTMLElement>(null);
-	useSquircle(cardRef, 20);
+	useSquircle(cardRef, 20, { wrapperRef });
 
 	const handleSelect = () => {
 		if (isSkeleton || !apartment || !onSelect) return;
@@ -48,8 +52,8 @@ function ApartmentCard({
 	};
 
 	return (
-		<article
-			ref={cardRef}
+		<div
+			ref={wrapperRef}
 			role={isSkeleton ? undefined : "button"}
 			tabIndex={isSkeleton ? -1 : 0}
 			onClick={isSkeleton ? undefined : handleSelect}
@@ -60,8 +64,7 @@ function ApartmentCard({
 			aria-hidden={isSkeleton}
 			data-apartment-card={isSkeleton ? undefined : ""}
 			className={cn(
-				"group/card relative flex flex-col gap-1 overflow-hidden rounded-[20px] bg-card p-2",
-				"shadow-card-1-clip outline-none",
+				"group/card relative rounded-[20px] outline-none",
 				"transition duration-200 ease-[cubic-bezier(0.34,1.3,0.64,1)] will-change-transform",
 				isSkeleton
 					? "cursor-default"
@@ -69,15 +72,20 @@ function ApartmentCard({
 				isHidden ? "opacity-60" : "opacity-100",
 			)}
 		>
-			{isSkeleton ? (
-				<SkeletonContent />
-			) : (
-				<>
-					<CardContent apartment={apartment!} index={index} />
-					{apartment!.status === "shortlist" ? <ShortlistRibbon /> : null}
-				</>
-			)}
-		</article>
+			<article
+				ref={cardRef}
+				className="flex flex-col gap-1 overflow-hidden rounded-[20px] bg-card p-2 shadow-card-1"
+			>
+				{isSkeleton ? (
+					<SkeletonContent />
+				) : (
+					<>
+						<CardContent apartment={apartment!} index={index} />
+						{apartment!.status === "shortlist" ? <ShortlistRibbon /> : null}
+					</>
+				)}
+			</article>
+		</div>
 	);
 }
 
@@ -92,25 +100,28 @@ function CardContent({
 	const beds = getBedroomCount(apartment);
 	const baths = getBathroomCount(apartment);
 	const isPriority = index < 3;
+	const imageWrapperRef = useRef<HTMLDivElement>(null);
 	const imageRef = useRef<HTMLDivElement>(null);
-	useSquircle(imageRef, 12);
+	useSquircle(imageRef, 12, { wrapperRef: imageWrapperRef });
 
 	return (
 		<>
-			<div
-				ref={imageRef}
-				className="relative aspect-[1920/1080] w-full overflow-hidden rounded-[12px] bg-muted shadow-card-1-clip"
-			>
-				{image?.url ? (
-					<FadeImage
-						src={image.url}
-						alt={image.image.caption ?? ""}
-						loading={isPriority ? "eager" : "lazy"}
-						decoding="async"
-						fetchPriority={isPriority ? "high" : "auto"}
-						className="absolute inset-0 size-full object-cover"
-					/>
-				) : null}
+			<div ref={imageWrapperRef} className="relative">
+				<div
+					ref={imageRef}
+					className="relative aspect-[1920/1080] w-full overflow-hidden rounded-[12px] bg-muted shadow-card-1"
+				>
+					{image?.url ? (
+						<FadeImage
+							src={image.url}
+							alt={image.image.caption ?? ""}
+							loading={isPriority ? "eager" : "lazy"}
+							decoding="async"
+							fetchPriority={isPriority ? "high" : "auto"}
+							className="absolute inset-0 size-full object-cover"
+						/>
+					) : null}
+				</div>
 			</div>
 
 			<div className="flex flex-col gap-1 px-2 py-1.5">
@@ -132,15 +143,18 @@ function CardContent({
 }
 
 function SkeletonContent() {
+	const wrapperRef = useRef<HTMLDivElement>(null);
 	const ref = useRef<HTMLDivElement>(null);
-	useSquircle(ref, 12);
+	useSquircle(ref, 12, { wrapperRef });
 	return (
 		<>
-			<div
-				ref={ref}
-				aria-hidden
-				className="aspect-[1920/1080] w-full animate-pulse rounded-[12px] bg-muted shadow-card-1-clip"
-			/>
+			<div ref={wrapperRef} className="relative">
+				<div
+					ref={ref}
+					aria-hidden
+					className="aspect-[1920/1080] w-full animate-pulse rounded-[12px] bg-muted shadow-card-1"
+				/>
+			</div>
 			<div aria-hidden className="flex flex-col gap-2 px-2 py-1.5">
 				<div className="h-[16px] w-2/3 animate-pulse rounded bg-muted" />
 				<div className="h-[14px] w-1/2 animate-pulse rounded bg-muted" />

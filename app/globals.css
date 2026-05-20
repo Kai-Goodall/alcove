@@ -156,44 +156,8 @@ body {
   background: rgb(240 105 82 / 0.24);
 }
 
-/* Squircles are applied via `useSquircle()` from `@lisse/react`. Because
-   `clip-path` crops the element's painted box — including any
-   `box-shadow` that extends outside it — the variants below replace each
-   shadow token with `filter: drop-shadow()` equivalents that *do* trace
-   the clipped silhouette. Use the `-clip` suffix on any element that
-   has `useSquircle` attached. Notes:
-     1. `drop-shadow()` doesn't support spread, so the 1px ring layer
-        each token used to carry is approximated with a thin 0 0 1px
-        halo drop-shadow.
-     2. Chained drop-shadows are rasterized once each, so prefer keeping
-        the layer count modest (2 visible + 1 halo here). */
-
-@utility shadow-card-1-clip {
-  filter: drop-shadow(0 0 1px rgb(0 0 0 / 0.1))
-          drop-shadow(0 4px 6px rgb(0 0 0 / 0.05))
-          drop-shadow(0 2px 2px rgb(0 0 0 / 0.05));
-}
-
-@utility shadow-card-2-clip {
-  filter: drop-shadow(0 0 1px rgb(0 0 0 / 0.1))
-          drop-shadow(0 8px 12px rgb(0 0 0 / 0.06))
-          drop-shadow(0 1px 3px rgb(0 0 0 / 0.1));
-}
-
-@utility shadow-tooltip-clip {
-  filter: drop-shadow(0 0 1px rgb(0 0 0 / 0.1))
-          drop-shadow(0 8px 12px rgb(0 0 0 / 0.06))
-          drop-shadow(0 1px 3px rgb(0 0 0 / 0.1));
-}
-
-@utility shadow-button-clip {
-  filter: drop-shadow(0 0 1px rgb(0 0 0 / 0.1))
-          drop-shadow(0 4px 6px rgb(0 0 0 / 0.05))
-          drop-shadow(0 2px 2px rgb(0 0 0 / 0.05));
-}
-
-@utility shadow-input-clip {
-  filter: drop-shadow(0 0 1px rgb(0 0 0 / 0.1))
-          drop-shadow(0 2px 2px rgb(0 0 0 / 0.05));
-}
+/* Squircles are applied via `useSquircle()` from `@lisse/react`. Pass a
+   `wrapperRef` on elements that need a visible shadow — Lisse extracts
+   the CSS `box-shadow` and re-renders it as SVG that follows the
+   squircle exactly. See the hook's JSDoc for details. */
 

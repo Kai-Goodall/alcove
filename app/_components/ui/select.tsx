@@ -59,11 +59,12 @@ const SelectContent = React.forwardRef<
     },
     ref,
   ) => {
+    const wrapperRef = React.useRef<HTMLDivElement>(null);
     const squircleRef = React.useRef<HTMLDivElement>(null);
-    useSquircle(squircleRef, 16);
+    useSquircle(squircleRef, 16, { wrapperRef });
     const setRefs = React.useCallback(
       (el: HTMLDivElement | null) => {
-        squircleRef.current = el;
+        wrapperRef.current = el;
         if (typeof ref === "function") ref(el);
         else if (ref) {
           (ref as React.MutableRefObject<HTMLDivElement | null>).current = el;
@@ -80,18 +81,23 @@ const SelectContent = React.forwardRef<
           sideOffset={sideOffset}
           align={align}
           data-overlay-content=""
-          className={cn(
-            "z-50 min-w-[137px] rounded-[16px] bg-card text-foreground shadow-tooltip-clip outline-none",
-            className,
-          )}
+          className="z-50 outline-none"
           style={{
             transformOrigin: "var(--radix-select-content-transform-origin)",
           }}
           {...props}
         >
-          <SelectPrimitive.Viewport className="flex flex-col items-stretch p-1">
-            {children}
-          </SelectPrimitive.Viewport>
+          <div
+            ref={squircleRef}
+            className={cn(
+              "min-w-[137px] rounded-[16px] bg-card text-foreground shadow-tooltip outline-none",
+              className,
+            )}
+          >
+            <SelectPrimitive.Viewport className="flex flex-col items-stretch p-1">
+              {children}
+            </SelectPrimitive.Viewport>
+          </div>
         </SelectPrimitive.Content>
       </SelectPrimitive.Portal>
     );

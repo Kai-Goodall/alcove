@@ -51,8 +51,11 @@ function AddApartmentDrawer({
   onHoverChange,
   isMobile = false,
 }: AddApartmentDrawerProps) {
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
-  useSquircle(drawerRef, isMobile ? 0 : 36);
+  useSquircle(drawerRef, isMobile ? 0 : 36, {
+    wrapperRef: isMobile ? undefined : wrapperRef,
+  });
   const [url, setUrl] = useState("");
   const [jobId, setJobId] = useState<Id<"apartmentImportJobs"> | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -129,11 +132,8 @@ function AddApartmentDrawer({
   const displayUrl = job ? stripUrlPrefix(job.sourceUrl) : "";
 
   return (
-    <motion.aside
-      ref={drawerRef}
-      role="dialog"
-      aria-modal={isMobile ? "true" : "false"}
-      aria-label="Add apartment"
+    <motion.div
+      ref={wrapperRef}
       initial={
         isMobile
           ? { transform: "translateX(100%)", opacity: 1 }
@@ -150,12 +150,22 @@ function AddApartmentDrawer({
       onMouseLeave={() => onHoverChange?.(false)}
       style={isMobile ? undefined : { right: rightOffset }}
       className={cn(
-        "pointer-events-auto fixed z-30 flex flex-col overflow-hidden bg-card",
+        "pointer-events-auto fixed z-30",
         isMobile
-          ? "inset-0 rounded-none"
-          : "top-16 bottom-16 w-[525px] max-w-[calc(100vw-32px)] rounded-[36px] shadow-card-2-clip",
+          ? "inset-0"
+          : "top-16 bottom-16 w-[525px] max-w-[calc(100vw-32px)]",
       )}
     >
+      <aside
+        ref={drawerRef}
+        role="dialog"
+        aria-modal={isMobile ? "true" : "false"}
+        aria-label="Add apartment"
+        className={cn(
+          "relative flex h-full w-full flex-col overflow-hidden bg-card",
+          isMobile ? "rounded-none" : "rounded-[36px] shadow-card-2",
+        )}
+      >
       {isMobile ? (
         <button
           type="button"
@@ -256,7 +266,8 @@ function AddApartmentDrawer({
           </form>
         </div>
       )}
-    </motion.aside>
+      </aside>
+    </motion.div>
   );
 }
 

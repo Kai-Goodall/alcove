@@ -3,35 +3,46 @@
 import { useSmoothCorners } from "@lisse/react";
 import type { RefObject } from "react";
 
+export interface UseSquircleOptions {
+	/**
+	 * `position: relative` ancestor that hosts the SVG overlay for shadow /
+	 * border effects. When provided, Lisse's `autoEffects` is enabled, which
+	 * extracts every CSS `box-shadow` and `border` layer from the inner
+	 * element via `parseBoxShadow` and re-renders them as SVG that traces
+	 * the squircle silhouette exactly — including spread, multiple layers,
+	 * and inset shadows. Without a wrapper, `clip-path` would crop the
+	 * native CSS shadow against the element's painted box and you'd get a
+	 * shadowless squircle.
+	 */
+	wrapperRef?: RefObject<HTMLElement | null>;
+}
+
 /**
  * Apply a Figma-quality squircle clip-path to a referenced element. Uses
  * the @lisse/react smooth-corners hook with Figma's standard smoothing
- * factor (0.6) so the rendered curvature matches what designers draw,
- * meaning the `radius` value passed here is what shows up visually — no
- * compensation bump needed (unlike CSS `corner-shape: squircle`, which
- * reads ~4–8px tighter than Figma at the same numeric radius).
+ * factor (0.6) so the rendered curvature matches what designers draw.
  *
- * @remarks
- * `autoEffects` is forced off. Lisse's default behaviour is to extract
- * the element's CSS `box-shadow` + `border` on mount and re-render them
- * as SVG effects so they trace the squircle exactly. That requires a
- * wrapper `<div>` for the SVG overlay — which the hook (vs. the
- * component) doesn't create — so the stripped shadows just vanish.
- * Disabling auto-extract leaves the CSS shadow on the element, which
- * also lets motion's `animate={{ boxShadow }}` and CSS transitions on
- * `box-shadow` continue working. The shadow's perimeter follows the
- * element's border-box (so set a matching `rounded-*` for a clean look)
- * rather than the squircle path, but the visual gap is small at the
- * shadow blurs we use.
+ * For elements that need a visible shadow, pass `{ wrapperRef }` — see
+ * the field doc on `UseSquircleOptions.wrapperRef` for the rationale.
  *
- * @param ref  the element to clip
+ * @param ref     element to clip to a squircle
  * @param radius  CSS pixels for all four corners
+ * @param options optional `wrapperRef` to enable SVG shadow/border auto-extract
  */
 function useSquircle(
 	ref: RefObject<HTMLElement | null>,
 	radius: number,
+	options?: UseSquircleOptions,
 ): void {
-	useSmoothCorners(ref, { radius, smoothing: 0.6 }, { autoEffects: false });
+	const wrapperRef = options?.wrapperRef;
+	useSmoothCorners(
+		ref,
+		{ radius, smoothing: 0.6 },
+		{
+			autoEffects: Boolean(wrapperRef),
+			wrapperRef,
+		},
+	);
 }
 
 export { useSquircle };

@@ -13,20 +13,23 @@ export interface ButtonGroupProps
  * their own active/inactive surface.
  */
 function ButtonGroup({ children, className, ...props }: ButtonGroupProps) {
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const ref = useRef<HTMLDivElement>(null);
-  useSquircle(ref, 10);
+  useSquircle(ref, 10, { wrapperRef });
   return (
-    <div
-      ref={ref}
-      role="group"
-      className={cn(
-        "inline-flex h-[34px] w-full items-stretch overflow-hidden rounded-[10px] bg-card shadow-button-clip",
-        "divide-x divide-border/70",
-        className,
-      )}
-      {...props}
-    >
-      {children}
+    <div ref={wrapperRef} className="relative inline-flex w-full">
+      <div
+        ref={ref}
+        role="group"
+        className={cn(
+          "inline-flex h-[34px] w-full items-stretch overflow-hidden rounded-[10px] bg-card shadow-button",
+          "divide-x divide-border/70",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </div>
     </div>
   );
 }

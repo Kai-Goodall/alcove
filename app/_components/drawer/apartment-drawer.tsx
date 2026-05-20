@@ -43,11 +43,16 @@ function ApartmentDrawer({
 	rightOffset,
 	isMobile = false,
 }: ApartmentDrawerProps) {
+	const wrapperRef = useRef<HTMLDivElement>(null);
 	const drawerRef = useRef<HTMLDivElement>(null);
 	const scrollRef = useRef<HTMLDivElement>(null);
 	// 0 on mobile (no rounding — full-screen sheet) so the clip-path stays
-	// a plain rectangle and doesn't interfere with `rounded-none`.
-	useSquircle(drawerRef, isMobile ? 0 : 36);
+	// a plain rectangle and doesn't interfere with `rounded-none`. The
+	// wrapper hosts Lisse's SVG shadow overlay so it follows the drawer's
+	// slide-in/out transform.
+	useSquircle(drawerRef, isMobile ? 0 : 36, {
+		wrapperRef: isMobile ? undefined : wrapperRef,
+	});
 
 	// Convex pushes updates on this query — keeps the drawer fresh if the doc
 	// changes (e.g. status flips elsewhere) while preserving the initial paint.
@@ -96,11 +101,8 @@ function ApartmentDrawer({
 	}, [apartment._id]);
 
 	return (
-		<motion.aside
-			ref={drawerRef}
-			role="dialog"
-			aria-modal={isMobile ? "true" : "false"}
-			aria-label={`${getDisplayName(apartment)} details`}
+		<motion.div
+			ref={wrapperRef}
 			initial={
 				isMobile
 					? { transform: "translateX(100%)", opacity: 1 }
@@ -117,12 +119,24 @@ function ApartmentDrawer({
 			onMouseLeave={() => onHoverChange?.(false)}
 			style={isMobile ? undefined : { right: rightOffset }}
 			className={cn(
-				"pointer-events-auto fixed z-30 overflow-hidden bg-card",
+				"pointer-events-auto fixed z-30",
 				isMobile
-					? "inset-0 rounded-none"
-					: "top-16 bottom-16 w-[525px] max-w-[calc(100vw-32px)] rounded-[36px] shadow-card-2-clip",
+					? "inset-0"
+					: "top-16 bottom-16 w-[525px] max-w-[calc(100vw-32px)]",
 			)}
 		>
+			<aside
+				ref={drawerRef}
+				role="dialog"
+				aria-modal={isMobile ? "true" : "false"}
+				aria-label={`${getDisplayName(apartment)} details`}
+				className={cn(
+					"relative h-full w-full overflow-hidden bg-card",
+					isMobile
+						? "rounded-none"
+						: "rounded-[36px] shadow-card-2",
+				)}
+			>
 			{isMobile ? (
 				<button
 					type="button"
@@ -166,7 +180,8 @@ function ApartmentDrawer({
 					</motion.div>
 				</AnimatePresence>
 			</div>
-		</motion.aside>
+			</aside>
+		</motion.div>
 	);
 }
 

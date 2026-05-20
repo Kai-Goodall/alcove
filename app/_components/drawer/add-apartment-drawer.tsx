@@ -153,7 +153,7 @@ function AddApartmentDrawer({
         "pointer-events-auto fixed z-30 flex flex-col overflow-hidden bg-card",
         isMobile
           ? "inset-0 rounded-none"
-          : "top-16 bottom-16 w-[525px] max-w-[calc(100vw-32px)] rounded-[36px] shadow-card-2",
+          : "top-16 bottom-16 w-[525px] max-w-[calc(100vw-32px)] rounded-[36px] shadow-card-2-clip",
       )}
     >
       {isMobile ? (

@@ -101,7 +101,7 @@ const PopoverContent = React.forwardRef<
                     "var(--radix-popover-content-transform-origin)",
                 }}
                 className={cn(
-                  "rounded-[24px] bg-card text-foreground shadow-tooltip",
+                  "rounded-[24px] bg-card text-foreground shadow-tooltip-clip",
                   "outline-none",
                   className,
                 )}

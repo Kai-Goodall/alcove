@@ -81,7 +81,7 @@ const SelectContent = React.forwardRef<
           align={align}
           data-overlay-content=""
           className={cn(
-            "z-50 min-w-[137px] rounded-[16px] bg-card text-foreground shadow-tooltip outline-none",
+            "z-50 min-w-[137px] rounded-[16px] bg-card text-foreground shadow-tooltip-clip outline-none",
             className,
           )}
           style={{

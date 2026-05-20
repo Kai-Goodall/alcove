@@ -255,7 +255,7 @@ function NumberStepper({
 			ref={ref}
 			className={cn(
 				"flex h-9 items-center justify-center gap-2.5 rounded-[12px] bg-card px-3",
-				"shadow-input",
+				"shadow-input-clip",
 			)}
 		>
 			<StepperButton

@@ -1,6 +1,5 @@
 import * as React from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { useSquircle } from "@/_lib/use-squircle";
 import { cn } from "@/_lib/utils";
 
 type MotionSafeInputProps = Omit<
@@ -36,23 +35,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       ? { duration: 0 }
       : { type: "spring" as const, duration: 0.16, bounce: 0 };
 
-    // Own ref drives the squircle; we also forward to any consumer ref.
-    const squircleRef = React.useRef<HTMLInputElement>(null);
-    useSquircle(squircleRef, 12);
-    const setRefs = React.useCallback(
-      (el: HTMLInputElement | null) => {
-        squircleRef.current = el;
-        if (typeof ref === "function") ref(el);
-        else if (ref) {
-          (ref as React.MutableRefObject<HTMLInputElement | null>).current = el;
-        }
-      },
-      [ref],
-    );
-
+    // No squircle clip-path here — the input's animated `box-shadow`
+    // (motion's `whileFocus`) would be cropped by the clip and never
+    // render. The radius is small enough that the circular-arc rounding
+    // reads near-identical to the squircle at this size.
     return (
       <MotionInput
-        ref={setRefs}
+        ref={ref}
         type={type}
         aria-invalid={invalid || undefined}
         initial={false}

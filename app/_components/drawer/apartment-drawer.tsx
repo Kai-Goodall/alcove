@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useMutation, useQuery } from "convex/react";
+import { IconChevronLeftFill18 } from "nucleo-ui-fill-18";
 import { api } from "../../../convex/_generated/api";
 import { ImageGallery } from "@/_components/drawer/image-gallery";
 import { StatCards } from "@/_components/drawer/stat-cards";
@@ -9,12 +10,14 @@ import { Location } from "@/_components/drawer/location";
 import { Notes } from "@/_components/drawer/notes";
 import { FavoriteHeart } from "@/_components/favorite-heart";
 import { TourSelect } from "@/_components/tour-select";
+import { Icon } from "@/_components/ui/icon";
 import {
 	formatPrice,
 	formatStreetAddress,
 	getDisplayName,
 	type Apartment,
 } from "@/_lib/apartment";
+import { cn } from "@/_lib/utils";
 
 const RELATIVE_FORMATTER = new Intl.RelativeTimeFormat("en", {
 	numeric: "auto",
@@ -28,6 +31,8 @@ export interface ApartmentDrawerProps {
 	onHoverChange?: (hovered: boolean) => void;
 	/** Distance from the viewport's right edge, in px. */
 	rightOffset: number;
+	/** When true, render as a full-screen sheet with a back chevron. */
+	isMobile?: boolean;
 }
 
 function ApartmentDrawer({
@@ -35,6 +40,7 @@ function ApartmentDrawer({
 	onClose,
 	onHoverChange,
 	rightOffset,
+	isMobile = false,
 }: ApartmentDrawerProps) {
 	const drawerRef = useRef<HTMLDivElement>(null);
 	const scrollRef = useRef<HTMLDivElement>(null);
@@ -61,8 +67,10 @@ function ApartmentDrawer({
 
 	// Click outside the drawer closes it — except when the click lands on
 	// another apartment card OR inside a portaled overlay (select menu,
-	// popover) whose content is rendered outside the drawer DOM tree.
+	// popover) whose content is rendered outside the drawer DOM tree. On
+	// mobile the drawer is a full sheet, so there is no "outside" — skip.
 	useEffect(() => {
+		if (isMobile) return;
 		const onPointerDown = (event: PointerEvent) => {
 			const target = event.target as Element | null;
 			if (!target) return;
@@ -73,7 +81,7 @@ function ApartmentDrawer({
 		};
 		document.addEventListener("pointerdown", onPointerDown);
 		return () => document.removeEventListener("pointerdown", onPointerDown);
-	}, [onClose]);
+	}, [onClose, isMobile]);
 
 	// Reset scroll to top when the displayed apartment changes.
 	useEffect(() => {
@@ -87,17 +95,40 @@ function ApartmentDrawer({
 		<motion.aside
 			ref={drawerRef}
 			role="dialog"
-			aria-modal="false"
+			aria-modal={isMobile ? "true" : "false"}
 			aria-label={`${getDisplayName(apartment)} details`}
-			initial={{ transform: "translateX(32px)", opacity: 0 }}
+			initial={
+				isMobile
+					? { transform: "translateX(100%)", opacity: 1 }
+					: { transform: "translateX(32px)", opacity: 0 }
+			}
 			animate={{ transform: "translateX(0px)", opacity: 1 }}
-			exit={{ transform: "translateX(32px)", opacity: 0 }}
+			exit={
+				isMobile
+					? { transform: "translateX(100%)", opacity: 1 }
+					: { transform: "translateX(32px)", opacity: 0 }
+			}
 			transition={{ type: "spring", duration: 0.34, bounce: 0 }}
 			onMouseEnter={() => onHoverChange?.(true)}
 			onMouseLeave={() => onHoverChange?.(false)}
-			style={{ right: rightOffset }}
-			className="squircle pointer-events-auto fixed top-16 bottom-16 z-30 w-[525px] max-w-[calc(100vw-32px)] overflow-hidden rounded-[48px] bg-card shadow-card-2"
+			style={isMobile ? undefined : { right: rightOffset }}
+			className={cn(
+				"pointer-events-auto fixed z-30 overflow-hidden bg-card",
+				isMobile
+					? "inset-0 rounded-none"
+					: "squircle top-16 bottom-16 w-[525px] max-w-[calc(100vw-32px)] rounded-[48px] shadow-card-2",
+			)}
 		>
+			{isMobile ? (
+				<button
+					type="button"
+					aria-label="Close apartment details"
+					onClick={onClose}
+					className="absolute top-3 left-3 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-card/85 text-foreground shadow-card-1 backdrop-blur-md outline-none transition-colors hover:bg-button-hover focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card"
+				>
+					<Icon glyph={IconChevronLeftFill18} size={18} />
+				</button>
+			) : null}
 			<div
 				ref={scrollRef}
 				className="h-full max-h-full overflow-y-auto [scrollbar-width:thin]"
@@ -114,11 +145,12 @@ function ApartmentDrawer({
 						<ImageGallery
 							apartmentId={apartment._id}
 							images={apartment.images}
+							isMobile={isMobile}
 						/>
 						<div className="flex flex-col gap-5 px-4 pb-4">
 							<ApartmentSummary apartment={apartment} />
 							<StatCards apartment={apartment} />
-							<div className="flex items-stretch gap-5">
+							<div className="flex flex-col gap-5 sm:flex-row sm:items-stretch">
 								<MoveIn apartment={apartment} />
 								<Location apartment={apartment} />
 							</div>

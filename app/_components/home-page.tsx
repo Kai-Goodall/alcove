@@ -20,6 +20,7 @@ import {
   type Apartment,
 } from "@/_lib/apartment";
 import { useApartmentSelection } from "@/_lib/use-apartment-selection";
+import { useIsMobile } from "@/_lib/use-is-mobile";
 
 const COLUMN_WIDTH = 800;
 const DRAWER_WIDTH = 525;
@@ -81,6 +82,7 @@ function HomePage() {
   const [isAddOpen, setIsAddOpen] = useState(false);
   const isDrawerOpen = selectedId !== null || isAddOpen;
   const { sideMargin, viewportShift } = useContainerLayout();
+  const isMobile = useIsMobile();
 
   // Only re-arm the dim lock when the drawer transitions from CLOSED to
   // OPEN. Switching apartments while the drawer is already open carries
@@ -213,21 +215,24 @@ function HomePage() {
   // The page is always shifted aside while the drawer is open. The dim
   // (opacity + blur) is held until the user has entered the drawer once;
   // after that, it tracks pointer hover.
+  // Page shift + dim are desktop-only — on mobile the drawer covers the
+  // whole viewport, so leave the underlying page alone.
   const isDimmed =
-    isDrawerOpen && (!hasEnteredDrawer || isDrawerHovered);
+    !isMobile && isDrawerOpen && (!hasEnteredDrawer || isDrawerHovered);
 
   return (
     <div className="relative min-h-screen w-full overflow-x-hidden bg-background">
       <motion.div
         animate={{
-          transform: isDrawerOpen
-            ? `translateX(${-viewportShift}px)`
-            : "translateX(0px)",
+          transform:
+            isDrawerOpen && !isMobile
+              ? `translateX(${-viewportShift}px)`
+              : "translateX(0px)",
           opacity: isDimmed ? 0.6 : 1,
           filter: isDimmed ? "blur(4px)" : "blur(0px)",
         }}
         transition={{ type: "spring", duration: 0.34, bounce: 0 }}
-        className="mx-auto w-full max-w-[800px] px-4 py-16"
+        className="mx-auto w-full max-w-[800px] px-4 py-6 sm:py-16"
       >
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-3.5">
@@ -254,6 +259,7 @@ function HomePage() {
             onClose={() => setSelectedId(null)}
             onHoverChange={handleDrawerHoverChange}
             rightOffset={sideMargin}
+            isMobile={isMobile}
           />
         ) : isAddOpen ? (
           <AddApartmentDrawer
@@ -265,6 +271,7 @@ function HomePage() {
             }}
             onHoverChange={handleDrawerHoverChange}
             rightOffset={sideMargin}
+            isMobile={isMobile}
           />
         ) : null}
       </AnimatePresence>

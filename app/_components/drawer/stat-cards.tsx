@@ -23,7 +23,7 @@ function StatCards({ apartment }: StatCardsProps) {
 	const hasPair = beds !== undefined || baths !== undefined;
 
 	return (
-		<div className="flex items-stretch gap-2">
+		<div className="-mx-4 flex items-stretch gap-2 overflow-x-auto px-4 [scrollbar-width:none] sm:mx-0 sm:overflow-visible sm:px-0 [&::-webkit-scrollbar]:hidden">
 			{hasPair ? (
 				<div className="squircle flex shrink-0 items-stretch rounded-[32px] bg-surface-sunken">
 					{beds !== undefined ? (

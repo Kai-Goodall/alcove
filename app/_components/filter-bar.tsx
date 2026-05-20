@@ -43,14 +43,14 @@ function FilterBar({
   filtersActive,
 }: FilterBarProps) {
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
       <SegmentedTabs
         items={TRACK_ITEMS}
         value={track}
         onValueChange={(value) => onTrackChange(value as TrackFilter)}
         aria-label="Filter by bedrooms"
       />
-      <div className="flex w-[250px] items-center gap-[10px]">
+      <div className="flex w-full items-center gap-[10px] sm:w-[250px]">
         <Popover>
           <PopoverTrigger asChild>
             <button

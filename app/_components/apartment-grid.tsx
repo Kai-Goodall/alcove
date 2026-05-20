@@ -22,7 +22,7 @@ function ApartmentGrid({ apartments, onSelect }: ApartmentGridProps) {
 
 	return (
 		<motion.div
-			className="grid w-full grid-cols-3 gap-3"
+			className="grid w-full grid-cols-1 gap-3 sm:grid-cols-3"
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			transition={{ duration: 0.3, ease: "easeOut" }}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FadeImage } from "@/_components/ui/fade-image";
 import { ScrollContainer } from "@/_components/ui/scroll-container";
 import type { Apartment } from "@/_lib/apartment";
@@ -7,15 +7,19 @@ import { cn } from "@/_lib/utils";
 export interface ImageGalleryProps {
   apartmentId: Apartment["_id"];
   images: Apartment["images"];
+  /** When true, render a swipable horizontal strip of full-size images. */
+  isMobile?: boolean;
 }
 
-function ImageGallery({ apartmentId, images }: ImageGalleryProps) {
+function ImageGallery({ apartmentId, images, isMobile = false }: ImageGalleryProps) {
   const usable = images.filter((image) => image.url);
   const [activeIndex, setActiveIndex] = useState(0);
+  const mobileScrollerRef = useRef<HTMLDivElement>(null);
 
   // Reset to first image when the apartment changes.
   useEffect(() => {
     setActiveIndex(0);
+    mobileScrollerRef.current?.scrollTo({ left: 0, behavior: "instant" as ScrollBehavior });
   }, [apartmentId]);
 
   if (usable.length === 0) {
@@ -24,6 +28,32 @@ function ImageGallery({ apartmentId, images }: ImageGalleryProps) {
         aria-hidden
         className="squircle aspect-[1920/1080] w-full rounded-[32px] bg-muted shadow-card-1"
       />
+    );
+  }
+
+  if (isMobile) {
+    return (
+      <div
+        ref={mobileScrollerRef}
+        className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {usable.map((image) => (
+          <div
+            key={image._id}
+            className="squircle relative aspect-[1920/1080] w-[calc(100vw-2rem)] shrink-0 snap-center overflow-hidden rounded-[32px] bg-muted shadow-card-1"
+          >
+            {image.url ? (
+              <FadeImage
+                src={image.url}
+                alt={image.image.caption ?? ""}
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 size-full object-cover"
+              />
+            ) : null}
+          </div>
+        ))}
+      </div>
     );
   }
 

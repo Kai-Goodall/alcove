@@ -2,12 +2,14 @@ import { type FormEvent, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useMutation, useQuery } from "convex/react";
 import { IconHouseSearchFill24 } from "nucleo-core-fill-24";
+import { IconChevronLeftFill18 } from "nucleo-ui-fill-18";
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
 import { Button } from "@/_components/ui/button";
 import { Icon } from "@/_components/ui/icon";
 import { Input } from "@/_components/ui/input";
 import { Typography } from "@/_components/ui/typography";
+import { cn } from "@/_lib/utils";
 
 type ImportJob = {
   _id: Id<"apartmentImportJobs">;
@@ -33,6 +35,8 @@ export interface AddApartmentDrawerProps {
   onApartmentAdded: (apartmentId: Id<"apartments">) => void;
   rightOffset: number;
   onHoverChange?: (hovered: boolean) => void;
+  /** When true, render as a full-screen sheet with a back chevron. */
+  isMobile?: boolean;
 }
 
 function stripUrlPrefix(url: string): string {
@@ -44,6 +48,7 @@ function AddApartmentDrawer({
   onApartmentAdded,
   rightOffset,
   onHoverChange,
+  isMobile = false,
 }: AddApartmentDrawerProps) {
   const drawerRef = useRef<HTMLDivElement>(null);
   const [url, setUrl] = useState("");
@@ -85,6 +90,7 @@ function AddApartmentDrawer({
   }, [onClose]);
 
   useEffect(() => {
+    if (isMobile) return;
     const onPointerDown = (event: PointerEvent) => {
       const target = event.target as Element | null;
       if (!target) return;
@@ -95,7 +101,7 @@ function AddApartmentDrawer({
     };
     document.addEventListener("pointerdown", onPointerDown);
     return () => document.removeEventListener("pointerdown", onPointerDown);
-  }, [onClose]);
+  }, [onClose, isMobile]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -124,17 +130,40 @@ function AddApartmentDrawer({
     <motion.aside
       ref={drawerRef}
       role="dialog"
-      aria-modal="false"
+      aria-modal={isMobile ? "true" : "false"}
       aria-label="Add apartment"
-      initial={{ transform: "translateX(32px)", opacity: 0 }}
+      initial={
+        isMobile
+          ? { transform: "translateX(100%)", opacity: 1 }
+          : { transform: "translateX(32px)", opacity: 0 }
+      }
       animate={{ transform: "translateX(0px)", opacity: 1 }}
-      exit={{ transform: "translateX(32px)", opacity: 0 }}
+      exit={
+        isMobile
+          ? { transform: "translateX(100%)", opacity: 1 }
+          : { transform: "translateX(32px)", opacity: 0 }
+      }
       transition={{ type: "spring", duration: 0.34, bounce: 0 }}
       onMouseEnter={() => onHoverChange?.(true)}
       onMouseLeave={() => onHoverChange?.(false)}
-      style={{ right: rightOffset }}
-      className="squircle pointer-events-auto fixed top-16 bottom-16 z-30 flex w-[525px] max-w-[calc(100vw-32px)] flex-col overflow-hidden rounded-[48px] bg-card shadow-card-2"
+      style={isMobile ? undefined : { right: rightOffset }}
+      className={cn(
+        "pointer-events-auto fixed z-30 flex flex-col overflow-hidden bg-card",
+        isMobile
+          ? "inset-0 rounded-none"
+          : "squircle top-16 bottom-16 w-[525px] max-w-[calc(100vw-32px)] rounded-[48px] shadow-card-2",
+      )}
     >
+      {isMobile ? (
+        <button
+          type="button"
+          aria-label="Close add apartment"
+          onClick={onClose}
+          className="absolute top-3 left-3 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-card/85 text-foreground shadow-card-1 backdrop-blur-md outline-none transition-colors hover:bg-button-hover focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card"
+        >
+          <Icon glyph={IconChevronLeftFill18} size={18} />
+        </button>
+      ) : null}
       {hasJob ? (
         <div className="flex flex-col gap-6 p-4">
           <div className="flex flex-col gap-3 px-6 pt-6">

@@ -40,6 +40,10 @@ function Notes({ apartment }: NotesProps) {
   );
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
+  // Tracks whether the editor was opened by an explicit user click — only
+  // then do we autofocus. Auto-opens from persisted notes (initial render
+  // or apartment swap) leave focus alone.
+  const shouldFocusOnOpenRef = useRef(false);
   useSquircle(bodyRef, 20);
 
   // Re-sync only when the drawer swaps to a different apartment. We must NOT
@@ -63,15 +67,20 @@ function Notes({ apartment }: NotesProps) {
     return () => window.clearTimeout(id);
   }, [userNotes, persistedUserNotes, apartment._id, setUserNotesMutation]);
 
-  // Focus the textarea when the editor first opens.
+  // Focus only when the editor opens in response to a user click.
   useEffect(() => {
     if (!isEditorOpen) return;
+    if (!shouldFocusOnOpenRef.current) return;
+    shouldFocusOnOpenRef.current = false;
     const id = requestAnimationFrame(() => textareaRef.current?.focus());
     return () => cancelAnimationFrame(id);
   }, [isEditorOpen]);
 
   const handleContainerClick = () => {
-    if (!isEditorOpen) setIsEditorOpen(true);
+    if (!isEditorOpen) {
+      shouldFocusOnOpenRef.current = true;
+      setIsEditorOpen(true);
+    }
   };
 
   if (!aiBody && !isEditorOpen && persistedUserNotes.length === 0) {

@@ -4,8 +4,8 @@ This is the complete, click-by-click setup. For the short version see the
 [Quick start](../README.md#quick-start) in the README.
 
 Alcove is modular: the only hard requirements are **Node.js** and **Convex**.
-The AI importer, discovery crawler, image storage, and maps are each optional
-and only needed for the features that use them. Set up what you need.
+The AI importer, daily automation, image storage, and maps are each optional and
+only needed for the features that use them. Set up what you need.
 
 ## 1. Prerequisites
 
@@ -16,7 +16,8 @@ Optional, per feature:
 
 - **Anthropic API key** (Add-by-URL importer) — <https://console.anthropic.com/>.
   Your account must have the `web_search` and `web_fetch` tools available.
-- **Firecrawl API key** (discovery) — <https://www.firecrawl.dev/>.
+- **An agent runner** for the daily automation (e.g. an OpenAI Codex automation)
+  — only if you want the hands-off daily search.
 - **Cloudflare R2** (image storage) — <https://developers.cloudflare.com/r2/>.
 - **Google Maps API key** (location previews) —
   <https://console.cloud.google.com/google/maps-apis>.
@@ -107,21 +108,21 @@ paste a listing URL.
 See [`docs/configuration.md`](./configuration.md#cloudflare-r2) for how the
 bucket name is resolved.
 
-## 6. Firecrawl — discovery (optional)
+## 6. Daily search automation (optional)
 
-```ini
-# .env.local
-FIRECRAWL_API_KEY=fc-...
-```
-
-Then run a discovery sweep:
+Generate the agent prompt from your config and inspect it:
 
 ```bash
-npm run discover:apartments
+npm run prompt:automation            # print
+npm run prompt:automation > prompt.txt   # save
 ```
 
-It writes ranked candidate URLs to `data/firecrawl-discovery/<date>.json`. Tune
-the queries and sources in [`alcove.config.mjs`](../alcove.config.mjs).
+Paste the output into a scheduled agent (an OpenAI Codex automation, a Claude
+scheduled task, or any agent runner on a cron). Each run searches the market,
+writes `data/automation-backfill/<date>.json`, and imports it with
+`npm run import:apartment-runs`. Tune everything it says by editing
+[`alcove.config.mjs`](../alcove.config.mjs). Full details in
+[`automation.md`](./automation.md).
 
 ## 7. Google Static Maps — location previews (optional)
 

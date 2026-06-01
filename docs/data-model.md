@@ -1,8 +1,8 @@
 # Data model & ingestion contracts
 
 This is the reference for anyone wiring **their own automation or database** to
-Alcove. It covers the Convex schema, the `runs.json` import contract, the
-discovery output shape, `sourceKey` conventions, and the CLI flags.
+Alcove. It covers the Convex schema, the `runs.json` import contract,
+`sourceKey` conventions, and the CLI flags.
 
 ## Convex schema
 
@@ -154,36 +154,13 @@ mutation `api.apartments.upsert` directly with a fully-shaped apartment object
 }
 ```
 
-## Discovery output shape
+## Where runs come from
 
-`npm run discover:apartments` writes
-`data/firecrawl-discovery/<date>.json`:
-
-```jsonc
-{
-  "runDate": "2026-05-20",
-  "generatedAt": "2026-05-20T12:00:00.000Z",
-  "configVersion": 1,
-  "status": "ok",            // or "degraded"
-  "degraded": false,
-  "degradedReasons": [],
-  "queries": [ /* the query set used */ ],
-  "mappedRoots": [ /* curated sources mapped */ ],
-  "stats": { "rawCount": 0, "uniqueCount": 0, "keptCount": 0, "directOperatorCount": 0, "…": 0 },
-  "errors": [],
-  "candidates": [
-    {
-      "url": "…", "canonicalUrl": "…", "domain": "…",
-      "providerHint": "…", "sourceKind": "direct_operator_unit",
-      "trackHints": ["1br"], "neighborhoodHints": ["Chelsea"],
-      "priority": 100, "flags": ["availability_signal", "price_signal"]
-    }
-  ]
-}
-```
-
-These are **candidates to research**, not finished listings. Feed them to your
-automation to produce `runs.json` (or use the in-app Add-by-URL importer).
+The bulk importer consumes a `runs.json` you provide. Produce it however you
+like — the recommended path is the **daily automation** (`npm run
+prompt:automation` → a scheduled agent that searches, verifies, and writes the
+file), but a hand-written file or any script that emits this shape works too.
+See [`automation.md`](./automation.md).
 
 ## Import & migration tooling
 

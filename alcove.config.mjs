@@ -3,13 +3,14 @@
  *
  * This is the one file to edit to point Alcove at *your* apartment hunt:
  * where you're searching, the place you want a short commute to, the
- * neighborhoods and budgets you care about, and the sources to crawl.
+ * neighborhoods and budgets you care about, and the sources to check.
  *
- * It is imported by three runtimes, so keep it plain ESM (no TS, no Node-only
- * APIs, just data + pure functions):
+ * It is imported by:
  *   - the Convex importer action  (convex/apartmentImportActions.ts)
- *   - the Firecrawl discovery CLI (scripts/discover-apartments-firecrawl*.mjs)
  *   - the offline import CLI       (scripts/import-apartment-runs.mjs)
+ *   - the automation prompt generator (scripts/generate-automation-prompt.mjs)
+ *
+ * Keep it plain ESM (no TS, no Node-only APIs, just data + pure functions).
  *
  * The defaults below describe a Manhattan rental search. Replace them with
  * your own city, target, neighborhoods, budgets, and sources.
@@ -32,22 +33,18 @@
  * @property {number} [max]                 Upper bound when there is no range.
  * @property {number} [stretch]             Allowed only if unusually strong.
  * @property {string} [note]               Extra shortlist requirement.
- *
- * @typedef {Object} CuratedSource
- * @property {string} provider
- * @property {string} url
- * @property {string} search
+ * @property {string} [extra]              Additional automation-only guidance.
  */
 
-export const CONFIG_VERSION = 1;
+export const CONFIG_VERSION = 2;
 
 export const alcoveConfig = {
   /** Branding shown in the UI title and metadata. */
   appName: "Alcove",
 
   /**
-   * Where you're searching. Used for Firecrawl's `location`/`country` and for
-   * the Anthropic web-search tool's `user_location`.
+   * Where you're searching. Used for the Anthropic web-search tool's
+   * `user_location` in the in-app URL importer.
    */
   location: {
     city: "New York",
@@ -56,13 +53,6 @@ export const alcoveConfig = {
     country: "US",
     /** IANA timezone for the web-search tool. */
     timezone: "America/New_York",
-    /** Firecrawl `search` location string ("City,Region,Country"). */
-    searchLocation: "New York,New York,United States",
-    /** Firecrawl `map` location object. */
-    mapLocation: {
-      country: "US",
-      languages: ["en-US"],
-    },
   },
 
   /**
@@ -80,7 +70,7 @@ export const alcoveConfig = {
     },
   },
 
-  /** Neighborhoods you care about. Drives candidate tagging and scoring. */
+  /** Neighborhoods you care about. */
   neighborhoods: [
     "Chelsea",
     "West Village",
@@ -97,31 +87,38 @@ export const alcoveConfig = {
   ],
 
   /**
-   * Budget bands by bedroom track. Consumed by the AI importer's shortlist
-   * gate. Keys must match the tracks Alcove understands: "1br", "2br", "3br".
+   * Budget bands by bedroom track. Consumed by the in-app importer's shortlist
+   * gate and the automation prompt. Keys: "1br", "2br", "3br".
    * @type {Record<string, BudgetBand>}
    */
   budgets: {
-    "1br": { label: "1BR", preferred: [4000, 5500], hardCap: 6000 },
+    "1br": {
+      label: "1BR",
+      preferred: [4000, 5500],
+      hardCap: 6000,
+      note: "high photo and floor-plan/size confidence expected for shortlist",
+    },
     "2br": {
       label: "2BR",
       max: 9000,
-      note: "true 2BR/2BA is expected for shortlist",
+      note: "2BR/2BA is the expected standard; downgrade 2BR/1BA unless exceptional on location, light, layout, renovation, and price",
     },
     "3br": {
       label: "3BR",
       max: 14000,
       stretch: 15000,
-      note: "true 3BR/3BA is expected for shortlist",
+      note: "true 3BR/3BA is the target; downgrade 3BR/2BA unless exceptional",
+      extra:
+        "Strongly favor a real living room and generous layouts over over-partitioned units",
     },
   },
 
-  /** Non-negotiable features the AI importer weighs when ranking. */
+  /** Non-negotiable features the search weighs when ranking. */
   mustHaves: [
     "in-unit or in-building laundry",
     "dishwasher",
     "big windows / good daylight",
-    "renovated bathroom",
+    "relatively new or well-renovated bathroom",
     "air conditioning and heating",
   ],
 
@@ -130,114 +127,70 @@ export const alcoveConfig = {
    * @type {string | null}
    */
   furnitureFit:
-    "queen bed, 100 inch couch with ottoman, 47.4 x 29 inch coffee table, sideboard, accent chair",
+    "queen bed; 100 inch couch with ottoman; coffee table 47.4 in W x 29 in D x 15.5 in H; sideboard 54.3 in W x 15.7 in D x 30.3 in H; accent chair. The couch/ottoman and coffee table must fit comfortably with a usable walkway; sideboard and chair are nice-to-have",
 
   /** Anthropic model for the in-app URL importer. Overridable via ANTHROPIC_MODEL. */
   anthropicModel: "claude-sonnet-4-6",
 
   /**
-   * Firecrawl discovery query sets (`npm run discover:apartments`). Each query
-   * is run through Firecrawl search. Tune these to your market and tracks.
+   * Settings for the daily search automation. Generate the prompt with
+   * `npm run prompt:automation` and paste it into your Codex (or other agent)
+   * scheduled automation. See docs/automation.md.
    */
-  querySets: {
-    balanced: [
-      "Chelsea NYC rental building availability 1 bedroom Manhattan",
-      "West Village Manhattan 1 bedroom rental availability laundry dishwasher",
-      "Greenwich Village Manhattan 1 bedroom rental availability renovated",
-      "Flatiron Gramercy Manhattan 1 bedroom rental building availability",
-      "East Village Lower East Side Manhattan 1 bedroom rental building availability",
-      "Chelsea Manhattan 2 bedroom 2 bath rental availability",
-      "West Village Greenwich Village Manhattan 2 bedroom 2 bath rental availability",
-      "SoHo NoHo Tribeca Manhattan 2 bedroom 2 bath rental availability",
-      "East Village Manhattan 2 bedroom 2 bath rental availability washer dryer dishwasher",
-      "Tribeca Manhattan true 3 bedroom 3 bath rental availability",
-      "SoHo NoHo Manhattan true 3 bedroom 3 bath rental availability",
-      "Chelsea Manhattan true 3 bedroom 3 bath rental availability",
-      "site:streeteasy.com/building Manhattan 1 bedroom available now Chelsea West Village Greenwich Village",
-      "site:streeteasy.com/building Manhattan 2 bedroom 2 bath available now Chelsea Tribeca SoHo",
-      "site:streeteasy.com/building Manhattan 3 bedroom 3 bath available now Tribeca SoHo Chelsea",
-      "site:zillow.com/homedetails Manhattan 1 bedroom rental Chelsea West Village",
-      "site:apartments.com/new-york-ny Manhattan 2 bedroom 2 bathroom available now",
-      "site:renthop.com Manhattan 3 bedroom 3 bathroom rental availability",
+  automation: {
+    /** Suggested automation id/name. */
+    name: "daily-manhattan-apartment-search",
+    /** Move-in timing requirement, in plain language. */
+    moveIn:
+      "Move-in for June 1, with June 1–June 7 the ideal window. Available now is acceptable if likely workable; later availability should be a caveat.",
+    /**
+     * Direct operators / property managers to inspect first (their own
+     * availability pages are the freshest, most reliable source).
+     */
+    operators: [
+      "TF Cornerstone",
+      "Equity",
+      "Avalon",
+      "Related",
+      "Beam Living / StuyTown",
+      "Brodsky",
+      "Glenwood",
+      "Stonehenge",
+      "Rose Associates",
+      "Rockrose",
+      "Gotham",
+      "Fetner",
+      "Dermot",
+      "Bozzuto",
+      "Greystar",
+      "Moinian",
+      "Lalezarian",
+      "AKN",
+      "Solil",
+      "UDR",
+      "Pan Am Equities",
+      "Bettina",
+      "Icon Realty",
+      "Centurion",
+      "Jakobson",
+      "Ogden CAP",
+      "Milford",
     ],
-    broad: [
-      "Manhattan rental building availability Chelsea West Village East Village Tribeca",
-      "Chelsea NYC rental building availability 1 bedroom 2 bedroom 3 bedroom",
-      "West Village luxury rentals availability 2 bedroom 2 bath Manhattan",
-      "Greenwich Village apartment building availability Manhattan",
-      "SoHo NoHo rental building availability Manhattan",
-      "Tribeca 3 bedroom 3 bath rentals availability Manhattan",
-      "Gramercy Flatiron luxury rentals availability Manhattan",
-      "East Village LES apartment buildings availability Manhattan",
-      "site:streeteasy.com/building Manhattan available rental Chelsea",
-      "site:streeteasy.com/building Manhattan available rental West Village",
-      "site:streeteasy.com/building Manhattan available rental Tribeca",
-      "site:zillow.com/homedetails Manhattan rental apartment Chelsea",
-      "site:apartments.com/new-york-ny Manhattan apartment rental available now",
-      "site:renthop.com Manhattan apartment rental available now",
+    /** Aggregator/portal and broker sources to sweep after operators. */
+    portals: [
+      "StreetEasy",
+      "Zillow",
+      "Apartments.com",
+      "RentHop",
+      "Leasebreak",
+      "Craigslist (where reasonable)",
+      "broker and brokerage inventory pages",
     ],
   },
-
-  /**
-   * Direct-operator / property-manager sites to map on each discovery run.
-   * Firecrawl crawls each `url` filtered by `search` for availability pages.
-   * @type {CuratedSource[]}
-   */
-  curatedSources: [
-    {
-      provider: "Equity Apartments",
-      url: "https://www.equityapartments.com/new-york-city/",
-      search:
-        "chelsea west village gramercy tribeca apartment availability floor plan 1 bedroom 2 bedroom 3 bedroom",
-    },
-    {
-      provider: "Avalon Communities",
-      url: "https://www.avaloncommunities.com/new-york/new-york-city-apartments/",
-      search:
-        "new york city apartment availability floor plan 1 bedroom 2 bedroom 3 bedroom",
-    },
-    {
-      provider: "Brodsky",
-      url: "https://brodsky.com/rentals/",
-      search:
-        "west village greenwich village chelsea apartment available one bedroom two bedroom three bedroom",
-    },
-    {
-      provider: "Stonehenge NYC",
-      url: "https://www.stonehengenyc.com/apartments",
-      search:
-        "manhattan available apartment floorplan one bedroom two bedroom three bedroom",
-    },
-    {
-      provider: "Rockrose",
-      url: "https://rockrose.com/zh/listing/",
-      search: "new york available apartment 1 bed 2 bed 3 bed",
-    },
-    {
-      provider: "EVE NYC",
-      url: "https://eve.nyc/floorplans/",
-      search: "available floorplans 1 bedroom 2 bedroom 3 bedroom",
-    },
-    {
-      provider: "StuyTown / Beam Living",
-      url: "https://www.stuytown.com/nyc-apartments-for-rent",
-      search: "available apartments 1 bedroom 2 bedroom 3 bedroom",
-    },
-    {
-      provider: "The Chelsea / Greystar",
-      url: "https://www.thechelseaapts.com/new-york/the-chelsea/conventional",
-      search: "available apartment floorplan 1 bedroom 2 bedroom",
-    },
-    {
-      provider: "Chelsea29",
-      url: "https://www.chelsea29.com/floorplans",
-      search: "available floorplans 1 bedroom 2 bedroom",
-    },
-  ],
 };
 
-/** Render one budget band as a sentence for the extraction prompt. */
-function budgetLine(track, band) {
+/** Render one budget band as a sentence for the importer prompt. */
+function budgetLine(band) {
   const money = (n) => `$${n.toLocaleString("en-US")}`;
   const parts = [`${band.label} budget`];
   if (band.preferred) {
@@ -259,8 +212,9 @@ function capitalize(text) {
 }
 
 /**
- * Build the system prompt for the AI URL importer from the search profile.
- * Editing `alcoveConfig` above automatically updates the agent's standards.
+ * Build the system prompt for the in-app AI URL importer from the search
+ * profile. Editing `alcoveConfig` above automatically updates the agent's
+ * standards. The Convex importer calls this for you.
  *
  * @param {typeof alcoveConfig} [config]
  * @returns {string}
@@ -276,9 +230,7 @@ export function buildExtractionPrompt(config = alcoveConfig) {
     config.mustHaves.length > 0 &&
       `- Must-haves: ${config.mustHaves.join(", ")}.`,
     config.furnitureFit && `- Furniture fit matters: ${config.furnitureFit}.`,
-    ...Object.entries(config.budgets).map(([track, band]) =>
-      budgetLine(track, band),
-    ),
+    ...Object.values(config.budgets).map((band) => budgetLine(band)),
   ]
     .filter(Boolean)
     .join("\n");

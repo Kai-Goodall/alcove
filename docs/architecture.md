@@ -13,7 +13,7 @@ project layout and why `alcove.config.mjs` is plain ESM.
 | --- | --- | --- |
 | **Browser / Next.js** | `app/**` — UI, route handlers (`/api/og`, `/api/images/r2`) | `NEXT_PUBLIC_*`, server-side `R2_*` for the image proxy |
 | **Convex** | `convex/**` — queries, mutations, the `apartmentImportActions` Node action, scheduler | Convex deployment env (`ANTHROPIC_API_KEY`, `R2_*`) |
-| **Local CLI** | `scripts/**` — discovery, import, R2 migration | `.env.local` / shell |
+| **Local CLI** | `scripts/**` — prompt generator, import, R2 migration, icon build | `.env.local` / shell |
 
 `alcove.config.mjs` is imported by all three, so it stays plain JavaScript with
 no Node-only APIs. UI icons are vendored as local SVGs (see
@@ -39,7 +39,7 @@ Convex stores four tables (full field list in
 The schema.org shaping is deliberate: common real-estate fields stay portable,
 so your data isn't trapped in an app-specific format.
 
-## The three ingestion paths
+## The ingestion paths
 
 ### 1. Add by URL (in-app, AI)
 
@@ -66,47 +66,38 @@ required fields.
 
 Runs in: **Convex**. Needs: `ANTHROPIC_API_KEY`, `R2_*` on the deployment.
 
-### 2. Discovery (Firecrawl)
+### 2. Daily automation → bulk import (your runs)
 
 ```
-npm run discover:apartments
-  → Firecrawl search over alcoveConfig.querySets[<set>]
-  → Firecrawl map over alcoveConfig.curatedSources
-  → shape, classify (operator/portal/broker), score, de-dupe, filter
-  → write data/firecrawl-discovery/<date>.json (ranked candidates + stats)
+scheduled agent (prompt from `npm run prompt:automation`)
+  → searches the market, opens + verifies each candidate live
+  → writes data/automation-backfill/<date>.json (runs shape)
+  → runs: npm run import:apartment-runs -- data/automation-backfill/<date>.json
+        read runs file (your structured listings)
+        for each run: searchRuns.create
+        for each listing: apartments.upsert (by stable sourceKey)
+          then fetch/derive images → R2 (or Convex storage) → images.attach*
+        reuses existing runs/listings/images on reruns (resumable)
 ```
 
-The output is **candidate URLs**, not finished listings. It's the "what's out
-there" step. Runs in: **local CLI**. Needs: `FIRECRAWL_API_KEY`.
+The agent runs wherever you schedule it (Codex automation, cron, etc.); the
+import CLI runs locally and needs the Convex URL + `R2_*`. The prompt is
+generated from `alcove.config.mjs` — see [`docs/automation.md`](./automation.md).
+The `runs.json` shape is in [`docs/data-model.md`](./data-model.md).
 
-### 3. Bulk import (your runs)
+## Where you plug in
 
-```
-npm run import:apartment-runs [-- file.json ...flags]
-  → read runs.json (your structured listings)
-  → for each run: searchRuns.create
-  → for each listing: apartments.upsert (by stable sourceKey)
-      then fetch/derive images → R2 (or Convex storage) → images.attach*
-  → reuses existing runs/listings/images on reruns (resumable)
-```
+The import step consumes a finished, structured runs file. **How that file gets
+produced is intentionally yours:**
 
-Runs in: **local CLI**. Needs: Convex URL + `R2_*`. The `runs.json` shape is
-documented in [`docs/data-model.md`](./data-model.md).
-
-## How the paths connect (and where you plug in)
-
-Discovery produces candidate URLs; bulk import consumes finished, structured
-runs. **The step in between — turning candidates into structured listings — is
-intentionally yours.** That can be:
-
-- an agent/automation that reads the discovery JSON, researches each candidate,
-  and emits `runs.json`; or
+- the generated daily-automation prompt driving any agent runner (recommended);
 - the in-app Add-by-URL importer, one listing at a time; or
-- a human curating a `runs.json` by hand.
+- a human (or any script) writing a `runs.json` by hand, or calling the
+  `apartments.upsert` Convex mutation directly.
 
-As long as your automation emits the documented `runs.json` shape (or calls
-`apartments.upsert` directly), Alcove doesn't care how it was produced. This is
-what makes the repo reusable with *your own* automation and database.
+As long as it emits the documented `runs.json` shape (or calls
+`apartments.upsert`), Alcove doesn't care how it was produced. This is what
+makes the repo reusable with *your own* automation and database.
 
 ## Images
 

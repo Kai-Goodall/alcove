@@ -20,7 +20,7 @@
     "lint": "eslint .",
     "convex:dev": "convex dev",
     "convex:deploy": "convex deploy",
-    "discover:apartments": "node scripts/discover-apartments-firecrawl.mjs",
+    "prompt:automation": "node scripts/generate-automation-prompt.mjs",
     "import:apartment-runs": "node scripts/import-apartment-runs.mjs",
     "migrate:images:r2": "node scripts/migrate-images-to-r2.mjs",
     "build:icons": "node scripts/build-icons.mjs"
@@ -30,7 +30,6 @@
     "apartment-search",
     "nextjs",
     "convex",
-    "firecrawl",
     "anthropic",
     "dashboard"
   ],

@@ -6,17 +6,16 @@ photo-rich shortlist you can browse, filter, favorite, annotate, and track
 through touring.
 
 It pairs a polished **Next.js** front end with a **Convex** real-time backend
-and three ways to get listings in:
+and two ways to get listings in:
 
 1. **Add by URL** — paste any listing link and a Claude agent researches it,
    verifies the details, structures them, and pulls in photos.
-2. **Discover** — a Firecrawl crawler sweeps your curated sources and search
-   queries to surface fresh candidate listings.
-3. **Bulk import** — feed in structured runs from your own automation/agent and
-   Alcove upserts them with images.
+2. **Daily automation** — run a scheduled agent (e.g. a Codex automation) once a
+   day to search the market, write a structured runs file, and bulk-import it.
+   Alcove generates the agent prompt for you from your config.
 
 Everything that is specific to *one person's* hunt — the city, the commute
-target, neighborhoods, budgets, and the sources to crawl — lives in a single
+target, neighborhoods, budgets, and the sources to check — lives in a single
 [`alcove.config.mjs`](./alcove.config.mjs), so you can point it at your own
 search without touching application code.
 
@@ -48,8 +47,9 @@ search without touching application code.
 - **AI URL importer** — paste a listing link; a Claude agent (with web search +
   fetch) verifies and structures it, then attaches photos. Live job status is
   streamed into the UI.
-- **Firecrawl discovery** — search + site-map your curated operators and queries
-  into a ranked, de-duplicated candidate pool.
+- **Daily search automation** — `npm run prompt:automation` builds a tailored
+  agent prompt from your config; run it on a schedule to keep the shortlist
+  fresh, hands-off.
 - **Ranked shortlist** — model-scored ordering with favorites, manual
   hide/exclude, and tour-status tracking (`not yet` → `touring` → `toured`).
 - **Rich apartment drawer** — gallery, floor plans, stats, location map,
@@ -82,14 +82,15 @@ search without touching application code.
    ┌─────────────────┴───┐   ┌───────┴────────┐   ┌───────────────┐
    │ import-apartment-    │   │  Anthropic     │   │ Cloudflare R2 │
    │ runs.mjs (your runs) │   │  (Claude +     │   │  (S3 images)  │
-   └─────────────────────┘    │  web tools)    │   └───────────────┘
-   ┌─────────────────────┐    └────────────────┘
-   │ discover-apartments  │ → data/firecrawl-discovery/<date>.json
-   │ -firecrawl.mjs       │   (candidate URLs you feed to your agent)
+   └──────────▲──────────┘    │  web tools)    │   └───────────────┘
+              │ writes        └────────────────┘
+   ┌──────────┴──────────┐
+   │ daily agent (Codex) │ ← prompt from `npm run prompt:automation`
+   │ searches + verifies │   writes data/automation-backfill/<date>.json
    └─────────────────────┘
 ```
 
-The three data paths are described in detail in
+The data paths are described in detail in
 [Getting listings in](#getting-listings-in) and
 [`docs/architecture.md`](./docs/architecture.md).
 
@@ -99,7 +100,6 @@ The three data paths are described in detail in
 - [Convex](https://convex.dev/) — database, server functions, scheduling, file
   storage
 - [Anthropic Claude](https://docs.anthropic.com/) — the URL import agent
-- [Firecrawl](https://www.firecrawl.dev/) — listing discovery
 - [Cloudflare R2](https://developers.cloudflare.com/r2/) — image storage (S3 API)
 - [Google Static Maps](https://developers.google.com/maps/documentation/maps-static/overview)
   — location previews (optional)
@@ -109,8 +109,8 @@ The three data paths are described in detail in
 > Full, click-by-click instructions (creating each account, getting each key)
 > are in [`docs/setup.md`](./docs/setup.md). This is the short version.
 
-**Prerequisites:** Node.js ≥ 20 and a Convex account. Anthropic, Firecrawl, R2,
-and Google Maps are needed only for the features that use them.
+**Prerequisites:** Node.js ≥ 20 and a Convex account. Anthropic, R2, and Google
+Maps are needed only for the features that use them.
 
 ```bash
 # 1. Clone and install
@@ -139,7 +139,7 @@ Two places hold all configuration:
 
 | File | What it controls |
 | --- | --- |
-| [`alcove.config.mjs`](./alcove.config.mjs) | Your *search profile*: city/region, commute target, neighborhoods, budget bands, must-haves, query sets, curated sources, and the Claude model. |
+| [`alcove.config.mjs`](./alcove.config.mjs) | Your *search profile*: city/region, commute target, neighborhoods, budget bands, must-haves, furniture fit, the daily-automation settings (operators, portals, move-in), and the Claude model. |
 | `.env.local` (+ Convex/host env) | Secrets and service URLs. See [`.env.example`](./.env.example). |
 
 Environment variables live in up to three places depending on which code uses
@@ -153,18 +153,23 @@ the deployed app. Every variable and where it's needed is documented in
 | Path | Command / surface | Good for | Needs |
 | --- | --- | --- | --- |
 | **Add by URL** | "Add apartment" button in the app | one listing at a time, fully automated | Anthropic + R2 (on Convex) |
-| **Discovery** | `npm run discover:apartments` | finding fresh candidate URLs | Firecrawl |
-| **Bulk import** | `npm run import:apartment-runs` | loading structured runs from your own automation | Convex + R2 |
+| **Daily automation** | a scheduled agent (prompt from `npm run prompt:automation`) | a hands-off daily refresh of the whole shortlist | an agent runner (e.g. Codex) + Convex + R2 |
+| **Bulk import** | `npm run import:apartment-runs` | loading a structured runs file | Convex + R2 |
 
-The discovery crawler outputs **candidate URLs** (not finished listings) to
-`data/firecrawl-discovery/<date>.json`. Turning those candidates into the
-structured `runs.json` that the bulk importer consumes is the job of *your own
-automation* — an agent, a script, or a person. That contract is what makes
-Alcove reusable: implement it however you like, as long as the output matches
-the documented shape in [`docs/data-model.md`](./docs/data-model.md).
+The recommended setup is the **daily automation**: `npm run prompt:automation`
+prints an agent prompt tailored to your `alcove.config.mjs`. Paste it into a
+scheduled agent (a [Codex](https://developers.openai.com/codex/) automation,
+Claude, or any agent runner). Each run searches the market, verifies listings,
+writes a date-stamped runs file to `data/automation-backfill/`, and calls
+`npm run import:apartment-runs` to upsert it with images.
 
-> No sample run data ships with this repo. Bring your own listings via any of
-> the three paths above.
+Any agent works as long as it emits the documented runs shape (or calls
+`apartments.upsert` directly) — see [`docs/automation.md`](./docs/automation.md)
+and [`docs/data-model.md`](./docs/data-model.md). That contract is what makes
+Alcove reusable with *your own* automation.
+
+> No sample run data ships with this repo. Bring your own listings via either
+> path above.
 
 ## Scripts
 
@@ -172,12 +177,13 @@ the documented shape in [`docs/data-model.md`](./docs/data-model.md).
 | --- | --- |
 | `npm run dev` | Start the Next.js dev server. |
 | `npm run build` / `npm run start` | Production build / serve. |
-| `npm run lint` | ESLint via `next lint`. |
+| `npm run lint` | ESLint (`eslint .`). |
 | `npm run convex:dev` | Run the Convex dev backend (codegen + live functions). |
 | `npm run convex:deploy` | Deploy Convex functions to production. |
-| `npm run discover:apartments` | Firecrawl discovery → candidate URL JSON. |
-| `npm run import:apartment-runs` | Upsert structured runs + attach images. |
+| `npm run prompt:automation` | Print the daily-search agent prompt from your config. |
+| `npm run import:apartment-runs` | Upsert a structured runs file + attach images. |
 | `npm run migrate:images:r2` | Migrate existing Convex-stored images to R2. |
+| `npm run build:icons` | Regenerate the icon module from `app/_components/ui/icons/svg/`. |
 
 Script flags (dry-run, image limits, storage backend, etc.) are documented in
 [`docs/data-model.md`](./docs/data-model.md#import--migration-tooling). The
@@ -212,8 +218,8 @@ alcove/
 │   ├── apartmentImportActions.ts  # the Claude-powered importer (Node action)
 │   ├── images.ts           # image rows (Convex storage + R2)
 │   └── searchRuns.ts       # search-run bookkeeping
-├── scripts/                # CLIs: discovery, import, R2 migration, dev probes
-├── data/                   # local run data (gitignored; folders kept via .gitkeep)
+├── scripts/                # CLIs: prompt generator, import, R2 migration, icons
+├── data/                   # local run data (gitignored; folder kept via .gitkeep)
 └── docs/                   # detailed documentation
 ```
 
@@ -223,9 +229,11 @@ alcove/
 - [`docs/configuration.md`](./docs/configuration.md) — `alcove.config.mjs`
   reference + full environment-variable table.
 - [`docs/architecture.md`](./docs/architecture.md) — runtimes, data flow, and
-  the three ingestion paths in depth.
-- [`docs/data-model.md`](./docs/data-model.md) — Convex schema, the
-  `runs.json` / discovery JSON shapes, `sourceKey` conventions, and CLI flags.
+  the ingestion paths in depth.
+- [`docs/automation.md`](./docs/automation.md) — the daily search automation:
+  the prompt generator and how to schedule it.
+- [`docs/data-model.md`](./docs/data-model.md) — Convex schema, the `runs.json`
+  shape, `sourceKey` conventions, and CLI flags.
 - [`convex/README.md`](./convex/README.md) — Convex-specific backend notes.
 
 ## Notable caveats
@@ -239,9 +247,9 @@ alcove/
 - **Single-user by default.** Alcove ships without authentication — it assumes a
   private, single-user deployment. Add auth (e.g. Convex Auth or Clerk) before
   exposing it publicly.
-- **Respect source terms.** Discovery and the AI importer fetch third-party
-  pages. Review the terms of the sites you crawl and any per-service rate
-  limits/usage policies.
+- **Respect source terms.** The AI importer and your daily automation fetch
+  third-party pages. Review the terms of the sites you access and any
+  per-service rate limits/usage policies.
 
 ## Contributing
 

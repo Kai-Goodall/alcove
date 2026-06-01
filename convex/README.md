@@ -136,7 +136,7 @@ equity:beatrice:105-w-29th:unit-12a
       },
       "commute": {
         "toLocation": {
-          "name": "1 Example Plaza",
+          "name": "Your office",
           "address": {
             "streetAddress": "1 Example Plaza",
             "addressLocality": "New York",

@@ -61,7 +61,7 @@ export const alcoveConfig = {
    * @type {CommuteTarget | null}
    */
   commuteTarget: {
-    name: "1 Example Plaza",
+    name: "Your office",
     address: {
       streetAddress: "1 Example Plaza",
       addressLocality: "New York",

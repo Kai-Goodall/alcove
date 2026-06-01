@@ -149,7 +149,7 @@ mutation `api.apartments.upsert` directly with a fully-shaped apartment object
   "assessment": {
     "verification": { "freshness": "verified_live", "lastVerifiedAt": 1778944027000 },
     "confidence": { "photos": "medium", "floorPlan": "high" },
-    "commute": { "toLocation": { "name": "1 Example Plaza" }, "minutes": 18, "route": "N/R/W to Prince St" }
+    "commute": { "toLocation": { "name": "Your office" }, "minutes": 18, "route": "N/R/W to Prince St" }
   }
 }
 ```

@@ -1,7 +1,7 @@
 {
   "name": "alcove",
   "version": "1.0.0",
-  "description": "Self-hosted apartment-search dashboard: AI listing import, Firecrawl discovery, and a polished Next.js + Convex UI.",
+  "description": "Self-hosted apartment-search dashboard: AI listing import, a daily search automation, and a polished Next.js + Convex UI.",
   "type": "module",
   "license": "MIT",
   "author": "Neesh774",

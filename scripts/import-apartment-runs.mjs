@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "../convex/_generated/api.js";
+import { alcoveConfig } from "../alcove.config.mjs";
 import {
   createR2Client,
   ensureR2Bucket,
@@ -23,15 +24,7 @@ const REQUEST_DELAY_MS = 450;
 const USER_AGENT =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36 AlcoveImporter/1.0";
 
-const TO_LOCATION = {
-  name: "1 Example Plaza",
-  address: {
-    streetAddress: "1 Example Plaza",
-    addressLocality: "New York",
-    addressRegion: "NY",
-    addressCountry: "US",
-  },
-};
+const TO_LOCATION = alcoveConfig.commuteTarget;
 
 const AVAILABILITY_BY_STATUS = {
   shortlist: "https://schema.org/InStock",
@@ -233,14 +226,15 @@ function buildApartment(run, listing, searchRunId) {
       additionalProperty: priceProperties,
     },
     assessment: {
-      commute: listing.commute
-        ? {
-            toLocation: TO_LOCATION,
-            minutes: listing.commute.minutes,
-            route: listing.commute.route,
-            notes: listing.commute.notes,
-          }
-        : undefined,
+      commute:
+        TO_LOCATION && listing.commute
+          ? {
+              toLocation: TO_LOCATION,
+              minutes: listing.commute.minutes,
+              route: listing.commute.route,
+              notes: listing.commute.notes,
+            }
+          : undefined,
       verification: {
         freshness: listing.freshness ?? freshnessForStatus(status),
         note: listing.verificationNote,

@@ -7,7 +7,7 @@ import {
 	useTransform,
 	type MotionValue,
 } from "motion/react";
-import { IconArrowLeftFill18, IconArrowRightFill18 } from "nucleo-ui-fill-18";
+import { IconArrowLeftFill18, IconArrowRightFill18 } from "@/_components/ui/icons";
 import { Button } from "@/_components/ui/button";
 import { Icon } from "@/_components/ui/icon";
 import { cn } from "@/_lib/utils";

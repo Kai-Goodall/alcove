@@ -1,6 +1,6 @@
 import { useMutation } from "convex/react";
 import { motion } from "motion/react";
-import { IconHeartFill18 } from "nucleo-ui-fill-18";
+import { IconHeartFill18 } from "@/_components/ui/icons";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
 import { Icon } from "@/_components/ui/icon";

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useMutation, useQuery } from "convex/react";
-import { IconChevronLeftFill18 } from "nucleo-ui-fill-18";
+import { IconChevronLeftFill18 } from "@/_components/ui/icons";
 import { api } from "../../../convex/_generated/api";
 import { ImageGallery } from "@/_components/drawer/image-gallery";
 import { StatCards } from "@/_components/drawer/stat-cards";

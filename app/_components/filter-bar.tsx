@@ -1,5 +1,4 @@
-import { IconFilterFill18 } from "nucleo-ui-fill-18";
-import { IconFilterFillDuo18 } from "nucleo-ui-fill-duo-18";
+import { IconFilterFill18, IconFilterFillDuo18 } from "@/_components/ui/icons";
 import { FilterMenu, type FilterValues } from "@/_components/filter-menu";
 import { Icon } from "@/_components/ui/icon";
 import { Input } from "@/_components/ui/input";

@@ -1,12 +1,12 @@
 import type { ComponentType } from "react";
-import type { IconProps as NucleoIconProps } from "nucleo-ui-fill-18";
+import type { IconProps as GlyphProps } from "@/_components/ui/icons";
 import { cn } from "@/_lib/utils";
 
 export type IconSize = 12 | 14 | 16 | 18 | 20 | 24;
 
 export interface IconProps
-  extends Omit<NucleoIconProps, "size" | "width" | "height"> {
-  glyph: ComponentType<NucleoIconProps>;
+  extends Omit<GlyphProps, "size" | "width" | "height"> {
+  glyph: ComponentType<GlyphProps>;
   size?: IconSize;
   /** When provided, the icon is announced to screen readers with this label. */
   label?: string;

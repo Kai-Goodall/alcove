@@ -5,8 +5,8 @@ import {
 	IconCurrencyDollarFillDuo18,
 	IconHeartFillDuo18,
 	IconUserArrowRightFillDuo18,
-} from "nucleo-ui-fill-duo-18";
-import { IconMinusFill18, IconPlusFill18 } from "nucleo-ui-fill-18";
+} from "@/_components/ui/icons";
+import { IconMinusFill18, IconPlusFill18 } from "@/_components/ui/icons";
 import { ButtonGroup, ButtonGroupItem } from "@/_components/ui/button-group";
 import { Icon } from "@/_components/ui/icon";
 import { Input } from "@/_components/ui/input";

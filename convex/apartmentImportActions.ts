@@ -10,6 +10,7 @@ import { api, internal } from "./_generated/api";
 import { action, internalAction } from "./_generated/server";
 import type { Id } from "./_generated/dataModel";
 import type { ActionCtx } from "./_generated/server";
+import { alcoveConfig, buildExtractionPrompt } from "../alcove.config.mjs";
 
 type Track = "1br" | "2br" | "3br" | "unknown";
 type ApartmentStatus = "shortlist" | "monitor" | "excluded" | "archived";
@@ -187,7 +188,7 @@ const AgentExtractionSchema = z.object({
 type AgentListing = z.infer<typeof AgentListingSchema>;
 type AgentExtraction = z.infer<typeof AgentExtractionSchema>;
 
-const DEFAULT_MODEL = "claude-sonnet-4-6";
+const DEFAULT_MODEL = alcoveConfig.anthropicModel;
 const DEFAULT_IMAGE_LIMIT = 4;
 const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
 const MIN_IMAGE_WIDTH = 360;
@@ -198,15 +199,7 @@ const REQUEST_DELAY_MS = 450;
 const USER_AGENT =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36 AlcoveImporter/1.0";
 
-const TO_LOCATION = {
-  name: "1 Example Plaza",
-  address: {
-    streetAddress: "1 Example Plaza",
-    addressLocality: "New York",
-    addressRegion: "NY",
-    addressCountry: "US",
-  },
-};
+const TO_LOCATION = alcoveConfig.commuteTarget;
 
 const AVAILABILITY_BY_STATUS: Record<ApartmentStatus, string> = {
   shortlist: "https://schema.org/InStock",
@@ -215,44 +208,7 @@ const AVAILABILITY_BY_STATUS: Record<ApartmentStatus, string> = {
   archived: "https://schema.org/Discontinued",
 };
 
-const EXTRACTION_PROMPT = `
-You are the Alcove apartment import agent. Research exactly one apartment link and return field-by-field structured data for the Alcove database.
-
-Use the provided URL as the source of truth, then use web search/fetch to fill gaps from direct building, broker, operator, or portal pages. Be strict about live verification. Do not invent unavailable fields. Return null only for nullable fields that are genuinely not verified. Use "unknown" for laundry and dishwasher only after checking listing text, amenity lists, unit/building details, photos, floor plan evidence, and direct operator/broker pages.
-
-Ranking standards:
-- Main shortlist means strong enough to tour, not merely plausible.
-- Manhattan neighborhoods: Chelsea, West Village, East Village, Lower East Side, SoHo, NoHo, Tribeca, Little Italy, Stuy Town, Greenwich Village, Gramercy, Flatiron, and very strong adjacent areas.
-- Commute to 1 Example Plaza should be easy, ideally walking or one subway line, usually under/about 30 minutes.
-- Must-haves: laundry, dishwasher, big windows/daylight, renovated bathroom, A/C and heating.
-- Furniture fit matters: queen bed, 100 inch couch with ottoman, 47.4 x 29 inch coffee table, sideboard, accent chair.
-- 1BR budget preferred $4,000-$5,500, hard cap $6,000.
-- 2BR budget up to $9,000; true 2BR/2BA is expected for shortlist.
-- 3BR budget up to $14,000, stretch to $15,000 only if unusually strong; true 3BR/3BA is expected for shortlist.
-
-Structured output rules:
-- The schema is intentionally compact so it can be grammar-constrained reliably. Put each fact into its field; do not invent extra JSON keys.
-- name must be specific and useful: preferably "Building #Unit" or "Street Address #Unit". Do not use generic names like "Apartment listing", "StreetEasy listing", "Rental unit", "Available apartment", or a neighborhood-only title when a building, address, or unit exists.
-- buildingName is the named building when present, otherwise null. unit is the exact unit/apartment identifier when present, otherwise null.
-- streetAddress is the formatted street/unit address line as verified from the source. If the source separates unit, include the street in streetAddress and unit in unit; name should still include the unit.
-- addressLink should be a source, maps, or detail URL that verifies the address. If there is no separate address URL, set addressLink to the verified listing URL.
-- price must be numeric monthly rent in USD when verified. Put formatted price text in priceDisplay.
-- bedrooms and bathrooms must be numbers, including 0 for a verified studio and decimals like 1.5 when present.
-- laundry and dishwasher must be exactly "yes", "no", or "unknown".
-- amenities is for user-facing amenity labels only. Do not put prose there.
-- notes must be short, under about 360 characters, and should explain fit/caveats such as daylight, renovation, floor plan, or furniture fit. Never dump page text or restate all structured fields in notes.
-- sourcesSearched should list real URLs/domains searched or fetched.
-
-Required field guardrail for manual add:
-- Do not return a listing just because the URL card looks promising. Open/fetch the detail page first and extract the core fields from the page itself.
-- Required rich fields are name, url, addressLink, streetAddress, price, bedrooms, bathrooms, laundry, and dishwasher. If one is missing from the source page, keep looking on the detail page, embedded structured data, unit row, official building availability page, broker page, or property-manager page before giving up.
-- If price, bedrooms, bathrooms, streetAddress, or a verifying addressLink still cannot be verified after deeper searching, say exactly what is missing in warnings and return null/unknown in the structured field; the importer will reject it instead of adding an incomplete active row.
-
-Allowed status values: shortlist, monitor, excluded, archived.
-Allowed track values: 1br, 2br, 3br, unknown.
-Allowed freshness values: verified_live, availability_page_only, stale_or_mismatch, unverified.
-Allowed confidence values: high, medium, low, blocked, unknown.
-`.trim();
+const EXTRACTION_PROMPT = buildExtractionPrompt();
 
 export const run = internalAction({
   args: { jobId: v.id("apartmentImportJobs") },
@@ -625,10 +581,10 @@ async function extractWithClaude(
         max_uses: 5,
         user_location: {
           type: "approximate",
-          city: "New York",
-          region: "New York",
-          country: "US",
-          timezone: "America/New_York",
+          city: alcoveConfig.location.city,
+          region: alcoveConfig.location.region,
+          country: alcoveConfig.location.country,
+          timezone: alcoveConfig.location.timezone,
         },
       },
       {
@@ -931,14 +887,15 @@ function buildApartment(
       additionalProperty: priceProperties,
     },
     assessment: {
-      commute: listing.commute
-        ? {
-            toLocation: TO_LOCATION,
-            minutes: listing.commute.minutes,
-            route: listing.commute.route,
-            notes: listing.commute.notes,
-          }
-        : undefined,
+      commute:
+        TO_LOCATION && listing.commute
+          ? {
+              toLocation: TO_LOCATION,
+              minutes: listing.commute.minutes,
+              route: listing.commute.route,
+              notes: listing.commute.notes,
+            }
+          : undefined,
       verification: {
         freshness: listing.freshness ?? freshnessForStatus(status),
         note: listing.verificationNote,

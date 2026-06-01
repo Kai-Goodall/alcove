@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IconMinusFill18, IconPlusFill18 } from "nucleo-ui-fill-18";
+import { IconMinusFill18, IconPlusFill18 } from "@/_components/ui/icons";
 import { Button } from "@/_components/ui/button";
 import { FadeImage } from "@/_components/ui/fade-image";
 import { Icon } from "@/_components/ui/icon";

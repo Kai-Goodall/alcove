@@ -10,3 +10,7 @@ dist
 .claude
 next-env.d.ts
 .squircle-probe
+
+# Local apartment-search data (keep your own runs private; folders kept via .gitkeep)
+data/automation-backfill/*.json
+data/firecrawl-discovery/*.json

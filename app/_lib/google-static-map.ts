@@ -1,3 +1,5 @@
+// Bundled fallback key so the map works out of the box. Override it by setting
+// NEXT_PUBLIC_GOOGLE_MAPS_KEY to your own (restricted) key.
 const FALLBACK_KEY = "AIzaSyAU3EPk2RPf1uTGhbQtVIDBbQeNNpiPk2E";
 
 const STYLE_PARAMS: string[] = [
@@ -31,6 +33,10 @@ export interface StaticMapOptions {
   scale?: 1 | 2;
 }
 
+/**
+ * Build a styled Google Static Maps URL for an apartment location. Uses
+ * NEXT_PUBLIC_GOOGLE_MAPS_KEY when set, otherwise the bundled fallback key.
+ */
 export function googleStaticMapUrl(
   center: StaticMapCenter,
   options: StaticMapOptions = {},

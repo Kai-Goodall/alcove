@@ -3,6 +3,11 @@
 This backend uses standard schema.org-shaped objects where they fit, plus one
 small app-specific assessment block for the apartment-search automation.
 
+> For the full picture see the top-level [`README.md`](../README.md) and
+> [`docs/`](../docs): [architecture](../docs/architecture.md),
+> [configuration](../docs/configuration.md), and the
+> [data model / ingestion contracts](../docs/data-model.md).
+
 ## Data Model
 
 Each `apartments` document is an apartment listing composed of:
@@ -35,7 +40,9 @@ Backfill or import automation output from a normalized JSON file:
 npm run import:apartment-runs
 ```
 
-The default input is `data/automation-backfill/runs.json`. The script:
+The default input path is `data/automation-backfill/runs.json` (not shipped —
+your automation produces it; pass another path as the first argument). The
+script:
 
 - normalizes compact run data into the `RealEstateListing`, `Apartment`,
   `Offer`, and `assessment` shapes above;

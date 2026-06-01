@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Select as SelectPrimitive } from "radix-ui";
-import { IconChevronDownFill18 } from "nucleo-ui-fill-18";
+import { IconChevronDownFill18 } from "@/_components/ui/icons";
 import { Icon } from "@/_components/ui/icon";
 import { useSquircle } from "@/_lib/use-squircle";
 import { cn } from "@/_lib/utils";

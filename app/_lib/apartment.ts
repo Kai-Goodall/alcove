@@ -1,17 +1,15 @@
 import type { FunctionReturnType } from "convex/server";
 import {
+  IconBathtubFillDuo18,
+  IconBedDoubleFillDuo18,
   IconConciergeFill24,
   IconDishwasherFill24,
   IconDumbbellFill24,
   IconPawFill24,
   IconWashingMachineFill24,
   IconWifiFill24,
-} from "nucleo-core-fill-24";
-import {
-  IconBathtubFillDuo18,
-  IconBedDoubleFillDuo18,
-  type IconProps as NucleoIconProps,
-} from "nucleo-ui-fill-duo-18";
+  type IconProps as GlyphProps,
+} from "@/_components/ui/icons";
 import type { ComponentType } from "react";
 import { api } from "../../convex/_generated/api";
 
@@ -115,7 +113,7 @@ export function parseAvailability(offer: Apartment["offer"]): Availability {
   return { kind: "date", date: local };
 }
 
-type AmenityGlyph = ComponentType<NucleoIconProps>;
+type AmenityGlyph = ComponentType<GlyphProps>;
 
 interface AmenitySpec {
   label: string;

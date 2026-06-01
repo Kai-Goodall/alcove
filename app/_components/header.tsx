@@ -1,6 +1,6 @@
 "use client";
 
-import { IconPlusFill18 } from "nucleo-ui-fill-18";
+import { IconPlusFill18 } from "@/_components/ui/icons";
 import { Button } from "@/_components/ui/button";
 import { Icon } from "@/_components/ui/icon";
 import { Typography } from "@/_components/ui/typography";

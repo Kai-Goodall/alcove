@@ -1,8 +1,7 @@
 import { type FormEvent, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useMutation, useQuery } from "convex/react";
-import { IconHouseSearchFill24 } from "nucleo-core-fill-24";
-import { IconChevronLeftFill18 } from "nucleo-ui-fill-18";
+import { IconChevronLeftFill18, IconHouseSearchFill24 } from "@/_components/ui/icons";
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
 import { Button } from "@/_components/ui/button";

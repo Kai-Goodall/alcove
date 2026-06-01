@@ -1,4 +1,14 @@
-export const CONFIG_VERSION = 1;
+// Firecrawl discovery tuning.
+//
+// The *market profile* (location, query sets, curated sources, neighborhoods)
+// lives in ../alcove.config.mjs so you only edit it once. This file keeps the
+// mechanical knobs: how candidates are classified, scored, and filtered.
+// Customize the host pattern lists below if your market uses different
+// portals/brokers/operators.
+
+import { alcoveConfig, CONFIG_VERSION as PROFILE_VERSION } from "../alcove.config.mjs";
+
+export const CONFIG_VERSION = PROFILE_VERSION;
 
 export const DEFAULTS = {
   querySet: "balanced",
@@ -10,105 +20,34 @@ export const DEFAULTS = {
   searchConcurrency: 3,
   mapConcurrency: 2,
   timeoutMs: 60_000,
-  searchCountry: "US",
-  searchLocation: "New York,New York,United States",
-  mapLocation: {
-    country: "US",
-    languages: ["en-US"],
-  },
+  searchCountry: alcoveConfig.location.country,
+  searchLocation: alcoveConfig.location.searchLocation,
+  mapLocation: alcoveConfig.location.mapLocation,
 };
 
-export const QUERY_SETS = {
-  balanced: [
-    "Chelsea NYC rental building availability 1 bedroom Manhattan",
-    "West Village Manhattan 1 bedroom rental availability laundry dishwasher",
-    "Greenwich Village Manhattan 1 bedroom rental availability renovated",
-    "Flatiron Gramercy Manhattan 1 bedroom rental building availability",
-    "East Village Lower East Side Manhattan 1 bedroom rental building availability",
-    "Chelsea Manhattan 2 bedroom 2 bath rental availability",
-    "West Village Greenwich Village Manhattan 2 bedroom 2 bath rental availability",
-    "SoHo NoHo Tribeca Manhattan 2 bedroom 2 bath rental availability",
-    "East Village Manhattan 2 bedroom 2 bath rental availability washer dryer dishwasher",
-    "Tribeca Manhattan true 3 bedroom 3 bath rental availability",
-    "SoHo NoHo Manhattan true 3 bedroom 3 bath rental availability",
-    "Chelsea Manhattan true 3 bedroom 3 bath rental availability",
-    "site:streeteasy.com/building Manhattan 1 bedroom available now Chelsea West Village Greenwich Village",
-    "site:streeteasy.com/building Manhattan 2 bedroom 2 bath available now Chelsea Tribeca SoHo",
-    "site:streeteasy.com/building Manhattan 3 bedroom 3 bath available now Tribeca SoHo Chelsea",
-    "site:zillow.com/homedetails Manhattan 1 bedroom rental Chelsea West Village",
-    "site:apartments.com/new-york-ny Manhattan 2 bedroom 2 bathroom available now",
-    "site:renthop.com Manhattan 3 bedroom 3 bathroom rental availability",
-  ],
-  broad: [
-    "Manhattan rental building availability Chelsea West Village East Village Tribeca",
-    "Chelsea NYC rental building availability 1 bedroom 2 bedroom 3 bedroom",
-    "West Village luxury rentals availability 2 bedroom 2 bath Manhattan",
-    "Greenwich Village apartment building availability Manhattan",
-    "SoHo NoHo rental building availability Manhattan",
-    "Tribeca 3 bedroom 3 bath rentals availability Manhattan",
-    "Gramercy Flatiron luxury rentals availability Manhattan",
-    "East Village LES apartment buildings availability Manhattan",
-    "site:streeteasy.com/building Manhattan available rental Chelsea",
-    "site:streeteasy.com/building Manhattan available rental West Village",
-    "site:streeteasy.com/building Manhattan available rental Tribeca",
-    "site:zillow.com/homedetails Manhattan rental apartment Chelsea",
-    "site:apartments.com/new-york-ny Manhattan apartment rental available now",
-    "site:renthop.com Manhattan apartment rental available now",
-  ],
+export const QUERY_SETS = alcoveConfig.querySets;
+
+export const CURATED_ROOTS = alcoveConfig.curatedSources;
+
+// Per-neighborhood regex overrides for labels that need more than a simple
+// word-boundary match (abbreviations, alternate names). Keyed by the label as
+// it appears in alcoveConfig.neighborhoods.
+const NEIGHBORHOOD_PATTERN_OVERRIDES = {
+  "Lower East Side": /\blower east side\b|\bles\b/i,
+  "Stuy Town": /\bstuy\s*town\b|\bstuyvesant\b|\bpeter cooper\b/i,
 };
 
-export const CURATED_ROOTS = [
-  {
-    provider: "Equity Apartments",
-    url: "https://www.equityapartments.com/new-york-city/",
-    search:
-      "chelsea west village gramercy tribeca apartment availability floor plan 1 bedroom 2 bedroom 3 bedroom",
-  },
-  {
-    provider: "Avalon Communities",
-    url: "https://www.avaloncommunities.com/new-york/new-york-city-apartments/",
-    search:
-      "new york city apartment availability floor plan 1 bedroom 2 bedroom 3 bedroom",
-  },
-  {
-    provider: "Brodsky",
-    url: "https://brodsky.com/rentals/",
-    search:
-      "west village greenwich village chelsea apartment available one bedroom two bedroom three bedroom",
-  },
-  {
-    provider: "Stonehenge NYC",
-    url: "https://www.stonehengenyc.com/apartments",
-    search:
-      "manhattan available apartment floorplan one bedroom two bedroom three bedroom",
-  },
-  {
-    provider: "Rockrose",
-    url: "https://rockrose.com/zh/listing/",
-    search: "new york available apartment 1 bed 2 bed 3 bed",
-  },
-  {
-    provider: "EVE NYC",
-    url: "https://eve.nyc/floorplans/",
-    search: "available floorplans 1 bedroom 2 bedroom 3 bedroom",
-  },
-  {
-    provider: "StuyTown / Beam Living",
-    url: "https://www.stuytown.com/nyc-apartments-for-rent",
-    search: "available apartments 1 bedroom 2 bedroom 3 bedroom",
-  },
-  {
-    provider: "The Chelsea / Greystar",
-    url: "https://www.thechelseaapts.com/new-york/the-chelsea/conventional",
-    search: "available apartment floorplan 1 bedroom 2 bedroom",
-  },
-  {
-    provider: "Chelsea29",
-    url: "https://www.chelsea29.com/floorplans",
-    search: "available floorplans 1 bedroom 2 bedroom",
-  },
-];
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 
+export const NEIGHBORHOOD_HINTS = alcoveConfig.neighborhoods.map((label) => [
+  label,
+  NEIGHBORHOOD_PATTERN_OVERRIDES[label] ??
+    new RegExp(`\\b${escapeRegExp(label)}\\b`, "i"),
+]);
+
+// Sites where availability comes straight from the property manager/operator.
 export const DIRECT_OPERATOR_HOST_PATTERNS = [
   "equityapartments.com",
   "avaloncommunities.com",
@@ -127,6 +66,7 @@ export const DIRECT_OPERATOR_HOST_PATTERNS = [
   "gothamorg.com",
 ];
 
+// Aggregator/portal sites (listings re-posted from many sources).
 export const PORTAL_HOST_PATTERNS = [
   "streeteasy.com",
   "zillow.com",
@@ -139,6 +79,7 @@ export const PORTAL_HOST_PATTERNS = [
   "realtor.com",
 ];
 
+// Brokerage sites.
 export const BROKER_HOST_PATTERNS = [
   "elliman.com",
   "corcoran.com",
@@ -147,21 +88,6 @@ export const BROKER_HOST_PATTERNS = [
   "sothebysrealty.com",
   "nestseekers.com",
   "brownharrisstevens.com",
-];
-
-export const NEIGHBORHOOD_HINTS = [
-  ["Chelsea", /\bchelsea\b/i],
-  ["West Village", /\bwest village\b/i],
-  ["Greenwich Village", /\bgreenwich village\b/i],
-  ["East Village", /\beast village\b/i],
-  ["Lower East Side", /\blower east side\b|\bles\b/i],
-  ["SoHo", /\bsoho\b/i],
-  ["NoHo", /\bnoho\b/i],
-  ["Tribeca", /\btribeca\b/i],
-  ["Little Italy", /\blittle italy\b/i],
-  ["Gramercy", /\bgramercy\b/i],
-  ["Flatiron", /\bflatiron\b/i],
-  ["Stuy Town", /\bstuy\s*town\b|\bstuyvesant\b|\bpeter cooper\b/i],
 ];
 
 export const TRACK_HINTS = [

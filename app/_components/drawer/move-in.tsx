@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { IconCalendarFillDuo18 } from "nucleo-ui-fill-duo-18";
+import { IconCalendarFillDuo18 } from "@/_components/ui/icons";
 import { Icon } from "@/_components/ui/icon";
 import { Typography } from "@/_components/ui/typography";
 import { parseAvailability, type Apartment } from "@/_lib/apartment";

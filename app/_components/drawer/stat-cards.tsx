@@ -1,5 +1,5 @@
 import { type ComponentType, useRef } from "react";
-import type { IconProps as NucleoIconProps } from "nucleo-ui-fill-18";
+import type { IconProps as GlyphProps } from "@/_components/ui/icons";
 import { Icon } from "@/_components/ui/icon";
 import {
 	BathroomIcon,
@@ -69,7 +69,7 @@ function PairCard({ children }: { children: React.ReactNode }) {
 }
 
 interface StatItemProps {
-	glyph: ComponentType<NucleoIconProps>;
+	glyph: ComponentType<GlyphProps>;
 	label: string;
 }
 

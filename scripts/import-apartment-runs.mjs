@@ -277,10 +277,29 @@ async function attachPageImages(client, apartmentId, listing, options) {
   }
 
   let failures = 0;
-  const pageImages = await extractPageImages(listing.url);
+
+  // Scraper-provided direct image URLs are preferred: they're the actual
+  // listing photos and avoid re-fetching pages that may be modal-only (Bamboo)
+  // or bot-protected. Fall back to page/search extraction when absent.
+  const providedCandidates = (listing.imageUrls ?? [])
+    .filter(Boolean)
+    .map((url) => ({
+      url,
+      referer: listing.url,
+      caption: `Listing image from ${hostname(url)}.`,
+      kind: imageKindFromUrl(url),
+    }));
+
+  const pageImages =
+    providedCandidates.length >= remainingSlots
+      ? { candidates: providedCandidates }
+      : await extractPageImages(listing.url);
   if (pageImages.error) {
     console.warn(`  image page fetch failed for ${listing.url}: ${pageImages.error}`);
     failures += 1;
+  }
+  if (providedCandidates.length && providedCandidates.length < remainingSlots) {
+    pageImages.candidates = [...providedCandidates, ...(pageImages.candidates ?? [])];
   }
 
   const discoveredCandidates =

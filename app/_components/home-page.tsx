@@ -13,6 +13,7 @@ import {
   type FilterValues,
 } from "@/_components/filter-menu";
 import { Header } from "@/_components/header";
+import { SearchDialog } from "@/_components/search-dialog";
 import {
   formatStreetAddress,
   getBathroomCount,
@@ -80,6 +81,7 @@ function HomePage() {
 
   const [selectedId, setSelectedId] = useApartmentSelection();
   const [isAddOpen, setIsAddOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const isDrawerOpen = selectedId !== null || isAddOpen;
   const { sideMargin, viewportShift } = useContainerLayout();
   const isMobile = useIsMobile();
@@ -236,7 +238,10 @@ function HomePage() {
       >
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-3.5">
-            <Header onOpenAdd={() => setIsAddOpen(true)} />
+            <Header
+              onOpenAdd={() => setIsAddOpen(true)}
+              onOpenSearch={() => setIsSearchOpen(true)}
+            />
             <FilterBar
               track={track}
               onTrackChange={setTrack}
@@ -275,6 +280,8 @@ function HomePage() {
           />
         ) : null}
       </AnimatePresence>
+
+      <SearchDialog open={isSearchOpen} onOpenChange={setIsSearchOpen} />
     </div>
   );
 }

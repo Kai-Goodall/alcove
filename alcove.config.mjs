@@ -187,7 +187,114 @@ export const alcoveConfig = {
       "broker and brokerage inventory pages",
     ],
   },
+
+  /**
+   * Autonomous search + scrape settings (`npm run search`).
+   *
+   * This drives the no-API-key scraper engine in `scripts/search/`. It is
+   * intentionally region-agnostic: each source adapter decides whether it can
+   * serve the configured `location`, so pointing Alcove at a new city is a
+   * config change, not a code change.
+   *
+   * @typedef {Object} SearchCriteria
+   * @property {number} [minBedrooms]  Minimum bedroom count (0 = studio ok).
+   * @property {number} [maxBedrooms]  Maximum bedroom count.
+   * @property {number} [maxPrice]     Monthly rent ceiling in `currency`.
+   * @property {number} [minPrice]     Monthly rent floor.
+   * @property {string} [currency]     ISO 4217, e.g. "CAD" / "USD".
+   */
+  search: {
+    /**
+     * Default criteria used when the CLI / UI don't override them.
+     * @type {SearchCriteria}
+     */
+    criteria: {
+      minBedrooms: 1,
+      maxBedrooms: 3,
+      maxPrice: undefined,
+      currency: "USD",
+    },
+
+    /**
+     * Proximity anchor for distance filtering/scoring. When set, results are
+     * geocoded (free OpenStreetMap Nominatim, no key) and filtered to within
+     * `radiusKm`. Defaults to `commuteTarget` when null. Set both to disable.
+     * @type {{ label: string, query: string } | null}
+     */
+    near: null,
+    /** Radius in kilometres around `near` (or commuteTarget) to keep. */
+    radiusKm: 15,
+
+    /**
+     * Which source adapters to run, in priority order. Unknown ids and
+     * adapters that don't support the configured region are skipped with a
+     * logged note (recorded as blind spots on the search run).
+     *
+     * Available today: "kijiji", "bamboo", "craigslist".
+     * Best-effort / often bot-blocked without paid unblocking: "apartments",
+     * "rentals_ca", "marketplace".
+     */
+    sources: ["kijiji", "bamboo", "craigslist"],
+
+    /** Max listings to keep per source before dedupe (0 = unlimited). */
+    perSourceLimit: 60,
+
+    /**
+     * Contact string sent as the Nominatim `User-Agent` per its usage policy.
+     * Replace with your own deployment identifier + email.
+     */
+    geocodeContact: "alcove-search (set search.geocodeContact in alcove.config.mjs)",
+  },
 };
+
+/**
+ * Resolve effective search criteria by layering overrides over the config
+ * defaults. Used by both the CLI and the in-app search route.
+ *
+ * @param {Partial<SearchCriteria> & { near?: {label:string,query:string}|null, radiusKm?: number, sources?: string[] }} [overrides]
+ * @param {typeof alcoveConfig} [config]
+ */
+export function buildSearchCriteria(overrides = {}, config = alcoveConfig) {
+  const search = config.search ?? {};
+  const base = search.criteria ?? {};
+  const near =
+    overrides.near !== undefined
+      ? overrides.near
+      : search.near ??
+        (config.commuteTarget
+          ? {
+              label: config.commuteTarget.name,
+              query: addressToQuery(config.commuteTarget.address),
+            }
+          : null);
+
+  return {
+    minBedrooms: overrides.minBedrooms ?? base.minBedrooms,
+    maxBedrooms: overrides.maxBedrooms ?? base.maxBedrooms,
+    minPrice: overrides.minPrice ?? base.minPrice,
+    maxPrice: overrides.maxPrice ?? base.maxPrice,
+    currency: overrides.currency ?? base.currency ?? "USD",
+    location: config.location,
+    near,
+    radiusKm: overrides.radiusKm ?? search.radiusKm ?? 15,
+    sources: overrides.sources ?? search.sources ?? ["kijiji", "bamboo", "craigslist"],
+    perSourceLimit: overrides.perSourceLimit ?? search.perSourceLimit ?? 60,
+    geocodeContact: search.geocodeContact,
+  };
+}
+
+/** Flatten a schema.org-style PostalAddress into a geocoder query string. */
+function addressToQuery(address = {}) {
+  return [
+    address.streetAddress,
+    address.addressLocality,
+    address.addressRegion,
+    address.postalCode,
+    address.addressCountry,
+  ]
+    .filter(Boolean)
+    .join(", ");
+}
 
 /** Render one budget band as a sentence for the importer prompt. */
 function budgetLine(band) {

@@ -21,6 +21,7 @@
     "convex:dev": "convex dev",
     "convex:deploy": "convex deploy",
     "prompt:automation": "node scripts/generate-automation-prompt.mjs",
+    "search": "node scripts/search-apartments.mjs",
     "import:apartment-runs": "node scripts/import-apartment-runs.mjs",
     "migrate:images:r2": "node scripts/migrate-images-to-r2.mjs",
     "build:icons": "node scripts/build-icons.mjs"

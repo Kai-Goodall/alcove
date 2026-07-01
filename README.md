@@ -152,9 +152,16 @@ the deployed app. Every variable and where it's needed is documented in
 
 | Path | Command / surface | Good for | Needs |
 | --- | --- | --- | --- |
+| **Autonomous search** | `npm run search` or the in-app **Search** dialog | scraping many sources at once, no keys required | Convex (nothing else for v1) |
 | **Add by URL** | "Add apartment" button in the app | one listing at a time, fully automated | Anthropic + R2 (on Convex) |
 | **Daily automation** | a scheduled agent (prompt from `npm run prompt:automation`) | a hands-off daily refresh of the whole shortlist | an agent runner (e.g. Codex) + Convex + R2 |
 | **Bulk import** | `npm run import:apartment-runs` | loading a structured runs file | Convex + R2 |
+
+**Autonomous search** is the quickest way to fill an empty dashboard: it scrapes
+key-free sources (Kijiji, Bamboo Housing, Craigslist), filters by bedrooms /
+price / proximity (free OpenStreetMap geocoding), dedupes, and imports. Add
+`--ai` for a Version 2 pass that discovers more listings and ranks them against
+your profile. See [`docs/search.md`](./docs/search.md).
 
 The recommended setup is the **daily automation**: `npm run prompt:automation`
 prints an agent prompt tailored to your `alcove.config.mjs`. Paste it into a
@@ -181,6 +188,7 @@ Alcove reusable with *your own* automation.
 | `npm run convex:dev` | Run the Convex dev backend (codegen + live functions). |
 | `npm run convex:deploy` | Deploy Convex functions to production. |
 | `npm run prompt:automation` | Print the daily-search agent prompt from your config. |
+| `npm run search` | Autonomously scrape sources and import matches (`--ai` for AI deep search). See [`docs/search.md`](./docs/search.md). |
 | `npm run import:apartment-runs` | Upsert a structured runs file + attach images. |
 | `npm run migrate:images:r2` | Migrate existing Convex-stored images to R2. |
 | `npm run build:icons` | Regenerate the icon module from `app/_components/ui/icons/svg/`. |
@@ -230,6 +238,8 @@ alcove/
   reference + full environment-variable table.
 - [`docs/architecture.md`](./docs/architecture.md) — runtimes, data flow, and
   the ingestion paths in depth.
+- [`docs/search.md`](./docs/search.md) — autonomous search + scrape: the
+  key-free engine, source adapters, the `--ai` deep-search version, and the CLI.
 - [`docs/automation.md`](./docs/automation.md) — the daily search automation:
   the prompt generator and how to schedule it.
 - [`docs/data-model.md`](./docs/data-model.md) — Convex schema, the `runs.json`

@@ -66,6 +66,53 @@ export const attach = mutation({
   },
 });
 
+/**
+ * Attach an image by external URL (no download). Used by the in-app search:
+ * scraped listings carry direct CDN image URLs, and `listForApartment` already
+ * prefers `image.contentUrl`, so these render without touching Convex/R2 storage.
+ */
+export const attachExternal = mutation({
+  args: {
+    apartmentId: v.id("apartments"),
+    contentUrl: v.string(),
+    kind: imageKind,
+    sourceUrl: v.optional(v.string()),
+    image: v.optional(imageInput),
+    order: v.optional(v.number()),
+  },
+  handler: async (ctx, args) => {
+    const apartment = await ctx.db.get(args.apartmentId);
+    if (apartment === null) {
+      throw new Error("Apartment not found");
+    }
+
+    const existingImages = await ctx.db
+      .query("apartmentImages")
+      .withIndex("by_apartment", (q) => q.eq("apartmentId", args.apartmentId))
+      .collect();
+
+    if (existingImages.some((img) => img.image?.contentUrl === args.contentUrl)) {
+      return null;
+    }
+
+    return await ctx.db.insert("apartmentImages", {
+      apartmentId: args.apartmentId,
+      image: {
+        name: args.image?.name,
+        caption: args.image?.caption,
+        encodingFormat: args.image?.encodingFormat,
+        contentUrl: args.contentUrl,
+        representativeOfPage:
+          args.image?.representativeOfPage ?? existingImages.length === 0,
+      },
+      kind: args.kind,
+      sourceUrl: args.sourceUrl,
+      order: args.order ?? existingImages.length,
+      createdAt: Date.now(),
+    });
+  },
+});
+
 export const attachR2 = mutation({
   args: {
     apartmentId: v.id("apartments"),

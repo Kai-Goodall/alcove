@@ -9,20 +9,20 @@
 
 import { fetchText, parseNextData, delay, DEFAULT_DELAY_MS } from "../http.mjs";
 
-// city (lowercase) -> { slug, locationId } for the apartments/condos category.
+// city (lowercase) -> { slug, locationId, region } for the apartments/condos category.
 const CITY_CODES = {
-  "kitchener": { slug: "kitchener-waterloo", locationId: 1700212 },
-  "waterloo": { slug: "kitchener-waterloo", locationId: 1700212 },
-  "cambridge": { slug: "kitchener-waterloo", locationId: 1700212 },
-  "toronto": { slug: "city-of-toronto", locationId: 1700273 },
-  "ottawa": { slug: "ottawa", locationId: 1700185 },
-  "hamilton": { slug: "hamilton", locationId: 80014 },
-  "london": { slug: "london", locationId: 1700214 },
-  "guelph": { slug: "guelph", locationId: 1700242 },
-  "vancouver": { slug: "greater-vancouver-area", locationId: 80003 },
-  "calgary": { slug: "calgary", locationId: 1700199 },
-  "edmonton": { slug: "edmonton", locationId: 1700203 },
-  "montreal": { slug: "city-of-montreal", locationId: 1700281 },
+  "kitchener": { slug: "kitchener-waterloo", locationId: 1700212, region: "ON" },
+  "waterloo": { slug: "kitchener-waterloo", locationId: 1700212, region: "ON" },
+  "cambridge": { slug: "kitchener-waterloo", locationId: 1700212, region: "ON" },
+  "toronto": { slug: "city-of-toronto", locationId: 1700273, region: "ON" },
+  "ottawa": { slug: "ottawa", locationId: 1700185, region: "ON" },
+  "hamilton": { slug: "hamilton", locationId: 80014, region: "ON" },
+  "london": { slug: "london", locationId: 1700214, region: "ON" },
+  "guelph": { slug: "guelph", locationId: 1700242, region: "ON" },
+  "vancouver": { slug: "greater-vancouver-area", locationId: 80003, region: "BC" },
+  "calgary": { slug: "calgary", locationId: 1700199, region: "AB" },
+  "edmonton": { slug: "edmonton", locationId: 1700203, region: "AB" },
+  "montreal": { slug: "city-of-montreal", locationId: 1700281, region: "QC" },
 };
 
 export const id = "kijiji";
@@ -48,7 +48,7 @@ export function unsupportedReason(criteria) {
 export async function search(criteria, ctx = {}) {
   const log = ctx.log ?? (() => {});
   const city = criteria.location.city.toLowerCase();
-  const { slug, locationId } = CITY_CODES[city];
+  const { slug, locationId, region } = CITY_CODES[city];
   const limit = criteria.perSourceLimit || 60;
   const pages = Math.min(3, Math.ceil(limit / 40) || 1);
 
@@ -67,7 +67,7 @@ export async function search(criteria, ctx = {}) {
     await delay(DEFAULT_DELAY_MS);
   }
 
-  return collected.slice(0, limit).map((raw) => normalize(raw)).filter(Boolean);
+  return collected.slice(0, limit).map((raw) => normalize(raw, region)).filter(Boolean);
 }
 
 function buildUrl(slug, locationId, criteria, page) {
@@ -87,7 +87,7 @@ function extractListings(html) {
     .filter((v) => v && v.url);
 }
 
-function normalize(raw) {
+function normalize(raw, region) {
   const attrs = attrMap(raw.attributes?.all);
   const bedrooms = parseBedrooms(attrs.numberbedrooms);
   const bathrooms = parseBathrooms(attrs.numberbathrooms);
@@ -107,7 +107,7 @@ function normalize(raw) {
     bathrooms,
     address: loc.address,
     city: loc.name,
-    region: "ON",
+    region,
     country: "CA",
     lat: loc.latitude ?? loc.mapLatitude,
     lon: loc.longitude ?? loc.mapLongitude,

@@ -10,12 +10,14 @@
 
 import { fetchText, parseNextData, delay, DEFAULT_DELAY_MS } from "../http.mjs";
 
-// Cities Bamboo covers (from its own city list).
-const CITIES = new Set([
-  "calgary", "edmonton", "guelph", "hamilton", "kingston", "london",
-  "montreal", "niagara", "ottawa", "toronto", "vancouver", "waterloo",
-  "kitchener", "cambridge",
-]);
+// Cities Bamboo covers (from its own city list) -> province code.
+const CITY_REGIONS = {
+  calgary: "AB", edmonton: "AB", guelph: "ON", hamilton: "ON",
+  kingston: "ON", london: "ON", montreal: "QC", niagara: "ON",
+  ottawa: "ON", toronto: "ON", vancouver: "BC", waterloo: "ON",
+  kitchener: "ON", cambridge: "ON",
+};
+const CITIES = new Set(Object.keys(CITY_REGIONS));
 
 // Bamboo groups Kitchener/Cambridge under the Waterloo market.
 const CITY_ALIASES = { kitchener: "Waterloo", cambridge: "Waterloo" };
@@ -58,7 +60,7 @@ export async function search(criteria, ctx = {}) {
     totalPages = Number(props.totalPages) || totalPages;
     const listings = props.listings ?? [];
     if (!listings.length) break;
-    collected.push(...listings.map((l) => normalize(l, cityName)));
+    collected.push(...listings.map((l) => normalize(l, cityName, CITY_REGIONS[cityRaw])));
     if (collected.length >= limit) break;
     await delay(DEFAULT_DELAY_MS);
   }
@@ -66,7 +68,7 @@ export async function search(criteria, ctx = {}) {
   return collected.filter(Boolean).slice(0, limit);
 }
 
-function normalize(l, cityName) {
+function normalize(l, cityName, region) {
   if (!l?._id) return null;
   const images = [l.MainUrl, ...(l.ImageUrls ?? [])].filter(Boolean);
   const availability = [l.StartTerm, l.RentDuration].filter(Boolean).join(" · ");
@@ -88,7 +90,7 @@ function normalize(l, cityName) {
     bedrooms: numberOrUndefined(l.TotalBedrooms ?? l.RoomsAvailable),
     address: l.Address,
     city: cityName,
-    region: "ON",
+    region,
     country: "CA",
     imageUrls: dedupe(images).slice(0, 8),
     amenities: amenities.length ? amenities : undefined,

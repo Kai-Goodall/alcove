@@ -20,6 +20,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { alcoveConfig, buildSearchCriteria } from "../alcove.config.mjs";
 import { runSearch } from "./search/engine.mjs";
+import { resolveLocation } from "./search/geo.mjs";
 
 const args = parseArgs(process.argv.slice(2));
 
@@ -48,14 +49,15 @@ const overrides = {
 
 const criteria = buildSearchCriteria(clean(overrides));
 
-// Allow location overrides on top of the config-derived criteria.
+// Allow location overrides on top of the config-derived criteria. A bare
+// --city may sit in a different region/country than the configured profile,
+// so geocode it once to fill those in (free, Nominatim).
 if (args.city || args.region || args.country) {
-  criteria.location = {
-    ...criteria.location,
-    city: args.city ?? criteria.location?.city,
-    region: args.region ?? criteria.location?.region,
-    country: args.country ?? criteria.location?.country,
-  };
+  criteria.location = await resolveLocation(
+    { city: args.city, region: args.region, country: args.country },
+    criteria.location,
+    { contact: criteria.geocodeContact, anchorQuery: criteria.near?.query },
+  );
 }
 
 console.log(`Searching ${criteria.location?.city ?? "configured area"} …`);
@@ -69,7 +71,9 @@ console.log(
 let aiEnrich;
 if (args.ai) {
   const { createAiEnricher } = await import("./search/ai/enrich.mjs");
-  aiEnrich = createAiEnricher(alcoveConfig);
+  aiEnrich = createAiEnricher(alcoveConfig, {
+    apiKey: typeof args["api-key"] === "string" ? args["api-key"] : undefined,
+  });
 }
 
 const result = await runSearch(criteria, {
@@ -180,11 +184,12 @@ Options:
   --currency=CCY         e.g. CAD, USD
   --near="PLACE"         Proximity anchor (address/landmark); "" to disable
   --radius=KM            Radius around --near to keep (default: config)
-  --sources=a,b,c        Adapters to run (kijiji,bamboo,craigslist,rentals_ca,...)
+  --sources=a,b,c        Adapters to run (kijiji,zillow,bamboo,craigslist,reddit,custom,rentals_ca)
   --limit=N              Max listings per source
   --out=FILE             Output runs.json path
   --import               Upsert results into Convex after searching
-  --ai                   Version 2: Anthropic enrichment (needs ANTHROPIC_API_KEY)
+  --ai                   Version 2: Anthropic enrichment (needs an API key)
+  --api-key=KEY          Anthropic key for --ai (default: ANTHROPIC_API_KEY env)
   --dry-run              Search and print, but don't write/import
   --help                 Show this help
 `);

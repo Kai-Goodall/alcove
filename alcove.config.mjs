@@ -230,11 +230,29 @@ export const alcoveConfig = {
      * adapters that don't support the configured region are skipped with a
      * logged note (recorded as blind spots on the search run).
      *
-     * Available today: "kijiji", "bamboo", "craigslist".
-     * Best-effort / often bot-blocked without paid unblocking: "apartments",
-     * "rentals_ca", "marketplace".
+     * Available today: "kijiji" (CA), "zillow" (US+CA), "bamboo" (CA student
+     * towns), "craigslist" (any Craigslist city), "reddit" (city subreddits,
+     * best effort), "custom" (your `customSites` below).
+     * Best-effort / often bot-blocked: "rentals_ca". Honest no-ops that need
+     * AI deep search instead: "apartments", "marketplace".
      */
-    sources: ["kijiji", "bamboo", "craigslist"],
+    sources: ["kijiji", "zillow", "bamboo", "craigslist", "custom"],
+
+    /**
+     * Specific apartment complex / property-manager pages to scrape with the
+     * "custom" source — the availability or floor-plans page works best.
+     * Strings or `{ url, label }`. Sites behind bot walls fall back to a
+     * single tracked lead row (AI deep search can usually read them).
+     * @type {(string | { url: string, label?: string })[]}
+     */
+    customSites: [],
+
+    /**
+     * Subreddits for the "reddit" source (best effort — Reddit throttles
+     * unauthenticated clients). Defaults to well-known city subs when unset.
+     * @type {string[] | null}
+     */
+    redditSubreddits: null,
 
     /** Max listings to keep per source before dedupe (0 = unlimited). */
     perSourceLimit: 60,
@@ -277,8 +295,11 @@ export function buildSearchCriteria(overrides = {}, config = alcoveConfig) {
     location: config.location,
     near,
     radiusKm: overrides.radiusKm ?? search.radiusKm ?? 15,
-    sources: overrides.sources ?? search.sources ?? ["kijiji", "bamboo", "craigslist"],
+    sources:
+      overrides.sources ?? search.sources ?? ["kijiji", "zillow", "bamboo", "craigslist"],
     perSourceLimit: overrides.perSourceLimit ?? search.perSourceLimit ?? 60,
+    customSites: overrides.customSites ?? search.customSites ?? [],
+    redditSubreddits: overrides.redditSubreddits ?? search.redditSubreddits ?? null,
     geocodeContact: search.geocodeContact,
   };
 }

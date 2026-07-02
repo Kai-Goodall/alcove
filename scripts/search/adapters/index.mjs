@@ -11,12 +11,15 @@ import * as kijiji from "./kijiji.mjs";
 import * as bamboo from "./bamboo.mjs";
 import * as craigslist from "./craigslist.mjs";
 import * as rentalsCa from "./rentals-ca.mjs";
+import * as zillow from "./zillow.mjs";
+import * as reddit from "./reddit.mjs";
+import * as customSites from "./custom-sites.mjs";
 
 /**
  * Sources that can't be scraped without a logged-in session or paid bot
  * unblocking. Registered as honest no-ops so configuring them yields a clear
- * blind-spot note instead of a silent gap. The AI version (with browser-grade
- * fetching) is the path to enabling these.
+ * blind-spot note instead of a silent gap. AI deep search (Claude web search)
+ * is the path to these; it reads them without scraping.
  */
 function walledAdapter(id, label, reason) {
   return {
@@ -30,13 +33,16 @@ function walledAdapter(id, label, reason) {
 
 const ADAPTERS = [
   kijiji,
+  zillow,
   bamboo,
   craigslist,
+  reddit,
+  customSites,
   rentalsCa,
   walledAdapter(
     "apartments",
     "Apartments.com",
-    "Apartments.com is behind aggressive bot management; reliable scraping needs a paid unblocking service. Use the AI version or Add-by-URL instead.",
+    "Apartments.com blocks non-browser clients outright (Akamai). Enable AI deep search — Claude's web search reads it — or use Add-by-URL. Zillow covers much of the same complex inventory key-free.",
   ),
   walledAdapter(
     "marketplace",

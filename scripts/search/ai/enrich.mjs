@@ -18,15 +18,18 @@ import Anthropic from "@anthropic-ai/sdk";
 /**
  * Build the `aiEnrich` callback the engine expects.
  * @param {import("../../../alcove.config.mjs").alcoveConfig} config
+ * @param {{ apiKey?: string }} [options] apiKey overrides ANTHROPIC_API_KEY —
+ *   used by the in-app "bring your own key" flow (the key is never stored).
  */
-export function createAiEnricher(config) {
+export function createAiEnricher(config, options = {}) {
   return async function aiEnrich({ results, criteria, log = () => {} }) {
-    if (!process.env.ANTHROPIC_API_KEY) {
-      log("AI enrichment skipped: ANTHROPIC_API_KEY not set.");
+    const apiKey = options.apiKey || process.env.ANTHROPIC_API_KEY;
+    if (!apiKey) {
+      log("AI enrichment skipped: no Anthropic API key provided.");
       return { listings: results };
     }
 
-    const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+    const client = new Anthropic({ apiKey });
     const model = process.env.ANTHROPIC_MODEL ?? config.anthropicModel ?? "claude-sonnet-4-6";
 
     let listings = results;
@@ -63,16 +66,16 @@ export function createAiEnricher(config) {
 async function discoverListings(client, model, config, criteria, log) {
   const city = criteria.location?.city ?? config.location.city;
   const beds = [criteria.minBedrooms, criteria.maxBedrooms].filter((v) => v != null).join("–");
-  const message = await client.messages.create({
+  const request = {
     model,
-    max_tokens: 3000,
+    max_tokens: 4000,
     system:
-      "You are an apartment-search assistant. Use web search to find CURRENTLY LISTED rental apartments matching the user's criteria, including sources a simple scraper can't reach (Apartments.com, Zillow/Rentals.ca, operator and broker pages, local listings). Verify each is a live rental listing. Return ONLY a JSON array (no prose) of objects: {url, name, price, bedrooms, bathrooms, address, provider}. Omit fields you cannot verify. Max 15 items.",
+      "You are an apartment-search assistant. Use web search to find CURRENTLY LISTED rental apartments matching the user's criteria, focusing on sources a simple scraper can't reach: Apartments.com, PadMapper, Facebook Marketplace mirrors, Reddit posts in city subreddits, and especially specific apartment complex / property-manager websites and their availability pages. Verify each is a live rental listing. Return ONLY a JSON array (no prose) of objects: {url, name, price, bedrooms, bathrooms, address, provider}. Omit fields you cannot verify. Max 15 items.",
     tools: [
       {
         type: "web_search_20260209",
         name: "web_search",
-        max_uses: 6,
+        max_uses: 8,
         user_location: {
           type: "approximate",
           city,
@@ -96,7 +99,18 @@ async function discoverListings(client, model, config, criteria, log) {
           .join(" "),
       },
     ],
-  });
+  };
+
+  // Server-side web search runs in a server loop that can pause
+  // (stop_reason "pause_turn"); resend the turn to let it finish.
+  let message = await client.messages.create(request);
+  for (let i = 0; i < 3 && message.stop_reason === "pause_turn"; i += 1) {
+    log("AI discovery paused mid-search; continuing…");
+    message = await client.messages.create({
+      ...request,
+      messages: [...request.messages, { role: "assistant", content: message.content }],
+    });
+  }
 
   const raw = parseJsonArray(textOf(message));
   return raw

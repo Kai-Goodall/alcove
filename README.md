@@ -158,10 +158,14 @@ the deployed app. Every variable and where it's needed is documented in
 | **Bulk import** | `npm run import:apartment-runs` | loading a structured runs file | Convex + R2 |
 
 **Autonomous search** is the quickest way to fill an empty dashboard: it scrapes
-key-free sources (Kijiji, Bamboo Housing, Craigslist), filters by bedrooms /
-price / proximity (free OpenStreetMap geocoding), dedupes, and imports. Add
-`--ai` for a Version 2 pass that discovers more listings and ranks them against
-your profile. See [`docs/search.md`](./docs/search.md).
+key-free sources (Kijiji, Zillow, Bamboo Housing, Craigslist, Reddit, your own
+apartment-complex sites), filters by bedrooms / price / proximity (free
+OpenStreetMap geocoding), dedupes, and imports. Flip on **AI deep search** —
+paste an Anthropic key in the app, or set one on the server — for a pass that
+discovers more listings (Apartments.com, complex sites) via web search and
+ranks everything against your profile. The **Assistant** button opens an AI
+chat that compares your collected listings and helps you decide what to tour.
+See [`docs/search.md`](./docs/search.md).
 
 The recommended setup is the **daily automation**: `npm run prompt:automation`
 prints an agent prompt tailored to your `alcove.config.mjs`. Paste it into a
@@ -188,7 +192,7 @@ Alcove reusable with *your own* automation.
 | `npm run convex:dev` | Run the Convex dev backend (codegen + live functions). |
 | `npm run convex:deploy` | Deploy Convex functions to production. |
 | `npm run prompt:automation` | Print the daily-search agent prompt from your config. |
-| `npm run search` | Autonomously scrape sources and import matches (`--ai` for AI deep search). See [`docs/search.md`](./docs/search.md). |
+| `npm run search` | Autonomously scrape sources and import matches (`--ai` for AI deep search, `--api-key` to pass a key). See [`docs/search.md`](./docs/search.md). |
 | `npm run import:apartment-runs` | Upsert a structured runs file + attach images. |
 | `npm run migrate:images:r2` | Migrate existing Convex-stored images to R2. |
 | `npm run build:icons` | Regenerate the icon module from `app/_components/ui/icons/svg/`. |

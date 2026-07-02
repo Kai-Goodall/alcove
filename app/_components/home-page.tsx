@@ -12,6 +12,7 @@ import {
   DEFAULT_FILTER_VALUES,
   type FilterValues,
 } from "@/_components/filter-menu";
+import { AssistantPanel } from "@/_components/assistant-panel";
 import { Header } from "@/_components/header";
 import { SearchDialog } from "@/_components/search-dialog";
 import {
@@ -82,6 +83,7 @@ function HomePage() {
   const [selectedId, setSelectedId] = useApartmentSelection();
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isAssistantOpen, setIsAssistantOpen] = useState(false);
   const isDrawerOpen = selectedId !== null || isAddOpen;
   const { sideMargin, viewportShift } = useContainerLayout();
   const isMobile = useIsMobile();
@@ -241,6 +243,7 @@ function HomePage() {
             <Header
               onOpenAdd={() => setIsAddOpen(true)}
               onOpenSearch={() => setIsSearchOpen(true)}
+              onOpenAssistant={() => setIsAssistantOpen(true)}
             />
             <FilterBar
               track={track}
@@ -282,6 +285,10 @@ function HomePage() {
       </AnimatePresence>
 
       <SearchDialog open={isSearchOpen} onOpenChange={setIsSearchOpen} />
+      <AssistantPanel
+        open={isAssistantOpen}
+        onClose={() => setIsAssistantOpen(false)}
+      />
     </div>
   );
 }
